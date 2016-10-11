@@ -13,6 +13,8 @@ namespace Drupal\hook_event_dispatcher\Example;
 
 use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -21,7 +23,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * @package Drupal\hook_event_dispatcher\Example
  */
 class ExampleFormEventSubscribers implements EventSubscriberInterface {
-
 
   /**
    * @param \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event
@@ -47,6 +48,28 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
   }
 
   /**
+   * @param \Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent $event
+   */
+  public function alterWidgetForm(WidgetFormAlterEvent $event) {
+    $element = $event->getElement();
+    $element['extra_field'] = [
+      '#type' => 'textfield',
+      '#title' => 'I am an extra field!'
+    ];
+
+    $event->setElement($element);
+  }
+
+  /**
+   * @param \Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent $event
+   */
+  public function alterWidgetStringTextField(WidgetTypeFormAlterEvent $event) {
+    $element = $event->getElement();
+    // Do something cool.
+    $event->setElement($element);
+  }
+
+  /**
    * @inheritdoc
    */
   static function getSubscribedEvents() {
@@ -55,8 +78,14 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
         ['alterForm'],
       ],
       // react on "search_block_form" form.
-      'hook_event_dispatcher.search_block_form.alter' => [
+      'hook_event_dispatcher.form_search_block_form.alter' => [
         ['alterSearchForm'],
+      ],
+      HookEventDispatcherEvents::WIDGET_FORM_ALTER => [
+        ['alterWidgetForm'],
+      ],
+      'hook_event_dispatcher.widget_string_textfield.alter' => [
+        ['alterWidgetStringTextField'],
       ],
     ];
   }

@@ -20,5 +20,6 @@ final class HookEventDispatcherEvents {
 
   // FORM EVENTS.
   const FORM_ALTER = 'hook_event_dispatcher.form.alter';
+  const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
 
 }

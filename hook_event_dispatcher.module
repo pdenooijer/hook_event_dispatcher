@@ -15,6 +15,8 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityCreateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityLoadEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
 
 /**
  * Implements hook_help().
@@ -125,4 +127,22 @@ function hook_event_dispatcher_form_alter(&$form, FormStateInterface $form_state
   /** @var \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event */
   $event = $manager->register(new FormAlterEvent($form, $form_state, $form_id));
   $form = $event->getForm();
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function hook_event_dispatcher_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+
+  /** @var \Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent $event */
+  $event = $manager->register(new WidgetTypeFormAlterEvent($element, $form_state, $context));
+  $element = $event->getElement();
+
+  /** @var \Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent $event */
+  $event = $manager->register(new WidgetFormAlterEvent($element, $form_state, $context));
+  $element = $event->getElement();
+
+
 }

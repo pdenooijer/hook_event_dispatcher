@@ -26,7 +26,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class ExampleEntityEventSubscribers implements EventSubscriberInterface {
 
-
   /**
    * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event
    */
@@ -76,7 +75,6 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
     $entity = $event->getEntity();
     // Do some fancy stuff.
   }
-
 
   /**
    * @inheritdoc
