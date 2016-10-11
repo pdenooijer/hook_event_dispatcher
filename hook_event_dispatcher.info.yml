@@ -1,0 +1,5 @@
+name: Hook Event Dispatcher
+type: module
+description: Registers event dispatchers for several drupal hooks
+core: 8.x
+package: Development
