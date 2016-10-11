@@ -21,7 +21,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class ExampleEventSubscribers
+ * Class ExampleEntityEventSubscribers
  * @package Drupal\hook_event_dispatcher\Example
  */
 class ExampleEntityEventSubscribers implements EventSubscriberInterface {

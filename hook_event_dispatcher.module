@@ -4,6 +4,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent;
@@ -12,6 +13,8 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityCreateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityLoadEvent;
+use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 
 /**
  * Implements hook_help().
@@ -24,6 +27,7 @@ function hook_event_dispatcher_help($route_name, RouteMatchInterface $route_matc
   }
 }
 
+// ----------------------- ENTITY HOOKS ----------------------- //
 
 /**
  * Implements hook_entity_insert().
@@ -103,4 +107,22 @@ function hook_event_dispatcher_entity_view(array &$build, EntityInterface $entit
   $event = $manager->register(new EntityViewEvent($build, $entity, $display, $view_mode));
 
   $build = $event->getBuild();
+}
+
+// ----------------------- FORM HOOKS ----------------------- //
+
+/**
+ * Implements hook_form_alter().
+ */
+function hook_event_dispatcher_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+
+  /** @var \Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent $event */
+  $event = $manager->register(new FormIdAlterEvent($form, $form_state, $form_id));
+  $form = $event->getForm();
+
+  /** @var \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event */
+  $event = $manager->register(new FormAlterEvent($form, $form_state, $form_id));
+  $form = $event->getForm();
 }
