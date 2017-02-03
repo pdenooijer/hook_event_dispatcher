@@ -17,6 +17,7 @@ use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
 
 /**
  * Implements hook_help().
@@ -127,6 +128,13 @@ function hook_event_dispatcher_form_alter(&$form, FormStateInterface $form_state
   /** @var \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event */
   $event = $manager->register(new FormAlterEvent($form, $form_state, $form_id));
   $form = $event->getForm();
+
+  $build_info = $form_state->getBuildInfo();
+  if (!empty($build_info['base_form_id'])) {
+    /** @var \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
+    $event = $manager->register(new FormBaseAlterEvent($form, $form_state, $form_id, $build_info['base_form_id']));
+    $form = $event->getForm();
+  }
 }
 
 /**

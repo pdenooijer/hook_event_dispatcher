@@ -1,6 +1,6 @@
 Description
 -----------
-This module registers event dispatchers for several drupal hooks. 
+This module registers event dispatchers for several Drupal hooks.
 This allows you to use the D8 Event Subscriber system instead of the 
 outdated hook system to react on certain events. 
 

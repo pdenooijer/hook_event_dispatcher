@@ -12,6 +12,7 @@ namespace Drupal\hook_event_dispatcher\Example;
 
 
 use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
@@ -44,6 +45,15 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
     $form = $event->getForm();
     // Add placeholder.
     $form['keys']['#attributes']['placeholder'] = 'Search some things';
+    $event->setForm($form);
+  }
+
+  /**
+   * @param \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event
+   */
+  public function alterNodeForm(FormBaseAlterEvent $event) {
+    $form = $event->getForm();
+    $form['title']['widget'][0]['value']['#title'] = 'A new title!';
     $event->setForm($form);
   }
 
@@ -81,8 +91,9 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
       'hook_event_dispatcher.form_search_block_form.alter' => [
         ['alterSearchForm'],
       ],
-      HookEventDispatcherEvents::WIDGET_FORM_ALTER => [
-        ['alterWidgetForm'],
+      // react on al forms with base id "node_form"
+      'hook_event_dispatcher.form_base_node_form.alter' => [
+        ['alterNodeForm'],
       ],
       'hook_event_dispatcher.widget_string_textfield.alter' => [
         ['alterWidgetStringTextField'],
