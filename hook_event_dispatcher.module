@@ -154,3 +154,14 @@ function hook_event_dispatcher_field_widget_form_alter(&$element, FormStateInter
 
 
 }
+
+/**
+ * Implements hook_preprocess().
+ *
+ * @inheritdoc
+ */
+function hook_event_dispatcher_preprocess(&$variables, $hook) {
+  /* @var \Drupal\hook_event_dispatcher\Service\PreprocessEventService $service */
+  $service = Drupal::service('preprocess_event.service');
+  $service->createAndDispatchKnownEvent($hook, $variables);
+}
