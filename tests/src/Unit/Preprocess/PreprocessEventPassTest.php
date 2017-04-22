@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Preprocess;
+namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
 use Drupal\hook_event_dispatcher\Service\PreprocessEventPass;
-use Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers\FakePreprocessEvent;
-use Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers\FakePreprocessEventFactory;
-use Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers\SpyEventDispatcher;
-use Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers\YamlDefinitionsLoader;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\FakePreprocessEvent;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\FakePreprocessEventFactory;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\SpyEventDispatcher;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -24,14 +24,14 @@ class PreprocessEventPassTest extends \PHPUnit_Framework_TestCase {
   /**
    * The Drupal ContainerBuilder.
    *
-   * @var ContainerBuilder
+   * @var \Drupal\Core\DependencyInjection\ContainerBuilder
    */
   private $builder;
 
   /**
    * The PreprocessEventPass.
    *
-   * @var PreprocessEventPass
+   * @var \Drupal\hook_event_dispatcher\Service\PreprocessEventPass
    */
   private $pass;
 
@@ -40,7 +40,7 @@ class PreprocessEventPassTest extends \PHPUnit_Framework_TestCase {
    */
   public function setUp() {
     $this->builder = new ContainerBuilder();
-    $locator = new FileLocator([dirname(dirname(dirname(__DIR__)))]);
+    $locator = new FileLocator([dirname(dirname(dirname(dirname(__DIR__))))]);
     $loader = new YamlFileLoader($this->builder, $locator);
     $loader->load('hook_event_dispatcher.services.yml');
     $this->builder->set('event_dispatcher', new SpyEventDispatcher());
@@ -78,7 +78,7 @@ class PreprocessEventPassTest extends \PHPUnit_Framework_TestCase {
     $this->pass->process($this->builder);
     $this->builder->compile();
 
-    /* @var PreprocessEventFactoryMapper $mapper */
+    /* @var \Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper $mapper */
     $mapper = $this->builder->get('preprocess_event.factory_mapper');
     $variables = [];
 

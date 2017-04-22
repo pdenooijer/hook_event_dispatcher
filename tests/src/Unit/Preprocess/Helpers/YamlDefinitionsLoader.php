@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers;
+namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers;
 
 use Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper;
 use Symfony\Component\Yaml\Parser;
@@ -22,7 +22,7 @@ final class YamlDefinitionsLoader {
   /**
    * Factory mapper.
    *
-   * @var PreprocessEventFactoryMapper
+   * @var \Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper
    */
   private $mapper;
 
@@ -54,7 +54,7 @@ final class YamlDefinitionsLoader {
    */
   private function loadDefinitionsFromServicesYaml() {
     $yaml = new Parser();
-    $content = file_get_contents(dirname(dirname(dirname(dirname(__DIR__)))) . '/hook_event_dispatcher.services.yml');
+    $content = file_get_contents(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/hook_event_dispatcher.services.yml');
     $services = $yaml->parse($content)['services'];
 
     // Remove the Manager.
@@ -82,7 +82,7 @@ final class YamlDefinitionsLoader {
    *
    * Only need to load the files once from the filesystem.
    *
-   * @return YamlDefinitionsLoader
+   * @return \Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader
    *   Existing or new YamlDefinitionsLoader instance.
    */
   public static function getInstance() {
@@ -95,7 +95,7 @@ final class YamlDefinitionsLoader {
   /**
    * Get the FactoryMapper.
    *
-   * @return PreprocessEventFactoryMapper
+   * @return \Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper
    *   Factory mapper.
    */
   public function getMapper() {

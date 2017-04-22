@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers;
+namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers;
 
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -21,7 +21,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
   /**
    * Event.
    *
-   * @var Event
+   * @var \Symfony\Component\EventDispatcher\Event
    */
   private $event;
 
@@ -52,7 +52,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
   /**
    * Get the last event.
    *
-   * @return Event
+   * @return \Symfony\Component\EventDispatcher\Event
    *   Last event.
    */
   public function getLastEvent() {

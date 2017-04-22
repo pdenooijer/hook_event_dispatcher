@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers;
+namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\Factory\PreprocessEventFactoryInterface;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\DefaultEventVariables;

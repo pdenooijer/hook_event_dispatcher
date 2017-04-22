@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Preprocess;
+namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
@@ -23,7 +23,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
-use Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers\YamlDefinitionsLoader;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 
 /**
  * Class FactoryMapperTest.
@@ -33,7 +33,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
   /**
    * Factory mapper.
    *
-   * @var PreprocessEventFactoryMapper
+   * @var \Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper
    */
   private $mapper;
 
@@ -65,7 +65,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
    *   Class names array.
    */
   private function getFactoryClassNamesFromFilesystem() {
-    $files = scandir(dirname(dirname(dirname(__DIR__))) . '/src/Event/Preprocess/Factory');
+    $files = scandir(dirname(dirname(dirname(dirname(__DIR__)))) . '/src/Event/Preprocess/Factory');
 
     $invalid_factories = [
       '.',
@@ -100,7 +100,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
     $variables_array['elements']['#id'] = 22;
     $variables_array['content']['test'] = 'success2';
 
-    /* @var BlockEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(BlockEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -116,7 +116,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
     $variables_array['entity']['#entity'] = new \stdClass();
     $variables_array['entity']['#entity_type'] = 'test_type';
 
-    /* @var EckEntityEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(EckEntityPreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(EckEntityEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -132,7 +132,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
     $variables_array['element'] = ['element array'];
     $variables_array['items'] = ['items array'];
 
-    /* @var FieldEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FieldEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(FieldPreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(FieldEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -147,7 +147,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
     $variables_array = $this->createVariablesArray();
     $variables_array['element'] = ['element array'];
 
-    /* @var FormEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FormEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(FormPreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(FormEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -160,7 +160,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
   public function testHtmlEvent() {
     $variables_array = $this->createVariablesArray();
 
-    /* @var HtmlEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\HtmlEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(HtmlPreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(HtmlEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -172,7 +172,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
   public function testImageEvent() {
     $variables_array = $this->createVariablesArray();
 
-    /* @var ImageEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ImagePreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(ImageEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -185,7 +185,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
     $variables_array = $this->createVariablesArray();
     $variables_array['node'] = new \stdClass();
 
-    /* @var NodeEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(NodePreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(NodeEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -198,7 +198,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
   public function testPageEvent() {
     $variables_array['page']['test'] = 'success';
 
-    /* @var PageEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(PagePreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(PageEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -212,7 +212,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
     $variables_array['rows'][0]['#rows'] = ['rows'];
     $variables_array['view'] = 'view';
 
-    /* @var ViewEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewPreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(ViewEventVariables::class, $variables);
 
@@ -231,7 +231,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
     $variables_array['row'] = 'row';
     $variables_array['view'] = 'view';
 
-    /* @var ViewFieldEventVariables $variables */
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewFieldPreprocessEvent::class, $variables_array);
     $this->assertInstanceOf(ViewFieldEventVariables::class, $variables);
 
@@ -245,7 +245,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
   /**
    * Test the default event variable functions.
    *
-   * @param AbstractEventVariables $variables
+   * @param \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables $variables
    *   Variables object.
    */
   private function assertAbstractEventVariables(AbstractEventVariables $variables) {
@@ -264,13 +264,15 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
    * @param array $variables_array
    *   Variables array.
    *
-   * @return AbstractEventVariables
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables
    *   Variables object.
    */
   private function getVariablesFromCreatedEvent($class, array $variables_array) {
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEventInterface $class */
     $factory = $this->mapper->getFactory($class::getHook());
     $this->assertEquals($class::getHook(), $factory->getEventHook());
 
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEventInterface $event*/
     $event = $factory->createEvent($variables_array);
     $this->assertInstanceOf($class, $event);
 

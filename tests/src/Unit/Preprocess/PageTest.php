@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Preprocess;
+namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\node\Entity\Node;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;

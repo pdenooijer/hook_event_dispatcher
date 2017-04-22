@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Preprocess;
+namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
@@ -13,8 +13,8 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\hook_event_dispatcher\Service\PreprocessEventService;
-use Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers\YamlDefinitionsLoader;
-use Drupal\Tests\hook_event_dispatcher\Preprocess\Helpers\SpyEventDispatcher;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\SpyEventDispatcher;
 
 /**
  * Class ServiceTest.
@@ -24,7 +24,7 @@ final class ServiceTest extends \PHPUnit_Framework_TestCase {
   /**
    * PreprocessEventService.
    *
-   * @var PreprocessEventService
+   * @var \Drupal\hook_event_dispatcher\Service\PreprocessEventService
    *   PreprocessEventService.
    */
   private $service;
@@ -32,7 +32,7 @@ final class ServiceTest extends \PHPUnit_Framework_TestCase {
   /**
    * SpyEventDispatcher.
    *
-   * @var SpyEventDispatcher
+   * @var \Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\SpyEventDispatcher
    *   SpyEventDispatcher
    */
   private $dispatcher;
