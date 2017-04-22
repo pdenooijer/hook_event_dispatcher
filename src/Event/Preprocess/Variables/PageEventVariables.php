@@ -2,7 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 
-use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 /**
  * Class PageEventVariables.
@@ -16,13 +16,13 @@ class PageEventVariables extends AbstractEventVariables {
    *   Is it?
    */
   public function isNodePage() {
-    return isset($this->variables['node']) && $this->variables['node'] instanceof Node;
+    return isset($this->variables['node']) && $this->variables['node'] instanceof NodeInterface;
   }
 
   /**
    * Get the node of the page.
    *
-   * @return Node|null
+   * @return \Drupal\node\NodeInterface|null
    *   Drupal node.
    */
   public function getNode() {

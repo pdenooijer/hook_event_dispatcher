@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
-use Drupal\node\Entity\Node;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
+use Drupal\node\NodeInterface;
 
 /**
  * Class PageTest.
@@ -12,7 +12,7 @@ final class PageTest extends \PHPUnit_Framework_TestCase {
   /**
    * Mock node object.
    *
-   * @var Node
+   * @var \Drupal\node\Entity\Node
    */
   protected $node;
 
@@ -20,13 +20,10 @@ final class PageTest extends \PHPUnit_Framework_TestCase {
    * Setup.
    */
   public function setUp() {
-    parent::setUp();
-
-    $this->node = $this->getMockBuilder(Node::class)
+    $this->node = $this->getMockBuilder(NodeInterface::class)
       ->disableOriginalClone()
       ->disableOriginalConstructor()
       ->getMock();
-
   }
 
   /**
@@ -39,8 +36,8 @@ final class PageTest extends \PHPUnit_Framework_TestCase {
     $page = new PageEventVariables($vars);
     $this->assertTrue($page->get('test'));
     $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf('\stdClass', $page->get('object'));
-    $this->assertFalse($page->get('doesnotexists', FALSE));
+    $this->assertInstanceOf(\stdClass::class, $page->get('object'));
+    $this->assertFalse($page->get('doesNotExists', FALSE));
   }
 
   /**
@@ -54,7 +51,7 @@ final class PageTest extends \PHPUnit_Framework_TestCase {
     $page->set('object', new \stdClass());
     $this->assertTrue($page->get('test'));
     $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf('\stdClass', $page->get('object'));
+    $this->assertInstanceOf(\stdClass::class, $page->get('object'));
     $page->set('null');
     $this->assertNull($page->get('null'));
   }
@@ -70,7 +67,7 @@ final class PageTest extends \PHPUnit_Framework_TestCase {
     $vars['page']['object'] = new \stdClass();
     $this->assertTrue($page->get('test'));
     $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf('\stdClass', $page->get('object'));
+    $this->assertInstanceOf(\stdClass::class, $page->get('object'));
   }
 
   /**
@@ -96,7 +93,7 @@ final class PageTest extends \PHPUnit_Framework_TestCase {
     $page->set('node', new \stdClass());
     $this->assertEquals(NULL, $page->getNode());
     $vars['node'] = $this->node;
-    $this->assertInstanceOf(Node::class, $page->getNode());
+    $this->assertInstanceOf(NodeInterface::class, $page->getNode());
   }
 
 }
