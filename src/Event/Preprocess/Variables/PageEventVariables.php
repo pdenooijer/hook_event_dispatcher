@@ -68,4 +68,17 @@ class PageEventVariables extends AbstractEventVariables {
     return $this;
   }
 
+  /**
+   * Get a variable with a given name by reference.
+   *
+   * @param string $name
+   *   Variable name.
+   *
+   * @return mixed
+   *   Reference for the variable.
+   */
+  public function &getByReference($name) {
+    return $this->variables['page'][$name];
+  }
+
 }

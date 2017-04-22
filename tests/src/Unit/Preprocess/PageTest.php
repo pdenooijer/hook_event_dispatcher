@@ -96,4 +96,17 @@ final class PageTest extends \PHPUnit_Framework_TestCase {
     $this->assertInstanceOf(NodeInterface::class, $page->getNode());
   }
 
+  /**
+   * Test getting a var by ref and changing it.
+   */
+  public function testGetVarByRef() {
+    $vars['page']['test'] = 'test';
+    $page = new PageEventVariables($vars);
+    $test = &$page->getByReference('test');
+    $this->assertEquals('test', $test);
+    $test = 'OtherTest';
+    $this->assertEquals('OtherTest', $page->get('test'));
+    $this->assertEquals('OtherTest', $vars['page']['test']);
+  }
+
 }
