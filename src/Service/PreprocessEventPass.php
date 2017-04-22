@@ -16,7 +16,7 @@ final class PreprocessEventPass implements CompilerPassInterface {
    *
    * First get the factory defaults and then append the new/overrides to them.
    *
-   * @param ContainerBuilder $container
+   * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
    *   Drupal container.
    */
   public function process(ContainerBuilder $container) {

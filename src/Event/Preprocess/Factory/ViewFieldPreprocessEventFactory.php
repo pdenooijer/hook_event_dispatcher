@@ -16,7 +16,7 @@ final class ViewFieldPreprocessEventFactory implements PreprocessEventFactoryInt
    * @param array $variables
    *   Variables.
    *
-   * @return ViewFieldPreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

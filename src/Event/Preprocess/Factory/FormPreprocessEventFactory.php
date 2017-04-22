@@ -16,7 +16,7 @@ final class FormPreprocessEventFactory implements PreprocessEventFactoryInterfac
    * @param array $variables
    *   Variables.
    *
-   * @return FormPreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

@@ -16,7 +16,7 @@ final class HtmlPreprocessEventFactory implements PreprocessEventFactoryInterfac
    * @param array $variables
    *   Variables.
    *
-   * @return HtmlPreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

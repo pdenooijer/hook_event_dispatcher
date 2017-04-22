@@ -16,7 +16,7 @@ final class ImagePreprocessEventFactory implements PreprocessEventFactoryInterfa
    * @param array $variables
    *   Variables.
    *
-   * @return ImagePreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

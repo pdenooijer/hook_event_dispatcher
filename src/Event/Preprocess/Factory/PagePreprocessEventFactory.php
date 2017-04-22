@@ -16,7 +16,7 @@ final class PagePreprocessEventFactory implements PreprocessEventFactoryInterfac
    * @param array $variables
    *   Variables.
    *
-   * @return PagePreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

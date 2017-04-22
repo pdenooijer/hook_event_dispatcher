@@ -13,14 +13,14 @@ abstract class AbstractPreprocessEvent extends Event implements PreprocessEventI
   /**
    * Event variables.
    *
-   * @var AbstractEventVariables
+   * @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables
    */
   protected $variables;
 
   /**
    * PreprocessEvent constructor.
    *
-   * @param AbstractEventVariables $variables
+   * @param \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables $variables
    *   The variables.
    */
   public function __construct(AbstractEventVariables $variables) {
@@ -40,7 +40,7 @@ abstract class AbstractPreprocessEvent extends Event implements PreprocessEventI
   /**
    * Get the template variables.
    *
-   * @return AbstractEventVariables
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables
    *   Template variables.
    */
   public function getVariables() {

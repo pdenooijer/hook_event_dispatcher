@@ -16,7 +16,7 @@ final class EckEntityPreprocessEventFactory implements PreprocessEventFactoryInt
    * @param array $variables
    *   Variables.
    *
-   * @return EckEntityPreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

@@ -2,8 +2,6 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 
-use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
-
 /**
  * Interface PreprocessEventInterface.
  */
@@ -28,7 +26,7 @@ interface PreprocessEventInterface {
   /**
    * Get the template variables.
    *
-   * @return AbstractEventVariables
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables
    *   Template variables.
    */
   public function getVariables();

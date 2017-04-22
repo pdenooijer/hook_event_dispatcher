@@ -16,7 +16,7 @@ final class NodePreprocessEventFactory implements PreprocessEventFactoryInterfac
    * @param array $variables
    *   Variables.
    *
-   * @return NodePreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

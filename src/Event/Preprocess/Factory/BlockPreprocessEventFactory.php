@@ -16,7 +16,7 @@ final class BlockPreprocessEventFactory implements PreprocessEventFactoryInterfa
    * @param array $variables
    *   Variables.
    *
-   * @return BlockPreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

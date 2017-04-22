@@ -16,7 +16,7 @@ final class ViewPreprocessEventFactory implements PreprocessEventFactoryInterfac
    * @param array $variables
    *   Variables.
    *
-   * @return ViewPreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

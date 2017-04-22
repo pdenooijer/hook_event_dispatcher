@@ -16,7 +16,7 @@ final class FieldPreprocessEventFactory implements PreprocessEventFactoryInterfa
    * @param array $variables
    *   Variables.
    *
-   * @return FieldPreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables) {

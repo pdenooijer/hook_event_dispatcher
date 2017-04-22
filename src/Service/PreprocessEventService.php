@@ -12,7 +12,7 @@ final class PreprocessEventService {
   /**
    * Event dispatcher.
    *
-   * @var EventDispatcherInterface
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
   private $dispatcher;
 
@@ -26,7 +26,7 @@ final class PreprocessEventService {
   /**
    * PreprocessEventService constructor.
    *
-   * @param EventDispatcherInterface $dispatcher
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
    *   Event dispatcher.
    * @param PreprocessEventFactoryMapper $mapper
    *   Factory mapper.

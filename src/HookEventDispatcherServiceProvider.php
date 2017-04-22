@@ -14,7 +14,7 @@ final class HookEventDispatcherServiceProvider implements ServiceProviderInterfa
   /**
    * Registers services to the container.
    *
-   * @param ContainerBuilder $container
+   * @param \Drupal\Core\DependencyInjection\ContainerBuilder $container
    *   The ContainerBuilder to register services to.
    */
   public function register(ContainerBuilder $container) {

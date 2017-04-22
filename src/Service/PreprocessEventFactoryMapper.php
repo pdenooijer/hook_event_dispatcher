@@ -12,14 +12,14 @@ final class PreprocessEventFactoryMapper {
   /**
    * Map that binds a hook to a factory.
    *
-   * @var PreprocessEventFactoryInterface[]
+   * @var \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\PreprocessEventFactoryInterface[]
    */
   private $hookToFactoryMap = [];
 
   /**
    * Add Factory to the mapper.
    *
-   * @param PreprocessEventFactoryInterface $factory
+   * @param \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\PreprocessEventFactoryInterface $factory
    *   Provided factory to add.
    */
   public function addFactory(PreprocessEventFactoryInterface $factory) {
@@ -33,7 +33,7 @@ final class PreprocessEventFactoryMapper {
    * @param string $hook
    *   The hook name.
    *
-   * @return PreprocessEventFactoryInterface|null
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\PreprocessEventFactoryInterface|null
    *   PreprocessEventFactory.
    */
   public function getFactory($hook) {

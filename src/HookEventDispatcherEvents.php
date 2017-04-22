@@ -3,7 +3,8 @@
 namespace Drupal\hook_event_dispatcher;
 
 /**
- * Class HookEventDispatcherEvents
+ * Class HookEventDispatcherEvents.
+ *
  * @package Drupal\hook_event_dispatcher
  */
 final class HookEventDispatcherEvents {
