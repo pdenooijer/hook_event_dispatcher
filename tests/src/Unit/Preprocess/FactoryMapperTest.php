@@ -196,7 +196,7 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
    * Test a PagePreprocessEvent.
    */
   public function testPageEvent() {
-    $variables_array['page']['test'] = 'success';
+    $variables_array['page'] = $this->createVariablesArray();
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(PagePreprocessEvent::class, $variables_array);
@@ -252,6 +252,11 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('success', $variables->get('test'));
     $this->assertEquals('default', $variables->get('test2', 'default'));
 
+    $reference = &$variables->getByReference('reference');
+    $this->assertEquals('first', $reference);
+    $reference = 'second';
+    $this->assertEquals('second', $variables->get('reference'));
+
     $variables->set('test3', 'new set');
     $this->assertEquals('new set', $variables->get('test3'));
   }
@@ -286,7 +291,10 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
    *   Variables array.
    */
   private function createVariablesArray() {
-    return ['test' => 'success'];
+    return [
+      'test' => 'success',
+      'reference' => 'first',
+    ];
   }
 
 }
