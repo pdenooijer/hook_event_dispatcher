@@ -50,6 +50,11 @@ services:
     tags:
       -  { name: preprocess_event_default_factory }
 
+  preprocess_event.factory.taxonomy_term:
+    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\TaxonomyTermPreprocessEventFactory
+    tags:
+      -  { name: preprocess_event_default_factory }
+
   preprocess_event.factory.view_field:
     class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ViewFieldPreprocessEventFactory
     tags:

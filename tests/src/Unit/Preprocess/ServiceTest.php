@@ -10,6 +10,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\TaxonomyTermPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\hook_event_dispatcher\Service\PreprocessEventService;
@@ -111,6 +112,13 @@ final class ServiceTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Test a PagePreprocessEvent.
+   */
+  public function testTaxonomyTermEvent() {
+    $this->createAndAssertEvent(TaxonomyTermPreprocessEvent::class);
+  }
+
+  /**
    * Test a ViewFieldPreprocessEvent.
    */
   public function testViewFieldEvent() {
@@ -140,6 +148,7 @@ final class ServiceTest extends \PHPUnit_Framework_TestCase {
    *   Event class name.
    */
   private function createAndAssertEvent($class) {
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent $class */
     $this->service->createAndDispatchKnownEvent($class::getHook(), $this->variables);
     $this->assertEquals($class::name(), $this->dispatcher->getLastEventName());
     $this->assertInstanceOf($class, $this->dispatcher->getLastEvent());
