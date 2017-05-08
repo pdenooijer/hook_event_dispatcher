@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
+use Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent;
@@ -274,8 +275,11 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
    */
   private function getVariablesFromCreatedEvent($class, array $variables_array) {
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEventInterface $class */
-    $factory = $this->mapper->getFactory($class::getHook());
-    $this->assertEquals($class::getHook(), $factory->getEventHook());
+    $hook = $class::getHook();
+    $this->assertEquals(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
+
+    $factory = $this->mapper->getFactory($hook);
+    $this->assertEquals($hook, $factory->getEventHook());
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEventInterface $event*/
     $event = $factory->createEvent($variables_array);
