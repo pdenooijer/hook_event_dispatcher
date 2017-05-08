@@ -34,7 +34,7 @@ abstract class AbstractPreprocessEvent extends Event implements PreprocessEventI
    *   Event name.
    */
   public static function name() {
-    return 'preprocess_' . static::getHook();
+    return static::DISPATCH_NAME_PREFIX . static::getHook();
   }
 
   /**

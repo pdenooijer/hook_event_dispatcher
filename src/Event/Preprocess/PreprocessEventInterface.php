@@ -7,6 +7,8 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
  */
 interface PreprocessEventInterface {
 
+  const DISPATCH_NAME_PREFIX = 'preprocess_';
+
   /**
    * Get the hook name.
    *
