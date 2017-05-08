@@ -13,7 +13,7 @@ interface PreprocessEventFactoryInterface {
    * @param array $variables
    *   Variables.
    *
-   * @return AbstractPreprocessEvent
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent
    *   Created event.
    */
   public function createEvent(array &$variables);
