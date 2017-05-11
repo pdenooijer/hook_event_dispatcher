@@ -10,7 +10,7 @@ class ViewFieldEventVariables extends AbstractEventVariables {
   /**
    * Get the field.
    *
-   * @return Field
+   * @return \Drupal\views\Plugin\views\field\EntityField
    *   Field.
    */
   public function getField() {
@@ -20,7 +20,7 @@ class ViewFieldEventVariables extends AbstractEventVariables {
   /**
    * Get the output.
    *
-   * @return Markup
+   * @return \Drupal\views\Plugin\views\field\Markup
    *   Output.
    */
   public function getOutput() {
@@ -30,7 +30,7 @@ class ViewFieldEventVariables extends AbstractEventVariables {
   /**
    * Get the row.
    *
-   * @return ResultRow
+   * @return \Drupal\views\ResultRow
    *   Row.
    */
   public function getRow() {
@@ -40,7 +40,7 @@ class ViewFieldEventVariables extends AbstractEventVariables {
   /**
    * Get the view.
    *
-   * @return ViewExecutable
+   * @return \Drupal\views\ViewExecutable
    *   View.
    */
   public function getView() {

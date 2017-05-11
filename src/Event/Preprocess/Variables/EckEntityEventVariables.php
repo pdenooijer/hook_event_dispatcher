@@ -10,7 +10,7 @@ class EckEntityEventVariables extends AbstractEventVariables {
   /**
    * Get the EckEntity.
    *
-   * @return EckEntity
+   * @return \Drupal\eck\Entity\EckEntity
    *   EckEntity.
    */
   public function getEntity() {

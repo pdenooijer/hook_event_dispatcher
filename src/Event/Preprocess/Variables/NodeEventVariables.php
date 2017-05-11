@@ -12,7 +12,7 @@ class NodeEventVariables extends AbstractEventVariables {
   /**
    * Get the node.
    *
-   * @return Node
+   * @return \Drupal\node\Entity\Node
    *   The node.
    */
   public function getNode() {

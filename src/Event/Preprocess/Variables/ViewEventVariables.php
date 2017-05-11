@@ -20,7 +20,7 @@ class ViewEventVariables extends AbstractEventVariables {
   /**
    * Get the view.
    *
-   * @return ViewExecutable
+   * @return \Drupal\views\ViewExecutable
    *   View.
    */
   public function getView() {
