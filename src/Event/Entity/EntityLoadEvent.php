@@ -22,7 +22,7 @@ class EntityLoadEvent extends Event implements EventInterface {
    */
   public function __construct(array $entities, $entity_type_id) {
     $this->entities = $entities;
-    $this->entityType = $entity_type_id;
+    $this->entityTypeId = $entity_type_id;
   }
 
   /**
