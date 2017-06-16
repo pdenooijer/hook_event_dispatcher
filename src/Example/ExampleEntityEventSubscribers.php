@@ -13,6 +13,7 @@ namespace Drupal\hook_event_dispatcher\Example;
 
 use Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent;
+use Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent;
@@ -69,6 +70,14 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   }
 
   /**
+   * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent $event
+   */
+  public function hookEntityPreDelete(EntityPredeleteEvent $event){
+    $entity = $event->getEntity();
+    // Do something before entity is deleted.
+  }
+
+  /**
    * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent $event
    */
   public function hookEntityDelete(EntityDeleteEvent $event) {
@@ -92,6 +101,9 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
       ],
       HookEventDispatcherEvents::ENTITY_UPDATE => [
         ['hookEntityUpdate'],
+      ],
+      HookEventDispatcherEvents::ENTITY_PRE_DELETE => [
+        ['hookEntityPreDelete'],
       ],
       HookEventDispatcherEvents::ENTITY_DELETE => [
         ['hookEntityDelete'],

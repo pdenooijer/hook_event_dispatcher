@@ -12,6 +12,7 @@ final class HookEventDispatcherEvents {
   // ENTITY EVENTS.
   const ENTITY_INSERT = 'hook_event_dispatcher.entity.insert';
   const ENTITY_UPDATE = 'hook_event_dispatcher.entity.update';
+  const ENTITY_PRE_DELETE = 'hook_event_dispatcher.entity.predelete';
   const ENTITY_DELETE = 'hook_event_dispatcher.entity.delete';
   const ENTITY_PRE_SAVE = 'hook_event_dispatcher.entity.presave';
   const ENTITY_VIEW = 'hook_event_dispatcher.entity.view';
