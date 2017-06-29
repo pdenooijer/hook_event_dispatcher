@@ -2,15 +2,15 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Form;
 
-
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
-
+/**
+ * Class WidgetTypeFormAlterEvent.
+ *
+ * @package Drupal\hook_event_dispatcher\Event\Form
+ */
 class WidgetTypeFormAlterEvent extends WidgetFormAlterEvent {
 
   /**
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function getDispatcherType() {
     /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
