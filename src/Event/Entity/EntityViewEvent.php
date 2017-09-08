@@ -61,7 +61,7 @@ class EntityViewEvent extends BaseEntityEvent {
    * @return array
    *   The build.
    */
-  public function getBuild() {
+  public function &getBuild() {
     return $this->build;
   }
 
