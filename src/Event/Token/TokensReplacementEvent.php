@@ -1,0 +1,206 @@
+<?php
+
+namespace Drupal\hook_event_dispatcher\Event\Token;
+
+use Drupal\Component\Render\MarkupInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\hook_event_dispatcher\Event\EventInterface;
+use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Symfony\Component\EventDispatcher\Event;
+
+/**
+ * Class TokensProvideEvent.
+ *
+ * @package Drupal\hook_event_dispatcher\Event\Token
+ * @see hook_tokens
+ */
+final class TokensReplacementEvent extends Event implements EventInterface {
+
+  /**
+   * An associative array of replacement values.
+   *
+   * Keyed by the raw [type:token] strings from the original text.
+   * The returned values must be either plain
+   * text strings, or an object implementing MarkupInterface if they are
+   * HTML-formatted.
+   *
+   * @var string|\Drupal\Component\Render\MarkupInterface[]
+   */
+  private $replacementValues = [];
+  private $type;
+  private $tokens;
+  private $data;
+  private $options;
+  private $bubbleableMetadata;
+
+  /**
+   * Constructor.
+   *
+   * {@see hook_tokens}
+   */
+  public function __construct(
+    $type,
+    array $tokens,
+    array $data,
+    array $options,
+    BubbleableMetadata $bubbleable_metadata
+  ) {
+    $this->type = $type;
+    $this->tokens = $tokens;
+    $this->data = $data;
+    $this->options = $options;
+    $this->bubbleableMetadata = $bubbleable_metadata;
+  }
+
+  /**
+   * Getter.
+   *
+   * The machine-readable name of the type (group) of token being replaced,
+   * such as 'node', 'user', or another type defined by a hook_token_info()
+   * implementation.
+   *
+   * @return string
+   *   The type.
+   */
+  public function getType() {
+    return $this->type;
+  }
+
+  /**
+   * Getter.
+   *
+   * An array of tokens to be replaced. The keys are the machine-readable
+   * token names, and the values are the raw [type:token] strings that
+   * appeared in the original text.
+   *
+   * @return array
+   *   The tokens.
+   */
+  public function getTokens() {
+    return $this->tokens;
+  }
+
+  /**
+   * Getter for single data member.
+   *
+   * @param string $key
+   *   The key for the additional token data, like 'node'.
+   * @param mixed $default
+   *   The default value, if data does not exists.
+   *
+   * @return mixed
+   *   The value.
+   */
+  public function getData($key, $default = NULL) {
+    return isset($this->data[$key]) ? $this->data[$key] : $default;
+  }
+
+  /**
+   * Getter.
+   *
+   * An associative array of data objects to be used when generating
+   * replacement values, as supplied in the $data parameter to
+   * \Drupal\Core\Utility\Token::replace().
+   *
+   * @return array
+   *   The raw data given inside the hook_tokens.
+   */
+  public function getRawData() {
+    return $this->data;
+  }
+
+  /**
+   * Getter.
+   *
+   * An associative array of options for token replacement; see
+   * \Drupal\Core\Utility\Token::replace() for possible values.
+   *
+   * @return array
+   *   The raw options given inside the hook_tokens.
+   */
+  public function getOptions() {
+    return $this->options;
+  }
+
+  /**
+   * Getter.
+   *
+   * The bubbleable metadata. Prior to invoking this hook,
+   * \Drupal\Core\Utility\Token::generate() collects metadata for all of the
+   * data objects in $data. For any data sources not in $data, but that are
+   * used by the token replacement logic, such as global configuration (e.g.,
+   * 'system.site') and related objects (e.g., $node->getOwner()),
+   * implementations of this hook must add the corresponding metadata.
+   * For example:
+   *
+   * @return \Drupal\Core\Render\BubbleableMetadata
+   *   The metadata.
+   */
+  public function getBubbleableMetadata() {
+    return $this->bubbleableMetadata;
+  }
+
+  /**
+   * An associative array of replacement values.
+   *
+   * Keyed by the raw [type:token] strings from the original text.
+   * The returned values must be either plain
+   * text strings, or an object implementing MarkupInterface if they are
+   * HTML-formatted.
+   *
+   * @return string|\Drupal\Component\Render\MarkupInterface[]
+   *   The replacement values for the token.
+   */
+  public function getReplacementValues() {
+    return $this->replacementValues;
+  }
+
+  /**
+   * Set's a replacement value for a token.
+   *
+   * @param string $type
+   *   The token type like 'node'.
+   * @param string $token
+   *   The name of the token, like 'url'.
+   * @param string|\Drupal\Component\Render\MarkupInterface $replacement
+   *   The replacement value.
+   */
+  public function setReplacementValue($type, $token, $replacement) {
+    if (!is_string($type)) {
+      throw new \UnexpectedValueException('Type should be a string');
+    }
+    if (!is_string($token)) {
+      throw new \UnexpectedValueException('Token should be a string');
+    }
+    if (!$this->forToken($type, $token)) {
+      throw new \UnexpectedValueException('Requested replacement is not requested');
+    }
+    if (!is_string($replacement) && !$replacement instanceof MarkupInterface) {
+      throw new \UnexpectedValueException('Replacement value should be a string or instanceof MarkupInterface');
+    }
+    $this->replacementValues[sprintf('[%s:%s]', $type, $token)] = $replacement;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDispatcherType() {
+    return HookEventDispatcherEvents::TOKEN_REPLACEMENT;
+  }
+
+  /**
+   * Check if the event is for the given token.
+   *
+   * @param string $type
+   *   The token type like 'node'.
+   * @param string $token
+   *   The token type like 'url'.
+   *
+   * @return bool
+   *   TRUE if there is one.
+   */
+  public function forToken($type, $token) {
+    return $this->type === $type && isset($this->tokens[$token]);
+  }
+
+}

@@ -24,4 +24,8 @@ final class HookEventDispatcherEvents {
   const FORM_ALTER = 'hook_event_dispatcher.form.alter';
   const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
 
+  // TOKEN EVENTS.
+  const TOKEN_REPLACEMENT = 'hook_event_dispatcher.token.replacement';
+  const TOKEN_INFO = 'hook_event_dispatcher.token.info';
+
 }
