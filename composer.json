@@ -7,17 +7,23 @@
     "drupal/core": "^8.2",
     "phpunit/phpunit": "^5.7",
     "drupal/coder": "^8.2",
-    "phpmd/phpmd": "^2.6"
+    "phpmd/phpmd": "^2.6",
+    "jakub-onderka/php-parallel-lint": "^0.9.2",
+    "jakub-onderka/php-console-highlighter": "^0.3.2"
   },
+  "minimum-stability": "alpha",
   "scripts": {
     "test": [
+      "@phplint",
       "@phpunit",
       "@phpcs",
       "@phpmd"
     ],
-    "phpunit": "./vendor/bin/phpunit ./tests",
-    "phpcs": "./vendor/bin/phpcs --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml  --extensions=php,module,inc --report=full --warning-severity=0 ./src ./tests",
-    "phpmd": "./vendor/bin/phpmd src text phpmd.xml  --suffixes php,module,inc"
+    "phplint": "vendor/bin/parallel-lint --exclude vendor/ -e php,module,inc,install,profile,theme .",
+    "phpunit": "vendor/bin/phpunit --configuration=phpunit.xml",
+    "phpcs": "vendor/bin/phpcs --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 --ignore=vendor/ .",
+    "phpmd": "vendor/bin/phpmd --exclude vendor --suffixes php,module,inc,install,profile,theme . text phpmd.xml",
+    "phpcbf": "vendor/bin/phpcbf --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --ignore=vendor/ --extensions=php,module,inc,install,profile,theme ."
   },
   "autoload": {
     "psr-4": {
@@ -36,6 +42,6 @@
     }
   },
   "suggest": {
-    "drupal/token": "Provides additional tokens not supported by core, as well as a UI for browsing tokens."
+    "drupal/token": "Provides additional tokens not supported by core (most notably fields), as well as a UI for browsing tokens."
   }
 }
