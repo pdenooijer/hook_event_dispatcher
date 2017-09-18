@@ -10,7 +10,6 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent;
@@ -38,12 +37,13 @@ use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
  *
  * {@inheritdoc}
  */
-function hook_event_dispatcher_help($route_name, RouteMatchInterface $route_match) {
-  switch ($route_name) {
-    case 'help.page.hook_event_dispatcher':
-      $output = file_get_contents(drupal_get_path('module', 'hook_event_dispatcher') . '/README.txt');
-      return '<pre>' . $output . '</pre>';
+function hook_event_dispatcher_help($routeName) {
+  if ($routeName === 'help.page.hook_event_dispatcher') {
+    $path = drupal_get_path('module', 'hook_event_dispatcher');
+    $output = file_get_contents($path . '/README.txt');
+    return '<pre>' . $output . '</pre>';
   }
+  return '';
 }
 
 /**
@@ -131,10 +131,10 @@ function hook_event_dispatcher_entity_create(EntityInterface $entity) {
  *
  * {@inheritdoc}
  */
-function hook_event_dispatcher_entity_load(array $entities, $entity_type_id) {
+function hook_event_dispatcher_entity_load(array $entities, $entityTypeId) {
   /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new EntityLoadEvent($entities, $entity_type_id));
+  $manager->register(new EntityLoadEvent($entities, $entityTypeId));
 }
 
 /**
@@ -146,11 +146,11 @@ function hook_event_dispatcher_entity_view(
   array &$build,
   EntityInterface $entity,
   EntityViewDisplayInterface $display,
-  $view_mode
+  $viewMode
 ) {
   /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new EntityViewEvent($build, $entity, $display, $view_mode));
+  $manager->register(new EntityViewEvent($build, $entity, $display, $viewMode));
 }
 
 /**
@@ -158,17 +158,17 @@ function hook_event_dispatcher_entity_view(
  *
  * {@inheritdoc}
  */
-function hook_event_dispatcher_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function hook_event_dispatcher_form_alter(&$form, FormStateInterface $formState, $formId) {
   /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new FormAlterEvent($form, $form_state, $form_id));
+  $manager->register(new FormAlterEvent($form, $formState, $formId));
 
-  $build_info = $form_state->getBuildInfo();
-  if (!empty($build_info['base_form_id'])) {
+  $buildInfo = $formState->getBuildInfo();
+  if (!empty($buildInfo['base_form_id'])) {
     /** @var \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
-    $manager->register(new FormBaseAlterEvent($form, $form_state, $form_id, $build_info['base_form_id']));
+    $manager->register(new FormBaseAlterEvent($form, $formState, $formId, $buildInfo['base_form_id']));
   }
-  $manager->register(new FormIdAlterEvent($form, $form_state, $form_id));
+  $manager->register(new FormIdAlterEvent($form, $formState, $formId));
 }
 
 /**
@@ -176,11 +176,11 @@ function hook_event_dispatcher_form_alter(&$form, FormStateInterface $form_state
  *
  * {@inheritdoc}
  */
-function hook_event_dispatcher_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+function hook_event_dispatcher_field_widget_form_alter(&$element, FormStateInterface $formState, $context) {
   /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new WidgetFormAlterEvent($element, $form_state, $context));
-  $manager->register(new WidgetTypeFormAlterEvent($element, $form_state, $context));
+  $manager->register(new WidgetFormAlterEvent($element, $formState, $context));
+  $manager->register(new WidgetTypeFormAlterEvent($element, $formState, $context));
 }
 
 /**
@@ -215,11 +215,11 @@ function hook_event_dispatcher_tokens(
   $tokens,
   array $data,
   array $options,
-  BubbleableMetadata $bubbleable_metadata
+  BubbleableMetadata $bubbleableMetadata
 ) {
   /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new TokensReplacementEvent($type, $tokens, $data, $options, $bubbleable_metadata);
+  $event = new TokensReplacementEvent($type, $tokens, $data, $options, $bubbleableMetadata);
   $manager->register($event);
   return $event->getReplacementValues();
 }
@@ -242,6 +242,8 @@ function hook_event_dispatcher_token_info() {
 
 /**
  * Implements hook_path_insert().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_path_insert($path) {
   if (empty($path)) {
@@ -255,6 +257,8 @@ function hook_event_dispatcher_path_insert($path) {
 
 /**
  * Implements hook_path_update().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_path_update($path) {
   if (empty($path)) {
@@ -268,6 +272,8 @@ function hook_event_dispatcher_path_update($path) {
 
 /**
  * Implements hook_path_delete().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_path_delete($path) {
   if (empty($path)) {
