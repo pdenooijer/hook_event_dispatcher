@@ -148,7 +148,6 @@ function hook_event_dispatcher_entity_view(array &$build, EntityInterface $entit
 function hook_event_dispatcher_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new FormIdAlterEvent($form, $form_state, $form_id));
   $manager->register(new FormAlterEvent($form, $form_state, $form_id));
 
   $build_info = $form_state->getBuildInfo();
@@ -156,6 +155,7 @@ function hook_event_dispatcher_form_alter(&$form, FormStateInterface $form_state
     /** @var \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
     $manager->register(new FormBaseAlterEvent($form, $form_state, $form_id, $build_info['base_form_id']));
   }
+  $manager->register(new FormIdAlterEvent($form, $form_state, $form_id));
 }
 
 /**
