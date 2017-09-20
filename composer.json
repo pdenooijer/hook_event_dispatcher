@@ -1,0 +1,41 @@
+{
+  "name": "drupal/hook_event_dispatcher",
+  "description": "Dispatches events for several drupal core hooks.",
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "require-dev": {
+    "drupal/core": "^8.2",
+    "phpunit/phpunit": "^5.7",
+    "drupal/coder": "^8.2",
+    "phpmd/phpmd": "^2.6"
+  },
+  "scripts": {
+    "test": [
+      "@phpunit",
+      "@phpcs",
+      "@phpmd"
+    ],
+    "phpunit": "./vendor/bin/phpunit ./tests",
+    "phpcs": "./vendor/bin/phpcs --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml  --extensions=php,module,inc --report=full --warning-severity=0 ./src ./tests",
+    "phpmd": "./vendor/bin/phpmd src text phpmd.xml  --suffixes php,module,inc"
+  },
+  "autoload": {
+    "psr-4": {
+      "Drupal\\hook_event_dispatcher\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Drupal\\Tests\\hook_event_dispatcher\\": "tests/src/"
+    }
+  },
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  },
+  "suggest": {
+    "drupal/token": "Provides additional tokens not supported by core, as well as a UI for browsing tokens."
+  }
+}

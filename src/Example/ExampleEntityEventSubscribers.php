@@ -66,6 +66,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   public function entityInsert(EntityInsertEvent $event) {
     $entity = $event->getEntity();
     // Do some fancy stuff.
+    fancy_stuff($entity);
   }
 
   /**
@@ -77,6 +78,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   public function entityUpdate(EntityUpdateEvent $event) {
     $entity = $event->getEntity();
     // Do some fancy stuff.
+    fancy_stuff($entity);
   }
 
   /**
@@ -88,6 +90,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   public function entityPreDelete(EntityPredeleteEvent $event) {
     $entity = $event->getEntity();
     // Do something before entity is deleted.
+    fancy_stuff($entity);
   }
 
   /**
@@ -99,6 +102,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   public function entityDelete(EntityDeleteEvent $event) {
     $entity = $event->getEntity();
     // Do some fancy stuff.
+    fancy_stuff($entity);
   }
 
   /**

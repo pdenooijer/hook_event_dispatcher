@@ -86,6 +86,7 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
   public function alterWidgetStringTextField(WidgetTypeFormAlterEvent $event) {
     $element = &$event->getElement();
     // Do something cool.
+    something_cool($element);
   }
 
   /**
