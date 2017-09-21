@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent;
@@ -20,6 +21,8 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityCreateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityLoadEvent;
+use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
+use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
@@ -221,4 +224,43 @@ function hook_event_dispatcher_token_info() {
     'types' => $event->getTokenTypes(),
     'tokens' => $event->getTokens(),
   ];
+}
+
+/**
+ * Implements hook_path_insert().
+ */
+function hook_event_dispatcher_path_insert($path) {
+  if (empty($path)) {
+    return;
+  }
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PathInsertEvent($path);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_path_update().
+ */
+function hook_event_dispatcher_path_update($path) {
+  if (empty($path)) {
+    return;
+  }
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PathUpdateEvent($path);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_path_delete().
+ */
+function hook_event_dispatcher_path_delete($path) {
+  if (empty($path)) {
+    return;
+  }
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PathDeleteEvent($path);
+  $manager->register($event);
 }

@@ -28,4 +28,9 @@ final class HookEventDispatcherEvents {
   const TOKEN_REPLACEMENT = 'hook_event_dispatcher.token.replacement';
   const TOKEN_INFO = 'hook_event_dispatcher.token.info';
 
+  // PATH EVENTS.
+  const PATH_INSERT = 'hook_event_dispatcher.path.insert';
+  const PATH_DELETE = 'hook_event_dispatcher.path.delete';
+  const PATH_UPDATE = 'hook_event_dispatcher.path.update';
+
 }
