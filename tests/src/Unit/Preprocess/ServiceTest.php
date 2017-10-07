@@ -19,6 +19,8 @@ use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\SpyEventDispatche
 
 /**
  * Class ServiceTest.
+ *
+ * @group hook_event_dispatcher
  */
 final class ServiceTest extends \PHPUnit_Framework_TestCase {
 
