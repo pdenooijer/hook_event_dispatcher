@@ -5,11 +5,13 @@
  * Hook event dispatcher module.
  */
 
+use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent;
@@ -179,4 +181,15 @@ function hook_event_dispatcher_preprocess(&$variables, $hook) {
   /* @var \Drupal\hook_event_dispatcher\Service\PreprocessEventService $service */
   $service = Drupal::service('preprocess_event.service');
   $service->createAndDispatchKnownEvent($hook, $variables);
+}
+
+/**
+ * Implements hook_block_build_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_block_build_alter(&$build, BlockPluginInterface $block) {
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new BlockBuildAlterEvent($build, $block));
 }
