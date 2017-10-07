@@ -28,6 +28,8 @@ use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLo
 
 /**
  * Class FactoryMapperTest.
+ *
+ * @group hook_event_dispatcher
  */
 final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
 

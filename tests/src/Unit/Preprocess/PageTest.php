@@ -7,6 +7,8 @@ use Drupal\node\NodeInterface;
 
 /**
  * Class PageTest.
+ *
+ * @group hook_event_dispatcher
  */
 final class PageTest extends \PHPUnit_Framework_TestCase {
   /**

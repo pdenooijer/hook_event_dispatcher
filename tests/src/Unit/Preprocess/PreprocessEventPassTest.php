@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * Class PreprocessEventPassTest.
  *
- * @package Drupal\Tests\hook_event_dispatcher\Preprocess
+ * @group hook_event_dispatcher
  */
 class PreprocessEventPassTest extends \PHPUnit_Framework_TestCase {
 
