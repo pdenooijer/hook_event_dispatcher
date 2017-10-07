@@ -109,6 +109,15 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * @inheritdoc
    */
+  public function getListenerPriority($eventName, $listener) {
+    throw new \BadMethodCallException();
+  }
+
+  /**
+   * Mock.
+   *
+   * @inheritdoc
+   */
   public function hasListeners($event_name = NULL) {
     throw new \BadMethodCallException();
   }
