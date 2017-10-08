@@ -44,15 +44,15 @@ class EntityViewEvent extends BaseEntityEvent {
    * @param \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
    *   The entity view display holding the display options configured for the
    *   entity components.
-   * @param string $view_mode
+   * @param string $viewMode
    *   The view mode the entity is rendered in.
    */
-  public function __construct(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  public function __construct(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $viewMode) {
     parent::__construct($entity);
 
     $this->build = &$build;
     $this->display = $display;
-    $this->viewMode = $view_mode;
+    $this->viewMode = $viewMode;
   }
 
   /**

@@ -37,18 +37,18 @@ abstract class BaseFormEvent extends Event implements EventInterface {
    *
    * @param array $form
    *   Nested array of form elements that comprise the form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   * @param \Drupal\Core\Form\FormStateInterface $formState
    *   The current state of the form. The arguments that
    *   \Drupal::formBuilder()->getForm() was originally called with are
    *   available in the array $form_state->getBuildInfo()['args'].
-   * @param string $form_id
+   * @param string $formId
    *   String representing the name of the form itself. Typically this is the
    *   name of the function that generated the form.
    */
-  public function __construct(array &$form, FormStateInterface $form_state, $form_id) {
+  public function __construct(array &$form, FormStateInterface $formState, $formId) {
     $this->form = &$form;
-    $this->formState = $form_state;
-    $this->formId = $form_id;
+    $this->formState = $formState;
+    $this->formId = $formId;
   }
 
   /**

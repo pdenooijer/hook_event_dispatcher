@@ -27,7 +27,6 @@ class PreprocessEventPassTest extends \PHPUnit_Framework_TestCase {
    * @var \Drupal\Core\DependencyInjection\ContainerBuilder
    */
   private $builder;
-
   /**
    * The PreprocessEventPass.
    *
@@ -82,10 +81,10 @@ class PreprocessEventPassTest extends \PHPUnit_Framework_TestCase {
     $mapper = $this->builder->get('preprocess_event.factory_mapper');
     $variables = [];
 
-    $eckEntityMappedFactory = $mapper->getFactory(EckEntityPreprocessEvent::getHook());
-    $this->assertInstanceOf(FakePreprocessEventFactory::class, $eckEntityMappedFactory);
-    $this->assertEquals(EckEntityPreprocessEvent::getHook(), $eckEntityMappedFactory->getEventHook());
-    $this->assertInstanceOf(FakePreprocessEvent::class, $eckEntityMappedFactory->createEvent($variables));
+    $eckMappedFactory = $mapper->getFactory(EckEntityPreprocessEvent::getHook());
+    $this->assertInstanceOf(FakePreprocessEventFactory::class, $eckMappedFactory);
+    $this->assertEquals(EckEntityPreprocessEvent::getHook(), $eckMappedFactory->getEventHook());
+    $this->assertInstanceOf(FakePreprocessEvent::class, $eckMappedFactory->createEvent($variables));
 
     $htmlMappedFactory = $mapper->getFactory(HtmlPreprocessEvent::getHook());
     $this->assertInstanceOf(FakePreprocessEventFactory::class, $htmlMappedFactory);

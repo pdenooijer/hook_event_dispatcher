@@ -13,10 +13,10 @@ class WidgetTypeFormAlterEvent extends WidgetFormAlterEvent {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    /** @var \Drupal\Core\Field\FieldDefinitionInterface $field_definition */
-    $context = $this->getContext();
-    $field_definition = $context['items']->getFieldDefinition();
-    return 'hook_event_dispatcher.widget_' . $field_definition->getType() . '.alter';
+    /* @var \Drupal\Core\Field\FieldItemListInterface $items */
+    $items = $this->getContext()['items'];
+    $fieldDefinition = $items->getFieldDefinition();
+    return 'hook_event_dispatcher.widget_' . $fieldDefinition->getType() . '.alter';
   }
 
 }

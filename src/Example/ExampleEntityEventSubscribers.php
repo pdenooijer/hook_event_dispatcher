@@ -54,7 +54,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    */
   public function entityPreSave(EntityPresaveEvent $event) {
     $entity = $event->getEntity();
-    $entity->title->value = 'Overwritten';
+    $entity->special_field->value = 'PreSave!';
   }
 
   /**
@@ -64,8 +64,9 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    *   The event.
    */
   public function entityInsert(EntityInsertEvent $event) {
+    // Do some fancy stuff with new entity.
     $entity = $event->getEntity();
-    // Do some fancy stuff.
+    $entity->special_field->value = 'Insert!';
   }
 
   /**
@@ -75,8 +76,9 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    *   The event.
    */
   public function entityUpdate(EntityUpdateEvent $event) {
+    // Do some fancy stuff, when entity is updated.
     $entity = $event->getEntity();
-    // Do some fancy stuff.
+    $entity->special_field->value = 'Update!';
   }
 
   /**
@@ -86,8 +88,9 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    *   The event.
    */
   public function entityPreDelete(EntityPredeleteEvent $event) {
-    $entity = $event->getEntity();
     // Do something before entity is deleted.
+    $entity = $event->getEntity();
+    $entity->special_field->value = 'PreDelete!';
   }
 
   /**
@@ -97,8 +100,9 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    *   The event.
    */
   public function entityDelete(EntityDeleteEvent $event) {
+    // Do some fancy stuff, after entity is deleted.
     $entity = $event->getEntity();
-    // Do some fancy stuff.
+    $entity->special_field->value = 'Deleted!';
   }
 
   /**

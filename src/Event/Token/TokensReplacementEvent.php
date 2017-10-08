@@ -77,7 +77,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * @param array $options
    *   An associative array of options for token replacement; see
    *   \Drupal\Core\Utility\Token::replace() for possible values.
-   * @param \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata
+   * @param \Drupal\Core\Render\BubbleableMetadata $bubbleableMetadata
    *   The bubbleable metadata. Prior to invoking this hook,
    *   \Drupal\Core\Utility\Token::generate() collects metadata for all of the
    *   data objects in $data. For any data sources not in $data, but that are
@@ -90,13 +90,13 @@ final class TokensReplacementEvent extends Event implements EventInterface {
     array $tokens,
     array $data,
     array $options,
-    BubbleableMetadata $bubbleable_metadata
+    BubbleableMetadata $bubbleableMetadata
   ) {
     $this->type = $type;
     $this->tokens = $tokens;
     $this->data = $data;
     $this->options = $options;
-    $this->bubbleableMetadata = $bubbleable_metadata;
+    $this->bubbleableMetadata = $bubbleableMetadata;
   }
 
   /**
@@ -211,6 +211,8 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    *   The name of the token, like 'url'.
    * @param string|\Drupal\Component\Render\MarkupInterface $replacement
    *   The replacement value.
+   *
+   * @throws \UnexpectedValueException
    */
   public function setReplacementValue($type, $token, $replacement) {
     if (!is_string($type)) {
@@ -225,7 +227,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
     if (!is_string($replacement) && !$replacement instanceof MarkupInterface) {
       throw new \UnexpectedValueException('Replacement value should be a string or instanceof MarkupInterface');
     }
-    $this->replacementValues[sprintf('[%s:%s]', $type, $token)] = $replacement;
+    $this->replacementValues["[$type:$token]"] = $replacement;
   }
 
   /**
