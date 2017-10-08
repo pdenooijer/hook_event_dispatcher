@@ -9,24 +9,27 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * Class HookEventDispatcherManager.
  *
  * @package Drupal\hook_event_dispatcher\Manager
+ *
+ * Wrapper class for the external dispatcher dependency. If this ever changes
+ * we only have to change it once.
  */
-class HookEventDispatcherManager {
+final class HookEventDispatcherManager {
 
   /**
    * The event dispatcher.
    *
    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
    */
-  protected $eventDispatcher;
+  private $eventDispatcher;
 
   /**
    * EntityDispatcherManager constructor.
    *
-   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
    *   The event dispatcher.
    */
-  public function __construct(EventDispatcherInterface $event_dispatcher) {
-    $this->eventDispatcher = $event_dispatcher;
+  public function __construct(EventDispatcherInterface $eventDispatcher) {
+    $this->eventDispatcher = $eventDispatcher;
   }
 
   /**

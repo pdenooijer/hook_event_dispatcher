@@ -21,6 +21,10 @@ use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\SpyEventDispatche
  * Class ServiceTest.
  *
  * @group hook_event_dispatcher
+ *
+ * Testing all events gives expected PHPMD warnings.
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 final class ServiceTest extends \PHPUnit_Framework_TestCase {
 
