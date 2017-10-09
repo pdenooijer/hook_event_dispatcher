@@ -25,6 +25,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class FactoryMapperTest.
@@ -35,7 +36,7 @@ use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLo
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
+final class FactoryMapperTest extends TestCase {
 
   /**
    * Factory mapper.
