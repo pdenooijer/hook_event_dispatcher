@@ -109,14 +109,15 @@ final class FactoryMapperTest extends TestCase {
   public function testBlockEvent() {
     $variablesArray = $this->createVariablesArray();
     $variablesArray['elements']['#id'] = 22;
-    $variablesArray['content']['test'] = 'success2';
+    $variablesArray['content']['test'] = ['success2'];
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(BlockEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
     $this->assertEquals(22, $variables->getId());
-    $this->assertEquals('success2', $variables->getContentChild('test'));
+    $this->assertEquals(['success2'], $variables->getContentChild('test'));
+    $this->assertEquals([], $variables->getContentChild('none-existing'));
   }
 
   /**
