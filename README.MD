@@ -12,10 +12,13 @@ Installation
 ------------
 To install this module, do the following:
 
-1. Extract the tar ball that you downloaded from Drupal.org.
+With composer:
+1. ```composer require drupal/hook_event_dispatcher```
 
+Manual installation:
+1. Extract the tar ball that you downloaded from Drupal.org.
 2. Upload the entire directory and all its contents to your modules directory.
 
 Examples
----------
-You can find an example on how to use each dispatcher in src/Example
+--------
+You can find an example on how to use each Event in src/Example
