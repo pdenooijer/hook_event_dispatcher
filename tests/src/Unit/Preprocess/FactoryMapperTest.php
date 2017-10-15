@@ -25,6 +25,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class FactoryMapperTest.
@@ -35,7 +36,7 @@ use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLo
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
+final class FactoryMapperTest extends TestCase {
 
   /**
    * Factory mapper.
@@ -108,14 +109,15 @@ final class FactoryMapperTest extends \PHPUnit_Framework_TestCase {
   public function testBlockEvent() {
     $variablesArray = $this->createVariablesArray();
     $variablesArray['elements']['#id'] = 22;
-    $variablesArray['content']['test'] = 'success2';
+    $variablesArray['content']['test'] = ['success2'];
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(BlockEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
     $this->assertEquals(22, $variables->getId());
-    $this->assertEquals('success2', $variables->getContentChild('test'));
+    $this->assertEquals(['success2'], $variables->getContentChild('test'));
+    $this->assertEquals([], $variables->getContentChild('none-existing'));
   }
 
   /**

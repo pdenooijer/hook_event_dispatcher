@@ -52,7 +52,7 @@ function hook_event_dispatcher_help($routeName) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_insert(EntityInterface $entity) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityInsertEvent($entity));
 }
@@ -63,7 +63,7 @@ function hook_event_dispatcher_entity_insert(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_update(EntityInterface $entity) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityUpdateEvent($entity));
 }
@@ -74,7 +74,7 @@ function hook_event_dispatcher_entity_update(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_predelete(EntityInterface $entity) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityPredeleteEvent($entity));
 }
@@ -85,7 +85,7 @@ function hook_event_dispatcher_entity_predelete(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_delete(EntityInterface $entity) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityDeleteEvent($entity));
 }
@@ -96,7 +96,7 @@ function hook_event_dispatcher_entity_delete(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_presave(EntityInterface $entity) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityPresaveEvent($entity));
 }
@@ -107,7 +107,7 @@ function hook_event_dispatcher_entity_presave(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityAccessEvent($entity, $operation, $account);
   $manager->register($event);
@@ -121,7 +121,7 @@ function hook_event_dispatcher_entity_access(EntityInterface $entity, $operation
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_create(EntityInterface $entity) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityCreateEvent($entity));
 }
@@ -132,7 +132,7 @@ function hook_event_dispatcher_entity_create(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_load(array $entities, $entityTypeId) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityLoadEvent($entities, $entityTypeId));
 }
@@ -148,7 +148,7 @@ function hook_event_dispatcher_entity_view(
   EntityViewDisplayInterface $display,
   $viewMode
 ) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityViewEvent($build, $entity, $display, $viewMode));
 }
@@ -159,13 +159,13 @@ function hook_event_dispatcher_entity_view(
  * {@inheritdoc}
  */
 function hook_event_dispatcher_form_alter(&$form, FormStateInterface $formState, $formId) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new FormAlterEvent($form, $formState, $formId));
 
   $buildInfo = $formState->getBuildInfo();
   if (!empty($buildInfo['base_form_id'])) {
-    /** @var \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
+    /* @var \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
     $manager->register(new FormBaseAlterEvent($form, $formState, $formId, $buildInfo['base_form_id']));
   }
   $manager->register(new FormIdAlterEvent($form, $formState, $formId));
@@ -177,7 +177,7 @@ function hook_event_dispatcher_form_alter(&$form, FormStateInterface $formState,
  * {@inheritdoc}
  */
 function hook_event_dispatcher_field_widget_form_alter(&$element, FormStateInterface $formState, $context) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new WidgetFormAlterEvent($element, $formState, $context));
   $manager->register(new WidgetTypeFormAlterEvent($element, $formState, $context));
@@ -200,7 +200,7 @@ function hook_event_dispatcher_preprocess(&$variables, $hook) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_block_build_alter(&$build, BlockPluginInterface $block) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new BlockBuildAlterEvent($build, $block));
 }
@@ -217,7 +217,7 @@ function hook_event_dispatcher_tokens(
   array $options,
   BubbleableMetadata $bubbleableMetadata
 ) {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new TokensReplacementEvent($type, $tokens, $data, $options, $bubbleableMetadata);
   $manager->register($event);
@@ -230,7 +230,7 @@ function hook_event_dispatcher_tokens(
  * {@inheritdoc}
  */
 function hook_event_dispatcher_token_info() {
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new TokensInfoEvent();
   $manager->register($event);
@@ -249,7 +249,7 @@ function hook_event_dispatcher_path_insert($path) {
   if (empty($path)) {
     return;
   }
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PathInsertEvent($path);
   $manager->register($event);
@@ -264,7 +264,7 @@ function hook_event_dispatcher_path_update($path) {
   if (empty($path)) {
     return;
   }
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PathUpdateEvent($path);
   $manager->register($event);
@@ -279,7 +279,7 @@ function hook_event_dispatcher_path_delete($path) {
   if (empty($path)) {
     return;
   }
-  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager $manager */
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PathDeleteEvent($path);
   $manager->register($event);

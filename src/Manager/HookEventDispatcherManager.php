@@ -13,7 +13,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * Wrapper class for the external dispatcher dependency. If this ever changes
  * we only have to change it once.
  */
-final class HookEventDispatcherManager {
+final class HookEventDispatcherManager implements HookEventDispatcherManagerInterface {
 
   /**
    * The event dispatcher.

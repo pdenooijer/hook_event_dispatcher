@@ -3,7 +3,6 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\Factory\PreprocessEventFactoryInterface;
-use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\DefaultEventVariables;
 
 /**
  * Class FakePreprocessEventFactory.
@@ -39,7 +38,7 @@ final class FakePreprocessEventFactory implements PreprocessEventFactoryInterfac
    *   Created event.
    */
   public function createEvent(array &$variables) {
-    return new FakePreprocessEvent(new DefaultEventVariables($variables));
+    return new FakePreprocessEvent(new FakeEventVariables($variables));
   }
 
   /**

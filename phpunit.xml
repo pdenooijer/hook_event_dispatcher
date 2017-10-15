@@ -8,10 +8,18 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="vendor/autoload.php">
+         bootstrap="phpunit.autoload.php">
     <testsuites>
         <testsuite name="Test Suite">
             <directory>tests/src/</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory>src/</directory>
+            <exclude>
+                <directory>src/Example</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>

@@ -19,11 +19,11 @@
       "@phpcs",
       "@phpmd"
     ],
-    "phplint": "vendor/bin/parallel-lint --exclude vendor/ -e php,module,inc,install,profile,theme .",
+    "phplint": "vendor/bin/parallel-lint --exclude vendor/ --exclude .idea/ -e php,module,inc,install,profile,theme .",
     "phpunit": "vendor/bin/phpunit --configuration=phpunit.xml",
-    "phpcs": "vendor/bin/phpcs --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 --ignore=vendor/ .",
-    "phpmd": "vendor/bin/phpmd --exclude vendor --suffixes php,module,inc,install,profile,theme . text phpmd.xml",
-    "phpcbf": "vendor/bin/phpcbf --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --ignore=vendor/ --extensions=php,module,inc,install,profile,theme ."
+    "phpcs": "vendor/bin/phpcs --ignore=vendor/,.idea/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 .",
+    "phpcbf": "vendor/bin/phpcbf --ignore=vendor/,.idea/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme .",
+    "phpmd": "vendor/bin/phpmd --exclude vendor/,.idea/ --suffixes php,module,inc,install,profile,theme . text phpmd.xml"
   },
   "autoload": {
     "psr-4": {

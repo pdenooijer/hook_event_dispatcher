@@ -4,13 +4,14 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\node\NodeInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class PageTest.
  *
  * @group hook_event_dispatcher
  */
-final class PageTest extends \PHPUnit_Framework_TestCase {
+final class PageTest extends TestCase {
   /**
    * Mock node object.
    *
