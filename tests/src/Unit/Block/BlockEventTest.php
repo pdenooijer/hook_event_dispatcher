@@ -12,6 +12,8 @@ use PHPUnit\Framework\TestCase;
  * Class BlockEventTest.
  *
  * @package Drupal\Tests\hook_event_dispatcher\Unit\Block
+ *
+ * @group hook_event_dispatcher
  */
 class BlockEventTest extends TestCase {
 

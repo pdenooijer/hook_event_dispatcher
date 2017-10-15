@@ -11,6 +11,8 @@ use PHPUnit\Framework\TestCase;
  * Class PathEventTest.
  *
  * @package Drupal\Tests\hook_event_dispatcher\Unit\Form
+ *
+ * @group hook_event_dispatcher
  */
 class PathEventTest extends TestCase {
 

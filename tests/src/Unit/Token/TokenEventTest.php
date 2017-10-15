@@ -16,6 +16,8 @@ use PHPUnit\Framework\TestCase;
  * Class TokenEventTest.
  *
  * @package Drupal\Tests\hook_event_dispatcher\Unit\Form
+ *
+ * @group hook_event_dispatcher
  */
 class TokenEventTest extends TestCase {
 

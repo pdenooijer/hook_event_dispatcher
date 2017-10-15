@@ -14,6 +14,8 @@ use PHPUnit\Framework\TestCase;
  * Class FormEventTest.
  *
  * @package Drupal\Tests\hook_event_dispatcher\Unit\Form
+ *
+ * @group hook_event_dispatcher
  */
 class FormEventTest extends TestCase {
 

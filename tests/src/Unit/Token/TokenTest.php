@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
  * Class TokenTest.
  *
  * @package Drupal\Tests\hook_event_dispatcher\Unit\Token
+ *
+ * @group hook_event_dispatcher
  */
 class TokenTest extends TestCase {
 

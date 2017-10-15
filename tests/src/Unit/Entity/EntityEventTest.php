@@ -16,6 +16,8 @@ use PHPUnit\Framework\TestCase;
  * Class EntityEventTest.
  *
  * @package Drupal\Tests\hook_event_dispatcher\Unit\Entity
+ *
+ * @group hook_event_dispatcher
  */
 class EntityEventTest extends TestCase {
 
