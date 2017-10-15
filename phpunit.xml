@@ -14,4 +14,12 @@
             <directory>tests/src/</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory>src/</directory>
+            <exclude>
+                <directory>src/Example</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>
