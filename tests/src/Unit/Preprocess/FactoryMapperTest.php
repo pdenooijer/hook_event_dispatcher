@@ -11,6 +11,8 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
@@ -252,6 +254,21 @@ final class FactoryMapperTest extends TestCase {
     $this->assertEquals('output', $variables->getOutput());
     $this->assertEquals('row', $variables->getRow());
     $this->assertEquals('view', $variables->getView());
+  }
+
+  /**
+   * Test a ParagraphPreprocessEvent.
+   */
+  public function testParagraphEvent() {
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['paragraph'] = 'paragraph';
+
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ParagraphPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ParagraphEventVariables::class, $variables);
+
+    $this->assertAbstractEventVariables($variables);
+    $this->assertEquals('paragraph', $variables->getParagraph());
   }
 
   /**

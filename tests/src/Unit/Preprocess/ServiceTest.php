@@ -10,6 +10,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\TaxonomyTermPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
@@ -130,6 +131,13 @@ final class ServiceTest extends TestCase {
    */
   public function testViewFieldEvent() {
     $this->createAndAssertEvent(ViewFieldPreprocessEvent::class);
+  }
+
+  /**
+   * Test a ParagraphPreprocessEvent.
+   */
+  public function testParagraphEvent() {
+    $this->createAndAssertEvent(ParagraphPreprocessEvent::class);
   }
 
   /**

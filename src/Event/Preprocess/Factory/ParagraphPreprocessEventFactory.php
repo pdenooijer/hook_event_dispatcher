@@ -6,7 +6,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables;
 
 /**
- * Class ParagraphPreprocessEventFactory
+ * Class ParagraphPreprocessEventFactory.
  *
  * @package Drupal\hook_event_dispatcher\Event\Preprocess\Factory
  */

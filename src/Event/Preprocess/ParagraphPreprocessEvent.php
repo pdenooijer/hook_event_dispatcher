@@ -3,7 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 
 /**
- * Class ParagraphPreprocessEvent
+ * Class ParagraphPreprocessEvent.
  *
  * @package Drupal\hook_event_dispatcher\Event\Preprocess
  */

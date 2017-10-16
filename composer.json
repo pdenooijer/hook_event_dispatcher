@@ -47,6 +47,7 @@
     }
   },
   "suggest": {
-    "drupal/token": "Provides additional tokens not supported by core (most notably fields), as well as a UI for browsing tokens."
+    "drupal/token": "Provides additional tokens not supported by core (most notably fields), as well as a UI for browsing tokens.",
+    "drupal/paragraph": "Enables the creation of paragraphs entities."
   }
 }
