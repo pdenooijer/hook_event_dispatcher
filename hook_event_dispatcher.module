@@ -8,6 +8,8 @@
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
@@ -21,6 +23,7 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent;
+use Drupal\hook_event_dispatcher\Event\EntityField\EntityFieldAccessEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
@@ -283,4 +286,20 @@ function hook_event_dispatcher_path_delete($path) {
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PathDeleteEvent($path);
   $manager->register($event);
+}
+
+/**
+ * Implements hook_entity_field_access().
+ */
+function hook_event_dispatcher_entity_field_access(
+  $operation,
+  FieldDefinitionInterface $field_definition,
+  AccountInterface $account,
+  FieldItemListInterface $items = NULL
+) {
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityFieldAccessEvent($operation, $field_definition, $account, $items);
+  $manager->register($event);
+
+  return $event->getAccessResult();
 }

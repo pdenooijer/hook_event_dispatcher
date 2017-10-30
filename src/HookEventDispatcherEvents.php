@@ -20,6 +20,9 @@ final class HookEventDispatcherEvents {
   const ENTITY_CREATE = 'hook_event_dispatcher.entity.create';
   const ENTITY_LOAD = 'hook_event_dispatcher.entity.load';
 
+  // ENTITY FIELD EVENTS.
+  const ENTITY_FIELD_ACCESS = 'hook_event_dispatcher.entity_field.access';
+
   // FORM EVENTS.
   const FORM_ALTER = 'hook_event_dispatcher.form.alter';
   const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
