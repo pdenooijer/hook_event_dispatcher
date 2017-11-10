@@ -290,16 +290,17 @@ function hook_event_dispatcher_path_delete($path) {
 
 /**
  * Implements hook_entity_field_access().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_field_access(
   $operation,
-  FieldDefinitionInterface $field_definition,
+  FieldDefinitionInterface $fieldDefinition,
   AccountInterface $account,
   FieldItemListInterface $items = NULL
 ) {
   $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new EntityFieldAccessEvent($operation, $field_definition, $account, $items);
+  $event = new EntityFieldAccessEvent($operation, $fieldDefinition, $account, $items);
   $manager->register($event);
-
   return $event->getAccessResult();
 }
