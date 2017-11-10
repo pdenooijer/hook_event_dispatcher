@@ -3,6 +3,7 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\CommentPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
@@ -68,6 +69,13 @@ final class ServiceTest extends TestCase {
    */
   public function testBlockEvent() {
     $this->createAndAssertEvent(BlockPreprocessEvent::class);
+  }
+
+  /**
+   * Test a BlockPreprocessEvent.
+   */
+  public function testCommentEvent() {
+    $this->createAndAssertEvent(CommentPreprocessEvent::class);
   }
 
   /**
