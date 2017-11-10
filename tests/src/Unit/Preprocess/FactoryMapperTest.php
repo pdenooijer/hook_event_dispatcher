@@ -4,6 +4,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\CommentPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
@@ -12,11 +13,9 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables;
-use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FieldEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FormEventVariables;
@@ -24,8 +23,11 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\HtmlEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use PHPUnit\Framework\TestCase;
 
@@ -120,6 +122,20 @@ final class FactoryMapperTest extends TestCase {
     $this->assertEquals(22, $variables->getId());
     $this->assertEquals(['success2'], $variables->getContentChild('test'));
     $this->assertEquals([], $variables->getContentChild('none-existing'));
+  }
+
+  /**
+   * Test a CommentPreprocessEvent.
+   */
+  public function testCommentEvent() {
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['comment'] = new \stdClass();
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(CommentPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(CommentEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+    $this->assertInstanceOf(\stdClass::class, $variables->getComment());
   }
 
   /**
