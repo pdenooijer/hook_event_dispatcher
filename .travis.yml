@@ -13,6 +13,8 @@ cache:
   directories:
     - ~/.composer
 
+install: true
+
 before_script:
   - composer install
 
