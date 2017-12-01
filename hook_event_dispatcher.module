@@ -34,6 +34,11 @@ use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
+use Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent;
+use Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
+use Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent;
+use Drupal\hook_event_dispatcher\Event\Views\ViewsPreExecuteEvent;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_help().
@@ -303,4 +308,40 @@ function hook_event_dispatcher_entity_field_access(
   $event = new EntityFieldAccessEvent($operation, $fieldDefinition, $account, $items);
   $manager->register($event);
   return $event->getAccessResult();
+}
+
+/**
+ * Implements hook_views_pre_execute().
+ */
+function hook_event_dispatcher_views_pre_execute(ViewExecutable $view) {
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPreExecuteEvent($view);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_post_execute().
+ */
+function hook_event_dispatcher_views_post_execute(ViewExecutable $view) {
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPostExecuteEvent($view);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_pre_build().
+ */
+function hook_event_dispatcher_views_pre_build(ViewExecutable $view) {
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPreBuildEvent($view);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_post_build().
+ */
+function hook_event_dispatcher_views_post_build(ViewExecutable $view) {
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPostBuildEvent($view);
+  $manager->register($event);
 }
