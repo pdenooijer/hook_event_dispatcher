@@ -35,6 +35,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
     $view = $event->getView();
 
     // Do something with the view.
+    $view->setArguments(['test']);
   }
 
   /**
@@ -47,6 +48,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
     $view = $event->getView();
 
     // Do something with the view.
+    $view->build_info;
   }
 
   /**
@@ -59,6 +61,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
     $view = $event->getView();
 
     // Do something with the view.
+    $view->setArguments(['test']);
   }
 
   /**
@@ -71,6 +74,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
     $view = $event->getView();
 
     // Do something with the view.
+    $view->build_info;
   }
 
   /**
