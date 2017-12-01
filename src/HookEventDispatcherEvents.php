@@ -39,4 +39,10 @@ final class HookEventDispatcherEvents {
   const PATH_DELETE = 'hook_event_dispatcher.path.delete';
   const PATH_UPDATE = 'hook_event_dispatcher.path.update';
 
+  // VIEWS EVENTS.
+  const VIEWS_PRE_EXECUTE = 'hook_event_dispatcher.views.pre_execute';
+  const VIEWS_POST_EXECUTE = 'hook_event_dispatcher.views.post_execute';
+  const VIEWS_PRE_BUILD = 'hook_event_dispatcher.views.pre_build';
+  const VIEWS_POST_BUILD = 'hook_event_dispatcher.views.post_build';
+
 }

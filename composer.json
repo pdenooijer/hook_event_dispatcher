@@ -32,7 +32,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Drupal\\Tests\\hook_event_dispatcher\\": "tests/src/"
+      "Drupal\\Tests\\hook_event_dispatcher\\": "tests/src/",
+      "Drupal\\views\\": "vendor/drupal/core/modules/views/src/"
     }
   },
   "repositories": {
