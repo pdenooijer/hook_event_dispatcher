@@ -40,7 +40,7 @@ class ViewEventTest extends TestCase {
    */
   public function testPreBuildEvent() {
     /** @var \Drupal\views\ViewExecutable $view */
-    $view = $this->getMock(ViewExecutable::class);
+    $view = $this->createMock(ViewExecutable::class);
 
     hook_event_dispatcher_views_pre_build($view);
 
@@ -54,7 +54,7 @@ class ViewEventTest extends TestCase {
    */
   public function testPostBuildEvent() {
     /** @var \Drupal\views\ViewExecutable $view */
-    $view = $this->getMock(ViewExecutable::class);
+    $view = $this->createMock(ViewExecutable::class);
 
     hook_event_dispatcher_views_post_build($view);
 
@@ -68,7 +68,7 @@ class ViewEventTest extends TestCase {
    */
   public function testPreExecuteEvent() {
     /** @var \Drupal\views\ViewExecutable $view */
-    $view = $this->getMock(ViewExecutable::class);
+    $view = $this->createMock(ViewExecutable::class);
 
     hook_event_dispatcher_views_pre_execute($view);
 
@@ -82,7 +82,7 @@ class ViewEventTest extends TestCase {
    */
   public function testPostExecuteEvent() {
     /** @var \Drupal\views\ViewExecutable $view */
-    $view = $this->getMock(ViewExecutable::class);
+    $view = $this->createMock(ViewExecutable::class);
 
     hook_event_dispatcher_views_post_execute($view);
 
