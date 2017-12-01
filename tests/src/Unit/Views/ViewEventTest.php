@@ -36,7 +36,7 @@ class ViewEventTest extends TestCase {
   }
 
   /**
-   * @test
+   * Pre build event.
    */
   public function testPreBuildEvent() {
     /** @var \Drupal\views\ViewExecutable $view */
@@ -50,7 +50,7 @@ class ViewEventTest extends TestCase {
   }
 
   /**
-   * @test
+   * Post build event.
    */
   public function testPostBuildEvent() {
     /** @var \Drupal\views\ViewExecutable $view */
@@ -64,7 +64,7 @@ class ViewEventTest extends TestCase {
   }
 
   /**
-   * @test
+   * Pre execute event.
    */
   public function testPreExecuteEvent() {
     /** @var \Drupal\views\ViewExecutable $view */
@@ -78,7 +78,7 @@ class ViewEventTest extends TestCase {
   }
 
   /**
-   * @test
+   * Post execute event.
    */
   public function testPostExecuteEvent() {
     /** @var \Drupal\views\ViewExecutable $view */
