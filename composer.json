@@ -4,12 +4,12 @@
   "type": "drupal-module",
   "license": "GPL-2.0+",
   "require-dev": {
-    "drupal/core": "^8.2",
-    "phpunit/phpunit": "^5.7",
     "drupal/coder": "^8.2",
-    "phpmd/phpmd": "^2.6",
+    "drupal/core": "^8.2",
+    "jakub-onderka/php-console-highlighter": "^0.3.2",
     "jakub-onderka/php-parallel-lint": "^0.9.2",
-    "jakub-onderka/php-console-highlighter": "^0.3.2"
+    "phpmd/phpmd": "^2.6",
+    "phpunit/phpunit": "^5.7"
   },
   "minimum-stability": "alpha",
   "scripts": {
