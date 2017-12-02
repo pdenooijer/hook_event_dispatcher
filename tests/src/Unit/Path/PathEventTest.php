@@ -5,7 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Path;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use PHPUnit\Framework\TestCase;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * Class PathEventTest.
@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @group hook_event_dispatcher
  */
-class PathEventTest extends TestCase {
+class PathEventTest extends UnitTestCase {
 
   /**
    * The manager.

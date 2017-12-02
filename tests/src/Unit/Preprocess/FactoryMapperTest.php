@@ -29,7 +29,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariab
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
-use PHPUnit\Framework\TestCase;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * Class FactoryMapperTest.
@@ -40,7 +40,7 @@ use PHPUnit\Framework\TestCase;
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class FactoryMapperTest extends TestCase {
+final class FactoryMapperTest extends UnitTestCase {
 
   /**
    * Factory mapper.

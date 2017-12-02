@@ -6,7 +6,7 @@ use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use PHPUnit\Framework\TestCase;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * Class BlockEventTest.
@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @group hook_event_dispatcher
  */
-class BlockEventTest extends TestCase {
+class BlockEventTest extends UnitTestCase {
 
   /**
    * The manager.

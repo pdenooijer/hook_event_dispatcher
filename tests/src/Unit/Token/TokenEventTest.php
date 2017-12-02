@@ -10,7 +10,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
 use Drupal\hook_event_dispatcher\Value\Token;
 use Drupal\hook_event_dispatcher\Value\TokenType;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use PHPUnit\Framework\TestCase;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * Class TokenEventTest.
@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @group hook_event_dispatcher
  */
-class TokenEventTest extends TestCase {
+class TokenEventTest extends UnitTestCase {
 
   /**
    * The manager.

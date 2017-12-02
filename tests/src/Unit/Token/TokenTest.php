@@ -3,7 +3,7 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Token;
 
 use Drupal\hook_event_dispatcher\Value\Token;
-use PHPUnit\Framework\TestCase;
+use Drupal\Tests\UnitTestCase;
 
 /**
  * Class TokenTest.
@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @group hook_event_dispatcher
  */
-class TokenTest extends TestCase {
+class TokenTest extends UnitTestCase {
 
   /**
    * Test Token invalid type exception.

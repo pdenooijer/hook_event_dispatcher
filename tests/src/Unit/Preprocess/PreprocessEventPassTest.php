@@ -10,7 +10,7 @@ use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\FakePreprocessEve
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\FakePreprocessEventFactory;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\SpyEventDispatcher;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
-use PHPUnit\Framework\TestCase;
+use Drupal\Tests\UnitTestCase;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
  *
  * @group hook_event_dispatcher
  */
-class PreprocessEventPassTest extends TestCase {
+class PreprocessEventPassTest extends UnitTestCase {
 
   /**
    * The Drupal ContainerBuilder.
