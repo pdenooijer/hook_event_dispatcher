@@ -144,12 +144,15 @@ class EntityEventTest extends UnitTestCase {
    */
   public function testEntityPresaveEvent() {
     $entity = $this->createMock(EntityInterface::class);
+    $originalEntity = $this->createMock(EntityInterface::class);
+    $entity->original = $originalEntity;
 
     hook_event_dispatcher_entity_presave($entity);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_PRE_SAVE);
     $this->assertEquals($entity, $event->getEntity());
+    $this->assertEquals($originalEntity, $event->getOriginalEntity());
   }
 
   /**
@@ -157,12 +160,15 @@ class EntityEventTest extends UnitTestCase {
    */
   public function testEntityUpdateEvent() {
     $entity = $this->createMock(EntityInterface::class);
+    $originalEntity = $this->createMock(EntityInterface::class);
+    $entity->original = $originalEntity;
 
     hook_event_dispatcher_entity_update($entity);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_UPDATE);
     $this->assertEquals($entity, $event->getEntity());
+    $this->assertEquals($originalEntity, $event->getOriginalEntity());
   }
 
   /**
