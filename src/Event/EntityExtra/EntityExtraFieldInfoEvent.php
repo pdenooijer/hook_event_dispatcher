@@ -6,9 +6,16 @@ use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class EntityExtraFieldInfoEvent.
+ *
+ * @package Drupal\hook_event_dispatcher\Event\EntityExtra
+ */
 class EntityExtraFieldInfoEvent extends Event implements EventInterface {
 
   /**
+   * Field info.
+   *
    * @var array
    */
   private $fieldInfo = [];
@@ -27,6 +34,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * Set the field info.
    *
    * @param array $fieldInfo
+   *   Field info.
    */
   public function setFieldInfo(array $fieldInfo) {
     $this->fieldInfo = $fieldInfo;
@@ -36,6 +44,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * Get the field info.
    *
    * @return array
+   *   Field info.
    */
   public function getFieldInfo() {
     return $this->fieldInfo;
@@ -87,7 +96,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * @param string $type
    *   The type.
    */
-  private function addFieldInfo($entityType, $bundle, $fieldName, array $info, $type): void {
+  private function addFieldInfo($entityType, $bundle, $fieldName, array $info, $type) {
     $this->fieldInfo[$entityType][$bundle][$type][$fieldName] = $info;
   }
 

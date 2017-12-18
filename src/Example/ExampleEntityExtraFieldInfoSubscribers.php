@@ -36,12 +36,13 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
 
     $entityType = 'node';
     $bundle = 'page';
-    $fieldName = 'my-pseudo-field';
+    $fieldName = 'field_test';
+    $testFieldInfo = [];
     // Add a single display info.
-    $event->addDisplayFieldInfo($entityType, $bundle, $fieldName, []);
+    $event->addDisplayFieldInfo($entityType, $bundle, $fieldName, $testFieldInfo);
 
     // Add a single form info.
-    $event->addFormFieldInfo($entityType, $bundle, $fieldName, []);
+    $event->addFormFieldInfo($entityType, $bundle, $fieldName, $testFieldInfo);
   }
 
   /**
@@ -54,6 +55,7 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
     $fieldInfo = &$event->getInfo();
 
     // Manipulate the field info.
+    $fieldInfo['node']['test']['display']['field_test']['weight'] = -20;
   }
 
   /**

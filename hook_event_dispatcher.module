@@ -314,6 +314,8 @@ function hook_event_dispatcher_entity_field_access(
 
 /**
  * Implements hook_views_pre_execute().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_views_pre_execute(ViewExecutable $view) {
   $manager = Drupal::service('hook_event_dispatcher.manager');
@@ -323,6 +325,8 @@ function hook_event_dispatcher_views_pre_execute(ViewExecutable $view) {
 
 /**
  * Implements hook_views_post_execute().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_views_post_execute(ViewExecutable $view) {
   $manager = Drupal::service('hook_event_dispatcher.manager');
@@ -332,6 +336,8 @@ function hook_event_dispatcher_views_post_execute(ViewExecutable $view) {
 
 /**
  * Implements hook_views_pre_build().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_views_pre_build(ViewExecutable $view) {
   $manager = Drupal::service('hook_event_dispatcher.manager');
@@ -341,6 +347,8 @@ function hook_event_dispatcher_views_pre_build(ViewExecutable $view) {
 
 /**
  * Implements hook_views_post_build().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_views_post_build(ViewExecutable $view) {
   $manager = Drupal::service('hook_event_dispatcher.manager');
@@ -360,8 +368,10 @@ function hook_event_dispatcher_entity_extra_field_info() {
 
 /**
  * Implements hook_entity_extra_field_info_alter().
+ *
+ * {@inheritdoc}
  */
-function hook_event_dispatcher_entity_extra_field_info_alter(&$info) {
+function hook_event_dispatcher_entity_extra_field_info_alter(array &$info) {
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityExtraFieldInfoAlterEvent($info);
   $manager->register($event);
