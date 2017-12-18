@@ -1,0 +1,69 @@
+<?php
+
+namespace Drupal\hook_event_dispatcher\Example;
+
+use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent;
+use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent;
+use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+/**
+ * Class ExampleEntityExtraFieldInfoSubscribers.
+ *
+ * Don't forget to define your class as a service and tag it as
+ * an "event_subscriber":
+ *
+ * services:
+ *   hook_event_dispatcher.example_entity_extra_field_info_subscribers:
+ *   class:'\Drupal\hook_event_dispatcher\Example\ExampleEntityExtraFieldInfoSubscribers'
+ * tags:
+ *     - { name: 'event_subscriber' }
+ *
+ * @package Drupal\hook_event_dispatcher\Example
+ */
+class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface {
+
+  /**
+   * Entity extra field info.
+   *
+   * @param \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event
+   *   The event.
+   */
+  public function fieldInfo(EntityExtraFieldInfoEvent $event) {
+    // Set the field info directly.
+    $fieldInfo = [];
+    $event->setFieldInfo($fieldInfo);
+
+    $entityType = 'node';
+    $bundle = 'page';
+    $fieldName = 'my-pseudo-field';
+    // Add a single display info.
+    $event->addDisplayFieldInfo($entityType, $bundle, $fieldName, []);
+
+    // Add a single form info.
+    $event->addFormFieldInfo($entityType, $bundle, $fieldName, []);
+  }
+
+  /**
+   * Entity extra field info.
+   *
+   * @param \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent $event
+   *   The event.
+   */
+  public function fieldInfoAlter(EntityExtraFieldInfoAlterEvent $event) {
+    $fieldInfo = &$event->getInfo();
+
+    // Manipulate the field info.
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSubscribedEvents() {
+    return [
+      HookEventDispatcherEvents::ENTITY_EXTRA_FIELD_INFO => 'fieldInfo',
+      HookEventDispatcherEvents::ENTITY_EXTRA_FIELD_INFO_ALTER => 'fieldInfoAlter',
+    ];
+  }
+
+}
