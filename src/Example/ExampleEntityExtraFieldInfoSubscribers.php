@@ -52,7 +52,7 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
    *   The event.
    */
   public function fieldInfoAlter(EntityExtraFieldInfoAlterEvent $event) {
-    $fieldInfo = &$event->getInfo();
+    $fieldInfo = &$event->getFieldInfo();
 
     // Manipulate the field info.
     $fieldInfo['node']['test']['display']['field_test']['weight'] = -20;

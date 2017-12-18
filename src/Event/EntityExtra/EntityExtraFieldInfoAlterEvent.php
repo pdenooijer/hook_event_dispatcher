@@ -14,20 +14,20 @@ use Symfony\Component\EventDispatcher\Event;
 class EntityExtraFieldInfoAlterEvent extends Event implements EventInterface {
 
   /**
-   * Extra field info.
+   * Field info.
    *
    * @var array
    */
-  private $info;
+  private $fieldInfo;
 
   /**
    * EntityExtraFieldInfoAlterEvent constructor.
    *
-   * @param array $info
+   * @param array $fieldInfo
    *   Extra field info.
    */
-  public function __construct(array &$info) {
-    $this->info = &$info;
+  public function __construct(array &$fieldInfo) {
+    $this->fieldInfo = &$fieldInfo;
   }
 
   /**
@@ -41,13 +41,13 @@ class EntityExtraFieldInfoAlterEvent extends Event implements EventInterface {
   }
 
   /**
-   * Get the extra field info.
+   * Get the field info.
    *
    * @return array
    *   Extra field info.
    */
-  public function &getInfo() {
-    return $this->info;
+  public function &getFieldInfo() {
+    return $this->fieldInfo;
   }
 
 }
