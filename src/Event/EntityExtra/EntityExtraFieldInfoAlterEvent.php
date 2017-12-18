@@ -46,7 +46,7 @@ class EntityExtraFieldInfoAlterEvent extends Event implements EventInterface {
    * @return array
    *   Extra field info.
    */
-  public function getInfo() {
+  public function &getInfo() {
     return $this->info;
   }
 
