@@ -15,39 +15,39 @@ use PHPUnit\Framework\TestCase;
  *
  * @group hook_event_dispatcher
  */
-class EntityTypeTest extends TestCase {
+class EntityTypeBaseFieldTest extends TestCase {
 
-    /**
-     * The manager.
-     *
-     * @var \Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy
-     */
-    private $manager;
+  /**
+   * The manager.
+   *
+   * @var \Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy
+   */
+  private $manager;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp() {
-        $builder = new ContainerBuilder();
-        $this->manager = new HookEventDispatcherManagerSpy();
-        $builder->set('hook_event_dispatcher.manager', $this->manager);
-        $builder->compile();
-        \Drupal::setContainer($builder);
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    $builder = new ContainerBuilder();
+    $this->manager = new HookEventDispatcherManagerSpy();
+    $builder->set('hook_event_dispatcher.manager', $this->manager);
+    $builder->compile();
+    \Drupal::setContainer($builder);
+  }
 
-    /**
-     * Test the EntityBaseFieldInfoEvent.
-     */
-    public function testEntityBaseFieldInfoEvent() {
-        $entityType = $this->createMock(EntityTypeInterface::class);
+  /**
+   * Test the EntityBaseFieldInfoEvent.
+   */
+  public function testEntityBaseFieldInfoEvent() {
+    $entityType = $this->createMock(EntityTypeInterface::class);
 
-        $fields = hook_event_dispatcher_entity_base_field_info($entityType);
+    $fields = hook_event_dispatcher_entity_base_field_info($entityType);
 
-        /* @var \Drupal\hook_event_dispatcher\Event\EntityType\EntityBaseFieldInfoEvent $event */
-        $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_BASE_FIELD_INFO);
+    /* @var \Drupal\hook_event_dispatcher\Event\EntityType\EntityBaseFieldInfoEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_BASE_FIELD_INFO);
 
-        $this->assertEquals($entityType, $event->getEntityType());
-        $this->assertEquals($fields, $event->getFields());
-    }
+    $this->assertEquals($entityType, $event->getEntityType());
+    $this->assertEquals($fields, $event->getFields());
+  }
 
 }

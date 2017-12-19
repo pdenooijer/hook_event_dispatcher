@@ -28,6 +28,12 @@ class EntityBaseFieldInfoEvent extends Event implements EventInterface {
    */
   private $fields = [];
 
+  /**
+   * EntityBaseFieldInfoEvent constructor.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeInterface $entityType
+   *   The entity type.
+   */
   public function __construct(EntityTypeInterface $entityType) {
     $this->entityType = $entityType;
   }
@@ -65,7 +71,7 @@ class EntityBaseFieldInfoEvent extends Event implements EventInterface {
    * @param static[] $fields
    *   The fields.
    */
-  public function setFields($fields) {
+  public function setFields(array $fields) {
     $this->fields = $fields;
   }
 
