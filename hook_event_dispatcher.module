@@ -8,6 +8,7 @@
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -26,6 +27,7 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent;
 use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent;
 use Drupal\hook_event_dispatcher\Event\EntityField\EntityFieldAccessEvent;
+use Drupal\hook_event_dispatcher\Event\EntityType\EntityBaseFieldInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
@@ -310,6 +312,16 @@ function hook_event_dispatcher_entity_field_access(
   $event = new EntityFieldAccessEvent($operation, $fieldDefinition, $account, $items);
   $manager->register($event);
   return $event->getAccessResult();
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function hook_event_dispatcher_entity_base_field_info(EntityTypeInterface $entityType) {
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityBaseFieldInfoEvent($entityType);
+  $manager->register($event);
+  return $event->getFields();
 }
 
 /**

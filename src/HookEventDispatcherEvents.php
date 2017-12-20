@@ -27,6 +27,9 @@ final class HookEventDispatcherEvents {
   const ENTITY_EXTRA_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_extra_field.info';
   const ENTITY_EXTRA_FIELD_INFO = 'hook_event_dispatcher.entity_extra_field.info_alter';
 
+  // ENTITY TYPE EVENTS.
+  const ENTITY_BASE_FIELD_INFO = 'hook_event_dispatcher.entity_base.field_info';
+
   // FORM EVENTS.
   const FORM_ALTER = 'hook_event_dispatcher.form.alter';
   const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
