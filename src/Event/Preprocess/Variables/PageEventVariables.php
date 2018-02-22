@@ -53,7 +53,7 @@ class PageEventVariables extends AbstractEventVariables {
   }
 
   /**
-   * Set page variables.
+   * Set a given page variable.
    *
    * @param string $name
    *   Name.
@@ -65,6 +65,20 @@ class PageEventVariables extends AbstractEventVariables {
    */
   public function set($name, $value = NULL) {
     $this->variables['page'][$name] = $value;
+    return $this;
+  }
+
+  /**
+   * Remove a given page variable.
+   *
+   * @param string $name
+   *   Name.
+   *
+   * @return $this
+   *   Page
+   */
+  public function remove($name) {
+    unset($this->variables['page'][$name]);
     return $this;
   }
 

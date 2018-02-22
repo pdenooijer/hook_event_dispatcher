@@ -52,10 +52,24 @@ abstract class AbstractEventVariables {
    *   Variable value.
    *
    * @return $this
-   *   Template variables.
+   *   Event variables.
    */
   public function set($name, $value = NULL) {
     $this->variables[$name] = $value;
+    return $this;
+  }
+
+  /**
+   * Remove a given variable.
+   *
+   * @param string $name
+   *   Variable name.
+   *
+   * @return $this
+   *   Event variables.
+   */
+  public function remove($name) {
+    unset($this->variables[$name]);
     return $this;
   }
 
