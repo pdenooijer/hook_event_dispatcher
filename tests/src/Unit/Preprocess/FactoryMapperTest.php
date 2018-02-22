@@ -13,6 +13,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\TaxonomyTermPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\UsernamePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
@@ -25,6 +26,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
@@ -234,6 +236,18 @@ final class FactoryMapperTest extends UnitTestCase {
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(PagePreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(PageEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+  }
+
+  /**
+   * Test a TaxonomyTermPreprocessEvent.
+   */
+  public function testTaxonomyTermEvent() {
+    $variablesArray = $this->createVariablesArray();
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(TaxonomyTermPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(TaxonomyTermEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
   }
 
