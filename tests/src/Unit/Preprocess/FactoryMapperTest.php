@@ -13,6 +13,8 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\TaxonomyTermPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\UsernamePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables;
@@ -24,12 +26,15 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
+use Drupal\user\UserInterface;
 
 /**
  * Class FactoryMapperTest.
@@ -235,20 +240,54 @@ final class FactoryMapperTest extends UnitTestCase {
   }
 
   /**
-   * Test a ViewPreprocessEvent.
+   * Test a ParagraphPreprocessEvent.
    */
-  public function testViewEvent() {
+  public function testParagraphEvent() {
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['rows'][0]['#rows'] = ['rows'];
-    $variablesArray['view'] = 'view';
+    $variablesArray['paragraph'] = 'paragraph';
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables $variables */
-    $variables = $this->getVariablesFromCreatedEvent(ViewPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ViewEventVariables::class, $variables);
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ParagraphPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ParagraphEventVariables::class, $variables);
 
     $this->assertAbstractEventVariables($variables);
-    $this->assertEquals(['rows'], $variables->getRows());
-    $this->assertEquals('view', $variables->getView());
+    $this->assertEquals('paragraph', $variables->getParagraph());
+  }
+
+  /**
+   * Test a TaxonomyTermPreprocessEvent.
+   */
+  public function testTaxonomyTermEvent() {
+    $variablesArray = $this->createVariablesArray();
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(TaxonomyTermPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(TaxonomyTermEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+  }
+
+  /**
+   * Test a UsernamePreprocessEvent.
+   */
+  public function testUsernameEvent() {
+    $variablesArray = $this->createVariablesArray();
+    $accountMock = $this->getMockBuilder(UserInterface::class)
+      ->disableOriginalClone()
+      ->disableOriginalConstructor()
+      ->setMethods(['isAnonymous'])
+      ->getMock();
+    $accountMock->expects($this->once())
+      ->method('isAnonymous')
+      ->with()
+      ->willReturn(TRUE);
+    $variablesArray['account'] = $accountMock;
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(UsernamePreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(UsernameEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+    $this->assertEquals($accountMock, $variables->getAccount());
+    $this->assertTrue($variables->userIsAnonymous());
   }
 
   /**
@@ -273,18 +312,20 @@ final class FactoryMapperTest extends UnitTestCase {
   }
 
   /**
-   * Test a ParagraphPreprocessEvent.
+   * Test a ViewPreprocessEvent.
    */
-  public function testParagraphEvent() {
+  public function testViewEvent() {
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['paragraph'] = 'paragraph';
+    $variablesArray['rows'][0]['#rows'] = ['rows'];
+    $variablesArray['view'] = 'view';
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables $variables */
-    $variables = $this->getVariablesFromCreatedEvent(ParagraphPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ParagraphEventVariables::class, $variables);
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ViewPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ViewEventVariables::class, $variables);
 
     $this->assertAbstractEventVariables($variables);
-    $this->assertEquals('paragraph', $variables->getParagraph());
+    $this->assertEquals(['rows'], $variables->getRows());
+    $this->assertEquals('view', $variables->getView());
   }
 
   /**
