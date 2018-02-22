@@ -240,6 +240,21 @@ final class FactoryMapperTest extends UnitTestCase {
   }
 
   /**
+   * Test a ParagraphPreprocessEvent.
+   */
+  public function testParagraphEvent() {
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['paragraph'] = 'paragraph';
+
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ParagraphPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ParagraphEventVariables::class, $variables);
+
+    $this->assertAbstractEventVariables($variables);
+    $this->assertEquals('paragraph', $variables->getParagraph());
+  }
+
+  /**
    * Test a TaxonomyTermPreprocessEvent.
    */
   public function testTaxonomyTermEvent() {
@@ -276,23 +291,6 @@ final class FactoryMapperTest extends UnitTestCase {
   }
 
   /**
-   * Test a ViewPreprocessEvent.
-   */
-  public function testViewEvent() {
-    $variablesArray = $this->createVariablesArray();
-    $variablesArray['rows'][0]['#rows'] = ['rows'];
-    $variablesArray['view'] = 'view';
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables $variables */
-    $variables = $this->getVariablesFromCreatedEvent(ViewPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ViewEventVariables::class, $variables);
-
-    $this->assertAbstractEventVariables($variables);
-    $this->assertEquals(['rows'], $variables->getRows());
-    $this->assertEquals('view', $variables->getView());
-  }
-
-  /**
    * Test a ViewFieldPreprocessEvent.
    */
   public function testViewFieldEvent() {
@@ -314,18 +312,20 @@ final class FactoryMapperTest extends UnitTestCase {
   }
 
   /**
-   * Test a ParagraphPreprocessEvent.
+   * Test a ViewPreprocessEvent.
    */
-  public function testParagraphEvent() {
+  public function testViewEvent() {
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['paragraph'] = 'paragraph';
+    $variablesArray['rows'][0]['#rows'] = ['rows'];
+    $variablesArray['view'] = 'view';
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables $variables */
-    $variables = $this->getVariablesFromCreatedEvent(ParagraphPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ParagraphEventVariables::class, $variables);
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ViewPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ViewEventVariables::class, $variables);
 
     $this->assertAbstractEventVariables($variables);
-    $this->assertEquals('paragraph', $variables->getParagraph());
+    $this->assertEquals(['rows'], $variables->getRows());
+    $this->assertEquals('view', $variables->getView());
   }
 
   /**
