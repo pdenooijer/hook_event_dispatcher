@@ -7,6 +7,10 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class AbstractPreprocessEvent.
+ *
+ * @package Drupal\hook_event_dispatcher\Event\Preprocess
+ *
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
 abstract class AbstractPreprocessEvent extends Event implements PreprocessEventInterface {
 

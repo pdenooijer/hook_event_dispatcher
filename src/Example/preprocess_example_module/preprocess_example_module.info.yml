@@ -1,0 +1,5 @@
+name: Preprocess example module
+type: module
+description: Registers an extra preprocess event.
+core: 8.x
+package: Development
