@@ -60,6 +60,20 @@ abstract class AbstractEventVariables {
   }
 
   /**
+   * Remove a given variable.
+   *
+   * @param string $name
+   *   Variable name.
+   *
+   * @return $this
+   *   Template variables.
+   */
+  public function remove($name) {
+    unset($this->variables[$name]);
+    return $this;
+  }
+
+  /**
    * Get a variable with a given name by reference.
    *
    * @param string $name
