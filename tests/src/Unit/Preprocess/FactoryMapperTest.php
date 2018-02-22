@@ -13,6 +13,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\UsernamePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables;
@@ -24,12 +25,14 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
+use Drupal\user\UserInterface;
 
 /**
  * Class FactoryMapperTest.
@@ -232,6 +235,30 @@ final class FactoryMapperTest extends UnitTestCase {
     $variables = $this->getVariablesFromCreatedEvent(PagePreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(PageEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
+  }
+
+  /**
+   * Test a UsernamePreprocessEvent.
+   */
+  public function testUsernameEvent() {
+    $variablesArray = $this->createVariablesArray();
+    $accountMock = $this->getMockBuilder(UserInterface::class)
+      ->disableOriginalClone()
+      ->disableOriginalConstructor()
+      ->setMethods(['isAnonymous'])
+      ->getMock();
+    $accountMock->expects($this->once())
+      ->method('isAnonymous')
+      ->with()
+      ->willReturn(TRUE);
+    $variablesArray['account'] = $accountMock;
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(UsernamePreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(UsernameEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+    $this->assertEquals($accountMock, $variables->getAccount());
+    $this->assertTrue($variables->userIsAnonymous());
   }
 
   /**
