@@ -304,6 +304,9 @@ final class FactoryMapperTest extends UnitTestCase {
 
     $variables->set('test3', 'new set');
     $this->assertEquals('new set', $variables->get('test3'));
+
+    $variables->remove('test');
+    $this->assertNull($variables->get('test'));
   }
 
   /**
