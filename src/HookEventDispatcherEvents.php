@@ -55,4 +55,9 @@ final class HookEventDispatcherEvents {
   // THEME EVENTS.
   const THEME_SUGGESTIONS_ALTER = 'hook_event_dispatcher.theme.suggestions_alter';
 
+  // USER EVENTS.
+  const USER_LOGIN = 'hook_event_dispatcher.user.login';
+  const USER_LOGOUT = 'hook_event_dispatcher.user.logout';
+  const USER_FORMAT_NAME_ALTER = 'hook_event_dispatcher.user.format_name_alter';
+
 }
