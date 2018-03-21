@@ -42,6 +42,8 @@ use Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPreExecuteEvent;
+use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -387,4 +389,15 @@ function hook_event_dispatcher_entity_extra_field_info_alter(array &$info) {
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityExtraFieldInfoAlterEvent($info);
   $manager->register($event);
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new ThemeSuggestionsAlterEvent($suggestions, $variables, $hook));
+  $manager->register(new ThemeSuggestionsAlterIdEvent($suggestions, $variables, $hook));
 }
