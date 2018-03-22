@@ -38,6 +38,9 @@ use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
+use Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent;
+use Drupal\hook_event_dispatcher\Event\User\UserLoginEvent;
+use Drupal\hook_event_dispatcher\Event\User\UserLogoutEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent;
@@ -310,6 +313,7 @@ function hook_event_dispatcher_entity_field_access(
   AccountInterface $account,
   FieldItemListInterface $items = NULL
 ) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityFieldAccessEvent($operation, $fieldDefinition, $account, $items);
   $manager->register($event);
@@ -318,8 +322,11 @@ function hook_event_dispatcher_entity_field_access(
 
 /**
  * Implements hook_entity_base_field_info().
+ *
+ * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_base_field_info(EntityTypeInterface $entityType) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityBaseFieldInfoEvent($entityType);
   $manager->register($event);
@@ -332,6 +339,7 @@ function hook_event_dispatcher_entity_base_field_info(EntityTypeInterface $entit
  * {@inheritdoc}
  */
 function hook_event_dispatcher_views_pre_execute(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPreExecuteEvent($view);
   $manager->register($event);
@@ -343,6 +351,7 @@ function hook_event_dispatcher_views_pre_execute(ViewExecutable $view) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_views_post_execute(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPostExecuteEvent($view);
   $manager->register($event);
@@ -354,6 +363,7 @@ function hook_event_dispatcher_views_post_execute(ViewExecutable $view) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_views_pre_build(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPreBuildEvent($view);
   $manager->register($event);
@@ -365,6 +375,7 @@ function hook_event_dispatcher_views_pre_build(ViewExecutable $view) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_views_post_build(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPostBuildEvent($view);
   $manager->register($event);
@@ -374,6 +385,7 @@ function hook_event_dispatcher_views_post_build(ViewExecutable $view) {
  * Implements hook_entity_extra_field_info().
  */
 function hook_event_dispatcher_entity_extra_field_info() {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityExtraFieldInfoEvent();
   $manager->register($event);
@@ -386,6 +398,7 @@ function hook_event_dispatcher_entity_extra_field_info() {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_entity_extra_field_info_alter(array &$info) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityExtraFieldInfoAlterEvent($info);
   $manager->register($event);
@@ -397,7 +410,44 @@ function hook_event_dispatcher_entity_extra_field_info_alter(array &$info) {
  * {@inheritdoc}
  */
 function hook_event_dispatcher_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new ThemeSuggestionsAlterEvent($suggestions, $variables, $hook));
   $manager->register(new ThemeSuggestionsAlterIdEvent($suggestions, $variables, $hook));
+}
+
+/**
+ * Implements hook_user_login().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_user_login(AccountInterface $account) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new UserLoginEvent($account);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_user_logout().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_user_logout(AccountInterface $account) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new UserLogoutEvent($account);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_user_format_name_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_user_format_name_alter(&$name, AccountInterface $account) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new UserFormatNameAlterEvent($name, $account);
+  $manager->register($event);
 }
