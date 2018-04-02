@@ -53,6 +53,7 @@ final class HookEventDispatcherEvents {
   const VIEWS_POST_BUILD = 'hook_event_dispatcher.views.post_build';
 
   // THEME EVENTS.
+  const THEME = 'hook_event_dispatcher.theme';
   const THEME_SUGGESTIONS_ALTER = 'hook_event_dispatcher.theme.suggestions_alter';
 
   // USER EVENTS.
