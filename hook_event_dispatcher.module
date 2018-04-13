@@ -36,6 +36,7 @@ use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
+use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
@@ -210,6 +211,17 @@ function hook_event_dispatcher_preprocess(&$variables, $hook) {
   /* @var \Drupal\hook_event_dispatcher\Service\PreprocessEventService $service */
   $service = Drupal::service('preprocess_event.service');
   $service->createAndDispatchKnownEvent($hook, $variables);
+}
+
+/**
+ * Implements hook_template_preprocess_default_variables_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_template_preprocess_default_variables_alter(&$variables) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new TemplatePreprocessDefaultVariablesAlterEvent($variables));
 }
 
 /**
