@@ -3,6 +3,7 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
+use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
 use Drupal\Tests\UnitTestCase;
@@ -35,7 +36,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
   }
 
   /**
-   * Tests the themeSuggestionsAlterEvent().
+   * Tests the themeSuggestionsAlterEvent.
    */
   public function testThemeSuggestionsAlterEvent() {
     $this->manager->setMaxEventCount(2);
@@ -56,7 +57,39 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
   }
 
   /**
-   * Tests the ThemeSuggestionsAlterIdEvent().
+   * Tests the themeSuggestionsAlterEvent with setSuggestion.
+   */
+  public function testThemeSuggestionsAlterEventWithSetSuggestions() {
+    $this->manager->setMaxEventCount(2);
+    $suggestions = [
+      'container_theme_function_1',
+      'container_theme_function_2',
+      'container_theme_function_3'
+    ];
+    $variables = ['content' => 'test'];
+    $hook = 'container';
+
+    $newSuggestions = [
+      'container_theme_function_1',
+      'container_theme_function_2',
+    ];
+
+    $this->manager->setEventCallbacks([
+      HookEventDispatcherEvents::THEME_SUGGESTIONS_ALTER => function (ThemeSuggestionsAlterEvent $event) use ($newSuggestions) {
+        $event->setSuggestions($newSuggestions);
+      },
+    ]);
+
+    hook_event_dispatcher_theme_suggestions_alter($suggestions, $variables, $hook);
+
+    /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::THEME_SUGGESTIONS_ALTER);
+    $this->assertEquals($newSuggestions, $event->getSuggestions());
+    $this->assertEquals($variables, $event->getVariables());
+  }
+
+  /**
+   * Tests the ThemeSuggestionsAlterIdEvent.
    */
   public function testThemeSuggestionsAlterIdEvent() {
     $this->manager->setMaxEventCount(2);
