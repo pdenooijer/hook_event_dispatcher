@@ -55,6 +55,7 @@ final class HookEventDispatcherEvents {
   // THEME EVENTS.
   const THEME = 'hook_event_dispatcher.theme';
   const THEME_SUGGESTIONS_ALTER = 'hook_event_dispatcher.theme.suggestions_alter';
+  const TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER = 'hook_event_dispatcher.theme.template_preprocess_default_variables_alter';
 
   // USER EVENTS.
   const USER_LOGIN = 'hook_event_dispatcher.user.login';
