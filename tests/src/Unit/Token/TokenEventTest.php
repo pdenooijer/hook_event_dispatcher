@@ -159,7 +159,7 @@ class TokenEventTest extends UnitTestCase {
     $metaData = $this->createMock(BubbleableMetadata::class);
     $event = new TokensReplacementEvent('', [], [], [], $metaData);
 
-    $this->expectException(\UnexpectedValueException::class);
+    $this->setExpectedException(\UnexpectedValueException::class);
     $event->setReplacementValue(NULL, '', '');
   }
 
@@ -170,7 +170,7 @@ class TokenEventTest extends UnitTestCase {
     $metaData = $this->createMock(BubbleableMetadata::class);
     $event = new TokensReplacementEvent('', [], [], [], $metaData);
 
-    $this->expectException(\UnexpectedValueException::class);
+    $this->setExpectedException(\UnexpectedValueException::class);
     $event->setReplacementValue('', NULL, '');
   }
 
@@ -181,7 +181,7 @@ class TokenEventTest extends UnitTestCase {
     $metaData = $this->createMock(BubbleableMetadata::class);
     $event = new TokensReplacementEvent('', [], [], [], $metaData);
 
-    $this->expectException(\UnexpectedValueException::class);
+    $this->setExpectedException(\UnexpectedValueException::class);
     $event->setReplacementValue('', '', '');
   }
 
@@ -192,7 +192,7 @@ class TokenEventTest extends UnitTestCase {
     $metaData = $this->createMock(BubbleableMetadata::class);
     $event = new TokensReplacementEvent('test', ['token' => '[test:token]'], [], [], $metaData);
 
-    $this->expectException(\UnexpectedValueException::class);
+    $this->setExpectedException(\UnexpectedValueException::class);
     $event->setReplacementValue('test', 'token', NULL);
   }
 
