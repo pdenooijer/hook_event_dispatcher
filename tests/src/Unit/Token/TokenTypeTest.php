@@ -18,7 +18,7 @@ class TokenTypeTest extends UnitTestCase {
    * Test TokenType invalid type exception.
    */
   public function testTokenTypeInvalidTypeException() {
-    $this->expectException(\UnexpectedValueException::class);
+    $this->setExpectedException(\UnexpectedValueException::class);
     TokenType::create(NULL, '');
   }
 
@@ -26,7 +26,7 @@ class TokenTypeTest extends UnitTestCase {
    * Test TokenType invalid name exception.
    */
   public function testTokenTypeInvalidNameException() {
-    $this->expectException(\UnexpectedValueException::class);
+    $this->setExpectedException(\UnexpectedValueException::class);
     TokenType::create('', NULL);
   }
 
@@ -34,7 +34,7 @@ class TokenTypeTest extends UnitTestCase {
    * Test TokenType invalid description exception.
    */
   public function testTokenTypeInvalidDescriptionException() {
-    $this->expectException(\UnexpectedValueException::class);
+    $this->setExpectedException(\UnexpectedValueException::class);
     TokenType::create('', '')->setDescription(NULL);
   }
 
@@ -42,7 +42,7 @@ class TokenTypeTest extends UnitTestCase {
    * Test TokenType invalid needs data exception.
    */
   public function testTokenTypeInvalidNeedsDataException() {
-    $this->expectException(\UnexpectedValueException::class);
+    $this->setExpectedException(\UnexpectedValueException::class);
     TokenType::create('', '')->setNeedsData(TRUE);
   }
 
