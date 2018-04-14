@@ -12,6 +12,8 @@ use Drupal\Tests\UnitTestCase;
  * Class TemplatePreprocessDefaultVariablesAlterEventTest.
  *
  * @package Drupal\Tests\hook_event_dispatcher\Unit\Theme
+ *
+ * @group hook_event_dispatcher
  */
 final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCase {
 
