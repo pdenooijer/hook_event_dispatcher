@@ -43,8 +43,9 @@ class ThemeEventTest extends UnitTestCase {
       'some_custom__hook_theme' => [
         'variables' => [
           'custom_variable' => NULL,
-        ]
-      ]
+        ],
+        'path' => 'some/path',
+      ],
     ];
     $this->manager->setEventCallbacks([
       HookEventDispatcherEvents::THEME => function (ThemeEvent $event) use ($newThemes) {
@@ -62,8 +63,8 @@ class ThemeEventTest extends UnitTestCase {
             'month' => 2,
             'day' => 15,
           ],
-        ]
-      ]
+        ],
+      ],
     ];
 
     $hookNewInformation = hook_event_dispatcher_theme($existing);
@@ -75,11 +76,37 @@ class ThemeEventTest extends UnitTestCase {
   }
 
   /**
+   * ThemeEvent with addNewThemes test.
+   */
+  public function testThemeEventWithAddNewThemesPathException() {
+    $newThemes = [
+      'some_custom__hook_theme' => [
+        'variables' => [
+          'custom_variable' => NULL,
+        ],
+      ],
+    ];
+    $this->manager->setEventCallbacks([
+      HookEventDispatcherEvents::THEME => function (ThemeEvent $event) use ($newThemes) {
+        $event->addNewThemes($newThemes);
+      },
+    ]);
+
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessage('Missing path in the information array, see \hook_theme() for more information.');
+
+    hook_event_dispatcher_theme([]);
+  }
+
+  /**
    * ThemeEvent with addNewTheme test.
    */
   public function testThemeEventWithAddNewTheme() {
     $themeHook = 'extra_theme__hook';
-    $information = ['array_with_extra_theme_information'];
+    $information = [
+      'test' => 'extra_theme_information',
+      'path' => 'some/path',
+    ];
     $expectedNewTheme[$themeHook] = $information;
 
     $this->manager->setEventCallbacks([
@@ -98,8 +125,8 @@ class ThemeEventTest extends UnitTestCase {
             'month' => 2,
             'day' => 15,
           ],
-        ]
-      ]
+        ],
+      ],
     ];
 
     $hookNewInformation = hook_event_dispatcher_theme($existing);
@@ -108,6 +135,27 @@ class ThemeEventTest extends UnitTestCase {
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::THEME);
     $this->assertSame($existing, $event->getExisting());
     $this->assertSame($expectedNewTheme, $hookNewInformation);
+  }
+
+  /**
+   * ThemeEvent with addNewTheme test.
+   */
+  public function testThemeEventWithAddNewThemeWithPathException() {
+    $themeHook = 'extra_theme__hook';
+    $information = [
+      'test' => 'extra_theme_information',
+    ];
+
+    $this->manager->setEventCallbacks([
+      HookEventDispatcherEvents::THEME => function (ThemeEvent $event) use ($themeHook, $information) {
+        $event->addNewTheme($themeHook, $information);
+      },
+    ]);
+
+    $this->expectException(\RuntimeException::class);
+    $this->expectExceptionMessage('Missing path in the information array, see \hook_theme() for more information.');
+
+    hook_event_dispatcher_theme([]);
   }
 
 }

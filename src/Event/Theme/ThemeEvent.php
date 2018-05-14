@@ -82,8 +82,15 @@ final class ThemeEvent extends Event implements EventInterface {
    *
    * @see \hook_theme()
    * Have a look at the return statement.
+   *
+   * @throws \RuntimeException
    */
   public function addNewTheme($theme, array $information) {
+    if (empty($information['path'])) {
+      throw new \RuntimeException(
+        'Missing path in the information array, see \hook_theme() for more information.'
+      );
+    }
     $this->newThemes[$theme] = $information;
   }
 
@@ -95,9 +102,13 @@ final class ThemeEvent extends Event implements EventInterface {
    *
    * @see \hook_theme()
    * Have a look at the return statement.
+   *
+   * @throws \RuntimeException
    */
   public function addNewThemes(array $themes) {
-    $this->newThemes = array_merge($this->newThemes, $themes);
+    foreach ($themes as $theme => $information) {
+      $this->addNewTheme($theme, $information);
+    }
   }
 
 }
