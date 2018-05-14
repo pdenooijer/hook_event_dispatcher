@@ -40,6 +40,7 @@ use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesA
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
+use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserLoginEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserLogoutEvent;
@@ -475,5 +476,15 @@ function hook_event_dispatcher_user_format_name_alter(&$name, AccountInterface $
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new UserFormatNameAlterEvent($name, $account);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function hook_event_dispatcher_toolbar_alter(&$items) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ToolbarAlterEvent($items);
   $manager->register($event);
 }
