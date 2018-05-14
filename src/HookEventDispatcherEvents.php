@@ -62,4 +62,7 @@ final class HookEventDispatcherEvents {
   const USER_LOGOUT = 'hook_event_dispatcher.user.logout';
   const USER_FORMAT_NAME_ALTER = 'hook_event_dispatcher.user.format_name_alter';
 
+  // TOOLBAR EVENTS.
+  const TOOLBAR_ALTER = 'hook_event_dispatcher.toolbar.alter';
+
 }
