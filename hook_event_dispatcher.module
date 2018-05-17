@@ -44,6 +44,7 @@ use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserLoginEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserLogoutEvent;
+use Drupal\hook_event_dispatcher\Event\Views\ViewsDataAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsDataEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
@@ -359,6 +360,17 @@ function hook_event_dispatcher_views_data() {
   $event = new ViewsDataEvent();
   $manager->register($event);
   return $event->getData();
+}
+
+/**
+ * Implements hook_views_data_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_views_data_alter(array &$data) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new ViewsDataAlterEvent($data));
 }
 
 /**

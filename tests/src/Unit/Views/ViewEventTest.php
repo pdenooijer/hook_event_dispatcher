@@ -3,6 +3,7 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Views;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
+use Drupal\hook_event_dispatcher\Event\Views\ViewsDataAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsDataEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
@@ -99,6 +100,51 @@ class ViewEventTest extends UnitTestCase {
       ],
     ];
     $this->assertSame($expectedResult, $result);
+  }
+
+  /**
+   * ViewsDataAlterEvent by reference test.
+   */
+  public function testViewsDataAlterEventByReference() {
+    $this->manager->setEventCallbacks([
+      HookEventDispatcherEvents::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
+        $data = &$event->getData();
+        $data['test']['other_test'] = ['some_data'];
+      },
+    ]);
+
+    $data = $expectedData = [
+      'test' => [
+        'test' => 'test_array_data',
+      ],
+    ];
+    hook_event_dispatcher_views_data_alter($data);
+
+    $expectedData['test']['other_test'] = ['some_data'];
+    $this->assertSame($expectedData, $data);
+  }
+
+  /**
+   * ViewsDataAlterEvent by set test.
+   */
+  public function testViewsDataAlterEventBySet() {
+    $this->manager->setEventCallbacks([
+      HookEventDispatcherEvents::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
+        $data = $event->getData();
+        $data['other'] = ['other_data'];
+        $event->setData($data);
+      },
+    ]);
+
+    $data = $expectedData = [
+      'test' => [
+        'test' => 'test_array_data',
+      ],
+    ];
+    hook_event_dispatcher_views_data_alter($data);
+
+    $expectedData['other'] = ['other_data'];
+    $this->assertSame($expectedData, $data);
   }
 
   /**
