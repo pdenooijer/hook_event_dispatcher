@@ -40,35 +40,6 @@ class EntityEventTest extends UnitTestCase {
   }
 
   /**
-   * Test EntityAccessEvent.
-   */
-  public function testEntityAccessEvent() {
-    $accessResult = $this->createMock(AccessResultInterface::class);
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
-        $event->setAccessResult($accessResult);
-      },
-    ]);
-
-    $entity = $this->createMock(EntityInterface::class);
-    $operation = 'test';
-    $account = $this->createMock(AccountInterface::class);
-
-    $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_ACCESS);
-    $this->assertEquals($entity, $event->getEntity());
-    $this->assertEquals($operation, $event->getOperation());
-    $this->assertEquals($account, $event->getAccount());
-    $this->assertEquals($accessResult, $hookAccessResult);
-
-    $newEntity = $this->createMock(EntityInterface::class);
-    $event->setEntity($newEntity);
-    $this->assertEquals($newEntity, $event->getEntity());
-  }
-
-  /**
    * Test EntityCreateEvent.
    */
   public function testEntityCreateEvent() {
