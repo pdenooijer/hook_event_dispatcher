@@ -3,6 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Event\Entity;
 
 use Drupal\Core\Access\AccessResultInterface;
+use Drupal\Core\Access\AccessResultNeutral;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
@@ -48,6 +49,7 @@ class EntityAccessEvent extends BaseEntityEvent {
 
     $this->operation = $operation;
     $this->account = $account;
+    $this->accessResult = new AccessResultNeutral();
   }
 
   /**
@@ -85,9 +87,21 @@ class EntityAccessEvent extends BaseEntityEvent {
    *
    * @param \Drupal\Core\Access\AccessResultInterface $accessResult
    *   The access result.
+   *
+   * @deprecated in favour of addAccessResult() which is more descriptive.
    */
   public function setAccessResult(AccessResultInterface $accessResult) {
-    $this->accessResult = $accessResult;
+    $this->addAccessResult($accessResult);
+  }
+
+  /**
+   * Add the access result.
+   *
+   * @param \Drupal\Core\Access\AccessResultInterface $accessResult
+   *   The access result.
+   */
+  public function addAccessResult(AccessResultInterface $accessResult) {
+    $this->accessResult = $this->accessResult->orIf($accessResult);
   }
 
   /**
