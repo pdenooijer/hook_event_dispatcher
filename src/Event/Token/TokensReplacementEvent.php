@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Token;
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -234,7 +234,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::TOKEN_REPLACEMENT;
+    return HookEventDispatcherInterface::TOKEN_REPLACEMENT;
   }
 
   /**

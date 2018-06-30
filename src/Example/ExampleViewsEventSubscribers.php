@@ -6,7 +6,7 @@ use Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPreExecuteEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -82,10 +82,10 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      HookEventDispatcherEvents::VIEWS_PRE_BUILD => 'preBuild',
-      HookEventDispatcherEvents::VIEWS_POST_BUILD => 'postBuild',
-      HookEventDispatcherEvents::VIEWS_PRE_EXECUTE => 'preExecute',
-      HookEventDispatcherEvents::VIEWS_POST_EXECUTE => 'postExecute',
+      HookEventDispatcherInterface::VIEWS_PRE_BUILD => 'preBuild',
+      HookEventDispatcherInterface::VIEWS_POST_BUILD => 'postBuild',
+      HookEventDispatcherInterface::VIEWS_PRE_EXECUTE => 'preExecute',
+      HookEventDispatcherInterface::VIEWS_POST_EXECUTE => 'postExecute',
     ];
   }
 

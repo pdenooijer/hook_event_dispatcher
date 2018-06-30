@@ -2,7 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Entity;
 
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class EntityUpdateEvent.
@@ -27,7 +27,7 @@ class EntityUpdateEvent extends BaseEntityEvent {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::ENTITY_UPDATE;
+    return HookEventDispatcherInterface::ENTITY_UPDATE;
   }
 
 }

@@ -4,7 +4,7 @@ namespace Drupal\hook_event_dispatcher\Example;
 
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\hook_event_dispatcher\Value\Token;
 use Drupal\hook_event_dispatcher\Value\TokenType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -19,8 +19,8 @@ final class ExampleTokenEventSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      HookEventDispatcherEvents::TOKEN_REPLACEMENT => 'tokenReplacement',
-      HookEventDispatcherEvents::TOKEN_INFO => 'tokenInfo',
+      HookEventDispatcherInterface::TOKEN_REPLACEMENT => 'tokenReplacement',
+      HookEventDispatcherInterface::TOKEN_INFO => 'tokenInfo',
     ];
   }
 

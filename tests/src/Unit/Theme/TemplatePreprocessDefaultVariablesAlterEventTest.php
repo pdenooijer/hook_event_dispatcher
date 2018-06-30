@@ -4,7 +4,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -43,7 +43,7 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
       'test_variable' => TRUE
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER => function (TemplatePreprocessDefaultVariablesAlterEvent $event) use ($newVariable) {
+      HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER => function (TemplatePreprocessDefaultVariablesAlterEvent $event) use ($newVariable) {
         $variables = &$event->getVariables();
         $variables += $newVariable;
       },
@@ -65,7 +65,7 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
     hook_event_dispatcher_template_preprocess_default_variables_alter($variables);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
     $this->assertSame($expectedVariables, $event->getVariables());
   }
 
@@ -77,7 +77,7 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
       'test_variable' => TRUE
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER => function (TemplatePreprocessDefaultVariablesAlterEvent $event) use ($newVariable) {
+      HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER => function (TemplatePreprocessDefaultVariablesAlterEvent $event) use ($newVariable) {
         $variables = $event->getVariables();
         $variables += $newVariable;
         $event->setVariables($variables);
@@ -100,7 +100,7 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
     hook_event_dispatcher_template_preprocess_default_variables_alter($variables);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
     $this->assertSame($expectedVariables, $event->getVariables());
   }
 

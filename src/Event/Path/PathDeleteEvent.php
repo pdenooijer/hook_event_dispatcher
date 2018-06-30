@@ -2,7 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Path;
 
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class PathDeleteEvent.
@@ -46,7 +46,7 @@ final class PathDeleteEvent extends BasePathEvent {
    *   The dispatcher type.
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::PATH_DELETE;
+    return HookEventDispatcherInterface::PATH_DELETE;
   }
 
 }

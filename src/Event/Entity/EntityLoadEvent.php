@@ -3,7 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Event\Entity;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -63,7 +63,7 @@ class EntityLoadEvent extends Event implements EventInterface {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::ENTITY_LOAD;
+    return HookEventDispatcherInterface::ENTITY_LOAD;
   }
 
 }

@@ -3,7 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Event\Views;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -57,7 +57,7 @@ final class ViewsDataAlterEvent extends Event implements EventInterface {
    *   The dispatcher type.
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::VIEWS_DATA_ALTER;
+    return HookEventDispatcherInterface::VIEWS_DATA_ALTER;
   }
 
 }

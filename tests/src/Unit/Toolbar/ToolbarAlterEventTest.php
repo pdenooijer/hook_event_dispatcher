@@ -3,7 +3,7 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Toolbar;
 
 use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
@@ -42,7 +42,7 @@ class ToolbarAlterEventTest extends UnitTestCase {
     $newItem = ['test' => 'item'];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::TOOLBAR_ALTER => function (ToolbarAlterEvent $event) use ($newItem) {
+      HookEventDispatcherInterface::TOOLBAR_ALTER => function (ToolbarAlterEvent $event) use ($newItem) {
         $items = &$event->getItems();
         $items += $newItem;
       },
@@ -67,7 +67,7 @@ class ToolbarAlterEventTest extends UnitTestCase {
     $newItem = ['test' => 'item'];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::TOOLBAR_ALTER => function (ToolbarAlterEvent $event) use ($newItem) {
+      HookEventDispatcherInterface::TOOLBAR_ALTER => function (ToolbarAlterEvent $event) use ($newItem) {
         $items = $event->getItems();
         $items += $newItem;
         $event->setItems($items);

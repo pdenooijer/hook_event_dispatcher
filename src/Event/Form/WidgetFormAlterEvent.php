@@ -4,7 +4,7 @@ namespace Drupal\hook_event_dispatcher\Event\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -103,7 +103,7 @@ class WidgetFormAlterEvent extends Event implements EventInterface {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::WIDGET_FORM_ALTER;
+    return HookEventDispatcherInterface::WIDGET_FORM_ALTER;
   }
 
 }

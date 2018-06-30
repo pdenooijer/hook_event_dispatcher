@@ -5,7 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Views;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsDataAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsDataEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\views\ViewExecutable;
 use Drupal\Tests\UnitTestCase;
@@ -48,7 +48,7 @@ class ViewEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::VIEWS_DATA => function (ViewsDataEvent $event) use ($data) {
+      HookEventDispatcherInterface::VIEWS_DATA => function (ViewsDataEvent $event) use ($data) {
         $event->addData($data);
       },
     ]);
@@ -81,7 +81,7 @@ class ViewEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::VIEWS_DATA => function (ViewsDataEvent $event) use ($data1, $data2, $data3) {
+      HookEventDispatcherInterface::VIEWS_DATA => function (ViewsDataEvent $event) use ($data1, $data2, $data3) {
         $event->addData($data1);
         $event->addData($data2);
         $event->addData($data3);
@@ -107,7 +107,7 @@ class ViewEventTest extends UnitTestCase {
    */
   public function testViewsDataAlterEventByReference() {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
+      HookEventDispatcherInterface::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
         $data = &$event->getData();
         $data['test']['other_test'] = ['some_data'];
       },
@@ -129,7 +129,7 @@ class ViewEventTest extends UnitTestCase {
    */
   public function testViewsDataAlterEventBySet() {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
+      HookEventDispatcherInterface::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
         $data = $event->getData();
         $data['other'] = ['other_data'];
         $event->setData($data);
@@ -157,7 +157,7 @@ class ViewEventTest extends UnitTestCase {
     hook_event_dispatcher_views_pre_build($view);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::VIEWS_PRE_BUILD);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_BUILD);
     $this->assertEquals($view, $event->getView());
   }
 
@@ -171,7 +171,7 @@ class ViewEventTest extends UnitTestCase {
     hook_event_dispatcher_views_post_build($view);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::VIEWS_POST_BUILD);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_BUILD);
     $this->assertEquals($view, $event->getView());
   }
 
@@ -185,7 +185,7 @@ class ViewEventTest extends UnitTestCase {
     hook_event_dispatcher_views_pre_execute($view);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::VIEWS_PRE_EXECUTE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_EXECUTE);
     $this->assertEquals($view, $event->getView());
   }
 
@@ -199,7 +199,7 @@ class ViewEventTest extends UnitTestCase {
     hook_event_dispatcher_views_post_execute($view);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::VIEWS_POST_EXECUTE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_EXECUTE);
     $this->assertEquals($view, $event->getView());
   }
 

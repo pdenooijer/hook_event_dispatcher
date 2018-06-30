@@ -4,7 +4,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Block;
 
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -45,7 +45,7 @@ class BlockEventTest extends UnitTestCase {
     hook_event_dispatcher_block_build_alter($build, $block);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::BLOCK_BUILD_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::BLOCK_BUILD_ALTER);
     $this->assertEquals($build, $event->getBuild());
     $this->assertEquals($block, $event->getBlock());
 

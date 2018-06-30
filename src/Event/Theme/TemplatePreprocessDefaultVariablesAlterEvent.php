@@ -3,7 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Event\Theme;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -40,7 +40,7 @@ final class TemplatePreprocessDefaultVariablesAlterEvent extends Event implement
    *   The dispatcher type.
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER;
+    return HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER;
   }
 
   /**
