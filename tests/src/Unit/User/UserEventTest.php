@@ -5,7 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\User;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -46,7 +46,7 @@ class UserEventTest extends UnitTestCase {
     hook_event_dispatcher_user_login($account);
 
     /* @var \Drupal\hook_event_dispatcher\Event\User\UserLoginEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::USER_LOGIN);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGIN);
     $this->assertEquals($account, $event->getAccount());
   }
 
@@ -60,7 +60,7 @@ class UserEventTest extends UnitTestCase {
     hook_event_dispatcher_user_logout($account);
 
     /* @var \Drupal\hook_event_dispatcher\Event\User\UserLogoutEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::USER_LOGOUT);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGOUT);
     $this->assertEquals($account, $event->getAccount());
   }
 
@@ -69,7 +69,7 @@ class UserEventTest extends UnitTestCase {
    */
   public function testUserFormatNameAlterEventByReference() {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::USER_FORMAT_NAME_ALTER => function (UserFormatNameAlterEvent $event) {
+      HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER => function (UserFormatNameAlterEvent $event) {
         $name = &$event->getName();
         $name .= ' improved!';
       },
@@ -82,7 +82,7 @@ class UserEventTest extends UnitTestCase {
     hook_event_dispatcher_user_format_name_alter($name, $account);
 
     /* @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::USER_FORMAT_NAME_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
     $this->assertSame('Test name improved!', $event->getName());
     $this->assertSame($account, $event->getAccount());
   }
@@ -92,7 +92,7 @@ class UserEventTest extends UnitTestCase {
    */
   public function testUserFormatNameAlterEventWithSet() {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::USER_FORMAT_NAME_ALTER => function (UserFormatNameAlterEvent $event) {
+      HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER => function (UserFormatNameAlterEvent $event) {
         $event->setName('New name!');
       },
     ]);
@@ -104,7 +104,7 @@ class UserEventTest extends UnitTestCase {
     hook_event_dispatcher_user_format_name_alter($name, $account);
 
     /* @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::USER_FORMAT_NAME_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
     $this->assertSame('New name!', $event->getName());
     $this->assertSame($account, $event->getAccount());
   }

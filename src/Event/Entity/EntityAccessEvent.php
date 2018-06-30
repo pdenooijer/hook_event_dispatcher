@@ -6,7 +6,7 @@ use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Access\AccessResultNeutral;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class EntityAccessEvent.
@@ -108,7 +108,7 @@ class EntityAccessEvent extends BaseEntityEvent {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::ENTITY_ACCESS;
+    return HookEventDispatcherInterface::ENTITY_ACCESS;
   }
 
 }

@@ -5,7 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
@@ -51,7 +51,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     hook_event_dispatcher_theme_suggestions_alter($suggestions, $variables, $hook);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::THEME_SUGGESTIONS_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER);
     $this->assertEquals($suggestions, $event->getSuggestions());
     $this->assertEquals($variables, $event->getVariables());
   }
@@ -75,7 +75,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::THEME_SUGGESTIONS_ALTER => function (ThemeSuggestionsAlterEvent $event) use ($newSuggestions) {
+      HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER => function (ThemeSuggestionsAlterEvent $event) use ($newSuggestions) {
         $event->setSuggestions($newSuggestions);
       },
     ]);
@@ -83,7 +83,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     hook_event_dispatcher_theme_suggestions_alter($suggestions, $variables, $hook);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::THEME_SUGGESTIONS_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER);
     $this->assertEquals($newSuggestions, $event->getSuggestions());
     $this->assertEquals($variables, $event->getVariables());
   }

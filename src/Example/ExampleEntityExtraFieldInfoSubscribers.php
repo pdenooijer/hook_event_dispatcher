@@ -4,7 +4,7 @@ namespace Drupal\hook_event_dispatcher\Example;
 
 use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -63,8 +63,8 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
    */
   public static function getSubscribedEvents() {
     return [
-      HookEventDispatcherEvents::ENTITY_EXTRA_FIELD_INFO => 'fieldInfo',
-      HookEventDispatcherEvents::ENTITY_EXTRA_FIELD_INFO_ALTER => 'fieldInfoAlter',
+      HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO => 'fieldInfo',
+      HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO_ALTER => 'fieldInfoAlter',
     ];
   }
 

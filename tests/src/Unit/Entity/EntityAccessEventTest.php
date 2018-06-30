@@ -9,7 +9,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -68,7 +68,7 @@ class EntityAccessEventTest extends UnitTestCase {
     $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_ACCESS);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_ACCESS);
     $this->assertSame($entity, $event->getEntity());
     $this->assertSame($operation, $event->getOperation());
     $this->assertSame($account, $event->getAccount());
@@ -86,7 +86,7 @@ class EntityAccessEventTest extends UnitTestCase {
   public function testEntityAccessEventWithDeprecatedSetAccessResult() {
     $accessResult = new AccessResultForbidden();
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
         $event->setAccessResult($accessResult);
       },
     ]);
@@ -108,7 +108,7 @@ class EntityAccessEventTest extends UnitTestCase {
   public function testEntityAccessEventNeutralResult() {
     $accessResult = new AccessResultNeutral();
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
         $event->addAccessResult($accessResult);
       },
     ]);
@@ -130,7 +130,7 @@ class EntityAccessEventTest extends UnitTestCase {
   public function testEntityAccessEventAllowedResult() {
     $accessResult = new AccessResultAllowed();
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
         $event->addAccessResult($accessResult);
       },
     ]);
@@ -152,7 +152,7 @@ class EntityAccessEventTest extends UnitTestCase {
   public function testEntityAccessEventForbiddenResult() {
     $accessResult = new AccessResultForbidden();
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
         $event->addAccessResult($accessResult);
       },
     ]);
@@ -181,7 +181,7 @@ class EntityAccessEventTest extends UnitTestCase {
       new AccessResultForbidden(),
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResults) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResults) {
         foreach ($accessResults as $accessResult) {
           $event->addAccessResult($accessResult);
         }

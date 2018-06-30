@@ -5,7 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 use Drupal\Core\Asset\AttachedAssets;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -41,7 +41,7 @@ final class JsAlterEventTest extends UnitTestCase {
    */
   public function testJsAlterEventByReference() {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::JS_ALTER => function (JsAlterEvent $event) {
+      HookEventDispatcherInterface::JS_ALTER => function (JsAlterEvent $event) {
         $javascript = &$event->getJavascript();
         unset($javascript['unset']);
       },
@@ -58,7 +58,7 @@ final class JsAlterEventTest extends UnitTestCase {
     hook_event_dispatcher_js_alter($javascript, $attachedAssets);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::JS_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::JS_ALTER);
 
     $this->assertSame($expectedJavascript, $event->getJavascript());
     $this->assertSame($attachedAssets, $event->getAttachedAssets());
@@ -72,7 +72,7 @@ final class JsAlterEventTest extends UnitTestCase {
       'new' => ['new-data'],
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::JS_ALTER => function (JsAlterEvent $event) use ($newJavascript) {
+      HookEventDispatcherInterface::JS_ALTER => function (JsAlterEvent $event) use ($newJavascript) {
         $javascript = $event->getJavascript();
         $javascript += $newJavascript;
         $event->setJavascript($javascript);
@@ -90,7 +90,7 @@ final class JsAlterEventTest extends UnitTestCase {
     hook_event_dispatcher_js_alter($javascript, $attachedAssets);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::JS_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::JS_ALTER);
 
     $this->assertSame($expectedJavascript, $event->getJavascript());
     $this->assertSame($attachedAssets, $event->getAttachedAssets());

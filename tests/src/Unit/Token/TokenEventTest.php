@@ -6,7 +6,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\hook_event_dispatcher\Value\Token;
 use Drupal\hook_event_dispatcher\Value\TokenType;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
@@ -54,7 +54,7 @@ class TokenEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::TOKEN_INFO => function (TokensInfoEvent $event) use ($types, $tokens) {
+      HookEventDispatcherInterface::TOKEN_INFO => function (TokensInfoEvent $event) use ($types, $tokens) {
         foreach ($types as $type) {
           $event->addTokenType($type);
         }
@@ -97,7 +97,7 @@ class TokenEventTest extends UnitTestCase {
       ],
     ];
     /* @var \Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::TOKEN_INFO);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_INFO);
     $this->assertEquals($expectedTypes, $result['types']);
     $this->assertEquals($expectedTokens, $result['tokens']);
     $this->assertEquals($expectedTypes, $event->getTokenTypes());
@@ -112,7 +112,7 @@ class TokenEventTest extends UnitTestCase {
     $replacement2 = 'Replacement value 2';
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::TOKEN_REPLACEMENT => function (TokensReplacementEvent $event) use ($replacement1, $replacement2) {
+      HookEventDispatcherInterface::TOKEN_REPLACEMENT => function (TokensReplacementEvent $event) use ($replacement1, $replacement2) {
         $event->setReplacementValue('test_type', 'token1', $replacement1);
         $event->setReplacementValue('test_type', 'token2', $replacement2);
       },
@@ -139,7 +139,7 @@ class TokenEventTest extends UnitTestCase {
       '[test_type:token2]' => $replacement2,
     ];
     /* @var \Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::TOKEN_REPLACEMENT);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_REPLACEMENT);
     $this->assertEquals($expectedResult, $result);
     $this->assertEquals($type, $event->getType());
     $this->assertEquals($tokens, $event->getTokens());

@@ -3,7 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Event\Theme;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -49,7 +49,7 @@ final class ThemeEvent extends Event implements EventInterface {
    *   The dispatcher type.
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::THEME;
+    return HookEventDispatcherInterface::THEME;
   }
 
   /**

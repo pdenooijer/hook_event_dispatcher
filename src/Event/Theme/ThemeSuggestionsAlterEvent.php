@@ -2,7 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Theme;
 
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class ThemeSuggestionsAlterEvent.
@@ -18,7 +18,7 @@ class ThemeSuggestionsAlterEvent extends BaseThemeSuggestionsEvent {
    *   Dispatcher type.
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::THEME_SUGGESTIONS_ALTER;
+    return HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER;
   }
 
 }

@@ -5,7 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
@@ -48,7 +48,7 @@ class ThemeEventTest extends UnitTestCase {
       ],
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::THEME => function (ThemeEvent $event) use ($newThemes) {
+      HookEventDispatcherInterface::THEME => function (ThemeEvent $event) use ($newThemes) {
         $event->addNewThemes($newThemes);
       },
     ]);
@@ -70,7 +70,7 @@ class ThemeEventTest extends UnitTestCase {
     $hookNewInformation = hook_event_dispatcher_theme($existing);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::THEME);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME);
     $this->assertSame($existing, $event->getExisting());
     $this->assertSame($newThemes, $hookNewInformation);
   }
@@ -87,7 +87,7 @@ class ThemeEventTest extends UnitTestCase {
       ],
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::THEME => function (ThemeEvent $event) use ($newThemes) {
+      HookEventDispatcherInterface::THEME => function (ThemeEvent $event) use ($newThemes) {
         $event->addNewThemes($newThemes);
       },
     ]);
@@ -110,7 +110,7 @@ class ThemeEventTest extends UnitTestCase {
     $expectedNewTheme[$themeHook] = $information;
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::THEME => function (ThemeEvent $event) use ($themeHook, $information) {
+      HookEventDispatcherInterface::THEME => function (ThemeEvent $event) use ($themeHook, $information) {
         $event->addNewTheme($themeHook, $information);
       },
     ]);
@@ -132,7 +132,7 @@ class ThemeEventTest extends UnitTestCase {
     $hookNewInformation = hook_event_dispatcher_theme($existing);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::THEME);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME);
     $this->assertSame($existing, $event->getExisting());
     $this->assertSame($expectedNewTheme, $hookNewInformation);
   }
@@ -147,7 +147,7 @@ class ThemeEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::THEME => function (ThemeEvent $event) use ($themeHook, $information) {
+      HookEventDispatcherInterface::THEME => function (ThemeEvent $event) use ($themeHook, $information) {
         $event->addNewTheme($themeHook, $information);
       },
     ]);

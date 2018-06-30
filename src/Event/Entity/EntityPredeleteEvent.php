@@ -2,7 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Entity;
 
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class EntityPredeleteEvent.
@@ -15,7 +15,7 @@ class EntityPredeleteEvent extends BaseEntityEvent {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::ENTITY_PRE_DELETE;
+    return HookEventDispatcherInterface::ENTITY_PRE_DELETE;
   }
 
 }

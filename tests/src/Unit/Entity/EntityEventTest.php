@@ -8,7 +8,7 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -48,7 +48,7 @@ class EntityEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_create($entity);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityCreateEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_CREATE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_CREATE);
     $this->assertEquals($entity, $event->getEntity());
   }
 
@@ -61,7 +61,7 @@ class EntityEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_delete($entity);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_DELETE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_DELETE);
     $this->assertEquals($entity, $event->getEntity());
   }
 
@@ -74,7 +74,7 @@ class EntityEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_insert($entity);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_INSERT);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_INSERT);
     $this->assertEquals($entity, $event->getEntity());
   }
 
@@ -92,7 +92,7 @@ class EntityEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_load($entities, $entityTypeId);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityLoadEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_LOAD);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_LOAD);
     $this->assertEquals($entities, $event->getEntities());
     $this->assertEquals($entityTypeId, $event->getEntityTypeId());
   }
@@ -106,7 +106,7 @@ class EntityEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_predelete($entity);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_PRE_DELETE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_PRE_DELETE);
     $this->assertEquals($entity, $event->getEntity());
   }
 
@@ -121,7 +121,7 @@ class EntityEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_presave($entity);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_PRE_SAVE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_PRE_SAVE);
     $this->assertEquals($entity, $event->getEntity());
     $this->assertEquals($originalEntity, $event->getOriginalEntity());
   }
@@ -137,7 +137,7 @@ class EntityEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_update($entity);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_UPDATE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_UPDATE);
     $this->assertEquals($entity, $event->getEntity());
     $this->assertEquals($originalEntity, $event->getOriginalEntity());
   }
@@ -154,7 +154,7 @@ class EntityEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_view($build, $entity, $display, $viewMode);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_VIEW);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_VIEW);
     $this->assertEquals($build, $event->getBuild());
     $this->assertEquals($entity, $event->getEntity());
     $this->assertEquals($display, $event->getDisplay());

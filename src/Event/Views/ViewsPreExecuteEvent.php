@@ -2,7 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Views;
 
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class ViewsPreExecuteEvent.
@@ -15,7 +15,7 @@ class ViewsPreExecuteEvent extends BaseViewsEvent {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::VIEWS_PRE_EXECUTE;
+    return HookEventDispatcherInterface::VIEWS_PRE_EXECUTE;
   }
 
 }

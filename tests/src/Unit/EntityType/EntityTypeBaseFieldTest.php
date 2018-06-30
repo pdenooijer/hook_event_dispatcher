@@ -5,7 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\EntityType;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityBaseFieldInfoEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -45,7 +45,7 @@ class EntityTypeBaseFieldTest extends UnitTestCase {
       'field_test2' => 'otherTest',
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherEvents::ENTITY_BASE_FIELD_INFO => function (EntityBaseFieldInfoEvent $event) use ($fields) {
+      HookEventDispatcherInterface::ENTITY_BASE_FIELD_INFO => function (EntityBaseFieldInfoEvent $event) use ($fields) {
         $event->setFields($fields);
       },
     ]);
@@ -55,7 +55,7 @@ class EntityTypeBaseFieldTest extends UnitTestCase {
     $hookFieldInfoResult = hook_event_dispatcher_entity_base_field_info($entityType);
 
     /* @var \Drupal\hook_event_dispatcher\Event\EntityType\EntityBaseFieldInfoEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::ENTITY_BASE_FIELD_INFO);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_BASE_FIELD_INFO);
 
     $this->assertEquals($entityType, $event->getEntityType());
     $this->assertEquals($fields, $event->getFields());
