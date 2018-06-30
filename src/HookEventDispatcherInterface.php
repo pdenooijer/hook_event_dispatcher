@@ -72,4 +72,7 @@ interface HookEventDispatcherInterface {
   const PAGE_TOP = 'hook_event_dispatcher.page.top';
   const PAGE_BOTTOM = 'hook_event_dispatcher.page.bottom';
 
+  // CRON EVENTS.
+  const CRON = 'hook_event_dispatcher.cron';
+
 }
