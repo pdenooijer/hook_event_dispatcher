@@ -16,6 +16,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Cron\CronEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityCreateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent;
@@ -35,12 +36,15 @@ use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent;
+use Drupal\hook_event_dispatcher\Event\Page\PageTopEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
+use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
 use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
@@ -53,9 +57,6 @@ use Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsPreExecuteEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
-use Drupal\hook_event_dispatcher\Event\Page\PageTopEvent;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -554,5 +555,17 @@ function hook_event_dispatcher_page_bottom(array &$pageBottom) {
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $event = new PageBottomEvent($pageBottom);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_cron() {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $event = new CronEvent();
   $manager->register($event);
 }
