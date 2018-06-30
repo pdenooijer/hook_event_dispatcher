@@ -2,7 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Path;
 
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class PathInsertEvent.
@@ -18,7 +18,7 @@ final class PathInsertEvent extends BasePathEvent {
    *   The dispatcher type.
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::PATH_INSERT;
+    return HookEventDispatcherInterface::PATH_INSERT;
   }
 
 }

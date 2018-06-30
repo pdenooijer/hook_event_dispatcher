@@ -2,7 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher\Event\Block;
 
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class EntityInsertEvent.
@@ -15,7 +15,7 @@ class BlockBuildAlterEvent extends BaseBlockEvent {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::BLOCK_BUILD_ALTER;
+    return HookEventDispatcherInterface::BLOCK_BUILD_ALTER;
   }
 
 }

@@ -4,7 +4,7 @@ namespace Drupal\hook_event_dispatcher\Event\Entity;
 
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class EntityViewEvent.
@@ -101,7 +101,7 @@ class EntityViewEvent extends BaseEntityEvent {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::ENTITY_VIEW;
+    return HookEventDispatcherInterface::ENTITY_VIEW;
   }
 
 }

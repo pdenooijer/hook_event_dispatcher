@@ -8,7 +8,7 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -110,12 +110,12 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      HookEventDispatcherEvents::ENTITY_VIEW => 'alterEntityView',
-      HookEventDispatcherEvents::ENTITY_PRE_SAVE => 'entityPreSave',
-      HookEventDispatcherEvents::ENTITY_INSERT => 'entityInsert',
-      HookEventDispatcherEvents::ENTITY_UPDATE => 'entityUpdate',
-      HookEventDispatcherEvents::ENTITY_PRE_DELETE => 'entityPreDelete',
-      HookEventDispatcherEvents::ENTITY_DELETE => 'entityDelete',
+      HookEventDispatcherInterface::ENTITY_VIEW => 'alterEntityView',
+      HookEventDispatcherInterface::ENTITY_PRE_SAVE => 'entityPreSave',
+      HookEventDispatcherInterface::ENTITY_INSERT => 'entityInsert',
+      HookEventDispatcherInterface::ENTITY_UPDATE => 'entityUpdate',
+      HookEventDispatcherInterface::ENTITY_PRE_DELETE => 'entityPreDelete',
+      HookEventDispatcherInterface::ENTITY_DELETE => 'entityDelete',
     ];
   }
 

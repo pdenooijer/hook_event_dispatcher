@@ -6,7 +6,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -50,7 +50,7 @@ class FormEventTest extends UnitTestCase {
     hook_event_dispatcher_form_alter($form, $formState, $formId);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::FORM_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::FORM_ALTER);
     $this->assertEquals($form, $event->getForm());
     $this->assertEquals($formState, $event->getFormState());
     $this->assertEquals($formId, $event->getFormId());
@@ -123,7 +123,7 @@ class FormEventTest extends UnitTestCase {
     hook_event_dispatcher_field_widget_form_alter($element, $formState, $context);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::WIDGET_FORM_ALTER);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::WIDGET_FORM_ALTER);
     $this->assertEquals($element, $event->getElement());
     $this->assertEquals($formState, $event->getFormState());
     $this->assertEquals($context, $event->getContext());

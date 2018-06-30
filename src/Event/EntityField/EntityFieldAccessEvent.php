@@ -8,7 +8,7 @@ use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -76,7 +76,7 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::ENTITY_FIELD_ACCESS;
+    return HookEventDispatcherInterface::ENTITY_FIELD_ACCESS;
   }
 
   /**

@@ -3,7 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Event\Toolbar;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -54,7 +54,7 @@ class ToolbarAlterEvent extends Event implements EventInterface {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return HookEventDispatcherEvents::TOOLBAR_ALTER;
+    return HookEventDispatcherInterface::TOOLBAR_ALTER;
   }
 
 }

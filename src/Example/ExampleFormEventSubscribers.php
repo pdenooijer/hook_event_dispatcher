@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -97,7 +97,7 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      HookEventDispatcherEvents::FORM_ALTER => 'alterForm',
+      HookEventDispatcherInterface::FORM_ALTER => 'alterForm',
       // React on "search_block_form" form.
       'hook_event_dispatcher.form_search_block_form.alter' => 'alterSearchForm',
       // React on al forms with base id "node_form".

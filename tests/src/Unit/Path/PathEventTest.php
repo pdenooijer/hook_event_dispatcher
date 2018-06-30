@@ -3,7 +3,7 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Path;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\HookEventDispatcherEvents;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
@@ -53,7 +53,7 @@ class PathEventTest extends UnitTestCase {
     hook_event_dispatcher_path_delete($path);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::PATH_DELETE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
     $this->assertEquals($source, $event->getSource());
     $this->assertEquals($alias, $event->getAlias());
     $this->assertEquals($langcode, $event->getLangcode());
@@ -79,7 +79,7 @@ class PathEventTest extends UnitTestCase {
     hook_event_dispatcher_path_insert($path);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::PATH_INSERT);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_INSERT);
     $this->assertEquals($source, $event->getSource());
     $this->assertEquals($alias, $event->getAlias());
     $this->assertEquals($langcode, $event->getLangcode());
@@ -104,7 +104,7 @@ class PathEventTest extends UnitTestCase {
     hook_event_dispatcher_path_update($path);
 
     /* @var \Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherEvents::PATH_UPDATE);
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_UPDATE);
     $this->assertEquals($source, $event->getSource());
     $this->assertEquals($alias, $event->getAlias());
     $this->assertEquals($langcode, $event->getLangcode());
