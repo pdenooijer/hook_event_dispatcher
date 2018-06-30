@@ -68,4 +68,8 @@ interface HookEventDispatcherInterface {
   // TOOLBAR EVENTS.
   const TOOLBAR_ALTER = 'hook_event_dispatcher.toolbar.alter';
 
+  // PAGE EVENTS.
+  const PAGE_TOP = 'hook_event_dispatcher.page.top';
+  const PAGE_BOTTOM = 'hook_event_dispatcher.page.bottom';
+
 }
