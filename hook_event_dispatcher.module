@@ -34,6 +34,7 @@ use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
@@ -541,5 +542,17 @@ function hook_event_dispatcher_page_top(array &$pageTop) {
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PageTopEvent($pageTop);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_page_bottom().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_page_bottom(array &$pageBottom) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PageBottomEvent($pageBottom);
   $manager->register($event);
 }
