@@ -30,6 +30,7 @@ interface HookEventDispatcherInterface {
   // ENTITY TYPE EVENTS.
   const ENTITY_BASE_FIELD_INFO = 'hook_event_dispatcher.entity_base.field_info';
   const ENTITY_BASE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_base.field_info_alter';
+  const ENTITY_BUNDLE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_bundle.field_info_alter';
 
   // FORM EVENTS.
   const FORM_ALTER = 'hook_event_dispatcher.form.alter';
