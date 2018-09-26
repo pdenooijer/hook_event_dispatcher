@@ -20,6 +20,11 @@ services:
       tags:
         -  { name: preprocess_event_default_factory }
 
+  preprocess_event.factory.entity:
+      class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\EntityPreprocessEventFactory
+      tags:
+        - { name: preprocess_event_default_factory }
+
   preprocess_event.factory.eck_entity:
     class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\EckEntityPreprocessEventFactory
     tags:

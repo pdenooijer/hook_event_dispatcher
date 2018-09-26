@@ -221,6 +221,14 @@ function hook_event_dispatcher_preprocess(&$variables, $hook) {
   /* @var \Drupal\hook_event_dispatcher\Service\PreprocessEventService $service */
   $service = \Drupal::service('preprocess_event.service');
   $service->createAndDispatchKnownEvent($hook, $variables);
+
+  /* @var \Drupal\Core\Entity\ContentEntityInterface|null $entity */
+  $entity = $service->getEntity($hook, $variables);
+  if ($entity) {
+    $service->createAndDispatchEntityTypeEvent($entity, $variables);
+    $service->createAndDispatchEntityTypeBundleEvent($entity, $variables);
+
+  }
 }
 
 /**

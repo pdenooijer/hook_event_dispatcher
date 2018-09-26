@@ -5,6 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\CommentPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\EntityPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
@@ -19,6 +20,7 @@ use Drupal\hook_event_dispatcher\Service\PreprocessEventService;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\SpyEventDispatcher;
 use Drupal\Tests\UnitTestCase;
+use Drupal\Core\Entity\ContentEntityInterface;
 
 /**
  * Class ServiceTest.
@@ -83,6 +85,44 @@ final class ServiceTest extends UnitTestCase {
    */
   public function testEckEntityEvent() {
     $this->createAndAssertEvent(EckEntityPreprocessEvent::class);
+  }
+
+  /**
+   * Test a EntityPreprocessEvent.
+   */
+  public function testEntityTypeEvent() {
+    $entity = $this->getMockForAbstractClass('\Drupal\Core\Entity\ContentEntityInterface');
+
+    $entity
+      ->expects($this->any())
+      ->method('getEntityTypeId')
+      ->willReturn('node');
+
+    $entity
+      ->expects($this->any())
+      ->method('bundle')
+      ->willReturn('article');
+
+    $this->createAndAssertEntityTypeEvent(EntityPreprocessEvent::class, $entity);
+  }
+
+  /**
+   * Test a EntityPreprocessEvent.
+   */
+  public function testEntityTypeBundleEvent() {
+    $entity = $this->getMockForAbstractClass('\Drupal\Core\Entity\ContentEntityInterface');
+
+    $entity
+      ->expects($this->any())
+      ->method('getEntityTypeId')
+      ->willReturn('node');
+
+    $entity
+      ->expects($this->any())
+      ->method('bundle')
+      ->willReturn('article');
+
+    $this->createAndAssertEntityTypeBundleEvent(EntityPreprocessEvent::class, $entity);
   }
 
   /**
@@ -174,6 +214,36 @@ final class ServiceTest extends UnitTestCase {
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent $class */
     $this->service->createAndDispatchKnownEvent($class::getHook(), $this->variables);
     $this->assertEquals($class::name(), $this->dispatcher->getLastEventName());
+    $this->assertInstanceOf($class, $this->dispatcher->getLastEvent());
+  }
+
+  /**
+   * Create and assert the given event class.
+   *
+   * @param string $class
+   *   Event class name.
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+   *   Event class name.
+   */
+  private function createAndAssertEntityTypeEvent($class, ContentEntityInterface $entity) {
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent $class */
+    $this->service->createAndDispatchEntityTypeEvent($entity, $this->variables);
+    $this->assertEquals($class::name() . '.' . $entity->getEntityTypeId(), $this->dispatcher->getLastEventName());
+    $this->assertInstanceOf($class, $this->dispatcher->getLastEvent());
+  }
+
+  /**
+   * Create and assert the given event class.
+   *
+   * @param string $class
+   *   Event class name.
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+   *   Event class name.
+   */
+  private function createAndAssertEntityTypeBundleEvent($class, ContentEntityInterface $entity) {
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent $class */
+    $this->service->createAndDispatchEntityTypeBundleEvent($entity, $this->variables);
+    $this->assertEquals($class::name() . '.' . $entity->getEntityTypeId() . '.' . $entity->bundle(), $this->dispatcher->getLastEventName());
     $this->assertInstanceOf($class, $this->dispatcher->getLastEvent());
   }
 
