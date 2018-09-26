@@ -53,7 +53,7 @@ final class YamlDefinitionsLoader {
    * Load the definitions from the services YAML.
    */
   private function loadDefinitionsFromServicesYaml() {
-    $yaml = new Parser()f;
+    $yaml = new Parser();
     $content = file_get_contents(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/hook_event_dispatcher.services.yml');
     $services = $yaml->parse($content)['services'];
 
