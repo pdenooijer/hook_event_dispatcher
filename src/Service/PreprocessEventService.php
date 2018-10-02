@@ -56,32 +56,17 @@ final class PreprocessEventService {
   /**
    * Create and dispatch the entity events.
    *
-   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
-   *   The entity object.
+   * @param string $hook
+   *   The factory hook.
    * @param array $variables
    *   Variables.
    */
-  public function createAndDispatchEntityTypeEvent(ContentEntityInterface $entity, array &$variables) {
-    $factory = $this->mapper->getFactory('entity');
+  public function createAndDispatchEntityEvent($hook, array &$variables) {
+    $factory = $this->mapper->getFactory($hook);
     if ($factory) {
+      /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\EntityPreprocessEvent $event */
       $event = $factory->createEvent($variables);
-      $this->dispatcher->dispatch($event::name() . '.' . $entity->getEntityTypeId(), $event);
-    }
-  }
-
-  /**
-   * Create and dispatch the entity events.
-   *
-   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
-   *   The entity object.
-   * @param array $variables
-   *   Variables.
-   */
-  public function createAndDispatchEntityTypeBundleEvent(ContentEntityInterface $entity, array &$variables) {
-    $factory = $this->mapper->getFactory('entity');
-    if ($factory) {
-      $event = $factory->createEvent($variables);
-      $this->dispatcher->dispatch($event::name() . '.' . $entity->getEntityTypeId() . '.' . $entity->bundle(), $event);
+      $this->dispatcher->dispatch($event->getComposedName(), $event);
     }
   }
 
@@ -97,11 +82,11 @@ final class PreprocessEventService {
    * @param array $variables
    *   The variables array.
    *
-   * @return \Drupal\Core\Entity\ContentEntityInterface|null
-   *   An entity or null when no entity is found in variables.
+   * @return bool
+   *   A boolean indicating whether an entity hook is called.
    */
-  public function getEntity($hook, array &$variables) {
-    return isset($variables['elements']['#entity_type']) && isset($variables['elements']['#' . $hook]) && ($variables['elements']['#' . $hook] instanceof EntityInterface) ? $variables['elements']['#' . $hook] : NULL;
+  public function isEntityHook($hook, array &$variables) {
+    return isset($variables['elements']['#entity_type']) && isset($variables['elements']['#' . $hook]) && ($variables['elements']['#' . $hook] instanceof ContentEntityInterface) ? TRUE : FALSE;
   }
 
 }

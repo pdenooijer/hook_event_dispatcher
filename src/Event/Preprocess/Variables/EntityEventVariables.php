@@ -14,7 +14,7 @@ class EntityEventVariables extends AbstractEventVariables {
    *   EckEntity.
    */
   public function getEntity() {
-    return $this->variables[$this->getEntityType()];
+    return $this->get($this->getEntityType());
   }
 
   /**
@@ -24,7 +24,8 @@ class EntityEventVariables extends AbstractEventVariables {
    *   Entity type.
    */
   public function getEntityType() {
-    return $this->variables['elements']['#entity_type'];
+    $elements = $this->get('elements');
+    return $elements['#entity_type'];
   }
 
   /**
@@ -34,7 +35,8 @@ class EntityEventVariables extends AbstractEventVariables {
    *   Entity type.
    */
   public function getEntityBundle() {
-    return $this->getEntity()->bundle();
+    $elements = $this->get('elements');
+    return $elements['#bundle'];
   }
 
   /**
@@ -44,7 +46,7 @@ class EntityEventVariables extends AbstractEventVariables {
    *   Entity type.
    */
   public function getViewMode() {
-    return $this->variables->get('view_mode');
+    return $this->get('view_mode');
   }
 
 }

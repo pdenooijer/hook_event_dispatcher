@@ -165,16 +165,27 @@ final class FactoryMapperTest extends UnitTestCase {
    * Test a EntityPreprocessEvent.
    */
   public function testEntityEvent() {
+    $entity = $this->getMockForAbstractClass('\Drupal\Core\Entity\ContentEntityInterface');
+
+    $entity
+      ->expects($this->any())
+      ->method('getEntityTypeId')
+      ->willReturn('test_type');
+
     $variablesArray = $this->createVariablesArray();
     $variablesArray['elements']['#entity_type'] = 'test_type';
-    $variablesArray['test_type'] = new \stdClass();
+    $variablesArray['elements']['#bundle'] = 'test_bundle';
+    $variablesArray['test_type'] = $entity;
+    $variablesArray['view_mode'] = 'test_view';
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EntityEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(EntityPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(EntityEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
-    $this->assertInstanceOf(\stdClass::class, $variables->getEntity());
+    $this->assertInstanceOf('\Drupal\Core\Entity\ContentEntityInterface', $variables->getEntity());
     $this->assertEquals('test_type', $variables->getEntityType());
+    $this->assertEquals('test_bundle', $variables->getEntityBundle());
+    $this->assertEquals('test_view', $variables->getViewMode());
   }
 
   /**
