@@ -203,10 +203,39 @@ final class ServiceTest extends UnitTestCase {
    *   Event class name.
    */
   private function createAndAssertEntityEvent($hook, $class) {
+    $entityClass = '\Drupal\Core\Entity\ContentEntityInterface';
+    $entityType = 'test_type';
+    $entityBundle = 'test_bundle';
+    $entityViewMode = 'test_view';
+
+    $entity = $this->getMockForAbstractClass($entityClass);
+    $entity
+      ->expects($this->any())
+      ->method('bundle')
+      ->willReturn($entityBundle);
+
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['elements']['#entity_type'] = $entityType;
+    $variablesArray['view_mode'] = $entityViewMode;
+    $variablesArray[$entityType] = $entity;
+
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent $class */
-    $this->service->createAndDispatchEntityEvent($hook, $this->variables);
+    $this->service->createAndDispatchEntityEvent($hook, $variablesArray);
     $this->assertContains($class::name(), $this->dispatcher->getLastEventName());
     $this->assertInstanceOf($class, $this->dispatcher->getLastEvent());
+  }
+
+  /**
+   * Create the variables array.
+   *
+   * @return array
+   *   Variables array.
+   */
+  private function createVariablesArray() {
+    return [
+      'test' => 'success',
+      'reference' => 'first',
+    ];
   }
 
 }

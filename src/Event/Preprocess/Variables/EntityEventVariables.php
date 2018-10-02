@@ -24,8 +24,7 @@ class EntityEventVariables extends AbstractEventVariables {
    *   Entity type.
    */
   public function getEntityType() {
-    $elements = $this->get('elements');
-    return $elements['#entity_type'];
+    return $this->get('elements')['#entity_type'];
   }
 
   /**
@@ -35,8 +34,7 @@ class EntityEventVariables extends AbstractEventVariables {
    *   Entity type.
    */
   public function getEntityBundle() {
-    $elements = $this->get('elements');
-    return $elements['#bundle'];
+    return $this->getEntity()->bundle();
   }
 
   /**
