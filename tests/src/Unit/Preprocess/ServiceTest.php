@@ -182,6 +182,27 @@ final class ServiceTest extends UnitTestCase {
   }
 
   /**
+   * Test entity hook detection.
+   */
+  public function testIsEntityHook() {
+    $entityClass = '\Drupal\Core\Entity\ContentEntityInterface';
+    $entityType = 'test_type';
+    $entityBundle = 'test_bundle';
+
+    $entity = $this->getMockForAbstractClass($entityClass);
+    $entity
+      ->expects($this->any())
+      ->method('bundle')
+      ->willReturn($entityBundle);
+
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['elements']['#entity_type'] = $entityType;
+    $variablesArray[$entityType] = $entity;
+
+    $this->assertEquals(TRUE, $this->service->isEntityHook($variablesArray));
+  }
+
+  /**
    * Create and assert the given event class.
    *
    * @param string $class

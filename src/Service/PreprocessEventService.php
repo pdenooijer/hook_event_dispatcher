@@ -77,16 +77,14 @@ final class PreprocessEventService {
    * and also validate they contain an object implementing the
    * entity interface. This way we are sure an entity hook is being called.
    *
-   * @param string $hook
-   *   The hook being called.
    * @param array $variables
    *   The variables array.
    *
    * @return bool
    *   A boolean indicating whether an entity hook is called.
    */
-  public function isEntityHook($hook, array &$variables) {
-    return isset($variables['elements']['#entity_type']) && isset($variables['elements']['#' . $hook]) && ($variables['elements']['#' . $hook] instanceof ContentEntityInterface) ? TRUE : FALSE;
+  public function isEntityHook(array &$variables) {
+    return isset($variables['elements']['#entity_type']) && isset($variables[$variables['elements']['#entity_type']]) && ($variables[$variables['elements']['#entity_type']] instanceof ContentEntityInterface) ? TRUE : FALSE;
   }
 
 }

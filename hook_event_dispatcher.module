@@ -223,7 +223,7 @@ function hook_event_dispatcher_preprocess(&$variables, $hook) {
   $service->createAndDispatchKnownEvent($hook, $variables);
 
   /* @var \Drupal\Core\Entity\ContentEntityInterface|null $entity */
-  $entity = $service->isEntityHook($hook, $variables);
+  $entity = $service->isEntityHook($variables);
   if ($entity) {
     $service->createAndDispatchEntityEvent('entity', $variables);
     $service->createAndDispatchEntityEvent('entity_bundle', $variables);
