@@ -255,8 +255,8 @@ final class ServiceTest extends UnitTestCase {
    */
   public function testNotMappingEvent() {
     $this->service->createAndDispatchKnownEvents('NoneExistingHook', $this->variables);
-    $this->assertEquals(NULL, $this->dispatcher->getLastEventName());
-    $this->assertEquals(NULL, $this->dispatcher->getLastEvent());
+    $this->assertEquals([], $this->dispatcher->getEventNames());
+    $this->assertEquals([], $this->dispatcher->getEvents());
   }
 
   /**
