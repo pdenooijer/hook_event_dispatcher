@@ -51,14 +51,4 @@ abstract class AbstractPreprocessEvent extends Event implements PreprocessEventI
     return $this->variables;
   }
 
-  /**
-   * Get the composed hook name.
-   *
-   * @return string
-   *   Hook name.
-   */
-  public function getComposedName() {
-    return self::name();
-  }
-
 }

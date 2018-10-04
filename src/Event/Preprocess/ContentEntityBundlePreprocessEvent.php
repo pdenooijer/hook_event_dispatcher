@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 /**
  * Class EntityPreprocessEvent.
  */
-class ContentEntityBundlePreprocessEvent extends AbstractPreprocessEvent {
+class ContentEntityBundlePreprocessEvent extends AbstractPreprocessEvent implements ComposedPreprocessEventInterface {
 
   /**
    * Get the hook name.
