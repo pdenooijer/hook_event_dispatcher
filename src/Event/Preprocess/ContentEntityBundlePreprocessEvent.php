@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 /**
  * Class EntityPreprocessEvent.
  */
-final class EntityPreprocessEvent extends AbstractPreprocessEvent {
+class ContentEntityBundlePreprocessEvent extends AbstractPreprocessEvent {
 
   /**
    * Get the hook name.
@@ -14,7 +14,7 @@ final class EntityPreprocessEvent extends AbstractPreprocessEvent {
    *   Hook name.
    */
   public static function getHook() {
-    return 'entity';
+    return 'entity_bundle';
   }
 
   /**
@@ -24,9 +24,9 @@ final class EntityPreprocessEvent extends AbstractPreprocessEvent {
    *   Hook name.
    */
   public function getComposedName() {
-    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EntityEventVariables $vars */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ContentEntityEventVariables $vars */
     $vars = $this->getVariables();
-    return self::name() . '.' . $vars->getEntityType();
+    return self::name() . '.' . $vars->getEntityType() . '.' . $vars->getEntityBundle();
   }
 
 }

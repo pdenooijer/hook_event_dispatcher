@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 /**
  * Class EntityEventVariables.
  */
-class EntityEventVariables extends AbstractEventVariables {
+class ContentEntityEventVariables extends AbstractEventVariables {
 
   /**
    * Get the Entity.

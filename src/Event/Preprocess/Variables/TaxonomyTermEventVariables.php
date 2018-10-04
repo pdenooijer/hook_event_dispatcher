@@ -7,7 +7,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
  *
  * @package Drupal\preprocess_event\Variables
  */
-class TaxonomyTermEventVariables extends AbstractEventVariables {
+class TaxonomyTermEventVariables extends ContentEntityEventVariables {
 
   /**
    * Get the TaxonomyTermEntity.

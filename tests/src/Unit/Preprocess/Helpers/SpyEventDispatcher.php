@@ -12,18 +12,18 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 final class SpyEventDispatcher implements EventDispatcherInterface {
 
   /**
-   * Event name.
+   * An array of events dispatched.
    *
-   * @var string
+   * @var \Symfony\Component\EventDispatcher\Event[]
    */
-  private $eventName;
+  private $eventArray = [];
 
   /**
-   * Event.
+   * An array of event names dispatched.
    *
-   * @var \Symfony\Component\EventDispatcher\Event
+   * @var array
    */
-  private $event;
+  private $eventNameArray = [];
 
   /**
    * Mocking an event dispatch, saving the event.
@@ -31,12 +31,32 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    * @inheritdoc
    */
   public function dispatch($eventName, Event $event = NULL) {
-    if ($this->eventName !== NULL || $this->event !== NULL) {
-      throw new \BadMethodCallException('SpyEventDispatcher got called twice');
-    }
 
-    $this->eventName = $eventName;
-    $this->event = $event;
+    if (in_array($eventName, $this->eventNameArray) || in_array($event, $this->eventArray)) {
+      throw new \BadMethodCallException('SpyEventDispatcher got called twice, for the same event');
+    }
+    $this->eventNameArray[] = $eventName;
+    $this->eventArray[] = $event;
+  }
+
+  /**
+   * Get the all event names.
+   *
+   * @return array
+   *   All dispatched event name.
+   */
+  public function getEventNames() {
+    return $this->eventNameArray;
+  }
+
+  /**
+   * Get the all the dispatched events.
+   *
+   * @return array
+   *   All dispatched events.
+   */
+  public function getEvents() {
+    return $this->eventArray;
   }
 
   /**

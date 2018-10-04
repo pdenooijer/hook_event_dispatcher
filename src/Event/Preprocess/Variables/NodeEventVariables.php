@@ -7,7 +7,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
  *
  * @package Drupal\hook_event_dispatcher
  */
-class NodeEventVariables extends AbstractEventVariables {
+class NodeEventVariables extends ContentEntityEventVariables {
 
   /**
    * Get the node.

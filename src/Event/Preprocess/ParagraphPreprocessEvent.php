@@ -7,7 +7,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
  *
  * @package Drupal\hook_event_dispatcher\Event\Preprocess
  */
-final class ParagraphPreprocessEvent extends AbstractPreprocessEvent {
+final class ParagraphPreprocessEvent extends ContentEntityPreprocessEvent {
 
   /**
    * {@inheritdoc}
