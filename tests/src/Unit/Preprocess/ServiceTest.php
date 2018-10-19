@@ -86,7 +86,22 @@ final class ServiceTest extends UnitTestCase {
    * Test a EckEntityPreprocessEvent.
    */
   public function testEckEntityEvent() {
-    $this->createAndAssertEvent(EckEntityPreprocessEvent::class, EckEntityPreprocessEvent::getHook(), [], EckEntityPreprocessEvent::name());
+    $hook = EckEntityPreprocessEvent::getHook();
+    $entityBundle = 'test_bundle';
+    $entityViewMode = 'test_view';
+
+    $entity = $this->getMockForAbstractClass(ContentEntityInterface::class);
+    $entity
+      ->expects($this->any())
+      ->method('bundle')
+      ->willReturn($entityBundle);
+
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['elements']['#entity_type'] = $hook;
+    $variablesArray['view_mode'] = $entityViewMode;
+    $variablesArray[$hook] = $entity;
+
+    $this->createAndAssertEvent(EckEntityPreprocessEvent::class, $hook, $variablesArray, EckEntityPreprocessEvent::name(), 2);
   }
 
   /**
