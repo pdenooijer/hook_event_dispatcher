@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 /**
  * Class ParagraphEventVariables.
  */
-class ParagraphEventVariables extends AbstractEventVariables {
+class ParagraphEventVariables extends ContentEntityEventVariables {
 
   /**
    * Get the paragraph object.

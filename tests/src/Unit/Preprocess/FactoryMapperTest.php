@@ -6,6 +6,8 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\CommentPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\ContentEntityPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\ContentEntityBundlePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
@@ -19,6 +21,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariabl
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ContentEntityEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FieldEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FormEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\HtmlEventVariables;
@@ -35,6 +38,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
 
 /**
  * Class FactoryMapperTest.
@@ -157,6 +161,64 @@ final class FactoryMapperTest extends UnitTestCase {
     $this->assertAbstractEventVariables($variables);
     $this->assertInstanceOf(\stdClass::class, $variables->getEntity());
     $this->assertEquals('test_type', $variables->getEntityType());
+  }
+
+  /**
+   * Test a EntityPreprocessEvent.
+   */
+  public function testEntityEvent() {
+    $entityType = 'test_type';
+    $entityBundle = 'test_bundle';
+    $entityViewMode = 'test_view';
+
+    $entity = $this->getMockForAbstractClass(ContentEntityInterface::class);
+    $entity
+      ->expects($this->any())
+      ->method('bundle')
+      ->willReturn($entityBundle);
+
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['elements']['#entity_type'] = $entityType;
+    $variablesArray['view_mode'] = $entityViewMode;
+    $variablesArray[$entityType] = $entity;
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ContentEntityEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ContentEntityPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ContentEntityEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+    $this->assertInstanceOf(ContentEntityInterface::class, $variables->getEntity());
+    $this->assertEquals($entityType, $variables->getEntityType());
+    $this->assertEquals($entityBundle, $variables->getEntityBundle());
+    $this->assertEquals($entityViewMode, $variables->getViewMode());
+  }
+
+  /**
+   * Test a EntityBundlePreprocessEvent.
+   */
+  public function testEntityBundleEvent() {
+    $entityType = 'test_type';
+    $entityBundle = 'test_bundle';
+    $entityViewMode = 'test_view';
+
+    $entity = $this->getMockForAbstractClass(ContentEntityInterface::class);
+    $entity
+      ->expects($this->any())
+      ->method('bundle')
+      ->willReturn($entityBundle);
+
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['elements']['#entity_type'] = $entityType;
+    $variablesArray['view_mode'] = $entityViewMode;
+    $variablesArray[$entityType] = $entity;
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ContentEntityEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ContentEntityBundlePreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ContentEntityEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+    $this->assertInstanceOf(ContentEntityInterface::class, $variables->getEntity());
+    $this->assertEquals($entityType, $variables->getEntityType());
+    $this->assertEquals($entityBundle, $variables->getEntityBundle());
+    $this->assertEquals($entityViewMode, $variables->getViewMode());
   }
 
   /**
