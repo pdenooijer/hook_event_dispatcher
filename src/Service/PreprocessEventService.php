@@ -46,11 +46,12 @@ final class PreprocessEventService {
    *   Variables.
    */
   public function createAndDispatchKnownEvents($hook, array &$variables) {
-    $this->createAndDispatchKnownEvent($hook, $variables);
     if ($this->isContentEntityHook($variables)) {
       $this->createAndDispatchEntityEvent($hook, $variables);
       $this->createAndDispatchEntityBundleEvent($variables);
+      return;
     }
+    $this->createAndDispatchKnownEvent($hook, $variables);
   }
 
   /**
@@ -78,7 +79,11 @@ final class PreprocessEventService {
    *   Variables.
    */
   private function createAndDispatchEntityEvent($hook, array &$variables) {
-    $factory = $factory = $this->mapper->getFactory($hook) ? NULL : $this->mapper->getFactory('entity');
+    // To support backwards compatibility we check for a specific
+    // factory first before use the general entity factory.
+    // This way the preprocess events that were already present before this
+    // change can just override the getComposedName() function.
+    $factory = $this->mapper->getFactory($hook) ?: $this->mapper->getFactory('entity');
     if ($factory) {
       $event = $factory->createEvent($variables);
       $this->dispatcher->dispatch($event->getComposedName(), $event);

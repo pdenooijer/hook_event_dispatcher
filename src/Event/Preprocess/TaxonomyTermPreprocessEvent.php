@@ -19,4 +19,14 @@ final class TaxonomyTermPreprocessEvent extends ContentEntityPreprocessEvent {
     return 'taxonomy_term';
   }
 
+  /**
+   * Get the hook name.
+   *
+   * @return string
+   *   Hook name.
+   */
+  public function getComposedName() {
+    return self::name();
+  }
+
 }

@@ -17,4 +17,14 @@ final class NodePreprocessEvent extends ContentEntityPreprocessEvent {
     return 'node';
   }
 
+  /**
+   * Get the hook name.
+   *
+   * @return string
+   *   Hook name.
+   */
+  public function getComposedName() {
+    return self::name();
+  }
+
 }

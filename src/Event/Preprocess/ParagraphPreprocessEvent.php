@@ -16,4 +16,14 @@ final class ParagraphPreprocessEvent extends ContentEntityPreprocessEvent {
     return 'paragraph';
   }
 
+  /**
+   * Get the hook name.
+   *
+   * @return string
+   *   Hook name.
+   */
+  public function getComposedName() {
+    return self::name();
+  }
+
 }
