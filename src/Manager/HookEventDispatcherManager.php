@@ -31,13 +31,7 @@ final class HookEventDispatcherManager implements HookEventDispatcherManagerInte
   }
 
   /**
-   * Registers an event dispatcher for given entity.
-   *
-   * @param \Drupal\hook_event_dispatcher\Event\EventInterface $event
-   *   The event.
-   *
-   * @return \Symfony\Component\EventDispatcher\Event
-   *   The event.
+   * {@inheritdoc}
    */
   public function register(EventInterface $event) {
     return $this->eventDispatcher->dispatch($event->getDispatcherType(), $event);

@@ -10,10 +10,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent;
 class ExamplePreprocessEvent extends AbstractPreprocessEvent {
 
   /**
-   * Get the hook name.
-   *
-   * @return string
-   *   Hook name.
+   * {@inheritdoc}
    */
   public static function getHook() {
     return 'example';

@@ -11,23 +11,14 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVar
 final class TaxonomyTermPreprocessEventFactory implements PreprocessEventFactoryInterface {
 
   /**
-   * Create the PreprocessEvent with EventVariables embedded.
-   *
-   * @param array $variables
-   *   Variables.
-   *
-   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\TaxonomyTermPreprocessEvent
-   *   Created event.
+   * {@inheritdoc}
    */
   public function createEvent(array &$variables) {
     return new TaxonomyTermPreprocessEvent(new TaxonomyTermEventVariables($variables));
   }
 
   /**
-   * Get the Event hook name.
-   *
-   * @return string
-   *   The hook name.
+   * {@inheritdoc}
    */
   public function getEventHook() {
     return TaxonomyTermPreprocessEvent::getHook();

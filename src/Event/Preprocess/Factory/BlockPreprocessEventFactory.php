@@ -11,23 +11,14 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
 final class BlockPreprocessEventFactory implements PreprocessEventFactoryInterface {
 
   /**
-   * Create the PreprocessEvent with EventVariables embedded.
-   *
-   * @param array $variables
-   *   Variables.
-   *
-   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent
-   *   Created event.
+   * {@inheritdoc}
    */
   public function createEvent(array &$variables) {
     return new BlockPreprocessEvent(new BlockEventVariables($variables));
   }
 
   /**
-   * Get the Event hook name.
-   *
-   * @return string
-   *   The hook name.
+   * {@inheritdoc}
    */
   public function getEventHook() {
     return BlockPreprocessEvent::getHook();

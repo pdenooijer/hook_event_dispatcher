@@ -27,10 +27,7 @@ class ExamplePreprocessEventFactory implements PreprocessEventFactoryInterface {
   }
 
   /**
-   * Get the Event hook name.
-   *
-   * @return string
-   *   The hook name.
+   * {@inheritdoc}
    */
   public function getEventHook() {
     return ExamplePreprocessEvent::getHook();
