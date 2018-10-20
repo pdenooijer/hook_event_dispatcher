@@ -4,78 +4,78 @@ services:
     arguments: ['@event_dispatcher']
 
   preprocess_event.service:
-    class: \Drupal\hook_event_dispatcher\Service\PreprocessEventService
+    class: Drupal\hook_event_dispatcher\Service\PreprocessEventService
     arguments: [ '@event_dispatcher', '@preprocess_event.factory_mapper' ]
 
   preprocess_event.factory_mapper:
-    class: \Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper
+    class: Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper
 
   preprocess_event.factory.block:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\BlockPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\BlockPreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.comment:
-      class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\CommentPreprocessEventFactory
-      tags:
-        -  { name: preprocess_event_default_factory }
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\CommentPreprocessEventFactory
+    tags:
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.eck_entity:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\EckEntityPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\EckEntityPreprocessEventFactory
     tags:
-      - { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.field:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\FieldPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\FieldPreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.form:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\FormPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\FormPreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.html:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\HtmlPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\HtmlPreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.image:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ImagePreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ImagePreprocessEventFactory
     tags:
-        -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.node:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\NodePreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\NodePreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.page:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\PagePreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\PagePreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.taxonomy_term:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\TaxonomyTermPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\TaxonomyTermPreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.username:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\UsernamePreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\UsernamePreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.view_field:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ViewFieldPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ViewFieldPreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.view:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ViewPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ViewPreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
 
   preprocess_event.factory.paragraph:
-    class: \Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ParagraphPreprocessEventFactory
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ParagraphPreprocessEventFactory
     tags:
-      -  { name: preprocess_event_default_factory }
+    - { name: preprocess_event_default_factory }
