@@ -6,8 +6,6 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class EntityInsertEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Entity
  */
 class BlockBuildAlterEvent extends BaseBlockEvent {
 

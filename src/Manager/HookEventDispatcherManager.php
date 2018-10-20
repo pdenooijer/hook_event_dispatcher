@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class HookEventDispatcherManager.
  *
- * @package Drupal\hook_event_dispatcher\Manager
- *
  * Wrapper class for the external dispatcher dependency. If this ever changes
  * we only have to change it once.
  */
@@ -33,13 +31,7 @@ final class HookEventDispatcherManager implements HookEventDispatcherManagerInte
   }
 
   /**
-   * Registers an event dispatcher for given entity.
-   *
-   * @param \Drupal\hook_event_dispatcher\Event\EventInterface $event
-   *   The event.
-   *
-   * @return \Symfony\Component\EventDispatcher\Event
-   *   The event.
+   * {@inheritdoc}
    */
   public function register(EventInterface $event) {
     return $this->eventDispatcher->dispatch($event->getDispatcherType(), $event);

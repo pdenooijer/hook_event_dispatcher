@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * Class AbstractPreprocessEvent.
  *
- * @package Drupal\hook_event_dispatcher\Event\Preprocess
- *
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
 abstract class AbstractPreprocessEvent extends Event implements PreprocessEventInterface {
@@ -32,20 +30,14 @@ abstract class AbstractPreprocessEvent extends Event implements PreprocessEventI
   }
 
   /**
-   * Get the Event name.
-   *
-   * @return string
-   *   Event name.
+   * {@inheritdoc}
    */
   public static function name() {
     return static::DISPATCH_NAME_PREFIX . static::getHook();
   }
 
   /**
-   * Get the template variables.
-   *
-   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables
-   *   Template variables.
+   * {@inheritdoc}
    */
   public function getVariables() {
     return $this->variables;

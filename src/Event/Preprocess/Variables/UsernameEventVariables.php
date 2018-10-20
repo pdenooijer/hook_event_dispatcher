@@ -4,8 +4,6 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 
 /**
  * Class UsernameEventVariables.
- *
- * @package Drupal\hook_event_dispatcher\Event\Preprocess\Variables
  */
 class UsernameEventVariables extends AbstractEventVariables {
 

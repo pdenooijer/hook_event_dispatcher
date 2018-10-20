@@ -49,7 +49,7 @@ final class Token {
    *   The group name, like 'node'.
    * @param string $token
    *   The token, like 'url' or 'id'.
-   * @param string|MarkupInterface $name
+   * @param string|\Drupal\Component\Render\MarkupInterface $name
    *   The print-able name of the type.
    *
    * @return \Drupal\hook_event_dispatcher\Value\Token

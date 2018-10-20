@@ -13,8 +13,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class EntityInsertEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\EntityField
  */
 class EntityFieldAccessEvent extends Event implements EventInterface {
 

@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class ThemeEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Theme
  */
 final class ThemeEvent extends Event implements EventInterface {
 

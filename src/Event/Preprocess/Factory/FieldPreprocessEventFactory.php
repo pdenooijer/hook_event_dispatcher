@@ -11,23 +11,14 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FieldEventVariables;
 final class FieldPreprocessEventFactory implements PreprocessEventFactoryInterface {
 
   /**
-   * Create the PreprocessEvent with EventVariables embedded.
-   *
-   * @param array $variables
-   *   Variables.
-   *
-   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent
-   *   Created event.
+   * {@inheritdoc}
    */
   public function createEvent(array &$variables) {
     return new FieldPreprocessEvent(new FieldEventVariables($variables));
   }
 
   /**
-   * Get the Event hook name.
-   *
-   * @return string
-   *   The hook name.
+   * {@inheritdoc}
    */
   public function getEventHook() {
     return FieldPreprocessEvent::getHook();

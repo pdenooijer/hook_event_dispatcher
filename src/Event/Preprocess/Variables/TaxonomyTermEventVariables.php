@@ -4,8 +4,6 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 
 /**
  * Class TaxonomyTermEventVariables.
- *
- * @package Drupal\preprocess_event\Variables
  */
 class TaxonomyTermEventVariables extends AbstractEventVariables {
 

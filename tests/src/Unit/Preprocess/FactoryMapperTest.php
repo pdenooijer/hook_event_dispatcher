@@ -99,7 +99,7 @@ final class FactoryMapperTest extends UnitTestCase {
 
     $classNames = [];
     foreach ($files as $file) {
-      $classNames[] = '\\Drupal\\hook_event_dispatcher\\Event\\Preprocess\\Factory\\' . substr($file, 0, -4);
+      $classNames[] = 'Drupal\\hook_event_dispatcher\\Event\\Preprocess\\Factory\\' . substr($file, 0, -4);
     }
     return $classNames;
   }

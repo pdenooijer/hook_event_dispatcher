@@ -6,16 +6,11 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent;
 
 /**
  * Class ExamplePreprocessEvent.
- *
- * @package Drupal\preprocess_example_module\Event\
  */
 class ExamplePreprocessEvent extends AbstractPreprocessEvent {
 
   /**
-   * Get the hook name.
-   *
-   * @return string
-   *   Hook name.
+   * {@inheritdoc}
    */
   public static function getHook() {
     return 'example';

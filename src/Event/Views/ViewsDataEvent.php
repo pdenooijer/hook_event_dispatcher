@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class ViewsDataEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Views
  */
 final class ViewsDataEvent extends Event implements EventInterface {
 

@@ -8,10 +8,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 final class FormPreprocessEvent extends AbstractPreprocessEvent {
 
   /**
-   * Get the hook name.
-   *
-   * @return string
-   *   Hook name.
+   * {@inheritdoc}
    */
   public static function getHook() {
     return 'form';

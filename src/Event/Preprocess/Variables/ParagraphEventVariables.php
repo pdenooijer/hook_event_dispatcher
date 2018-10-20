@@ -3,7 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 
 /**
- * Class PageEventVariables.
+ * Class ParagraphEventVariables.
  */
 class ParagraphEventVariables extends AbstractEventVariables {
 

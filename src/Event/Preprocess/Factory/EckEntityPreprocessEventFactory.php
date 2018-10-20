@@ -11,23 +11,14 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariab
 final class EckEntityPreprocessEventFactory implements PreprocessEventFactoryInterface {
 
   /**
-   * Create the PreprocessEvent with the Variables object embedded.
-   *
-   * @param array $variables
-   *   Variables.
-   *
-   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent
-   *   Created event.
+   * {@inheritdoc}
    */
   public function createEvent(array &$variables) {
     return new EckEntityPreprocessEvent(new EckEntityEventVariables($variables));
   }
 
   /**
-   * Get the Event hook name.
-   *
-   * @return string
-   *   The hook name.
+   * {@inheritdoc}
    */
   public function getEventHook() {
     return EckEntityPreprocessEvent::getHook();
