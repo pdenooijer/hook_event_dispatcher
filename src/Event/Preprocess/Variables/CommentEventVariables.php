@@ -4,8 +4,6 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 
 /**
  * Class CommentEventVariables.
- *
- * @package Drupal\hook_event_dispatcher
  */
 class CommentEventVariables extends AbstractEventVariables {
 

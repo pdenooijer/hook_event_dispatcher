@@ -8,8 +8,6 @@ use Drupal\preprocess_example_module\Event\ExamplePreprocessEvent;
 
 /**
  * Class ExamplePreprocessEventFactory.
- *
- * @package Drupal\preprocess_example_module\Event\Factory
  */
 class ExamplePreprocessEventFactory implements PreprocessEventFactoryInterface {
 

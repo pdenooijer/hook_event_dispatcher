@@ -9,8 +9,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class EntityBaseFieldInfoEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\EntityType
  */
 class EntityBaseFieldInfoEvent extends Event implements EventInterface {
 

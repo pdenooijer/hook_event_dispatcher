@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class EntityExtraFieldInfoEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\EntityExtra
  */
 class EntityExtraFieldInfoEvent extends Event implements EventInterface {
 

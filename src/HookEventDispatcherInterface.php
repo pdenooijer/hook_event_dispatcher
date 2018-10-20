@@ -4,8 +4,6 @@ namespace Drupal\hook_event_dispatcher;
 
 /**
  * Interface HookEventDispatcherInterface.
- *
- * @package Drupal\hook_event_dispatcher
  */
 interface HookEventDispatcherInterface {
 

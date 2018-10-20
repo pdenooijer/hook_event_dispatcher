@@ -5,8 +5,6 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 /**
  * Class AbstractEventVariables.
  *
- * @package Drupal\hook_event_dispatcher\Event\Preprocess\Variables
- *
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
 abstract class AbstractEventVariables {

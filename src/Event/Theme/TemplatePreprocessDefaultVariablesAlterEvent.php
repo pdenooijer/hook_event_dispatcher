@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class TemplatePreprocessDefaultVariablesAlterEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Theme
  */
 final class TemplatePreprocessDefaultVariablesAlterEvent extends Event implements EventInterface {
 

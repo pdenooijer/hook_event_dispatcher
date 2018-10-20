@@ -6,8 +6,6 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class FormAlterEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Form
  */
 class FormAlterEvent extends BaseFormEvent {
 

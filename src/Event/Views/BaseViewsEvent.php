@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class BaseViewsEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Views
  */
 abstract class BaseViewsEvent extends Event implements EventInterface {
 

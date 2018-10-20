@@ -9,8 +9,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class UserLogoutEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\User
  */
 final class UserLogoutEvent extends Event implements EventInterface {
 

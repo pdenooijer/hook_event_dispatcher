@@ -6,8 +6,6 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent;
 
 /**
  * Class ExamplePreprocessEvent.
- *
- * @package Drupal\preprocess_example_module\Event\
  */
 class ExamplePreprocessEvent extends AbstractPreprocessEvent {
 

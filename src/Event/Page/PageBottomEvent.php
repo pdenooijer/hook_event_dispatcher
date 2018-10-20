@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class PageBottomEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Page
  */
 class PageBottomEvent extends Event implements EventInterface {
 

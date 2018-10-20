@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class BaseEntityEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Entity
  */
 abstract class BaseEntityEvent extends Event implements EventInterface {
 

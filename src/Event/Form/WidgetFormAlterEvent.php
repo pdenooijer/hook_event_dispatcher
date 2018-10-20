@@ -9,8 +9,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class WidgetFormAlterEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Form
  */
 class WidgetFormAlterEvent extends Event implements EventInterface {
 

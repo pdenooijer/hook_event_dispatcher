@@ -6,8 +6,6 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class ViewsPreBuildEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Views
  */
 class ViewsPreBuildEvent extends BaseViewsEvent {
 

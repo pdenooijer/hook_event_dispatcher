@@ -4,8 +4,6 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 
 /**
  * Class TaxonomyTermPreprocessEvent.
- *
- * @package Drupal\preprocess_event\Event
  */
 final class TaxonomyTermPreprocessEvent extends AbstractPreprocessEvent {
 

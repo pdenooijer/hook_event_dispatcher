@@ -7,8 +7,6 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVar
 
 /**
  * Class TaxonomyTermPreprocessEventFactory.
- *
- * @package Drupal\hook_event_dispatcher\Event\Preprocess\Factory
  */
 final class TaxonomyTermPreprocessEventFactory implements PreprocessEventFactoryInterface {
 

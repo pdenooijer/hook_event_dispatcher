@@ -4,8 +4,6 @@ namespace Drupal\hook_event_dispatcher\Event\Form;
 
 /**
  * Class WidgetTypeFormAlterEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Form
  */
 class WidgetTypeFormAlterEvent extends WidgetFormAlterEvent {
 

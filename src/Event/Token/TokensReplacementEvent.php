@@ -11,7 +11,6 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * Class TokensProvideEvent.
  *
- * @package Drupal\hook_event_dispatcher\Event\Token
  * @see hook_tokens
  */
 final class TokensReplacementEvent extends Event implements EventInterface {

@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class ExamplePreprocessorEventSubscriber.
- *
- * @package Drupal\ib_references\EventSubscriber
  */
 final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterface {
 
