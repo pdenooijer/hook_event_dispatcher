@@ -57,10 +57,10 @@ final class TokenType {
    */
   public static function create($type, $name) {
     $instance = new self();
-    if (!is_string($type)) {
+    if (!\is_string($type)) {
       throw new \UnexpectedValueException('Type should be a string');
     }
-    if (!is_string($name) && !$name instanceof MarkupInterface) {
+    if (!\is_string($name) && !$name instanceof MarkupInterface) {
       throw new \UnexpectedValueException('Name should be a string or an instance of MarkupInterface');
     }
     $instance->type = $type;
@@ -80,7 +80,7 @@ final class TokenType {
    * @throws \UnexpectedValueException
    */
   public function setDescription($description) {
-    if (!is_string($description) && !$description instanceof MarkupInterface) {
+    if (!\is_string($description) && !$description instanceof MarkupInterface) {
       throw new \UnexpectedValueException('Description should be a string or an instance of MarkupInterface');
     }
     $clone = clone $this;
@@ -100,7 +100,7 @@ final class TokenType {
    * @throws \UnexpectedValueException
    */
   public function setNeedsData($needsData) {
-    if ($needsData && !is_string($needsData)) {
+    if ($needsData && !\is_string($needsData)) {
       throw new \UnexpectedValueException('NeedsData should be a string');
     }
     $clone = clone $this;

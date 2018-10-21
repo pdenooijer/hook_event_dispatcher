@@ -25,7 +25,7 @@ final class PreprocessEventPass implements CompilerPassInterface {
     $factoryIds = $container->findTaggedServiceIds('preprocess_event_default_factory');
     $factoryIds += $container->findTaggedServiceIds('preprocess_event_factory');
 
-    foreach (array_keys($factoryIds) as $id) {
+    foreach (\array_keys($factoryIds) as $id) {
       $factoryMapper->addMethodCall(
         'addFactory',
         [new Reference($id)]
