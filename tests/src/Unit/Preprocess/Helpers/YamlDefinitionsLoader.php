@@ -44,7 +44,7 @@ final class YamlDefinitionsLoader {
   /**
    * YamlDefinitionsLoader constructor.
    */
-  protected function __construct() {
+  private function __construct() {
     $this->loadDefinitionsFromServicesYaml();
     $this->setUpFactoriesMapper();
   }
