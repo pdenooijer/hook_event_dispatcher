@@ -7,4 +7,4 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit;
  *
  * @package Drupal\Tests\hook_event_dispatcher\Unit
  */
-class TooManyEventsException extends \Exception {}
+class TooManyEventsException extends \RuntimeException {}
