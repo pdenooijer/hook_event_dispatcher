@@ -38,7 +38,7 @@ abstract class AbstractEventVariables {
    *   Value for variable BY VALUE.
    */
   public function get($name, $default = NULL) {
-    return array_key_exists($name, $this->variables) ? $this->variables[$name] : $default;
+    return \array_key_exists($name, $this->variables) ? $this->variables[$name] : $default;
   }
 
   /**

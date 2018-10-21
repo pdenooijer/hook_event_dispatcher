@@ -23,14 +23,14 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
 
 /**
- * Class PreprocessEventsTest.
+ * Class FactoryMapperOtherEventsTest.
  *
  * @group hook_event_dispatcher
  *
- * Testing all events gives expected PHPMD warnings.
+ * Testing the other events gives expected PHPMD warnings.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class FactoryMapperEventsTest extends UnitTestCase {
+final class FactoryMapperOtherEventsTest extends UnitTestCase {
 
   /**
    * Factory mapper.

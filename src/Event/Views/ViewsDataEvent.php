@@ -27,7 +27,7 @@ final class ViewsDataEvent extends Event implements EventInterface {
    * @see \hook_views_data()
    */
   public function addData(array $data) {
-    $this->data = array_merge_recursive($this->data, $data);
+    $this->data = \array_merge_recursive($this->data, $data);
   }
 
   /**

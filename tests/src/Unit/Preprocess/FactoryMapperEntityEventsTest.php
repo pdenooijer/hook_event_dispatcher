@@ -22,7 +22,7 @@ use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLo
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class PreprocessEntityEventsTest.
+ * Class FactoryMapperEntityEventsTest.
  *
  * @group hook_event_dispatcher
  *
