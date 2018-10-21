@@ -6,20 +6,18 @@ sudo: false
 language: php
 
 php:
-  - 5.6
-  - 7.1
+- 5.6
+- 7.1
 
 cache:
   directories:
-    - ~/.composer
+  - ~/.composer
 
-install: true
-
-before_script:
-  - composer install
+install:
+- composer install
 
 script:
-  - vendor/bin/parallel-lint --exclude vendor/ -e php,module,inc,install,profile,theme .
-  - vendor/bin/phpunit --configuration=phpunit.xml --coverage-text
-  - vendor/bin/phpcs --ignore=vendor/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 .
-  - vendor/bin/phpmd --exclude vendor/ --suffixes php,module,inc,install,profile,theme . text phpmd.xml
+- vendor/bin/parallel-lint --exclude vendor/ -e php,module,inc,install,profile,theme .
+- vendor/bin/phpunit --configuration=phpunit.xml --coverage-text
+- vendor/bin/phpcs --ignore=vendor/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 .
+- vendor/bin/phpmd --exclude vendor/ --suffixes php,module,inc,install,profile,theme . text phpmd.xml
