@@ -12,31 +12,40 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 final class SpyEventDispatcher implements EventDispatcherInterface {
 
   /**
-   * Event name.
+   * Events keyed by event name.
    *
-   * @var string
+   * @var \Symfony\Component\EventDispatcher\Event[]
    */
-  private $eventName;
+  private $events = [];
 
   /**
-   * Event.
+   * Event count.
    *
-   * @var \Symfony\Component\EventDispatcher\Event
+   * @var int
    */
-  private $event;
+  private $count = 1;
+
+  /**
+   * Set the expected event count.
+   *
+   * @param int $count
+   *   Event count.
+   */
+  public function setExpectedEventCount($count) {
+    $this->count = $count;
+  }
 
   /**
    * Mocking an event dispatch, saving the event.
    *
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function dispatch($eventName, Event $event = NULL) {
-    if ($this->eventName !== NULL || $this->event !== NULL) {
-      throw new \BadMethodCallException('SpyEventDispatcher got called twice');
+    if (\count($this->events) === $this->count) {
+      throw new \BadMethodCallException("SpyEventDispatcher got called more then {$this->count} time(s)");
     }
 
-    $this->eventName = $eventName;
-    $this->event = $event;
+    $this->events[$eventName] = $event;
   }
 
   /**
@@ -46,7 +55,8 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *   Last event name.
    */
   public function getLastEventName() {
-    return $this->eventName;
+    \end($this->events);
+    return \key($this->events);
   }
 
   /**
@@ -56,7 +66,17 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *   Last event.
    */
   public function getLastEvent() {
-    return $this->event;
+    return \end($this->events);
+  }
+
+  /**
+   * Get the events keyed by event name.
+   *
+   * @return \Symfony\Component\EventDispatcher\Event[]
+   *   Events keyed by event name.
+   */
+  public function getEvents() {
+    return $this->events;
   }
 
   /**

@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 /**
  * Class TaxonomyTermEventVariables.
  */
-class TaxonomyTermEventVariables extends AbstractEventVariables {
+class TaxonomyTermEventVariables extends AbstractEntityEventVariables {
 
   /**
    * Get the TaxonomyTermEntity.
@@ -13,8 +13,15 @@ class TaxonomyTermEventVariables extends AbstractEventVariables {
    * @return \Drupal\taxonomy\Entity\Term
    *   TaxonomyTermEntity.
    */
-  public function getEntity() {
+  public function getTerm() {
     return $this->variables['term'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getEntity() {
+    return $this->getTerm();
   }
 
 }

@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 /**
  * Class NodePreprocessEvent.
  */
-final class NodePreprocessEvent extends AbstractPreprocessEvent {
+final class NodePreprocessEvent extends AbstractPreprocessEntityEvent {
 
   /**
    * {@inheritdoc}
