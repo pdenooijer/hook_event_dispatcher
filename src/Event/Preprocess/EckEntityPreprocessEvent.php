@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 /**
  * Class EckEntityPreprocessEvent.
  */
-final class EckEntityPreprocessEvent extends AbstractPreprocessEvent {
+final class EckEntityPreprocessEvent extends AbstractPreprocessEntityEvent {
 
   /**
    * {@inheritdoc}

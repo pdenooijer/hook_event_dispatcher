@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 /**
  * Class CommentPreprocessEvent.
  */
-final class CommentPreprocessEvent extends AbstractPreprocessEvent {
+final class CommentPreprocessEvent extends AbstractPreprocessEntityEvent {
 
   /**
    * {@inheritdoc}

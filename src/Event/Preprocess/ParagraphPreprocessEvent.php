@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess;
 /**
  * Class ParagraphPreprocessEvent.
  */
-final class ParagraphPreprocessEvent extends AbstractPreprocessEvent {
+final class ParagraphPreprocessEvent extends AbstractPreprocessEntityEvent {
 
   /**
    * {@inheritdoc}

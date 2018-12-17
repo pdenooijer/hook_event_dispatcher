@@ -3,15 +3,19 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\UsernamePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FieldEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FormEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\HtmlEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
@@ -23,14 +27,14 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
 
 /**
- * Class FactoryMapperOtherEventsTest.
+ * Class OtherEventVariablesTest.
  *
  * @group hook_event_dispatcher
  *
  * Testing the other events gives expected PHPMD warnings.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class FactoryMapperOtherEventsTest extends UnitTestCase {
+final class OtherEventVariablesTest extends UnitTestCase {
 
   /**
    * Factory mapper.
@@ -44,6 +48,25 @@ final class FactoryMapperOtherEventsTest extends UnitTestCase {
    */
   public function setUp() {
     $this->mapper = YamlDefinitionsLoader::getInstance()->getMapper();
+  }
+
+  /**
+   * Test a BlockPreprocessEvent.
+   */
+  public function testBlockEvent() {
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['block'] = 'block';
+    $variablesArray['elements']['#id'] = 22;
+    $variablesArray['content']['test'] = ['success2'];
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(BlockEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+    $this->assertSame('block', $variables->getBlock());
+    $this->assertEquals(22, $variables->getId());
+    $this->assertEquals(['success2'], $variables->getContentChild('test'));
+    $this->assertEquals([], $variables->getContentChild('none-existing'));
   }
 
   /**
@@ -85,6 +108,18 @@ final class FactoryMapperOtherEventsTest extends UnitTestCase {
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\HtmlEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(HtmlPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(HtmlEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+  }
+
+  /**
+   * Test a ImagePreprocessEvent.
+   */
+  public function testImageEvent() {
+    $variablesArray = $this->createVariablesArray();
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ImagePreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ImageEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
   }
 

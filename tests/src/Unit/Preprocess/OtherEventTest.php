@@ -3,33 +3,25 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\CommentPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\TaxonomyTermPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\hook_event_dispatcher\Service\PreprocessEventService;
-use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\SpyEventDispatcher;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class ServiceTest.
+ * Class OtherEventTest.
  *
  * @group hook_event_dispatcher
- *
- * Testing all events gives expected PHPMD warnings.
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class ServiceTest extends UnitTestCase {
+final class OtherEventTest extends UnitTestCase {
 
   /**
    * PreprocessEventService.
@@ -53,7 +45,7 @@ final class ServiceTest extends UnitTestCase {
    * @var array
    *   Variables.
    */
-  private $variables = [];
+  private $variables;
 
   /**
    * {@inheritdoc}
@@ -62,6 +54,7 @@ final class ServiceTest extends UnitTestCase {
     $loader = YamlDefinitionsLoader::getInstance();
     $this->dispatcher = new SpyEventDispatcher();
     $this->service = new PreprocessEventService($this->dispatcher, $loader->getMapper());
+    $this->variables = [];
   }
 
   /**
@@ -69,20 +62,6 @@ final class ServiceTest extends UnitTestCase {
    */
   public function testBlockEvent() {
     $this->createAndAssertEvent(BlockPreprocessEvent::class);
-  }
-
-  /**
-   * Test a BlockPreprocessEvent.
-   */
-  public function testCommentEvent() {
-    $this->createAndAssertEvent(CommentPreprocessEvent::class);
-  }
-
-  /**
-   * Test a EckEntityPreprocessEvent.
-   */
-  public function testEckEntityEvent() {
-    $this->createAndAssertEvent(EckEntityPreprocessEvent::class);
   }
 
   /**
@@ -114,13 +93,6 @@ final class ServiceTest extends UnitTestCase {
   }
 
   /**
-   * Test a NodePreprocessEvent.
-   */
-  public function testNodeEvent() {
-    $this->createAndAssertEvent(NodePreprocessEvent::class);
-  }
-
-  /**
    * Test a PagePreprocessEvent.
    */
   public function testPageEvent() {
@@ -128,24 +100,10 @@ final class ServiceTest extends UnitTestCase {
   }
 
   /**
-   * Test a PagePreprocessEvent.
-   */
-  public function testTaxonomyTermEvent() {
-    $this->createAndAssertEvent(TaxonomyTermPreprocessEvent::class);
-  }
-
-  /**
    * Test a ViewFieldPreprocessEvent.
    */
   public function testViewFieldEvent() {
     $this->createAndAssertEvent(ViewFieldPreprocessEvent::class);
-  }
-
-  /**
-   * Test a ParagraphPreprocessEvent.
-   */
-  public function testParagraphEvent() {
-    $this->createAndAssertEvent(ParagraphPreprocessEvent::class);
   }
 
   /**
@@ -159,9 +117,8 @@ final class ServiceTest extends UnitTestCase {
    * Test a unknown hook.
    */
   public function testNotMappingEvent() {
-    $this->service->createAndDispatchKnownEvent('NoneExistingHook', $this->variables);
-    $this->assertEquals(NULL, $this->dispatcher->getLastEventName());
-    $this->assertEquals(NULL, $this->dispatcher->getLastEvent());
+    $this->service->createAndDispatchKnownEvents('NoneExistingHook', $this->variables);
+    $this->assertSame([], $this->dispatcher->getEvents());
   }
 
   /**
@@ -172,9 +129,12 @@ final class ServiceTest extends UnitTestCase {
    */
   private function createAndAssertEvent($class) {
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent $class */
-    $this->service->createAndDispatchKnownEvent($class::getHook(), $this->variables);
-    $this->assertEquals($class::name(), $this->dispatcher->getLastEventName());
-    $this->assertInstanceOf($class, $this->dispatcher->getLastEvent());
+    $this->service->createAndDispatchKnownEvents($class::getHook(), $this->variables);
+    $this->assertSame($class::name(), $this->dispatcher->getLastEventName());
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent $event */
+    $event = $this->dispatcher->getLastEvent();
+    $this->assertInstanceOf($class, $event);
+    $this->assertInstanceOf(AbstractEventVariables::class, $event->getVariables());
   }
 
 }

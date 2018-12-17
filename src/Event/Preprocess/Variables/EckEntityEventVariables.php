@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 /**
  * Class EckEntityEventVariables.
  */
-class EckEntityEventVariables extends AbstractEventVariables {
+class EckEntityEventVariables extends AbstractEntityEventVariables {
 
   /**
    * Get the EckEntity.
@@ -13,18 +13,29 @@ class EckEntityEventVariables extends AbstractEventVariables {
    * @return \Drupal\eck\Entity\EckEntity
    *   EckEntity.
    */
-  public function getEntity() {
-    return $this->variables['entity']['#entity'];
+  public function getEckEntity() {
+    return $this->variables['eck_entity'];
   }
 
   /**
-   * Get the EckEntity type.
-   *
-   * @return string
-   *   Entity type.
+   * {@inheritdoc}
    */
-  public function getEntityType() {
-    return $this->variables['entity']['#entity_type'];
+  public function getEntity() {
+    return $this->getEckEntity();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getEntityBundle() {
+    return $this->variables['bundle'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getViewMode() {
+    return $this->variables['elements']['#view_mode'];
   }
 
 }

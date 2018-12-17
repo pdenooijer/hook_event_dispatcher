@@ -3,33 +3,31 @@
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\CommentPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\EckEntityPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\NodePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ParagraphPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEntityEventInterface;
 use Drupal\hook_event_dispatcher\Event\Preprocess\TaxonomyTermPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
-use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEntityEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariables;
-use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVariables;
+use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\EntityMock;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class FactoryMapperEntityEventsTest.
+ * Class EntityEventVariablesTest.
  *
  * @group hook_event_dispatcher
  *
- * Testing all events gives expected PHPMD warnings.
+ * Testing all variables gives expected PHPMD warnings.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class FactoryMapperEntityEventsTest extends UnitTestCase {
+final class EntityEventVariablesTest extends UnitTestCase {
 
   /**
    * Factory mapper.
@@ -46,112 +44,119 @@ final class FactoryMapperEntityEventsTest extends UnitTestCase {
   }
 
   /**
-   * Test a BlockPreprocessEvent.
-   */
-  public function testBlockEvent() {
-    $variablesArray = $this->createVariablesArray();
-    $variablesArray['elements']['#id'] = 22;
-    $variablesArray['content']['test'] = ['success2'];
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables $variables */
-    $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(BlockEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
-    $this->assertEquals(22, $variables->getId());
-    $this->assertEquals(['success2'], $variables->getContentChild('test'));
-    $this->assertEquals([], $variables->getContentChild('none-existing'));
-  }
-
-  /**
    * Test a CommentPreprocessEvent.
    */
   public function testCommentEvent() {
+    $comment = new EntityMock('comment', 'comment_bundle', 'comment_view_mode');
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['comment'] = new \stdClass();
+    $variablesArray['comment'] = $comment;
+    $variablesArray['commented_entity'] = 'node';
+    $variablesArray['view_mode'] = $comment->getViewMode();
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(CommentPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(CommentEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
-    $this->assertInstanceOf(\stdClass::class, $variables->getComment());
+    $this->assertAbstractEntityEventVariables($variables, $comment);
+    $this->assertSame($comment, $variables->getComment());
+    $this->assertSame('node', $variables->getCommentedEntity());
   }
 
   /**
    * Test a EckEntityPreprocessEvent.
    */
   public function testEckEntityEvent() {
+    $eckEntity = new EntityMock('eck_entity', 'eck_entity_bundle', 'eck_entity_view_mode');
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['entity']['#entity'] = new \stdClass();
-    $variablesArray['entity']['#entity_type'] = 'test_type';
+
+    $variablesArray['eck_entity'] = $eckEntity;
+    $variablesArray['elements'] = [
+      '#view_mode' => $eckEntity->getViewMode(),
+    ];
+    $variablesArray['theme_hook_original'] = $eckEntity->getEntityType();
+    $variablesArray['bundle'] = $eckEntity->bundle();
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(EckEntityPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(EckEntityEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
-    $this->assertInstanceOf(\stdClass::class, $variables->getEntity());
-    $this->assertEquals('test_type', $variables->getEntityType());
-  }
-
-  /**
-   * Test a ImagePreprocessEvent.
-   */
-  public function testImageEvent() {
-    $variablesArray = $this->createVariablesArray();
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables $variables */
-    $variables = $this->getVariablesFromCreatedEvent(ImagePreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ImageEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
+    $this->assertAbstractEntityEventVariables($variables, $eckEntity);
+    $this->assertSame($eckEntity, $variables->getEckEntity());
   }
 
   /**
    * Test a NodePreprocessEvent.
    */
   public function testNodeEvent() {
+    $node = new EntityMock('node', 'node_bundle', 'node_view_mode');
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['node'] = new \stdClass();
+    $variablesArray['node'] = $node;
+    $variablesArray['theme_hook_original'] = $node->getEntityType();
+    $variablesArray['view_mode'] = $node->getViewMode();
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(NodePreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(NodeEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
-    $this->assertInstanceOf(\stdClass::class, $variables->getNode());
+    $this->assertAbstractEntityEventVariables($variables, $node);
+    $this->assertSame($node, $variables->getNode());
   }
 
   /**
    * Test a ParagraphPreprocessEvent.
    */
   public function testParagraphEvent() {
+    $paragraph = new EntityMock('paragraph', 'paragraph_bundle', 'paragraph_view_mode');
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['paragraph'] = 'paragraph';
+    $variablesArray['paragraph'] = $paragraph;
+    $variablesArray['theme_hook_original'] = $paragraph->getEntityType();
+    $variablesArray['view_mode'] = $paragraph->getViewMode();
 
     /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ParagraphEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ParagraphPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(ParagraphEventVariables::class, $variables);
-
-    $this->assertAbstractEventVariables($variables);
-    $this->assertEquals('paragraph', $variables->getParagraph());
+    $this->assertAbstractEntityEventVariables($variables, $paragraph);
+    $this->assertSame($paragraph, $variables->getParagraph());
   }
 
   /**
    * Test a TaxonomyTermPreprocessEvent.
    */
   public function testTaxonomyTermEvent() {
+    $term = new EntityMock('taxonomy_term', 'term_bundle', 'term_view_mode');
     $variablesArray = $this->createVariablesArray();
+    $variablesArray['term'] = $term;
+    $variablesArray['theme_hook_original'] = $term->getEntityType();
+    $variablesArray['view_mode'] = $term->getViewMode();
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(TaxonomyTermPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(TaxonomyTermEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
+    $this->assertAbstractEntityEventVariables($variables, $term);
+    $this->assertSame($term, $variables->getTerm());
   }
 
   /**
-   * Test the default event variable functions.
+   * Test the default entity event variable methods.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables $variables
+   * @param \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEntityEventVariables $variables
+   *   Variables object.
+   * @param \Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\EntityMock $entity
+   *   Entity mock.
+   */
+  private function assertAbstractEntityEventVariables(AbstractEntityEventVariables $variables, EntityMock $entity) {
+    $this->assertAbstractEventVariables($variables);
+
+    $this->assertSame($entity, $variables->getEntity());
+    $this->assertSame($entity->getEntityType(), $variables->getEntityType());
+    $this->assertSame($entity->bundle(), $variables->getEntityBundle());
+    $this->assertSame($entity->getViewMode(), $variables->getViewMode());
+  }
+
+  /**
+   * Test the default event variable methods.
+   *
+   * @param \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEntityEventVariables $variables
    *   Variables object.
    */
-  private function assertAbstractEventVariables(AbstractEventVariables $variables) {
+  private function assertAbstractEventVariables(AbstractEntityEventVariables $variables) {
     $this->assertEquals('success', $variables->get('test'));
     $this->assertEquals('default', $variables->get('test2', 'default'));
 
@@ -175,7 +180,7 @@ final class FactoryMapperEntityEventsTest extends UnitTestCase {
    * @param array $variablesArray
    *   Variables array.
    *
-   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables
+   * @return \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEntityEventVariables
    *   Variables object.
    */
   private function getVariablesFromCreatedEvent($class, array $variablesArray) {
@@ -186,11 +191,15 @@ final class FactoryMapperEntityEventsTest extends UnitTestCase {
     $factory = $this->mapper->getFactory($hook);
     $this->assertEquals($hook, $factory->getEventHook());
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEventInterface $event*/
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEntityEventInterface $event*/
     $event = $factory->createEvent($variablesArray);
+    $this->assertInstanceOf(PreprocessEntityEventInterface::class, $event);
     $this->assertInstanceOf($class, $event);
 
-    return $event->getVariables();
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEntityEventVariables $variables */
+    $variables = $event->getVariables();
+    $this->assertInstanceOf(AbstractEntityEventVariables::class, $variables);
+    return $variables;
   }
 
   /**

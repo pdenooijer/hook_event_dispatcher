@@ -8,6 +8,16 @@ namespace Drupal\hook_event_dispatcher\Event\Preprocess\Variables;
 class BlockEventVariables extends AbstractEventVariables {
 
   /**
+   * Get the block.
+   *
+   * @return \Drupal\block\Entity\Block
+   *   The block.
+   */
+  public function getBlock() {
+    return $this->variables['block'];
+  }
+
+  /**
    * Get the block identifier.
    *
    * @return string
