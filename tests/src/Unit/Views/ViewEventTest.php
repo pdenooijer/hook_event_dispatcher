@@ -7,6 +7,7 @@ use Drupal\hook_event_dispatcher\Event\Views\ViewsDataAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsDataEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\Tests\UnitTestCase;
 
@@ -201,6 +202,23 @@ class ViewEventTest extends UnitTestCase {
     /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_EXECUTE);
     $this->assertEquals($view, $event->getView());
+  }
+
+  /**
+   * Query alter event.
+   */
+  public function testQueryAlterEvent() {
+    /** @var \Drupal\views\ViewExecutable $view */
+    $view = $this->createMock(ViewExecutable::class);
+    /** @var \Drupal\views\Plugin\views\query\QueryPluginBase $query */
+    $query = $this->createMock(QueryPluginBase::class);
+
+    hook_event_dispatcher_views_query_alter($view, $query);
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_QUERY_ALTER);
+    $this->assertSame($view, $event->getView());
+    $this->assertSame($query, $event->getQuery());
   }
 
 }
