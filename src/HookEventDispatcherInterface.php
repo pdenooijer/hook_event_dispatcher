@@ -364,6 +364,16 @@ interface HookEventDispatcherInterface {
    */
   const VIEWS_POST_BUILD = 'hook_event_dispatcher.views.post_build';
 
+  /**
+   * Alter the query before it is executed.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_views_query_alter()
+   * @see hook_views_query_alter()
+   */
+  const VIEWS_QUERY_ALTER = 'hook_event_dispatcher.views.query_alter';
+
   // THEME EVENTS.
   /**
    * Register a module or theme's theme implementations.
