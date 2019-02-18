@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Webform event dispatcher submodule.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementInfoAlterEvent;
+use Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementAlterEvent;
+use Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementTypeAlterEvent;
+
+// @todo add support for hook_webform_handler_info_alter
+// @todo add support for hook_webform_source_entity_info_alter
+// @todo add support for hook_webform_options_alter
+// @todo add support for hook_webform_options_WEBFORM_OPTIONS_ID_alter
+// @todo add support for hook_webform_submission_form_alter
+// @todo add support for hook_webform_admin_third_party_settings_form_alter
+// @todo add support for hook_webform_third_party_settings_form_alter
+// @todo add support for hook_webform_handler_invoke_alter
+// @todo add support for hook_webform_handler_invoke_METHOD_NAME_alter
+// @todo add support for hook_webform_libraries_info
+// @todo add support for hook_webform_libraries_info_alter
+// @todo add support for hook_webform_access_rules
+// @todo add support for hook_webform_access_rules_alter
+// @todo add support for hook_webform_submission_access
+// @todo add support for hook_webform_message_custom
+
+/**
+ * Implements hook_webform_element_info_alter().
+ */
+function webform_event_dispatcher_webform_element_info_alter(array &$definitions) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new WebformElementInfoAlterEvent($definitions));
+}
+
+/**
+ * Implements hook_webform_element_alter().
+ */
+function webform_event_dispatcher_webform_element_alter(array &$element, FormStateInterface $formState, array $context) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new WebformElementAlterEvent($element, $formState, $context));
+  $manager->register(new WebformElementTypeAlterEvent($element, $formState, $context));
+}

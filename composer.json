@@ -27,12 +27,14 @@
   },
   "autoload": {
     "psr-4": {
-      "Drupal\\hook_event_dispatcher\\": "src/"
+      "Drupal\\hook_event_dispatcher\\": "src/",
+      "Drupal\\webform_event_dispatcher\\": "modules/webform_event_dispatcher/src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
       "Drupal\\Tests\\hook_event_dispatcher\\": "tests/src/",
+      "Drupal\\Tests\\webform_event_dispatcher\\": "modules/webform_event_dispatcher/tests/src/",
       "Drupal\\Tests\\": "vendor/drupal/core/tests/Drupal/Tests",
       "Drupal\\views\\": "vendor/drupal/core/modules/views/src/"
     }
