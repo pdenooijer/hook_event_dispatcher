@@ -70,8 +70,8 @@ use Drupal\views\ViewExecutable;
  */
 function hook_event_dispatcher_help($routeName) {
   if ($routeName === 'help.page.hook_event_dispatcher') {
-    $path = drupal_get_path('module', 'hook_event_dispatcher');
-    $output = file_get_contents($path . '/README.txt');
+    $path = \drupal_get_path('module', 'hook_event_dispatcher');
+    $output = \file_get_contents($path . '/README.md');
     return '<pre>' . $output . '</pre>';
   }
   return '';
