@@ -43,6 +43,7 @@ use Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Theme\LibraryInfoAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
@@ -597,6 +598,18 @@ function hook_event_dispatcher_js_alter(array &$javascript, AttachedAssetsInterf
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $event = new JsAlterEvent($javascript, $assets);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_library_info_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_library_info_alter(array &$libraries, $extension) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $event = new LibraryInfoAlterEvent($libraries, $extension);
   $manager->register($event);
 }
 
