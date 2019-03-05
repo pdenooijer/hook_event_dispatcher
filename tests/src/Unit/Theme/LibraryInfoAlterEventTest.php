@@ -11,7 +11,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class LibraryInfoAlterEventTest.
  *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Libraries
+ * @package Drupal\Tests\hook_event_dispatcher\Unit\Library
  *
  * @group hook_event_dispatcher
  */
@@ -36,9 +36,9 @@ class LibraryInfoAlterEventTest extends UnitTestCase {
   }
 
   /**
-   * Test the LibrariesInfoAlterEventTest.
+   * Test the LibraryInfoAlterEventTest.
    */
-  public function testLibrariesInfoAlterEvent() {
+  public function testLibraryInfoAlterEvent() {
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::LIBRARY_INFO_ALTER => function (LibraryInfoAlterEvent $event) {
         $libraries = &$event->getLibraries();
