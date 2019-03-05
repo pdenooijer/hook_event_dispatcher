@@ -14,7 +14,7 @@ cache:
   - ~/.composer
 
 install:
-- composer install
+- COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-dist
 
 script:
 - vendor/bin/parallel-lint --exclude vendor/ -e php,module,inc,install,profile,theme .
