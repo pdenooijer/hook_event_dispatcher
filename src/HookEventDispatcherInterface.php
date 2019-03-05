@@ -425,6 +425,30 @@ interface HookEventDispatcherInterface {
 
   // USER EVENTS.
   /**
+   * Act on user account cancellations.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_user_cancel()
+   * @see hook_user_cancel()
+   *
+   * @var string
+   */
+  const USER_CANCEL = 'hook_event_dispatcher.user.cancel';
+
+  /**
+   * Modify account cancellation methods.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_user_cancel_methods_alter()
+   * @see hook_user_cancel_methods_alter()
+   *
+   * @var string
+   */
+  const USER_CANCEL_METHODS_ALTER = 'hook_event_dispatcher.user.cancel_methods_alter';
+
+  /**
    * The user just logged in.
    *
    * @Event

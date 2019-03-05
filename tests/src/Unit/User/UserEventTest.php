@@ -4,6 +4,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\User;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
@@ -34,6 +35,63 @@ class UserEventTest extends UnitTestCase {
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
     \Drupal::setContainer($builder);
+  }
+
+  /**
+   * User cancel event test.
+   */
+  public function testUserCancelEvent() {
+    $edit = ['Test', 'array'];
+    /* @var \Drupal\Core\Session\AccountInterface $account */
+    $account = $this->createMock(AccountInterface::class);
+    $method = 'Test method';
+
+    hook_event_dispatcher_user_cancel($edit, $account, $method);
+
+    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL);
+    $this->assertSame($edit, $event->getEdit());
+    $this->assertSame($account, $event->getAccount());
+    $this->assertSame($method, $event->getMethod());
+  }
+
+  /**
+   * User cancel methods alter event by reference test.
+   */
+  public function testUserCancelMethodsAlterEventByReference() {
+    $this->manager->setEventCallbacks([
+      HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER => function (UserCancelMethodsAlterEvent $event) {
+        $name = &$event->getMethods()[0];
+        $name .= ' improved!';
+      },
+    ]);
+
+    $methods = ['Test method'];
+
+    hook_event_dispatcher_user_cancel_methods_alter($methods);
+
+    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
+    $this->assertSame(['Test method improved!'], $event->getMethods());
+  }
+
+  /**
+   * User cancel methods alter event with set test.
+   */
+  public function testUserCancelMethodsAlterEventWithSet() {
+    $this->manager->setEventCallbacks([
+      HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER => function (UserCancelMethodsAlterEvent $event) {
+        $event->setMethods(['New method']);
+      },
+    ]);
+
+    $methods = ['Test method'];
+
+    hook_event_dispatcher_user_cancel_methods_alter($methods);
+
+    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
+    $this->assertSame(['New method'], $event->getMethods());
   }
 
   /**
