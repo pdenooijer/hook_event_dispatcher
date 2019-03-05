@@ -423,6 +423,18 @@ interface HookEventDispatcherInterface {
    */
   const JS_ALTER = 'hook_event_dispatcher.js.alter';
 
+  /**
+   * Alter the library info provided by an extension.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_library_info_alter()
+   * @see hook_library_info_alter()
+   *
+   * @var string
+   */
+  const LIBRARY_INFO_ALTER = 'hook_event_dispatcher.library.info_alter';
+
   // USER EVENTS.
   /**
    * Act on user account cancellations.
