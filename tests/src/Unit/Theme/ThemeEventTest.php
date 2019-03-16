@@ -93,7 +93,7 @@ class ThemeEventTest extends UnitTestCase {
     ]);
 
     $this->expectException(\RuntimeException::class);
-    $this->expectExceptionMessage('Missing path in the information array, see \hook_theme() for more information.');
+    $this->expectExceptionMessage('Missing path in the information array. ThemeEvent needs the path to be set manually, to have a proper default theme implementation. See \hook_theme() for more information.');
 
     hook_event_dispatcher_theme([]);
   }
@@ -153,7 +153,7 @@ class ThemeEventTest extends UnitTestCase {
     ]);
 
     $this->expectException(\RuntimeException::class);
-    $this->expectExceptionMessage('Missing path in the information array, see \hook_theme() for more information.');
+    $this->expectExceptionMessage('Missing path in the information array. ThemeEvent needs the path to be set manually, to have a proper default theme implementation. See \hook_theme() for more information.');
 
     hook_event_dispatcher_theme([]);
   }
