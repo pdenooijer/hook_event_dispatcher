@@ -20,7 +20,9 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewTableEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\ViewTablePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\Preprocess\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
@@ -178,6 +180,23 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $this->assertEquals('output', $variables->getOutput());
     $this->assertEquals('row', $variables->getRow());
     $this->assertEquals('view', $variables->getView());
+  }
+
+  /**
+   * Test a ViewTablePreprocessEvent.
+   */
+  public function testViewTableEvent() {
+    $variablesArray = $this->createVariablesArray();
+    $variablesArray['rows'] = 'rows';
+    $variablesArray['view'] = 'view';
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewTableEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(ViewTablePreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(ViewTableEventVariables::class, $variables);
+
+    $this->assertAbstractEventVariables($variables);
+    $this->assertSame('rows', $variables->getRows());
+    $this->assertSame('view', $variables->getView());
   }
 
   /**
