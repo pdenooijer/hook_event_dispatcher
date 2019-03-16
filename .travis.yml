@@ -2,7 +2,6 @@
 # Travis CI
 #
 
-sudo: false
 language: php
 
 php:
