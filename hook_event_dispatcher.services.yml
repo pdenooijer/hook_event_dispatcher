@@ -70,6 +70,11 @@ services:
     tags:
     - { name: preprocess_event_default_factory }
 
+  preprocess_event.factory.view_table:
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ViewTablePreprocessEventFactory
+    tags:
+    - { name: preprocess_event_default_factory }
+
   preprocess_event.factory.view:
     class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\ViewPreprocessEventFactory
     tags:
