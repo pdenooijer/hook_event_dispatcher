@@ -2,12 +2,11 @@
 # Travis CI
 #
 
-sudo: false
 language: php
 
 php:
 - 5.6
-- 7.1
+- 7.3
 
 cache:
   directories:
@@ -21,3 +20,7 @@ script:
 - vendor/bin/phpunit --configuration=phpunit.xml --coverage-text
 - vendor/bin/phpcs --ignore=vendor/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 .
 - vendor/bin/phpmd --exclude vendor/ --suffixes php,module,inc,install,profile,theme . text phpmd.xml
+
+branches:
+  only:
+    - 8.x-1.x
