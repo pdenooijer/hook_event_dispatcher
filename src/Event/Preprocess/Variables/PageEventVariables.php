@@ -95,4 +95,28 @@ class PageEventVariables extends AbstractEventVariables {
     return $this->variables['page'][$name];
   }
 
+  /**
+   * Get the complete $variables of the page template.
+   *
+   * @return mixed
+   *   Reference to all variables of the page template.
+   */
+  public function &getRootVariablesByReference() {
+    return $this->variables;
+  }
+
+  /**
+   * Add a cache context to the page template.
+   *
+   * @param string $context
+   *   A cache context such as 'url.path'.
+   *
+   * @return $this
+   *   PageEventVariables
+   */
+  public function addCacheContext($context) {
+    $this->variables['#cache']['contexts'][] = $context;
+    return $this;
+  }
+
 }

@@ -112,4 +112,30 @@ final class PageTest extends UnitTestCase {
     $this->assertEquals('OtherTest', $vars['page']['test']);
   }
 
+  /**
+   * Test getting root variables by reference.
+   */
+  public function testGetRootVariablesByReference() {
+    $vars['test'] = 'something';
+    $page = new PageEventVariables($vars);
+    $retrievedVars = &$page->getRootVariablesByReference();
+    $this->assertSame($vars, $retrievedVars);
+
+    $retrievedVars['test2'] = 'other';
+    $this->assertSame($vars, $retrievedVars);
+    $this->assertSame($vars, $page->getRootVariablesByReference());
+  }
+
+  /**
+   * Test add cache context.
+   */
+  public function testAddCacheContext() {
+    $vars = [];
+    $page = new PageEventVariables($vars);
+    $page->addCacheContext('url.path');
+
+    $expectedVars['#cache']['contexts'][] = 'url.path';
+    $this->assertSame($expectedVars, $vars);
+  }
+
 }
