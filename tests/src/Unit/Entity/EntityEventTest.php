@@ -98,6 +98,32 @@ class EntityEventTest extends UnitTestCase {
   }
 
   /**
+   * Test EntityTranslationInsertEvent.
+   */
+  public function testEntityTranslationInsertEvent() {
+    $entity = $this->createMock(EntityInterface::class);
+
+    hook_event_dispatcher_entity_translation_insert($entity);
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityTranslationInsertEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_TRANSLATION_INSERT);
+    $this->assertEquals($entity, $event->getEntity());
+  }
+
+  /**
+   * Test EntityTranslationDeleteEvent.
+   */
+  public function testEntityTranslationDeleteEvent() {
+    $entity = $this->createMock(EntityInterface::class);
+
+    hook_event_dispatcher_entity_translation_delete($entity);
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityTranslationDeleteEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_TRANSLATION_DELETE);
+    $this->assertEquals($entity, $event->getEntity());
+  }
+
+  /**
    * Test EntityPredeleteEvent.
    */
   public function testEntityPredeleteEvent() {

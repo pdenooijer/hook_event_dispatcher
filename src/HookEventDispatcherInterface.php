@@ -116,6 +116,30 @@ interface HookEventDispatcherInterface {
    */
   const ENTITY_LOAD = 'hook_event_dispatcher.entity.load';
 
+  /**
+   * Respond to creation of a new entity translation.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_translation_insert()
+   * @see hook_entity_translation_insert()
+   *
+   * @var string
+   */
+  const ENTITY_TRANSLATION_INSERT = 'hook_event_dispatcher.entity.translation_insert';
+
+  /**
+   * Respond to deletion of a new entity translation.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_translation_delete()
+   * @see hook_entity_translation_delete()
+   *
+   * @var string
+   */
+  const ENTITY_TRANSLATION_DELETE = 'hook_event_dispatcher.entity.translation_delete';
+
   // ENTITY FIELD EVENTS.
   /**
    * Control access to fields.
