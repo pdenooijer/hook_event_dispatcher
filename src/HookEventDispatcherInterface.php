@@ -215,6 +215,18 @@ interface HookEventDispatcherInterface {
    */
   const ENTITY_BUNDLE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_bundle.field_info_alter';
 
+  /**
+   * Add to entity type definitions..
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_type_build()
+   * @see hook_entity_type_build()
+   *
+   * @var string
+   */
+  const ENTITY_TYPE_BUILD = 'hook_event_dispatcher.entity_type.build';
+
   // FORM EVENTS.
   /**
    * Perform alterations before a form is rendered.
