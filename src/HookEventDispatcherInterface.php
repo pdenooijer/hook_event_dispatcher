@@ -558,6 +558,22 @@ interface HookEventDispatcherInterface {
    */
   const PAGE_BOTTOM = 'hook_event_dispatcher.page.bottom';
 
+  /**
+   * Add attachments (typically assets) to a page before it is rendered.
+   *
+   * Attachments should be added to individual element render arrays whenever
+   * possible, as per Drupal best practices, so only use this when that isn't
+   * practical or you need to target the page itself.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_page_attachments()
+   * @see hook_page_attachments()
+   *
+   * @var string
+   */
+  const PAGE_ATTACHMENTS = 'hook_event_dispatcher.page.attachments';
+
   // CRON EVENTS.
   /**
    * Perform periodic actions.
