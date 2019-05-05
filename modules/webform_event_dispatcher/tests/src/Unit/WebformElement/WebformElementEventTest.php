@@ -17,7 +17,7 @@ use Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementTypeAlter
  *
  * @group hook_event_dispatcher
  */
-class WebformFormElementEventTest extends UnitTestCase {
+class WebformElementEventTest extends UnitTestCase {
 
   /**
    * The manager.
