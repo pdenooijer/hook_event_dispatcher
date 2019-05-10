@@ -1,6 +1,6 @@
 name: Webform Event Dispatcher
 type: module
-description: Registers event dispatchers for several webform hooks
+description: Dispatches events for multiple webform hooks
 core: 8.x
 package: Development
 dependencies:

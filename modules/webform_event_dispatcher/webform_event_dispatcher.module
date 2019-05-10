@@ -28,6 +28,8 @@ use Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementTypeAlter
 
 /**
  * Implements hook_webform_element_info_alter().
+ *
+ * {@inheritdoc}
  */
 function webform_event_dispatcher_webform_element_info_alter(array &$definitions) {
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
@@ -37,6 +39,8 @@ function webform_event_dispatcher_webform_element_info_alter(array &$definitions
 
 /**
  * Implements hook_webform_element_alter().
+ *
+ * {@inheritdoc}
  */
 function webform_event_dispatcher_webform_element_alter(array &$element, FormStateInterface $formState, array $context) {
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
