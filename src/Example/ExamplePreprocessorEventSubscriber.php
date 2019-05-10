@@ -2,8 +2,8 @@
 
 namespace Drupal\hook_event_dispatcher\Example;
 
-use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
-use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
+use Drupal\preprocess_event_dispatcher\Event\BlockPreprocessEvent;
+use Drupal\preprocess_event_dispatcher\Event\PagePreprocessEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -24,11 +24,11 @@ final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterfa
   /**
    * Preprocess a node page to set the node title as page title.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent $event
+   * @param \Drupal\preprocess_event_dispatcher\Event\PagePreprocessEvent $event
    *   Event.
    */
   public function preprocessPage(PagePreprocessEvent $event) {
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables $variables */
+    /* @var \Drupal\preprocess_event_dispatcher\Variables\PageEventVariables $variables */
     $variables = $event->getVariables();
     $node = $variables->getNode();
 
@@ -42,11 +42,11 @@ final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterfa
   /**
    * Preprocess blocks with field_contact_form and add contact-form-wrapper id.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent $event
+   * @param \Drupal\preprocess_event_dispatcher\Event\BlockPreprocessEvent $event
    *   Event.
    */
   public function preprocessBlock(BlockPreprocessEvent $event) {
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables $variables */
+    /* @var \Drupal\preprocess_event_dispatcher\Variables\BlockEventVariables $variables */
     $variables = $event->getVariables();
 
     if ($variables->get('field_contact_form') === NULL) {

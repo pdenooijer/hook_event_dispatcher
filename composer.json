@@ -29,6 +29,7 @@
     "psr-4": {
       "Drupal\\hook_event_dispatcher\\": "src/",
       "Drupal\\media_event_dispatcher\\": "modules/media_event_dispatcher/src/",
+      "Drupal\\preprocess_event_dispatcher\\": "modules/preprocess_event_dispatcher/src/",
       "Drupal\\webform_event_dispatcher\\": "modules/webform_event_dispatcher/src/"
     }
   },
@@ -36,6 +37,7 @@
     "psr-4": {
       "Drupal\\Tests\\hook_event_dispatcher\\": "tests/src/",
       "Drupal\\Tests\\media_event_dispatcher\\": "modules/media_event_dispatcher/tests/src/",
+      "Drupal\\Tests\\preprocess_event_dispatcher\\": "modules/preprocess_event_dispatcher/tests/src/",
       "Drupal\\Tests\\webform_event_dispatcher\\": "modules/webform_event_dispatcher/tests/src/",
       "Drupal\\Tests\\": "vendor/drupal/core/tests/Drupal/Tests",
       "Drupal\\media\\": "vendor/drupal/core/modules/media/src/",

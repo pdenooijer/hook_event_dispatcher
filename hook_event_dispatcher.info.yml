@@ -1,6 +1,6 @@
 name: Hook Event Dispatcher
 type: module
-description: Registers event dispatchers for several drupal hooks
+description: Dispatches events for several drupal hooks
 core: 8.x
 core_version_requirement: ^8 || ^9
 package: Development

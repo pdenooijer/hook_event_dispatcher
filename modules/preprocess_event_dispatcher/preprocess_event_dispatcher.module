@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Preprocess event dispatcher module.
+ */
+
+/**
+ * Implements hook_preprocess().
+ *
+ * {@inheritdoc}
+ */
+function preprocess_event_dispatcher_preprocess(&$variables, $hook) {
+  /* @var \Drupal\preprocess_event_dispatcher\Service\PreprocessEventService $service */
+  $service = Drupal::service('preprocess_event.service');
+  $service->createAndDispatchKnownEvents($hook, $variables);
+}
