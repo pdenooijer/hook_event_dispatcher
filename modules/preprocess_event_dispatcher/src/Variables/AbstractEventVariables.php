@@ -50,13 +50,9 @@ abstract class AbstractEventVariables {
    *   Variable name.
    * @param mixed $value
    *   Variable value.
-   *
-   * @return $this
-   *   Event variables.
    */
-  public function set(string $name, $value = NULL) {
+  public function set(string $name, $value = NULL): void {
     $this->variables[$name] = $value;
-    return $this;
   }
 
   /**
@@ -64,13 +60,9 @@ abstract class AbstractEventVariables {
    *
    * @param string $name
    *   Variable name.
-   *
-   * @return $this
-   *   Event variables.
    */
-  public function remove(string $name) {
+  public function remove(string $name): void {
     unset($this->variables[$name]);
-    return $this;
   }
 
   /**

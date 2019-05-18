@@ -59,13 +59,9 @@ class PageEventVariables extends AbstractEventVariables {
    *   Name.
    * @param mixed $value
    *   Value.
-   *
-   * @return $this
-   *   PageEventVariables
    */
-  public function set(string $name, $value = NULL) {
+  public function set(string $name, $value = NULL): void {
     $this->variables['page'][$name] = $value;
-    return $this;
   }
 
   /**
@@ -73,13 +69,9 @@ class PageEventVariables extends AbstractEventVariables {
    *
    * @param string $name
    *   Name.
-   *
-   * @return $this
-   *   Page
    */
-  public function remove(string $name) {
+  public function remove(string $name): void {
     unset($this->variables['page'][$name]);
-    return $this;
   }
 
   /**
@@ -110,13 +102,9 @@ class PageEventVariables extends AbstractEventVariables {
    *
    * @param string $context
    *   A cache context such as 'url.path'.
-   *
-   * @return $this
-   *   PageEventVariables
    */
-  public function addCacheContext(string $context) {
+  public function addCacheContext(string $context): void {
     $this->variables['#cache']['contexts'][] = $context;
-    return $this;
   }
 
 }
