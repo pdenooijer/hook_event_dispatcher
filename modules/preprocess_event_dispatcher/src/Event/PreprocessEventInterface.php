@@ -2,12 +2,14 @@
 
 namespace Drupal\preprocess_event_dispatcher\Event;
 
+use Drupal\preprocess_event_dispatcher\Variables\AbstractEventVariables;
+
 /**
  * Interface PreprocessEventInterface.
  */
 interface PreprocessEventInterface {
 
-  const DISPATCH_NAME_PREFIX = 'preprocess_';
+  public const DISPATCH_NAME_PREFIX = 'preprocess_';
 
   /**
    * Get the hook name.
@@ -15,7 +17,7 @@ interface PreprocessEventInterface {
    * @return string
    *   Hook name.
    */
-  public static function getHook();
+  public static function getHook(): string;
 
   /**
    * Get the Event name.
@@ -23,7 +25,7 @@ interface PreprocessEventInterface {
    * @return string
    *   Event name.
    */
-  public static function name();
+  public static function name(): string;
 
   /**
    * Get the variables.
@@ -31,6 +33,6 @@ interface PreprocessEventInterface {
    * @return \Drupal\preprocess_event_dispatcher\Variables\AbstractEventVariables
    *   Variables.
    */
-  public function getVariables();
+  public function getVariables(): AbstractEventVariables;
 
 }

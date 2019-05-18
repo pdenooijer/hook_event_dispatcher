@@ -14,6 +14,8 @@ use Drupal\Tests\UnitTestCase;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use function array_keys;
+use function dirname;
 
 /**
  * Class PreprocessEventPassTest.
@@ -38,9 +40,9 @@ class PreprocessEventPassTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $this->builder = new ContainerBuilder();
-    $locator = new FileLocator([dirname(dirname(dirname(__DIR__)))]);
+    $locator = new FileLocator([dirname(__DIR__, 3)]);
     $loader = new YamlFileLoader($this->builder, $locator);
     $loader->load('preprocess_event_dispatcher.services.yml');
     $this->builder->set('event_dispatcher', new SpyEventDispatcher());
@@ -51,7 +53,7 @@ class PreprocessEventPassTest extends UnitTestCase {
   /**
    * Test if the ContainerBuilder has all services from the YAML file.
    */
-  public function testBuilderHasAllServices() {
+  public function testBuilderHasAllServices(): void {
     $this->pass->process($this->builder);
     $this->builder->compile();
 
@@ -66,7 +68,7 @@ class PreprocessEventPassTest extends UnitTestCase {
    *
    * Using the preprocess_event_dispatcher_factory tag.
    */
-  public function testOverwritingDefaultFactory() {
+  public function testOverwritingDefaultFactory(): void {
     $fakeEckEntityFactory = new Definition(FakePreprocessEventFactory::class, [EckEntityPreprocessEvent::getHook()]);
     $fakeEckEntityFactory->addTag('preprocess_event_factory');
     $this->builder->setDefinition('preprocess_event.fake_factory.eck_entity', $fakeEckEntityFactory);
@@ -84,12 +86,12 @@ class PreprocessEventPassTest extends UnitTestCase {
 
     $eckMappedFactory = $mapper->getFactory(EckEntityPreprocessEvent::getHook());
     $this->assertInstanceOf(FakePreprocessEventFactory::class, $eckMappedFactory);
-    $this->assertEquals(EckEntityPreprocessEvent::getHook(), $eckMappedFactory->getEventHook());
+    $this->assertSame(EckEntityPreprocessEvent::getHook(), $eckMappedFactory->getEventHook());
     $this->assertInstanceOf(FakePreprocessEvent::class, $eckMappedFactory->createEvent($variables));
 
     $htmlMappedFactory = $mapper->getFactory(HtmlPreprocessEvent::getHook());
     $this->assertInstanceOf(FakePreprocessEventFactory::class, $htmlMappedFactory);
-    $this->assertEquals(HtmlPreprocessEvent::getHook(), $htmlMappedFactory->getEventHook());
+    $this->assertSame(HtmlPreprocessEvent::getHook(), $htmlMappedFactory->getEventHook());
     $this->assertInstanceOf(FakePreprocessEvent::class, $htmlMappedFactory->createEvent($variables));
   }
 

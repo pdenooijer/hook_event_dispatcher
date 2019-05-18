@@ -10,7 +10,7 @@ final class ViewFieldPreprocessEvent extends AbstractPreprocessEvent {
   /**
    * {@inheritdoc}
    */
-  public static function getHook() {
+  public static function getHook(): string {
     return 'views_view_field';
   }
 

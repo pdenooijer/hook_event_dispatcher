@@ -35,7 +35,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    * @param int $count
    *   Event count.
    */
-  public function setExpectedEventCount($count) {
+  public function setExpectedEventCount(int $count): void {
     $this->count = $count;
   }
 
@@ -44,7 +44,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * {@inheritdoc}
    */
-  public function dispatch($eventName, Event $event = NULL) {
+  public function dispatch($eventName, Event $event = NULL): void {
     if (count($this->events) === $this->count) {
       throw new BadMethodCallException("SpyEventDispatcher got called more then {$this->count} time(s)");
     }
@@ -58,7 +58,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    * @return string
    *   Last event name.
    */
-  public function getLastEventName() {
+  public function getLastEventName(): string {
     end($this->events);
     return key($this->events);
   }
@@ -69,7 +69,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    * @return \Symfony\Component\EventDispatcher\Event
    *   Last event.
    */
-  public function getLastEvent() {
+  public function getLastEvent(): Event {
     return end($this->events);
   }
 
@@ -79,7 +79,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    * @return \Symfony\Component\EventDispatcher\Event[]
    *   Events keyed by event name.
    */
-  public function getEvents() {
+  public function getEvents(): array {
     return $this->events;
   }
 
@@ -88,7 +88,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * @inheritdoc
    */
-  public function addListener($eventName, $listener, $priority = 0) {
+  public function addListener($eventName, $listener, $priority = 0): void {
     throw new BadMethodCallException('This spy does not support this call');
   }
 
@@ -97,7 +97,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * @inheritdoc
    */
-  public function addSubscriber(EventSubscriberInterface $subscriber) {
+  public function addSubscriber(EventSubscriberInterface $subscriber): void {
     throw new BadMethodCallException('This spy does not support this call');
   }
 
@@ -106,7 +106,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * @inheritdoc
    */
-  public function removeListener($eventName, $listener) {
+  public function removeListener($eventName, $listener): void {
     throw new BadMethodCallException('This spy does not support this call');
   }
 
@@ -115,7 +115,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * @inheritdoc
    */
-  public function removeSubscriber(EventSubscriberInterface $subscriber) {
+  public function removeSubscriber(EventSubscriberInterface $subscriber): void {
     throw new BadMethodCallException('This spy does not support this call');
   }
 
@@ -124,7 +124,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * @inheritdoc
    */
-  public function getListeners($eventName = NULL) {
+  public function getListeners($eventName = NULL): array {
     throw new BadMethodCallException('This spy does not support this call');
   }
 
@@ -133,7 +133,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * @inheritdoc
    */
-  public function getListenerPriority($eventName, $listener) {
+  public function getListenerPriority($eventName, $listener): ?int {
     throw new BadMethodCallException('This spy does not support this call');
   }
 
@@ -142,7 +142,7 @@ final class SpyEventDispatcher implements EventDispatcherInterface {
    *
    * @inheritdoc
    */
-  public function hasListeners($eventName = NULL) {
+  public function hasListeners($eventName = NULL): bool {
     throw new BadMethodCallException('This spy does not support this call');
   }
 

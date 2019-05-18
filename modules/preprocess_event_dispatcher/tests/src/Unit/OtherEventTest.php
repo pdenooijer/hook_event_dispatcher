@@ -16,6 +16,7 @@ use Drupal\preprocess_event_dispatcher\Variables\AbstractEventVariables;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\SpyEventDispatcher;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
+use function str_replace;
 
 /**
  * Class OtherEventTest.
@@ -54,7 +55,7 @@ final class OtherEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $loader = YamlDefinitionsLoader::getInstance();
     $this->dispatcher = new SpyEventDispatcher();
     $this->service = new PreprocessEventService($this->dispatcher, $loader->getMapper());
@@ -64,70 +65,70 @@ final class OtherEventTest extends UnitTestCase {
   /**
    * Test a BlockPreprocessEvent.
    */
-  public function testBlockEvent() {
+  public function testBlockEvent(): void {
     $this->createAndAssertEvent(BlockPreprocessEvent::class);
   }
 
   /**
    * Test a FieldPreprocessEvent.
    */
-  public function testFieldEvent() {
+  public function testFieldEvent(): void {
     $this->createAndAssertEvent(FieldPreprocessEvent::class);
   }
 
   /**
    * Test a FormPreprocessEvent.
    */
-  public function testFormEvent() {
+  public function testFormEvent(): void {
     $this->createAndAssertEvent(FormPreprocessEvent::class);
   }
 
   /**
    * Test a HtmlPreprocessEvent.
    */
-  public function testHtmlEvent() {
+  public function testHtmlEvent(): void {
     $this->createAndAssertEvent(HtmlPreprocessEvent::class);
   }
 
   /**
    * Test a ImagePreprocessEvent.
    */
-  public function testImageEvent() {
+  public function testImageEvent(): void {
     $this->createAndAssertEvent(ImagePreprocessEvent::class);
   }
 
   /**
    * Test a PagePreprocessEvent.
    */
-  public function testPageEvent() {
+  public function testPageEvent(): void {
     $this->createAndAssertEvent(PagePreprocessEvent::class);
   }
 
   /**
    * Test a ViewFieldPreprocessEvent.
    */
-  public function testViewFieldEvent() {
+  public function testViewFieldEvent(): void {
     $this->createAndAssertEvent(ViewFieldPreprocessEvent::class);
   }
 
   /**
    * Test a ViewPreprocessEvent.
    */
-  public function testViewEvent() {
+  public function testViewEvent(): void {
     $this->createAndAssertEvent(ViewPreprocessEvent::class);
   }
 
   /**
    * Test a StatusMessagesPreprocessEvent.
    */
-  public function testStatusMessagesEvent() {
+  public function testStatusMessagesEvent(): void {
     $this->createAndAssertEvent(StatusMessagesPreprocessEvent::class);
   }
 
   /**
    * Test a unknown hook.
    */
-  public function testNotMappingEvent() {
+  public function testNotMappingEvent(): void {
     $this->service->createAndDispatchKnownEvents('NoneExistingHook', $this->variables);
     $this->assertSame([], $this->dispatcher->getEvents());
   }
@@ -138,14 +139,19 @@ final class OtherEventTest extends UnitTestCase {
    * @param string $class
    *   Event class name.
    */
-  private function createAndAssertEvent($class) {
+  private function createAndAssertEvent(string $class): void {
     /* @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent $class */
     $this->service->createAndDispatchKnownEvents($class::getHook(), $this->variables);
     $this->assertSame($class::name(), $this->dispatcher->getLastEventName());
     /** @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent $event */
     $event = $this->dispatcher->getLastEvent();
     $this->assertInstanceOf($class, $event);
-    $this->assertInstanceOf(AbstractEventVariables::class, $event->getVariables());
+    $variablesClass = str_replace(
+      ['\\Event\\', 'PreprocessEvent'],
+      ['\\Variables\\', 'EventVariables'],
+      $class
+    );
+    $this->assertInstanceOf($variablesClass, $event->getVariables());
   }
 
 }

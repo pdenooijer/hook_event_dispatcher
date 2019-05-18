@@ -2,6 +2,7 @@
 
 namespace Drupal\preprocess_event_dispatcher\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\PagePreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Variables\PageEventVariables;
 
@@ -13,14 +14,14 @@ final class PagePreprocessEventFactory implements PreprocessEventFactoryInterfac
   /**
    * {@inheritdoc}
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new PagePreprocessEvent(new PageEventVariables($variables));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return PagePreprocessEvent::getHook();
   }
 

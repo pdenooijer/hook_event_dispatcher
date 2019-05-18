@@ -2,6 +2,8 @@
 
 namespace Drupal\preprocess_event_dispatcher\Variables;
 
+use Drupal\Core\Entity\EntityInterface;
+
 /**
  * Class EntityEventVariables.
  */
@@ -13,7 +15,7 @@ abstract class AbstractEntityEventVariables extends AbstractEventVariables {
    * @return \Drupal\Core\Entity\EntityInterface
    *   Entity.
    */
-  abstract public function getEntity();
+  abstract public function getEntity(): EntityInterface;
 
   /**
    * Get the Entity type.
@@ -21,8 +23,8 @@ abstract class AbstractEntityEventVariables extends AbstractEventVariables {
    * @return string
    *   Entity type.
    */
-  public function getEntityType() {
-    return $this->get('theme_hook_original');
+  public function getEntityType(): string {
+    return $this->get('theme_hook_original', '');
   }
 
   /**
@@ -31,7 +33,7 @@ abstract class AbstractEntityEventVariables extends AbstractEventVariables {
    * @return string
    *   Entity bundle.
    */
-  public function getEntityBundle() {
+  public function getEntityBundle(): string {
     return $this->getEntity()->bundle();
   }
 
@@ -41,8 +43,8 @@ abstract class AbstractEntityEventVariables extends AbstractEventVariables {
    * @return string
    *   View mode.
    */
-  public function getViewMode() {
-    return $this->get('view_mode');
+  public function getViewMode(): string {
+    return $this->get('view_mode', '');
   }
 
 }

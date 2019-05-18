@@ -22,7 +22,7 @@ final class PreprocessEventFactoryMapper {
    * @param \Drupal\preprocess_event_dispatcher\Factory\PreprocessEventFactoryInterface $factory
    *   Provided factory to add.
    */
-  public function addFactory(PreprocessEventFactoryInterface $factory) {
+  public function addFactory(PreprocessEventFactoryInterface $factory): void {
     $hook = $factory->getEventHook();
     $this->hookToFactoryMap[$hook] = $factory;
   }
@@ -36,12 +36,8 @@ final class PreprocessEventFactoryMapper {
    * @return \Drupal\preprocess_event_dispatcher\Factory\PreprocessEventFactoryInterface|null
    *   PreprocessEventFactory.
    */
-  public function getFactory($hook) {
-    if (isset($this->hookToFactoryMap[$hook])) {
-      return $this->hookToFactoryMap[$hook];
-    }
-
-    return NULL;
+  public function getFactory(string $hook): ?PreprocessEventFactoryInterface {
+    return $this->hookToFactoryMap[$hook] ?? NULL;
   }
 
 }

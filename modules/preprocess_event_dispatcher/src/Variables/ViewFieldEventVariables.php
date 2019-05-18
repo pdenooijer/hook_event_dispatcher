@@ -2,6 +2,11 @@
 
 namespace Drupal\preprocess_event_dispatcher\Variables;
 
+use Drupal\views\Plugin\views\field\EntityField;
+use Drupal\views\Plugin\views\field\Markup;
+use Drupal\views\ResultRow;
+use Drupal\views\ViewExecutable;
+
 /**
  * Class ViewFieldEventVariables.
  */
@@ -13,7 +18,7 @@ class ViewFieldEventVariables extends AbstractEventVariables {
    * @return \Drupal\views\Plugin\views\field\EntityField
    *   Field.
    */
-  public function getField() {
+  public function getField(): EntityField {
     return $this->variables['field'];
   }
 
@@ -23,7 +28,7 @@ class ViewFieldEventVariables extends AbstractEventVariables {
    * @return \Drupal\views\Plugin\views\field\Markup
    *   Output.
    */
-  public function getOutput() {
+  public function getOutput(): Markup {
     return $this->variables['output'];
   }
 
@@ -33,7 +38,7 @@ class ViewFieldEventVariables extends AbstractEventVariables {
    * @return \Drupal\views\ResultRow
    *   Row.
    */
-  public function getRow() {
+  public function getRow(): ResultRow {
     return $this->variables['row'];
   }
 
@@ -43,7 +48,7 @@ class ViewFieldEventVariables extends AbstractEventVariables {
    * @return \Drupal\views\ViewExecutable
    *   View.
    */
-  public function getView() {
+  public function getView(): ViewExecutable {
     return $this->variables['view'];
   }
 

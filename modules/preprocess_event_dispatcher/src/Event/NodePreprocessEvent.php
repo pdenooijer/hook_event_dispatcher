@@ -10,7 +10,7 @@ final class NodePreprocessEvent extends AbstractPreprocessEntityEvent {
   /**
    * {@inheritdoc}
    */
-  public static function getHook() {
+  public static function getHook(): string {
     return 'node';
   }
 

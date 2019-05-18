@@ -2,6 +2,8 @@
 
 namespace Drupal\preprocess_event_dispatcher\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
+
 /**
  * Interface PreprocessEventFactoryInterface.
  */
@@ -16,7 +18,7 @@ interface PreprocessEventFactoryInterface {
    * @return \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent
    *   Created event.
    */
-  public function createEvent(array &$variables);
+  public function createEvent(array &$variables): AbstractPreprocessEvent;
 
   /**
    * Get the Event hook name.
@@ -24,6 +26,6 @@ interface PreprocessEventFactoryInterface {
    * @return string
    *   The hook name.
    */
-  public function getEventHook();
+  public function getEventHook(): string;
 
 }

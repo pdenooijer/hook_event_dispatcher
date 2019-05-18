@@ -13,7 +13,7 @@ class FieldEventVariables extends AbstractEventVariables {
    * @return array
    *   Element array reference.
    */
-  public function &getElement() {
+  public function &getElement(): array {
     return $this->variables['element'];
   }
 
@@ -23,7 +23,7 @@ class FieldEventVariables extends AbstractEventVariables {
    * @return array
    *   Items array reference.
    */
-  public function &getItems() {
+  public function &getItems(): array {
     return $this->variables['items'];
   }
 

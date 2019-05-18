@@ -32,14 +32,14 @@ abstract class AbstractPreprocessEvent extends Event implements PreprocessEventI
   /**
    * {@inheritdoc}
    */
-  public static function name() {
+  public static function name(): string {
     return static::DISPATCH_NAME_PREFIX . static::getHook();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getVariables() {
+  public function getVariables(): AbstractEventVariables {
     return $this->variables;
   }
 

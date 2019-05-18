@@ -45,7 +45,7 @@ final class PreprocessEventService {
    * @param array $variables
    *   Variables.
    */
-  public function createAndDispatchKnownEvents($hook, array &$variables) {
+  public function createAndDispatchKnownEvents(string $hook, array &$variables): void {
     $factory = $this->mapper->getFactory($hook);
     if ($factory === NULL) {
       return;
@@ -65,7 +65,7 @@ final class PreprocessEventService {
    * @param \Drupal\preprocess_event_dispatcher\Event\PreprocessEntityEventInterface $event
    *   The event to dispatch.
    */
-  private function dispatchEntitySpecificEvents(PreprocessEntityEventInterface $event) {
+  private function dispatchEntitySpecificEvents(PreprocessEntityEventInterface $event): void {
     $variables = $event->getVariables();
 
     $withBundle = $event::name($variables->getEntityBundle());

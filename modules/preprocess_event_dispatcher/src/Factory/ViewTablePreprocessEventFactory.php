@@ -2,6 +2,7 @@
 
 namespace Drupal\preprocess_event_dispatcher\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\ViewTablePreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Variables\ViewTableEventVariables;
 
@@ -13,14 +14,14 @@ final class ViewTablePreprocessEventFactory implements PreprocessEventFactoryInt
   /**
    * {@inheritdoc}
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new ViewTablePreprocessEvent(new ViewTableEventVariables($variables));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return ViewTablePreprocessEvent::getHook();
   }
 

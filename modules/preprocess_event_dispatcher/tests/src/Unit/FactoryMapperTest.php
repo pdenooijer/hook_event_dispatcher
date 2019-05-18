@@ -4,6 +4,12 @@ namespace Drupal\Tests\preprocess_event_dispatcher\Unit;
 
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
+use function array_filter;
+use function count;
+use function dirname;
+use function in_array;
+use function scandir;
+use function substr;
 
 /**
  * Class FactoryMapperTest.
@@ -22,18 +28,18 @@ final class FactoryMapperTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $this->mapper = YamlDefinitionsLoader::getInstance()->getMapper();
   }
 
   /**
    * Test if all factories are in the YAML file.
    */
-  public function testYamlHasAllFactories() {
+  public function testYamlHasAllFactories(): void {
     $factoriesYaml = YamlDefinitionsLoader::getInstance()->getFactories();
     $classNames = $this->getFactoryClassNamesFromFilesystem();
 
-    $this->assertCount(\count($factoriesYaml), $classNames);
+    $this->assertCount(count($factoriesYaml), $classNames);
 
     foreach ($factoriesYaml as $entry) {
       $this->assertContains($entry['class'], $classNames);
@@ -46,10 +52,10 @@ final class FactoryMapperTest extends UnitTestCase {
    * @return array
    *   Class names array.
    */
-  private function getFactoryClassNamesFromFilesystem() {
-    $files = \scandir(
+  private function getFactoryClassNamesFromFilesystem(): array {
+    $files = scandir(
       // Go to the project root directory.
-      \dirname(\dirname(\dirname(__DIR__))) . '/src/Factory',
+      dirname(__DIR__, 3) . '/src/Factory',
       SCANDIR_SORT_NONE
     );
 
@@ -58,13 +64,13 @@ final class FactoryMapperTest extends UnitTestCase {
       '..',
       'PreprocessEventFactoryInterface.php',
     ];
-    $files = \array_filter($files, function ($file) use ($invalidFactories) {
-      return !\in_array($file, $invalidFactories, TRUE);
+    $files = array_filter($files, static function ($file) use ($invalidFactories) {
+      return !in_array($file, $invalidFactories, TRUE);
     });
 
     $classNames = [];
     foreach ($files as $file) {
-      $classNames[] = 'Drupal\\preprocess_event_dispatcher\\Factory\\' . \substr($file, 0, -4);
+      $classNames[] = 'Drupal\\preprocess_event_dispatcher\\Factory\\' . substr($file, 0, -4);
     }
     return $classNames;
   }
@@ -72,9 +78,9 @@ final class FactoryMapperTest extends UnitTestCase {
   /**
    * Test a none existing hook.
    */
-  public function testNoneExistingHook() {
+  public function testNoneExistingHook(): void {
     $factory = $this->mapper->getFactory('NoneExistingHook');
-    $this->assertEquals(NULL, $factory);
+    $this->assertNull($factory);
   }
 
 }

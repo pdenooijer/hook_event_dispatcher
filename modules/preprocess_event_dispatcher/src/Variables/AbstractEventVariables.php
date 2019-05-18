@@ -2,6 +2,8 @@
 
 namespace Drupal\preprocess_event_dispatcher\Variables;
 
+use function array_key_exists;
+
 /**
  * Class AbstractEventVariables.
  *
@@ -37,8 +39,8 @@ abstract class AbstractEventVariables {
    * @return mixed
    *   Value for variable BY VALUE.
    */
-  public function get($name, $default = NULL) {
-    return \array_key_exists($name, $this->variables) ? $this->variables[$name] : $default;
+  public function get(string $name, $default = NULL) {
+    return array_key_exists($name, $this->variables) ? $this->variables[$name] : $default;
   }
 
   /**
@@ -52,7 +54,7 @@ abstract class AbstractEventVariables {
    * @return $this
    *   Event variables.
    */
-  public function set($name, $value = NULL) {
+  public function set(string $name, $value = NULL) {
     $this->variables[$name] = $value;
     return $this;
   }
@@ -66,7 +68,7 @@ abstract class AbstractEventVariables {
    * @return $this
    *   Event variables.
    */
-  public function remove($name) {
+  public function remove(string $name) {
     unset($this->variables[$name]);
     return $this;
   }
@@ -80,7 +82,7 @@ abstract class AbstractEventVariables {
    * @return mixed
    *   Reference for the variable.
    */
-  public function &getByReference($name) {
+  public function &getByReference(string $name) {
     return $this->variables[$name];
   }
 

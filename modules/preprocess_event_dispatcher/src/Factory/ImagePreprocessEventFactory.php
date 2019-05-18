@@ -2,6 +2,7 @@
 
 namespace Drupal\preprocess_event_dispatcher\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\ImagePreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Variables\ImageEventVariables;
 
@@ -13,14 +14,14 @@ final class ImagePreprocessEventFactory implements PreprocessEventFactoryInterfa
   /**
    * {@inheritdoc}
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new ImagePreprocessEvent(new ImageEventVariables($variables));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return ImagePreprocessEvent::getHook();
   }
 

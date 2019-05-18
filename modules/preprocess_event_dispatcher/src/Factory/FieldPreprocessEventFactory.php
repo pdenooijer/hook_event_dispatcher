@@ -2,6 +2,7 @@
 
 namespace Drupal\preprocess_event_dispatcher\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\FieldPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Variables\FieldEventVariables;
 
@@ -13,14 +14,14 @@ final class FieldPreprocessEventFactory implements PreprocessEventFactoryInterfa
   /**
    * {@inheritdoc}
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new FieldPreprocessEvent(new FieldEventVariables($variables));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return FieldPreprocessEvent::getHook();
   }
 

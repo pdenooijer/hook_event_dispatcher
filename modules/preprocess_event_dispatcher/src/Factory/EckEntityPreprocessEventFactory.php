@@ -2,6 +2,7 @@
 
 namespace Drupal\preprocess_event_dispatcher\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\EckEntityPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Variables\EckEntityEventVariables;
 
@@ -13,14 +14,14 @@ final class EckEntityPreprocessEventFactory implements PreprocessEventFactoryInt
   /**
    * {@inheritdoc}
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new EckEntityPreprocessEvent(new EckEntityEventVariables($variables));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return EckEntityPreprocessEvent::getHook();
   }
 

@@ -2,9 +2,10 @@
 
 namespace Drupal\Tests\preprocess_event_dispatcher\Unit;
 
-use Drupal\preprocess_event_dispatcher\Variables\PageEventVariables;
 use Drupal\node\NodeInterface;
+use Drupal\preprocess_event_dispatcher\Variables\PageEventVariables;
 use Drupal\Tests\UnitTestCase;
+use Mockery;
 use stdClass;
 
 /**
@@ -13,27 +14,11 @@ use stdClass;
  * @group preprocess_event_dispatcher
  */
 final class PageTest extends UnitTestCase {
-  /**
-   * Mock node object.
-   *
-   * @var \Drupal\node\Entity\Node
-   */
-  protected $node;
-
-  /**
-   * Setup.
-   */
-  public function setUp() {
-    $this->node = $this->getMockBuilder(NodeInterface::class)
-      ->disableOriginalClone()
-      ->disableOriginalConstructor()
-      ->getMock();
-  }
 
   /**
    * Test the getter.
    */
-  public function testGet() {
+  public function testGet(): void {
     $vars['page']['test'] = TRUE;
     $vars['page']['array'] = ['array key' => 1];
     $vars['page']['object'] = new stdClass();
@@ -47,7 +32,7 @@ final class PageTest extends UnitTestCase {
   /**
    * Test the setter.
    */
-  public function testSet() {
+  public function testSet(): void {
     $vars = [];
     $page = new PageEventVariables($vars);
     $page->set('test', TRUE);
@@ -63,7 +48,7 @@ final class PageTest extends UnitTestCase {
   /**
    * The the vars by ref.
    */
-  public function testVarByRef() {
+  public function testVarByRef(): void {
     $vars = [];
     $page = new PageEventVariables($vars);
     $vars['page']['test'] = TRUE;
@@ -77,46 +62,46 @@ final class PageTest extends UnitTestCase {
   /**
    * Test is node page.
    */
-  public function testIsNodePage() {
+  public function testIsNodePage(): void {
     $vars = [];
     $page = new PageEventVariables($vars);
     $this->assertFalse($page->isNodePage());
     $vars['node'] = new stdClass();
     $this->assertFalse($page->isNodePage());
-    $vars['node'] = $this->node;
+    $vars['node'] = Mockery::mock(NodeInterface::class);
     $this->assertTrue($page->isNodePage());
   }
 
   /**
    * Test getNode() call.
    */
-  public function testGetNode() {
+  public function testGetNode(): void {
     $vars = [];
     $page = new PageEventVariables($vars);
-    $this->assertEquals(NULL, $page->getNode());
+    $this->assertNull($page->getNode());
     $page->set('node', new stdClass());
-    $this->assertEquals(NULL, $page->getNode());
-    $vars['node'] = $this->node;
+    $this->assertNull($page->getNode());
+    $vars['node'] = Mockery::mock(NodeInterface::class);
     $this->assertInstanceOf(NodeInterface::class, $page->getNode());
   }
 
   /**
    * Test getting a var by ref and changing it.
    */
-  public function testGetVarByRef() {
+  public function testGetVarByRef(): void {
     $vars['page']['test'] = 'test';
     $page = new PageEventVariables($vars);
     $test = &$page->getByReference('test');
-    $this->assertEquals('test', $test);
+    $this->assertSame('test', $test);
     $test = 'OtherTest';
-    $this->assertEquals('OtherTest', $page->get('test'));
-    $this->assertEquals('OtherTest', $vars['page']['test']);
+    $this->assertSame('OtherTest', $page->get('test'));
+    $this->assertSame('OtherTest', $vars['page']['test']);
   }
 
   /**
    * Test getting root variables by reference.
    */
-  public function testGetRootVariablesByReference() {
+  public function testGetRootVariablesByReference(): void {
     $vars['test'] = 'something';
     $page = new PageEventVariables($vars);
     $retrievedVars = &$page->getRootVariablesByReference();
@@ -130,7 +115,7 @@ final class PageTest extends UnitTestCase {
   /**
    * Test add cache context.
    */
-  public function testAddCacheContext() {
+  public function testAddCacheContext(): void {
     $vars = [];
     $page = new PageEventVariables($vars);
     $page->addCacheContext('url.path');

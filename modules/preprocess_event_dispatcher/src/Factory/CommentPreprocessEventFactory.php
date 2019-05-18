@@ -2,6 +2,7 @@
 
 namespace Drupal\preprocess_event_dispatcher\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\CommentPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Variables\CommentEventVariables;
 
@@ -13,14 +14,14 @@ final class CommentPreprocessEventFactory implements PreprocessEventFactoryInter
   /**
    * {@inheritdoc}
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new CommentPreprocessEvent(new CommentEventVariables($variables));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return CommentPreprocessEvent::getHook();
   }
 

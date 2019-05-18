@@ -2,6 +2,9 @@
 
 namespace Drupal\preprocess_event_dispatcher\Variables;
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\paragraphs\ParagraphInterface;
+
 /**
  * Class ParagraphEventVariables.
  */
@@ -10,10 +13,10 @@ class ParagraphEventVariables extends AbstractEntityEventVariables {
   /**
    * Get the paragraph object.
    *
-   * @return \Drupal\paragraphs\Entity\Paragraph
+   * @return \Drupal\paragraphs\ParagraphInterface
    *   Return the paragraph object.
    */
-  public function getParagraph() {
+  public function getParagraph(): ParagraphInterface {
     return $this->variables['paragraph'];
   }
 
@@ -23,7 +26,7 @@ class ParagraphEventVariables extends AbstractEntityEventVariables {
    * @return \Drupal\Core\Entity\EntityInterface
    *   EckEntity.
    */
-  public function getEntity() {
+  public function getEntity(): EntityInterface {
     return $this->getParagraph();
   }
 

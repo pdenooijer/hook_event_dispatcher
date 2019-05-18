@@ -2,6 +2,8 @@
 
 namespace Drupal\preprocess_event_dispatcher\Event;
 
+use Drupal\preprocess_event_dispatcher\Variables\AbstractEventVariables;
+
 /**
  * Interface PreprocessEntityEventInterface.
  */
@@ -18,7 +20,7 @@ interface PreprocessEntityEventInterface extends PreprocessEventInterface {
    * @return string
    *   Event name.
    */
-  public static function name($bundle = '', $viewMode = '');
+  public static function name(string $bundle = '', string $viewMode = ''): string;
 
   /**
    * Get the Entity variables.
@@ -26,6 +28,6 @@ interface PreprocessEntityEventInterface extends PreprocessEventInterface {
    * @return \Drupal\preprocess_event_dispatcher\Variables\AbstractEntityEventVariables
    *   Entity variables.
    */
-  public function getVariables();
+  public function getVariables(): AbstractEventVariables;
 
 }

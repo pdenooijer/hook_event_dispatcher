@@ -2,6 +2,8 @@
 
 namespace Drupal\preprocess_event_dispatcher\Variables;
 
+use Drupal\user\UserInterface;
+
 /**
  * Class UsernameEventVariables.
  */
@@ -13,17 +15,17 @@ class UsernameEventVariables extends AbstractEventVariables {
    * @return bool
    *   Is it?
    */
-  public function userIsAnonymous() {
+  public function userIsAnonymous(): bool {
     return $this->getAccount()->isAnonymous();
   }
 
   /**
    * Get the user account.
    *
-   * @return \Drupal\user\Entity\User
+   * @return \Drupal\user\UserInterface
    *   The user account.
    */
-  public function getAccount() {
+  public function getAccount(): UserInterface {
     return $this->variables['account'];
   }
 

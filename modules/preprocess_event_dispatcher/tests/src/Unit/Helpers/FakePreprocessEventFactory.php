@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Factory\PreprocessEventFactoryInterface;
 
 /**
@@ -24,7 +25,7 @@ final class FakePreprocessEventFactory implements PreprocessEventFactoryInterfac
    * @param string $hook
    *   Fake hook.
    */
-  public function __construct($hook) {
+  public function __construct(string $hook) {
     $this->hook = $hook;
   }
 
@@ -37,14 +38,14 @@ final class FakePreprocessEventFactory implements PreprocessEventFactoryInterfac
    * @return FakePreprocessEvent
    *   Created event.
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new FakePreprocessEvent(new FakeEventVariables($variables));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return $this->hook;
   }
 

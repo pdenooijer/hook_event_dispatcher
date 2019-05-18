@@ -15,7 +15,7 @@ class PageEventVariables extends AbstractEventVariables {
    * @return bool
    *   Is it?
    */
-  public function isNodePage() {
+  public function isNodePage(): bool {
     return isset($this->variables['node']) && $this->variables['node'] instanceof NodeInterface;
   }
 
@@ -25,7 +25,7 @@ class PageEventVariables extends AbstractEventVariables {
    * @return \Drupal\node\NodeInterface|null
    *   Drupal node.
    */
-  public function getNode() {
+  public function getNode(): ?NodeInterface {
     if (!$this->isNodePage()) {
       return NULL;
     }
@@ -44,7 +44,7 @@ class PageEventVariables extends AbstractEventVariables {
    * @return mixed
    *   Value
    */
-  public function get($name, $default = NULL) {
+  public function get(string $name, $default = NULL) {
     if (!isset($this->variables['page'][$name])) {
       return $default;
     }
@@ -63,7 +63,7 @@ class PageEventVariables extends AbstractEventVariables {
    * @return $this
    *   PageEventVariables
    */
-  public function set($name, $value = NULL) {
+  public function set(string $name, $value = NULL) {
     $this->variables['page'][$name] = $value;
     return $this;
   }
@@ -77,7 +77,7 @@ class PageEventVariables extends AbstractEventVariables {
    * @return $this
    *   Page
    */
-  public function remove($name) {
+  public function remove(string $name) {
     unset($this->variables['page'][$name]);
     return $this;
   }
@@ -91,17 +91,17 @@ class PageEventVariables extends AbstractEventVariables {
    * @return mixed
    *   Reference for the variable.
    */
-  public function &getByReference($name) {
+  public function &getByReference(string $name) {
     return $this->variables['page'][$name];
   }
 
   /**
    * Get the complete $variables of the page template.
    *
-   * @return mixed
+   * @return array
    *   Reference to all variables of the page template.
    */
-  public function &getRootVariablesByReference() {
+  public function &getRootVariablesByReference(): array {
     return $this->variables;
   }
 
@@ -114,7 +114,7 @@ class PageEventVariables extends AbstractEventVariables {
    * @return $this
    *   PageEventVariables
    */
-  public function addCacheContext($context) {
+  public function addCacheContext(string $context) {
     $this->variables['#cache']['contexts'][] = $context;
     return $this;
   }

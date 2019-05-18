@@ -2,6 +2,8 @@
 
 namespace Drupal\preprocess_event_dispatcher\Variables;
 
+use Drupal\block\BlockInterface;
+
 /**
  * Class BlockEventVariables.
  */
@@ -10,10 +12,10 @@ class BlockEventVariables extends AbstractEventVariables {
   /**
    * Get the block.
    *
-   * @return \Drupal\block\Entity\Block
+   * @return \Drupal\block\BlockInterface
    *   The block.
    */
-  public function getBlock() {
+  public function getBlock(): BlockInterface {
     return $this->variables['block'];
   }
 
@@ -23,7 +25,7 @@ class BlockEventVariables extends AbstractEventVariables {
    * @return string
    *   Identifier for the block.
    */
-  public function getId() {
+  public function getId(): string {
     return $this->variables['elements']['#id'];
   }
 
@@ -36,11 +38,8 @@ class BlockEventVariables extends AbstractEventVariables {
    * @return array
    *   Content of the child or [].
    */
-  public function getContentChild($childName) {
-    if (isset($this->variables['content'][$childName])) {
-      return $this->variables['content'][$childName];
-    }
-    return [];
+  public function getContentChild(string $childName): array {
+    return $this->variables['content'][$childName] ?? [];
   }
 
 }

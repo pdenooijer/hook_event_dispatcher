@@ -2,9 +2,10 @@
 
 namespace Drupal\preprocess_example_module\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Factory\PreprocessEventFactoryInterface;
-use Drupal\preprocess_example_module\Event\Variables\ExampleEventVariables;
 use Drupal\preprocess_example_module\Event\ExamplePreprocessEvent;
+use Drupal\preprocess_example_module\Event\Variables\ExampleEventVariables;
 
 /**
  * Class ExamplePreprocessEventFactory.
@@ -20,7 +21,7 @@ class ExamplePreprocessEventFactory implements PreprocessEventFactoryInterface {
    * @return \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent
    *   Created event.
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new ExamplePreprocessEvent(
       new ExampleEventVariables($variables)
     );
@@ -29,7 +30,7 @@ class ExamplePreprocessEventFactory implements PreprocessEventFactoryInterface {
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return ExamplePreprocessEvent::getHook();
   }
 

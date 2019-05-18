@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\preprocess_event_dispatcher\Unit;
 
+use Drupal\block\BlockInterface;
 use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\BlockPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\FieldPreprocessEvent;
@@ -29,6 +30,11 @@ use Drupal\preprocess_event_dispatcher\Variables\ViewTableEventVariables;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
+use Drupal\views\Plugin\views\field\EntityField;
+use Drupal\views\Plugin\views\field\Markup;
+use Drupal\views\ResultRow;
+use Drupal\views\ViewExecutable;
+use Mockery;
 
 /**
  * Class OtherEventVariablesTest.
@@ -51,33 +57,34 @@ final class OtherEventVariablesTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $this->mapper = YamlDefinitionsLoader::getInstance()->getMapper();
   }
 
   /**
    * Test a BlockPreprocessEvent.
    */
-  public function testBlockEvent() {
+  public function testBlockEvent(): void {
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['block'] = 'block';
-    $variablesArray['elements']['#id'] = 22;
+    $block = Mockery::mock(BlockInterface::class);
+    $variablesArray['block'] = $block;
+    $variablesArray['elements']['#id'] = '22';
     $variablesArray['content']['test'] = ['success2'];
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\BlockEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(BlockEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
-    $this->assertSame('block', $variables->getBlock());
-    $this->assertEquals(22, $variables->getId());
-    $this->assertEquals(['success2'], $variables->getContentChild('test'));
-    $this->assertEquals([], $variables->getContentChild('none-existing'));
+    $this->assertSame($block, $variables->getBlock());
+    $this->assertSame('22', $variables->getId());
+    $this->assertSame(['success2'], $variables->getContentChild('test'));
+    $this->assertSame([], $variables->getContentChild('none-existing'));
   }
 
   /**
    * Test a FieldPreprocessEvent.
    */
-  public function testFieldEvent() {
+  public function testFieldEvent(): void {
     $variablesArray = $this->createVariablesArray();
     $variablesArray['element'] = ['element array'];
     $variablesArray['items'] = ['items array'];
@@ -86,14 +93,14 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $variables = $this->getVariablesFromCreatedEvent(FieldPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(FieldEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
-    $this->assertEquals(['element array'], $variables->getElement());
-    $this->assertEquals(['items array'], $variables->getItems());
+    $this->assertSame(['element array'], $variables->getElement());
+    $this->assertSame(['items array'], $variables->getItems());
   }
 
   /**
    * Test FormPreprocessEvent.
    */
-  public function testFormEvent() {
+  public function testFormEvent(): void {
     $variablesArray = $this->createVariablesArray();
     $variablesArray['element'] = ['element array'];
 
@@ -101,13 +108,13 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $variables = $this->getVariablesFromCreatedEvent(FormPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(FormEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
-    $this->assertEquals(['element array'], $variables->getElement());
+    $this->assertSame(['element array'], $variables->getElement());
   }
 
   /**
    * Test a HtmlPreprocessEvent.
    */
-  public function testHtmlEvent() {
+  public function testHtmlEvent(): void {
     $variablesArray = $this->createVariablesArray();
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\HtmlEventVariables $variables */
@@ -119,7 +126,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
   /**
    * Test a ImagePreprocessEvent.
    */
-  public function testImageEvent() {
+  public function testImageEvent(): void {
     $variablesArray = $this->createVariablesArray();
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\ImageEventVariables $variables */
@@ -131,7 +138,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
   /**
    * Test a PagePreprocessEvent.
    */
-  public function testPageEvent() {
+  public function testPageEvent(): void {
     $variablesArray['page'] = $this->createVariablesArray();
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\PageEventVariables $variables */
@@ -143,86 +150,89 @@ final class OtherEventVariablesTest extends UnitTestCase {
   /**
    * Test a UsernamePreprocessEvent.
    */
-  public function testUsernameEvent() {
+  public function testUsernameEvent(): void {
     $variablesArray = $this->createVariablesArray();
-    $accountMock = $this->getMockBuilder(UserInterface::class)
-      ->disableOriginalClone()
-      ->disableOriginalConstructor()
-      ->setMethods(['isAnonymous'])
-      ->getMock();
-    $accountMock->expects($this->once())
-      ->method('isAnonymous')
+    $accountMock = Mockery::mock(UserInterface::class);
+    $accountMock->expects('isAnonymous')
       ->with()
-      ->willReturn(TRUE);
+      ->once()
+      ->andReturnTrue();
     $variablesArray['account'] = $accountMock;
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\UsernameEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(UsernamePreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(UsernameEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
-    $this->assertEquals($accountMock, $variables->getAccount());
+    $this->assertSame($accountMock, $variables->getAccount());
     $this->assertTrue($variables->userIsAnonymous());
   }
 
   /**
    * Test a ViewFieldPreprocessEvent.
    */
-  public function testViewFieldEvent() {
+  public function testViewFieldEvent(): void {
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['field'] = 'field';
-    $variablesArray['output'] = 'output';
-    $variablesArray['row'] = 'row';
-    $variablesArray['view'] = 'view';
+    $field = Mockery::mock(EntityField::class);
+    $variablesArray['field'] = $field;
+    $output = Mockery::mock(Markup::class);
+    $variablesArray['output'] = $output;
+    $row = Mockery::mock(ResultRow::class);
+    $variablesArray['row'] = $row;
+    $view = Mockery::mock(ViewExecutable::class);
+    $variablesArray['view'] = $view;
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewFieldEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewFieldPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(ViewFieldEventVariables::class, $variables);
 
     $this->assertAbstractEventVariables($variables);
-    $this->assertEquals('field', $variables->getField());
-    $this->assertEquals('output', $variables->getOutput());
-    $this->assertEquals('row', $variables->getRow());
-    $this->assertEquals('view', $variables->getView());
+    $this->assertSame($field, $variables->getField());
+    $this->assertSame($output, $variables->getOutput());
+    $this->assertSame($row, $variables->getRow());
+    $this->assertSame($view, $variables->getView());
   }
 
   /**
    * Test a ViewTablePreprocessEvent.
    */
-  public function testViewTableEvent() {
+  public function testViewTableEvent(): void {
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['rows'] = 'rows';
-    $variablesArray['view'] = 'view';
+    $rows = Mockery::mock(ResultRow::class);
+    $variablesArray['rows'] = $rows;
+    $view = Mockery::mock(ViewExecutable::class);
+    $variablesArray['view'] = $view;
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewTableEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewTablePreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(ViewTableEventVariables::class, $variables);
 
     $this->assertAbstractEventVariables($variables);
-    $this->assertSame('rows', $variables->getRows());
-    $this->assertSame('view', $variables->getView());
+    $this->assertSame($rows, $variables->getRows());
+    $this->assertSame($view, $variables->getView());
   }
 
   /**
    * Test a ViewPreprocessEvent.
    */
-  public function testViewEvent() {
+  public function testViewEvent(): void {
     $variablesArray = $this->createVariablesArray();
     $variablesArray['rows'][0]['#rows'] = ['rows'];
-    $variablesArray['view'] = 'view';
+    $view = Mockery::mock(ViewExecutable::class);
+    $variablesArray['view'] = $view;
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(ViewEventVariables::class, $variables);
 
     $this->assertAbstractEventVariables($variables);
-    $this->assertEquals(['rows'], $variables->getRows());
-    $this->assertEquals('view', $variables->getView());
+    $this->assertSame(['rows'], $variables->getRows());
+    $this->assertSame($view, $variables->getView());
   }
 
   /**
    * Test a StatusMessagesPreprocessEvent.
    */
-  public function testStatusMessagesEvent() {
+  public function testStatusMessagesEvent(): void {
     $variablesArray = $this->createVariablesArray();
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\StatusMessagesEventVariables $variables */
@@ -237,17 +247,17 @@ final class OtherEventVariablesTest extends UnitTestCase {
    * @param \Drupal\preprocess_event_dispatcher\Variables\AbstractEventVariables $variables
    *   Variables object.
    */
-  private function assertAbstractEventVariables(AbstractEventVariables $variables) {
-    $this->assertEquals('success', $variables->get('test'));
-    $this->assertEquals('default', $variables->get('test2', 'default'));
+  private function assertAbstractEventVariables(AbstractEventVariables $variables): void {
+    $this->assertSame('success', $variables->get('test'));
+    $this->assertSame('default', $variables->get('test2', 'default'));
 
     $reference = &$variables->getByReference('reference');
-    $this->assertEquals('first', $reference);
+    $this->assertSame('first', $reference);
     $reference = 'second';
-    $this->assertEquals('second', $variables->get('reference'));
+    $this->assertSame('second', $variables->get('reference'));
 
     $variables->set('test3', 'new set');
-    $this->assertEquals('new set', $variables->get('test3'));
+    $this->assertSame('new set', $variables->get('test3'));
 
     $variables->remove('test');
     $this->assertNull($variables->get('test'));
@@ -264,13 +274,13 @@ final class OtherEventVariablesTest extends UnitTestCase {
    * @return \Drupal\preprocess_event_dispatcher\Variables\AbstractEventVariables
    *   Variables object.
    */
-  private function getVariablesFromCreatedEvent($class, array $variablesArray) {
+  private function getVariablesFromCreatedEvent(string $class, array $variablesArray): AbstractEventVariables {
     /* @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $class */
     $hook = $class::getHook();
-    $this->assertEquals(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
+    $this->assertSame(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
 
     $factory = $this->mapper->getFactory($hook);
-    $this->assertEquals($hook, $factory->getEventHook());
+    $this->assertSame($hook, $factory->getEventHook());
 
     /* @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $event*/
     $event = $factory->createEvent($variablesArray);
@@ -285,7 +295,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
    * @return array
    *   Variables array.
    */
-  private function createVariablesArray() {
+  private function createVariablesArray(): array {
     return [
       'test' => 'success',
       'reference' => 'first',

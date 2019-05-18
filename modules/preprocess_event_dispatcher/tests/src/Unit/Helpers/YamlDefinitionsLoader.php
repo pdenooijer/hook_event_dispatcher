@@ -4,6 +4,8 @@ namespace Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers;
 
 use Drupal\preprocess_event_dispatcher\Service\PreprocessEventFactoryMapper;
 use Symfony\Component\Yaml\Parser;
+use function dirname;
+use function file_get_contents;
 
 /**
  * Class YamlDefinitionsLoader.
@@ -52,9 +54,9 @@ final class YamlDefinitionsLoader {
   /**
    * Load the definitions from the services YAML.
    */
-  private function loadDefinitionsFromServicesYaml() {
+  private function loadDefinitionsFromServicesYaml(): void {
     $yaml = new Parser();
-    $content = file_get_contents(dirname(dirname(dirname(dirname(__DIR__)))) . '/preprocess_event_dispatcher.services.yml');
+    $content = file_get_contents(dirname(__DIR__, 4) . '/preprocess_event_dispatcher.services.yml');
     $factories = $this->services = $yaml->parse($content)['services'];
 
     // Remove the Service and Factory Mapper.
@@ -65,7 +67,7 @@ final class YamlDefinitionsLoader {
   /**
    * Set up Factories Mapper.
    */
-  private function setUpFactoriesMapper() {
+  private function setUpFactoriesMapper(): void {
     $this->mapper = new PreprocessEventFactoryMapper();
     foreach ($this->factories as $entry) {
       $factory = new $entry['class']();
@@ -81,7 +83,7 @@ final class YamlDefinitionsLoader {
    * @return \Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader
    *   Existing or new YamlDefinitionsLoader instance.
    */
-  public static function getInstance() {
+  public static function getInstance(): YamlDefinitionsLoader {
     if (static::$instance === NULL) {
       static::$instance = new static();
     }
@@ -94,7 +96,7 @@ final class YamlDefinitionsLoader {
    * @return \Drupal\preprocess_event_dispatcher\Service\PreprocessEventFactoryMapper
    *   Factory mapper.
    */
-  public function getMapper() {
+  public function getMapper(): PreprocessEventFactoryMapper {
     return $this->mapper;
   }
 
@@ -104,7 +106,7 @@ final class YamlDefinitionsLoader {
    * @return array
    *   Service definitions.
    */
-  public function getServices() {
+  public function getServices(): array {
     return $this->services;
   }
 
@@ -114,7 +116,7 @@ final class YamlDefinitionsLoader {
    * @return array
    *   Factory definitions.
    */
-  public function getFactories() {
+  public function getFactories(): array {
     return $this->factories;
   }
 

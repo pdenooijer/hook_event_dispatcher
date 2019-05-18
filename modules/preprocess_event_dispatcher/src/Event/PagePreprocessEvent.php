@@ -10,7 +10,7 @@ final class PagePreprocessEvent extends AbstractPreprocessEvent {
   /**
    * {@inheritdoc}
    */
-  public static function getHook() {
+  public static function getHook(): string {
     return 'page';
   }
 

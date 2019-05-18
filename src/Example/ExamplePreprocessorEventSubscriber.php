@@ -14,7 +14,7 @@ final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterfa
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       PagePreprocessEvent::name() => 'preprocessPage',
       BlockPreprocessEvent::name() => 'preprocessBlock',
@@ -27,7 +27,7 @@ final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterfa
    * @param \Drupal\preprocess_event_dispatcher\Event\PagePreprocessEvent $event
    *   Event.
    */
-  public function preprocessPage(PagePreprocessEvent $event) {
+  public function preprocessPage(PagePreprocessEvent $event): void {
     /* @var \Drupal\preprocess_event_dispatcher\Variables\PageEventVariables $variables */
     $variables = $event->getVariables();
     $node = $variables->getNode();
@@ -45,7 +45,7 @@ final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterfa
    * @param \Drupal\preprocess_event_dispatcher\Event\BlockPreprocessEvent $event
    *   Event.
    */
-  public function preprocessBlock(BlockPreprocessEvent $event) {
+  public function preprocessBlock(BlockPreprocessEvent $event): void {
     /* @var \Drupal\preprocess_event_dispatcher\Variables\BlockEventVariables $variables */
     $variables = $event->getVariables();
 

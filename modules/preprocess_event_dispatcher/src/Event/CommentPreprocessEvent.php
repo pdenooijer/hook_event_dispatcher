@@ -10,7 +10,7 @@ final class CommentPreprocessEvent extends AbstractPreprocessEntityEvent {
   /**
    * {@inheritdoc}
    */
-  public static function getHook() {
+  public static function getHook(): string {
     return 'comment';
   }
 

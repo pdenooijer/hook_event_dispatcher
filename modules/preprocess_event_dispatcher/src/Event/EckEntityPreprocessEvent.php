@@ -10,7 +10,7 @@ final class EckEntityPreprocessEvent extends AbstractPreprocessEntityEvent {
   /**
    * {@inheritdoc}
    */
-  public static function getHook() {
+  public static function getHook(): string {
     return 'eck_entity';
   }
 

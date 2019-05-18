@@ -2,6 +2,7 @@
 
 namespace Drupal\preprocess_event_dispatcher\Factory;
 
+use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\FormPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Variables\FormEventVariables;
 
@@ -13,14 +14,14 @@ final class FormPreprocessEventFactory implements PreprocessEventFactoryInterfac
   /**
    * {@inheritdoc}
    */
-  public function createEvent(array &$variables) {
+  public function createEvent(array &$variables): AbstractPreprocessEvent {
     return new FormPreprocessEvent(new FormEventVariables($variables));
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getEventHook() {
+  public function getEventHook(): string {
     return FormPreprocessEvent::getHook();
   }
 

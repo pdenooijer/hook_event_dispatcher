@@ -10,7 +10,7 @@ final class BlockPreprocessEvent extends AbstractPreprocessEvent {
   /**
    * {@inheritdoc}
    */
-  public static function getHook() {
+  public static function getHook(): string {
     return 'block';
   }
 
