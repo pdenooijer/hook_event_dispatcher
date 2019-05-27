@@ -71,12 +71,12 @@ final class EntityEventTest extends UnitTestCase {
    */
   public function testEckEntityEvent() {
     $this->variables = [
-      'elements' => [
+      'entity' => [
+        '#entity' => new EntityMock('eck_entity', 'bundle', 'view_mode'),
+        '#entity_type' => 'bundle',
         '#view_mode' => 'view_mode',
       ],
-      'eck_entity' => new EntityMock('eck_entity', 'bundle', 'view_mode'),
       'theme_hook_original' => 'eck_entity',
-      'bundle' => 'bundle',
     ];
     $this->createAndAssertEntityEvent(EckEntityPreprocessEvent::class);
   }
