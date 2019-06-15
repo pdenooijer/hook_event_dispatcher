@@ -68,12 +68,12 @@ final class EntityEventVariablesTest extends UnitTestCase {
     $eckEntity = new EntityMock('eck_entity', 'eck_entity_bundle', 'eck_entity_view_mode');
     $variablesArray = $this->createVariablesArray();
 
-    $variablesArray['entity'] = [
-      '#entity' => $eckEntity,
-      '#entity_type' => $eckEntity->bundle(),
+    $variablesArray['eck_entity'] = $eckEntity;
+    $variablesArray['elements'] = [
       '#view_mode' => $eckEntity->getViewMode(),
     ];
     $variablesArray['theme_hook_original'] = $eckEntity->getEntityType();
+    $variablesArray['bundle'] = $eckEntity->bundle();
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(EckEntityPreprocessEvent::class, $variablesArray);
