@@ -116,6 +116,30 @@ interface HookEventDispatcherInterface {
    */
   const ENTITY_LOAD = 'hook_event_dispatcher.entity.load';
 
+  /**
+   * Respond to creation of a new entity translation.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_translation_insert()
+   * @see hook_entity_translation_insert()
+   *
+   * @var string
+   */
+  const ENTITY_TRANSLATION_INSERT = 'hook_event_dispatcher.entity.translation_insert';
+
+  /**
+   * Respond to deletion of a new entity translation.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_translation_delete()
+   * @see hook_entity_translation_delete()
+   *
+   * @var string
+   */
+  const ENTITY_TRANSLATION_DELETE = 'hook_event_dispatcher.entity.translation_delete';
+
   // ENTITY FIELD EVENTS.
   /**
    * Control access to fields.
@@ -190,6 +214,18 @@ interface HookEventDispatcherInterface {
    * @var string
    */
   const ENTITY_BUNDLE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_bundle.field_info_alter';
+
+  /**
+   * Add to entity type definitions..
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_type_build()
+   * @see hook_entity_type_build()
+   *
+   * @var string
+   */
+  const ENTITY_TYPE_BUILD = 'hook_event_dispatcher.entity_type.build';
 
   // FORM EVENTS.
   /**
@@ -533,6 +569,22 @@ interface HookEventDispatcherInterface {
    * @var string
    */
   const PAGE_BOTTOM = 'hook_event_dispatcher.page.bottom';
+
+  /**
+   * Add attachments (typically assets) to a page before it is rendered.
+   *
+   * Attachments should be added to individual element render arrays whenever
+   * possible, as per Drupal best practices, so only use this when that isn't
+   * practical or you need to target the page itself.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_page_attachments()
+   * @see hook_page_attachments()
+   *
+   * @var string
+   */
+  const PAGE_ATTACHMENTS = 'hook_event_dispatcher.page.attachments';
 
   // CRON EVENTS.
   /**

@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Path;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
@@ -31,7 +32,7 @@ class PathEventTest extends UnitTestCase {
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
@@ -120,6 +121,9 @@ class PathEventTest extends UnitTestCase {
     hook_event_dispatcher_path_delete([]);
     hook_event_dispatcher_path_insert([]);
     hook_event_dispatcher_path_update([]);
+
+    // Add this check so phpunit won't trigger incomplete test.
+    $this->assertTrue(TRUE);
   }
 
 }
