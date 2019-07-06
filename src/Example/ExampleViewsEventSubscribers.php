@@ -35,8 +35,6 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    *   The event.
    */
   public function preView(ViewsPreViewEvent $event) {
-    $view = $event->getView();
-    $display_id = $event->getDisplayId();
     $args = &$event->getArgs();
 
     // Do something with the arguments.
@@ -63,10 +61,10 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    *   The event.
    */
   public function queryAlter(ViewsQueryAlterEvent $event) {
-    $view = $event->getView();
     $query = $event->getQuery();
 
     // Do something with the query.
+    $query->setLimit(10);
   }
 
   /**
@@ -74,19 +72,11 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    *
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event
    *   The event.
-   *
-   * @return array
-   *   An associative array where each key is a string to be replaced, and the
-   *   corresponding value is its replacement. The strings to replace are often
-   *   surrounded with '***', as illustrated in the example implementation, to
-   *   avoid collisions with other values in the query.
    */
   public function querySubstitutions(ViewsQuerySubstitutionsEvent $event) {
-    $view = $event->getView();
-
-    return array(
+    $event->setSubstitutions(array(
       '***CURRENT_TIME***' => \Drupal::time()->getRequestTime(),
-    );
+    ));
   }
 
   /**
@@ -138,7 +128,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
     $view = $event->getView();
 
     // Do something with the view.
-    $view->setArguments(['test']);
+    $view->setArguments(array('test'));
   }
 
   /**
@@ -148,8 +138,6 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    *   The event.
    */
   public function postRender(ViewsPostRenderEvent $event) {
-    $view = $event->getView();
-    $output = &$event->getOutput();
     $cache = $event->getCache();
 
     // Do something with the cache settings.
