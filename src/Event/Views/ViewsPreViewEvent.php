@@ -29,14 +29,14 @@ class ViewsPreViewEvent extends BaseViewsEvent {
    *
    * @param \Drupal\views\ViewExecutable $view
    *   The view object about to be processed.
-   * @param string $display_id
+   * @param string $displayId
    *   The machine name of the active display.
    * @param array $args
    *   An array of arguments passed into the view.
    */
-  public function __construct(ViewExecutable $view, $display_id, array &$args) {
+  public function __construct(ViewExecutable $view, $displayId, array &$args) {
     parent::__construct($view);
-    $this->displayId = $display_id;
+    $this->displayId = $displayId;
     $this->args = &$args;
   }
 
