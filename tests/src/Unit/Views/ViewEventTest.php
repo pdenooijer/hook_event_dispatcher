@@ -182,7 +182,7 @@ class ViewEventTest extends UnitTestCase {
   public function testQuerySubstitions() {
     /** @var \Drupal\views\ViewExecutable $view */
     $view = $this->createMock(ViewExecutable::class);
-    $expected_substitutions = array("test" => 1);
+    $expected_substitutions = ["test" => 1];
 
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::VIEWS_QUERY_SUBSTITUTIONS => function (ViewsQuerySubstitutionsEvent $event) use ($expected_substitutions) {

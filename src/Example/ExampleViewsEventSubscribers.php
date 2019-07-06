@@ -74,9 +74,9 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    *   The event.
    */
   public function querySubstitutions(ViewsQuerySubstitutionsEvent $event) {
-    $event->setSubstitutions(array(
+    $event->setSubstitutions([
       '***CURRENT_TIME***' => \Drupal::time()->getRequestTime(),
-    ));
+    ]);
   }
 
   /**
@@ -128,7 +128,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
     $view = $event->getView();
 
     // Do something with the view.
-    $view->setArguments(array('test'));
+    $view->setArguments(['test']);
   }
 
   /**
