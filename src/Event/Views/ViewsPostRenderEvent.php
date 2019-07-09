@@ -16,7 +16,7 @@ class ViewsPostRenderEvent extends BaseViewsEvent {
    *
    * @var string
    */
-  protected $output;
+  private $output;
 
   /**
    * The cache settings.

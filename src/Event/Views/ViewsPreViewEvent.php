@@ -15,7 +15,7 @@ class ViewsPreViewEvent extends BaseViewsEvent {
    *
    * @var array
    */
-  protected $args;
+  private $arguments;
 
   /**
    * The machine name of the active display.
@@ -31,13 +31,13 @@ class ViewsPreViewEvent extends BaseViewsEvent {
    *   The view object about to be processed.
    * @param string $displayId
    *   The machine name of the active display.
-   * @param array $args
+   * @param array $arguments
    *   An array of arguments passed into the view.
    */
-  public function __construct(ViewExecutable $view, $displayId, array &$args) {
+  public function __construct(ViewExecutable $view, $displayId, array &$arguments) {
     parent::__construct($view);
     $this->displayId = $displayId;
-    $this->args = &$args;
+    $this->$arguments = &$arguments;
   }
 
   /**
@@ -56,8 +56,8 @@ class ViewsPreViewEvent extends BaseViewsEvent {
    * @return array
    *   The array of arguments passed into the view.
    */
-  public function &getArgs() {
-    return $this->args;
+  public function &getArguments() {
+    return $this->arguments;
   }
 
   /**

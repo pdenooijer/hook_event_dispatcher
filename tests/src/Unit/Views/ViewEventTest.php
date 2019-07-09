@@ -47,20 +47,20 @@ class ViewEventTest extends UnitTestCase {
     /** @var \Drupal\views\ViewExecutable $view */
     $view = $this->createMock(ViewExecutable::class);
     $displayId = 'test';
-    $args = [
+    $arguments = [
       'test',
     ];
 
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::VIEWS_PRE_VIEW => function (ViewsPreViewEvent $event) {
-        $args = &$event->getArgs();
-        $args[0] = 'test2';
+        $arguments = &$event->getArguments();
+        $arguments[0] = 'test2';
       },
     ]);
 
-    hook_event_dispatcher_views_pre_view($view, $displayId, $args);
+    hook_event_dispatcher_views_pre_view($view, $displayId, $arguments);
 
-    $this->assertEquals('test2', $args[0]);
+    $this->assertEquals('test2', $arguments[0]);
   }
 
   /**

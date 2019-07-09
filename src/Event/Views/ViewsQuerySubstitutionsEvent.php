@@ -3,8 +3,6 @@
 namespace Drupal\hook_event_dispatcher\Event\Views;
 
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
-use Drupal\views\Plugin\views\query\QueryPluginBase;
-use Drupal\views\ViewExecutable;
 
 /**
  * Class ViewsQuerySubstitutionEvent.
@@ -18,7 +16,7 @@ final class ViewsQuerySubstitutionsEvent extends BaseViewsEvent {
    *
    * @var array
    */
-  private $substitutions;
+  private $substitutions = [];
 
   /**
    * Set the query substitutions.
@@ -42,7 +40,7 @@ final class ViewsQuerySubstitutionsEvent extends BaseViewsEvent {
    *   surrounded with '***', as illustrated in the example implementation, to
    *   avoid collisions with other values in the query.
    */
-  public function getSubstitutions() {
+  public function &getSubstitutions() {
     return $this->substitutions;
   }
 
