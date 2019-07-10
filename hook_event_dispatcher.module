@@ -40,6 +40,7 @@ use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
+use Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent;
 use Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent;
 use Drupal\hook_event_dispatcher\Event\Page\PageTopEvent;
@@ -750,5 +751,17 @@ function hook_event_dispatcher_cron() {
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $event = new CronEvent();
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_language_switch_links_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_language_switch_links_alter(array &$links, $type, $path) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $event = new LanguageSwitchLinksAlterEvent($links, $type, $path);
   $manager->register($event);
 }
