@@ -15,7 +15,7 @@ class ViewsPreViewEvent extends BaseViewsEvent {
    *
    * @var array
    */
-  private $arguments;
+  private $arguments = [];
 
   /**
    * The machine name of the active display.
@@ -37,7 +37,7 @@ class ViewsPreViewEvent extends BaseViewsEvent {
   public function __construct(ViewExecutable $view, $displayId, array &$arguments) {
     parent::__construct($view);
     $this->displayId = $displayId;
-    $this->$arguments = &$arguments;
+    $this->arguments = &$arguments;
   }
 
   /**
