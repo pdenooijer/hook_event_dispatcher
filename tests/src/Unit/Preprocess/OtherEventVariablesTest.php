@@ -9,6 +9,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\StatusMessagesPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\UsernamePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
@@ -214,6 +215,18 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $this->assertAbstractEventVariables($variables);
     $this->assertEquals(['rows'], $variables->getRows());
     $this->assertEquals('view', $variables->getView());
+  }
+
+  /**
+   * Test a StatusMessagesPreprocessEvent.
+   */
+  public function testStatusMessagesEvent() {
+    $variablesArray = $this->createVariablesArray();
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\StatusMessagesEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(StatusMessagesPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(StatusMessagesPreprocessEvent::class, $variables);
+    $this->assertAbstractEventVariables($variables);
   }
 
   /**
