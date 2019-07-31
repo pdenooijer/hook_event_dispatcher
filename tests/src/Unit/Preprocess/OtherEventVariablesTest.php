@@ -18,6 +18,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FormEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\HtmlEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\StatusMessagesEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
@@ -225,7 +226,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\StatusMessagesEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(StatusMessagesPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(StatusMessagesPreprocessEvent::class, $variables);
+    $this->assertInstanceOf(StatusMessagesEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
   }
 
