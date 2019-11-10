@@ -4,6 +4,7 @@ namespace Drupal\hook_event_dispatcher\Event\Theme;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
+use RuntimeException;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -85,7 +86,7 @@ final class ThemeEvent extends Event implements EventInterface {
    */
   public function addNewTheme($theme, array $information) {
     if (empty($information['path'])) {
-      throw new \RuntimeException(
+      throw new RuntimeException(
         'Missing path in the information array. ThemeEvent needs the path to be set manually, to have a proper default theme implementation. See \hook_theme() for more information.'
       );
     }
