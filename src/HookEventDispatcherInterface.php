@@ -645,4 +645,16 @@ interface HookEventDispatcherInterface {
    */
   const CRON = 'hook_event_dispatcher.cron';
 
+  /**
+   * Alter the links generated to switch languages.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_language_switch_links_alter()
+   * @see hook_language_switch_links_alter()
+   *
+   * @var string
+   */
+  const LANGUAGE_SWITCH_LINKS_ALTER = 'hook_event_dispatcher.language.switch_links_alter';
+
 }
