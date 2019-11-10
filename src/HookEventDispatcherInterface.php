@@ -353,6 +353,18 @@ interface HookEventDispatcherInterface {
   const VIEWS_DATA_ALTER = 'hook_event_dispatcher.views.data_alter';
 
   /**
+   * Alter a view at the very beginning of Views processing.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_views_pre_view()
+   * @see hook_views_pre_view()
+   *
+   * @var string
+   */
+  const VIEWS_PRE_VIEW = 'hook_event_dispatcher.views.pre_view';
+
+  /**
    * Act on the view after the query is built and just before it is executed.
    *
    * @Event
@@ -365,6 +377,18 @@ interface HookEventDispatcherInterface {
   const VIEWS_PRE_EXECUTE = 'hook_event_dispatcher.views.pre_execute';
 
   /**
+   * Act on the view immediately before rendering it.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_views_pre_render()
+   * @see hook_views_pre_render()
+   *
+   * @var string
+   */
+  const VIEWS_PRE_RENDER = 'hook_event_dispatcher.views.pre_render';
+
+  /**
    * Act on the view immediately after the query has been executed.
    *
    * @Event
@@ -375,6 +399,18 @@ interface HookEventDispatcherInterface {
    * @var string
    */
   const VIEWS_POST_EXECUTE = 'hook_event_dispatcher.views.post_execute';
+
+  /**
+   * Post-process any rendered data.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_views_post_render()
+   * @see hook_views_post_render()
+   *
+   * @var string
+   */
+  const VIEWS_POST_RENDER = 'hook_event_dispatcher.views.post_render';
 
   /**
    * Act on the view before the query is built, but after displays are attached.
@@ -409,6 +445,16 @@ interface HookEventDispatcherInterface {
    * @see hook_views_query_alter()
    */
   const VIEWS_QUERY_ALTER = 'hook_event_dispatcher.views.query_alter';
+
+  /**
+   * Replace special strings in the query before it is executed.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_views_query_substitutions()
+   * @see hook_views_query_substitutions()
+   */
+  const VIEWS_QUERY_SUBSTITUTIONS = 'hook_event_dispatcher.views.query_substitutions';
 
   // THEME EVENTS.
   /**
