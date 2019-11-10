@@ -60,6 +60,11 @@ services:
     tags:
     - { name: preprocess_event_default_factory }
 
+  preprocess_event.factory.status_messages:
+    class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\StatusMessagesPreprocessEventFactory
+    tags:
+    - { name: preprocess_event_default_factory }
+
   preprocess_event.factory.username:
     class: Drupal\hook_event_dispatcher\Event\Preprocess\Factory\UsernamePreprocessEventFactory
     tags:

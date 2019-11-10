@@ -9,6 +9,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\StatusMessagesPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\UsernamePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables;
@@ -17,6 +18,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\FormEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\HtmlEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ImageEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
+use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\StatusMessagesEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\UsernameEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\ViewFieldEventVariables;
@@ -35,6 +37,7 @@ use Drupal\user\UserInterface;
  *
  * Testing the other events gives expected PHPMD warnings.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 final class OtherEventVariablesTest extends UnitTestCase {
 
@@ -214,6 +217,18 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $this->assertAbstractEventVariables($variables);
     $this->assertEquals(['rows'], $variables->getRows());
     $this->assertEquals('view', $variables->getView());
+  }
+
+  /**
+   * Test a StatusMessagesPreprocessEvent.
+   */
+  public function testStatusMessagesEvent() {
+    $variablesArray = $this->createVariablesArray();
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\StatusMessagesEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(StatusMessagesPreprocessEvent::class, $variablesArray);
+    $this->assertInstanceOf(StatusMessagesEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
   }
 
   /**
