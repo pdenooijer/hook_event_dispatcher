@@ -5,6 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Preprocess;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
+use stdClass;
 
 /**
  * Class PageTest.
@@ -35,11 +36,11 @@ final class PageTest extends UnitTestCase {
   public function testGet() {
     $vars['page']['test'] = TRUE;
     $vars['page']['array'] = ['array key' => 1];
-    $vars['page']['object'] = new \stdClass();
+    $vars['page']['object'] = new stdClass();
     $page = new PageEventVariables($vars);
     $this->assertTrue($page->get('test'));
     $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf(\stdClass::class, $page->get('object'));
+    $this->assertInstanceOf(stdClass::class, $page->get('object'));
     $this->assertFalse($page->get('doesNotExists', FALSE));
   }
 
@@ -51,10 +52,10 @@ final class PageTest extends UnitTestCase {
     $page = new PageEventVariables($vars);
     $page->set('test', TRUE);
     $page->set('array', ['array key' => 1]);
-    $page->set('object', new \stdClass());
+    $page->set('object', new stdClass());
     $this->assertTrue($page->get('test'));
     $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf(\stdClass::class, $page->get('object'));
+    $this->assertInstanceOf(stdClass::class, $page->get('object'));
     $page->set('null');
     $this->assertNull($page->get('null'));
   }
@@ -67,10 +68,10 @@ final class PageTest extends UnitTestCase {
     $page = new PageEventVariables($vars);
     $vars['page']['test'] = TRUE;
     $vars['page']['array'] = ['array key' => 1];
-    $vars['page']['object'] = new \stdClass();
+    $vars['page']['object'] = new stdClass();
     $this->assertTrue($page->get('test'));
     $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf(\stdClass::class, $page->get('object'));
+    $this->assertInstanceOf(stdClass::class, $page->get('object'));
   }
 
   /**
@@ -80,7 +81,7 @@ final class PageTest extends UnitTestCase {
     $vars = [];
     $page = new PageEventVariables($vars);
     $this->assertFalse($page->isNodePage());
-    $vars['node'] = new \stdClass();
+    $vars['node'] = new stdClass();
     $this->assertFalse($page->isNodePage());
     $vars['node'] = $this->node;
     $this->assertTrue($page->isNodePage());
@@ -93,7 +94,7 @@ final class PageTest extends UnitTestCase {
     $vars = [];
     $page = new PageEventVariables($vars);
     $this->assertEquals(NULL, $page->getNode());
-    $page->set('node', new \stdClass());
+    $page->set('node', new stdClass());
     $this->assertEquals(NULL, $page->getNode());
     $vars['node'] = $this->node;
     $this->assertInstanceOf(NodeInterface::class, $page->getNode());

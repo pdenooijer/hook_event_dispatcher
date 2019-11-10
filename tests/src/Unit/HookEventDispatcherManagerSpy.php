@@ -4,6 +4,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface;
+use InvalidArgumentException;
 
 /**
  * Class HookEventDispatcherManagerSpy.
@@ -88,7 +89,7 @@ class HookEventDispatcherManagerSpy implements HookEventDispatcherManagerInterfa
    */
   public function getRegisteredEvent($eventName) {
     if (!isset($this->registeredEvents[$eventName])) {
-      throw new \InvalidArgumentException("The event '$eventName' was not registered");
+      throw new InvalidArgumentException("The event '$eventName' was not registered");
     }
     return $this->registeredEvents[$eventName];
   }

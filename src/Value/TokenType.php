@@ -3,6 +3,8 @@
 namespace Drupal\hook_event_dispatcher\Value;
 
 use Drupal\Component\Render\MarkupInterface;
+use UnexpectedValueException;
+use function is_string;
 
 /**
  * Token ValueObject.
@@ -57,11 +59,11 @@ final class TokenType {
    */
   public static function create($type, $name) {
     $instance = new self();
-    if (!\is_string($type)) {
-      throw new \UnexpectedValueException('Type should be a string');
+    if (!is_string($type)) {
+      throw new UnexpectedValueException('Type should be a string');
     }
-    if (!\is_string($name) && !$name instanceof MarkupInterface) {
-      throw new \UnexpectedValueException('Name should be a string or an instance of MarkupInterface');
+    if (!is_string($name) && !$name instanceof MarkupInterface) {
+      throw new UnexpectedValueException('Name should be a string or an instance of MarkupInterface');
     }
     $instance->type = $type;
     $instance->name = $name;
@@ -80,8 +82,8 @@ final class TokenType {
    * @throws \UnexpectedValueException
    */
   public function setDescription($description) {
-    if (!\is_string($description) && !$description instanceof MarkupInterface) {
-      throw new \UnexpectedValueException('Description should be a string or an instance of MarkupInterface');
+    if (!is_string($description) && !$description instanceof MarkupInterface) {
+      throw new UnexpectedValueException('Description should be a string or an instance of MarkupInterface');
     }
     $clone = clone $this;
     $clone->description = $description;
@@ -100,8 +102,8 @@ final class TokenType {
    * @throws \UnexpectedValueException
    */
   public function setNeedsData($needsData) {
-    if ($needsData && !\is_string($needsData)) {
-      throw new \UnexpectedValueException('NeedsData should be a string');
+    if ($needsData && !is_string($needsData)) {
+      throw new UnexpectedValueException('NeedsData should be a string');
     }
     $clone = clone $this;
     $clone->needsData = $needsData;

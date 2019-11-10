@@ -4,7 +4,7 @@
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
   "require-dev": {
-    "drupal/coder": "^8.3.1",
+    "drupal/coder": "8.3.1",
     "drupal/core": "^8.7",
     "jakub-onderka/php-console-highlighter": "^0.4.0",
     "jakub-onderka/php-parallel-lint": "^1.0",
@@ -49,7 +49,8 @@
   "config": {
     "platform": {
       "php": "5.6"
-    }
+    },
+    "sort-packages": true
   },
   "suggest": {
     "drupal/token": "Provides additional tokens not supported by core (most notably fields), as well as a UI for browsing tokens.",
