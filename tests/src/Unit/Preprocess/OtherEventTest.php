@@ -8,6 +8,7 @@ use Drupal\hook_event_dispatcher\Event\Preprocess\FormPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\HtmlPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ImagePreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
+use Drupal\hook_event_dispatcher\Event\Preprocess\StatusMessagesPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\Variables\AbstractEventVariables;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewFieldPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\ViewPreprocessEvent;
@@ -20,6 +21,9 @@ use Drupal\Tests\UnitTestCase;
  * Class OtherEventTest.
  *
  * @group hook_event_dispatcher
+ *
+ * Testing all variables gives expected PHPMD warnings.
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 final class OtherEventTest extends UnitTestCase {
 
@@ -111,6 +115,13 @@ final class OtherEventTest extends UnitTestCase {
    */
   public function testViewEvent() {
     $this->createAndAssertEvent(ViewPreprocessEvent::class);
+  }
+
+  /**
+   * Test a StatusMessagesPreprocessEvent.
+   */
+  public function testStatusMessagesEvent() {
+    $this->createAndAssertEvent(StatusMessagesPreprocessEvent::class);
   }
 
   /**
