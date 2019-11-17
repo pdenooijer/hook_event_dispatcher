@@ -54,6 +54,7 @@ use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesA
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
+use Drupal\hook_event_dispatcher\Event\Theme\ThemesInstalledEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
 use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
@@ -608,6 +609,17 @@ function hook_event_dispatcher_theme_suggestions_alter(array &$suggestions, arra
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new ThemeSuggestionsAlterEvent($suggestions, $variables, $hook));
   $manager->register(new ThemeSuggestionsAlterIdEvent($suggestions, $variables, $hook));
+}
+
+/**
+ * Implements hook_themes_installed().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_themes_installed(array $themeList) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new ThemesInstalledEvent($themeList));
 }
 
 /**
