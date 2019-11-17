@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\ib_references\EventSubscriber;
+namespace Drupal\hook_event_dispatcher\Example;
 
 use Drupal\hook_event_dispatcher\Event\Preprocess\BlockPreprocessEvent;
 use Drupal\hook_event_dispatcher\Event\Preprocess\PagePreprocessEvent;
