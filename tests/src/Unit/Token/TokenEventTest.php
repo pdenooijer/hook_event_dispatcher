@@ -51,6 +51,7 @@ class TokenEventTest extends UnitTestCase {
       Token::create('test_type', 'test_token1', 'Test name 1')->setDescription('Test description 1'),
       Token::create('test_type', 'test_token2', 'Test name 2')->setDescription('Test description 2'),
       Token::create('other_type', 'test_token3', 'Test name 3'),
+      Token::create('dynamic_type', 'test_token4', 'Test name 4')->setDynamic(TRUE),
     ];
 
     $this->manager->setEventCallbacks([
@@ -83,16 +84,26 @@ class TokenEventTest extends UnitTestCase {
         'test_token1' => [
           'name' => 'Test name 1',
           'description' => 'Test description 1',
+          'dynamic' => FALSE,
         ],
         'test_token2' => [
           'name' => 'Test name 2',
           'description' => 'Test description 2',
+          'dynamic' => FALSE,
         ],
       ],
       'other_type' => [
         'test_token3' => [
           'name' => 'Test name 3',
           'description' => NULL,
+          'dynamic' => FALSE,
+        ],
+      ],
+      'dynamic_type' => [
+        'test_token4' => [
+          'name' => 'Test name 4',
+          'description' => NULL,
+          'dynamic' => TRUE,
         ],
       ],
     ];
