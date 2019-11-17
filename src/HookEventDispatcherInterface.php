@@ -220,6 +220,18 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
+   * @see hook_event_dispatcher_entity_type_alter()
+   * @see hook_entity_type_alter()
+   *
+   * @var string
+   */
+  const ENTITY_TYPE_ALTER = 'hook_event_dispatcher.entity_type.alter';
+
+  /**
+   * Add to entity type definitions..
+   *
+   * @Event
+   *
    * @see hook_event_dispatcher_entity_type_build()
    * @see hook_entity_type_build()
    *
