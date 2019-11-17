@@ -494,6 +494,18 @@ interface HookEventDispatcherInterface {
   const THEME_SUGGESTIONS_ALTER = 'hook_event_dispatcher.theme.suggestions_alter';
 
   /**
+   * Respond to themes being installed.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_themes_installed()
+   * @see hook_themes_installed()
+   *
+   * @var string
+   */
+  const THEMES_INSTALLED = 'hook_event_dispatcher.theme.installed';
+
+  /**
    * Alter the default, hook-independent variables for all templates.
    *
    * @Event
