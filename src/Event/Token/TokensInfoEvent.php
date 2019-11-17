@@ -52,6 +52,7 @@ final class TokensInfoEvent extends Event implements EventInterface {
     $this->tokens[$type->getType()][$type->getToken()] = [
       'name' => $type->getName(),
       'description' => $type->getDescription(),
+      'dynamic' => $type->isDynamic(),
     ];
   }
 

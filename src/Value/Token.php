@@ -37,6 +37,12 @@ final class Token {
    * @var string|\Drupal\Component\Render\MarkupInterface
    */
   private $name;
+  /**
+   * Is a dynamic field.
+   *
+   * @var bool
+   */
+  private $dynamic = FALSE;
 
   /**
    * Use create function instead.
@@ -82,8 +88,8 @@ final class Token {
    * @param string $description
    *   The description of the token type.
    *
-   * @return self
-   *   New instance with the description.
+   * @return \Drupal\hook_event_dispatcher\Value\Token
+   *   New instance with the given description.
    *
    * @throws \UnexpectedValueException
    */
@@ -93,6 +99,21 @@ final class Token {
     }
     $clone = clone $this;
     $clone->description = $description;
+    return $clone;
+  }
+
+  /**
+   * Set whether or not the token is dynamic.
+   *
+   * @param bool $dynamic
+   *   TRUE if the token is dynamic.
+   *
+   * @return \Drupal\hook_event_dispatcher\Value\Token
+   *   New instance with the given dynamic.
+   */
+  public function setDynamic($dynamic) {
+    $clone = clone $this;
+    $clone->dynamic = $dynamic;
     return $clone;
   }
 
@@ -134,6 +155,16 @@ final class Token {
    */
   public function getToken() {
     return $this->token;
+  }
+
+  /**
+   * Getter.
+   *
+   * @return bool
+   *   Whether or not the token is dynamic.
+   */
+  public function isDynamic() {
+    return $this->dynamic;
   }
 
 }
