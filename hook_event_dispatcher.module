@@ -34,6 +34,7 @@ use Drupal\hook_event_dispatcher\Event\EntityField\EntityFieldAccessEvent;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityBaseFieldInfoAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityBaseFieldInfoEvent;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityBundleFieldInfoAlterEvent;
+use Drupal\hook_event_dispatcher\Event\EntityType\EntityTypeAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityTypeBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
@@ -414,6 +415,18 @@ function hook_event_dispatcher_entity_bundle_field_info_alter(array &$fields, En
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityBundleFieldInfoAlterEvent($fields, $entityType, $bundle);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_entity_type_alter(array &$entityTypes) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityTypeAlterEvent($entityTypes);
   $manager->register($event);
 }
 
