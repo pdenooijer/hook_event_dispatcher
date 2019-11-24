@@ -22,6 +22,8 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityCreateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityLoadEvent;
+use Drupal\hook_event_dispatcher\Event\Entity\EntityOperationEvent;
+use Drupal\hook_event_dispatcher\Event\Entity\EntityOperationAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityTranslationDeleteEvent;
@@ -219,6 +221,31 @@ function hook_event_dispatcher_entity_view(
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityViewEvent($build, $entity, $display, $viewMode));
+}
+
+/**
+ * Implements hook_entity_operation().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_entity_operation(EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityOperationEvent($entity);
+  $manager->register($event);
+
+  return $event->getOperations();
+}
+
+/**
+ * Implements hook_entity_operation_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_entity_operation_alter(array &$operations, EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityOperationAlterEvent($operations, $entity));
 }
 
 /**
