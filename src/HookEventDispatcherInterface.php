@@ -216,6 +216,30 @@ interface HookEventDispatcherInterface {
   const ENTITY_BUNDLE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_bundle.field_info_alter';
 
   /**
+   * Entity operation.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_operation()
+   * @see hook_entity_operation()
+   *
+   * @var string
+   */
+  const ENTITY_OPERATION = 'hook_event_dispatcher.entity.operation';
+
+  /**
+   * Entity operation alter.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_operation_alter()
+   * @see hook_entity_operation_alter()
+   *
+   * @var string
+   */
+  const ENTITY_OPERATION_ALTER = 'hook_event_dispatcher.entity.operation_alter';
+
+  /**
    * Add to entity type definitions..
    *
    * @Event
