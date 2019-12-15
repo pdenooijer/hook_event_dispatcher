@@ -165,27 +165,4 @@ class EntityEventTest extends UnitTestCase {
     $this->assertEquals($originalEntity, $event->getOriginalEntity());
   }
 
-  /**
-   * Test EntityViewEvent.
-   */
-  public function testEntityViewEvent() {
-    $build = ['testBuild'];
-    $entity = $this->createMock(EntityInterface::class);
-    $display = $this->createMock(EntityViewDisplayInterface::class);
-    $viewMode = 'testViewMode';
-
-    hook_event_dispatcher_entity_view($build, $entity, $display, $viewMode);
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_VIEW);
-    $this->assertEquals($build, $event->getBuild());
-    $this->assertEquals($entity, $event->getEntity());
-    $this->assertEquals($display, $event->getDisplay());
-    $this->assertEquals($viewMode, $event->getViewMode());
-
-    $newBuild = ['newBuild'];
-    $event->setBuild($newBuild);
-    $this->assertEquals($newBuild, $event->getBuild());
-  }
-
 }
