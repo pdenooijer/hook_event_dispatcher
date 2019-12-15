@@ -81,6 +81,18 @@ interface HookEventDispatcherInterface {
   const ENTITY_VIEW = 'hook_event_dispatcher.entity.view';
 
   /**
+   * Alter a entity being assembled right before rendering.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_view_alter()
+   * @see hook_entity_view_alter()
+   *
+   * @var string
+   */
+  const ENTITY_VIEW_ALTER = 'hook_event_dispatcher.entity.view_alter';
+
+  /**
    * Control entity operation access.
    *
    * @Event

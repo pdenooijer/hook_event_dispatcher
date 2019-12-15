@@ -30,6 +30,7 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityTranslationDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityTranslationInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent;
+use Drupal\hook_event_dispatcher\Event\Entity\EntityViewAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent;
 use Drupal\hook_event_dispatcher\Event\EntityField\EntityFieldAccessEvent;
@@ -221,6 +222,21 @@ function hook_event_dispatcher_entity_view(
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityViewEvent($build, $entity, $display, $viewMode));
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ *
+ *  * {@inheritdoc}
+ */
+function hook_event_dispatcher_entity_view_alter(
+  array &$build,
+  EntityInterface $entity,
+  EntityViewDisplayInterface $display
+) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityViewAlterEvent($build, $entity, $display));
 }
 
 /**
