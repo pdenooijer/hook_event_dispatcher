@@ -16,6 +16,10 @@ use function hook_event_dispatcher_entity_view_alter;
 
 /**
  * Class EntityViewEventTest.
+ *
+ * @package Drupal\Tests\hook_event_dispatcher\Unit\Entity
+ *
+ * @group hook_event_dispatcher
  */
 final class EntityViewEventTest extends UnitTestCase {
 
