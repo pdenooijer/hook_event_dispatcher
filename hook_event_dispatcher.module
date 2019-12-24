@@ -55,6 +55,7 @@ use Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\LibraryInfoAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
+use Drupal\hook_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemesInstalledEvent;
@@ -676,6 +677,18 @@ function hook_event_dispatcher_theme(array $existing) {
   $event = new ThemeEvent($existing);
   $manager->register($event);
   return $event->getNewThemes();
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_theme_registry_alter(array &$themeRegistry) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+
+  $manager->register(new ThemeRegistryAlterEvent($themeRegistry));
 }
 
 /**
