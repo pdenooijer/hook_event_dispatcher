@@ -705,6 +705,7 @@ interface HookEventDispatcherInterface {
    */
   const CRON = 'hook_event_dispatcher.cron';
 
+  // LANGUAGE EVENTS.
   /**
    * Alter the links generated to switch languages.
    *
@@ -716,5 +717,30 @@ interface HookEventDispatcherInterface {
    * @var string
    */
   const LANGUAGE_SWITCH_LINKS_ALTER = 'hook_event_dispatcher.language.switch_links_alter';
+
+  // WEBFORM EVENTS.
+  /**
+   * Respond to webform elements being rendered.
+   *
+   * @Event
+   *
+   * @see webform_event_dispatcher_webform_element_alter()
+   * @see hook_webform_element_alter()
+   *
+   * @var string
+   */
+  const WEBFORM_ELEMENT_ALTER = 'hook_event_dispatcher.webform.element.alter';
+
+  /**
+   * Respond to webform element info being initialized.
+   *
+   * @Event
+   *
+   * @see webform_event_dispatcher_webform_element_info_alter()
+   * @see hook_webform_element_info_alter()
+   *
+   * @var string
+   */
+  const WEBFORM_ELEMENT_INFO_ALTER = 'hook_event_dispatcher.webform.element.info.alter';
 
 }
