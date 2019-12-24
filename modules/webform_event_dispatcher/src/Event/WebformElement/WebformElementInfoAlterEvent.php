@@ -3,6 +3,7 @@
 namespace Drupal\webform_event_dispatcher\Event\WebformElement;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -44,7 +45,7 @@ class WebformElementInfoAlterEvent extends Event implements EventInterface {
    * {@inheritdoc}
    */
   public function getDispatcherType() {
-    return 'hook_event_dispatcher.webform.element.info.alter';
+    return HookEventDispatcherInterface::WEBFORM_ELEMENT_INFO_ALTER;
   }
 
 }
