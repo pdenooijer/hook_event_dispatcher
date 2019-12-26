@@ -518,6 +518,18 @@ interface HookEventDispatcherInterface {
   const THEME = 'hook_event_dispatcher.theme';
 
   /**
+   * Alter the theme registry information returned from hook_theme().
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_theme_registry_alter()
+   * @see hook_theme_registry_alter()
+   *
+   * @var string
+   */
+  const THEME_REGISTRY_ALTER = 'hook_event_dispatcher.theme.registry_alter';
+
+  /**
    * Alters named suggestions for all theme hooks.
    *
    * @Event
