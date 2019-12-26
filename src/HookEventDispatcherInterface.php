@@ -755,4 +755,17 @@ interface HookEventDispatcherInterface {
    */
   const WEBFORM_ELEMENT_INFO_ALTER = 'hook_event_dispatcher.webform.element.info.alter';
 
+  // MEDIA EVENTS.
+  /**
+   * Alters an oEmbed resource URL before it is fetched.
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_oembed_resource_data_alter()
+   * @see hook_oembed_resource_url_alter()
+   *
+   * @var string
+   */
+  const MEDIA_OEMBED_RESOURCE_DATA_ALTER = 'hook_event_dispatcher.media_oembed.url_alter';
+
 }

@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Media event dispatcher submodule.
+ */
+
+use Drupal\media_event_dispatcher\Event\Media\OEmbedResourceUrlAlterEvent;
+use Drupal\media\OEmbed\Provider;
+
+/**
+ * Implements hook_oembed_resource_url_alter().
+ *
+ * {@inheritdoc}
+ */
+function media_event_dispatcher_oembed_resource_url_alter(array &$parsedURL, Provider $provider) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $event = new OEmbedResourceUrlAlterEvent($parsedURL, $provider);
+  $manager->register($event);
+}
