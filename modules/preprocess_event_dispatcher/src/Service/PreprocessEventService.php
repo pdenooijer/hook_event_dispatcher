@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class PreprocessEventService.
  */
-final class PreprocessEventService {
+final class PreprocessEventService implements PreprocessEventServiceInterface {
 
   /**
    * Event dispatcher.
@@ -38,12 +38,7 @@ final class PreprocessEventService {
   }
 
   /**
-   * Create and dispatch the event.
-   *
-   * @param string $hook
-   *   The hook name.
-   * @param array $variables
-   *   Variables.
+   * {@inheritdoc}
    */
   public function createAndDispatchKnownEvents(string $hook, array &$variables): void {
     $factory = $this->mapper->getFactory($hook);
