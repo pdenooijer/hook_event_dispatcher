@@ -2,11 +2,13 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Cron;
 
+use Drupal;
 use Drupal\hook_event_dispatcher\Event\Cron\CronEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use function hook_event_dispatcher_cron;
 
 /**
  * Class CronEventTest.
@@ -27,18 +29,18 @@ final class CronEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * Test the cron event.
    */
-  public function testCronEvent() {
+  public function testCronEvent(): void {
     hook_event_dispatcher_cron();
 
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::CRON);
