@@ -81,18 +81,6 @@ class EntityAccessEvent extends BaseEntityEvent {
   }
 
   /**
-   * Set the access result.
-   *
-   * @param \Drupal\Core\Access\AccessResultInterface $accessResult
-   *   The access result.
-   *
-   * @deprecated in favour of addAccessResult() which is more descriptive.
-   */
-  public function setAccessResult(AccessResultInterface $accessResult) {
-    $this->addAccessResult($accessResult);
-  }
-
-  /**
    * Add the access result.
    *
    * @param \Drupal\Core\Access\AccessResultInterface $accessResult

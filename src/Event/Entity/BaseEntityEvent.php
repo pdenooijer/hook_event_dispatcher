@@ -38,16 +38,4 @@ abstract class BaseEntityEvent extends Event implements EventInterface {
     return $this->entity;
   }
 
-  /**
-   * Set the Entity.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The Entity.
-   *
-   * @deprecated This is not needed, objects are past by reference.
-   */
-  public function setEntity(EntityInterface $entity) {
-    $this->entity = $entity;
-  }
-
 }

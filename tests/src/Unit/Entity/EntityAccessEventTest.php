@@ -41,23 +41,6 @@ class EntityAccessEventTest extends UnitTestCase {
   }
 
   /**
-   * Deprecated setEntity method test.
-   *
-   * @deprecated should be removed when setEntity() method is removed.
-   */
-  public function testDeprecatedSetEntityMethod() {
-    $entity = $this->createMock(EntityInterface::class);
-    $operation = 'test';
-    $account = $this->createMock(AccountInterface::class);
-    $event = new EntityAccessEvent($entity, $operation, $account);
-
-    $otherEntity = $this->createMock(EntityInterface::class);
-    $event->setEntity($otherEntity);
-
-    $this->assertEquals($otherEntity, $event->getEntity());
-  }
-
-  /**
    * EntityAccessEvent with no changes test.
    */
   public function testEntityAccessEventWithNoChanges() {
@@ -76,30 +59,6 @@ class EntityAccessEventTest extends UnitTestCase {
     $this->assertTrue($hookAccessResult->isNeutral());
     $this->assertFalse($hookAccessResult->isAllowed());
     $this->assertFalse($hookAccessResult->isForbidden());
-  }
-
-  /**
-   * EntityAccessEvent with deprecated setAccessResult test.
-   *
-   * @deprecated should be removed when setAccessResult method is removed.
-   */
-  public function testEntityAccessEventWithDeprecatedSetAccessResult() {
-    $accessResult = new AccessResultForbidden();
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
-        $event->setAccessResult($accessResult);
-      },
-    ]);
-
-    $entity = $this->createMock(EntityInterface::class);
-    $operation = 'test';
-    $account = $this->createMock(AccountInterface::class);
-
-    $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
-
-    $this->assertFalse($hookAccessResult->isNeutral());
-    $this->assertFalse($hookAccessResult->isAllowed());
-    $this->assertTrue($hookAccessResult->isForbidden());
   }
 
   /**

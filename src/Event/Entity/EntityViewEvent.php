@@ -64,18 +64,6 @@ class EntityViewEvent extends BaseEntityEvent {
   }
 
   /**
-   * Set the build.
-   *
-   * @param array $build
-   *   The build.
-   *
-   * @deprecated This is not needed, this array is past by reference.
-   */
-  public function setBuild(array $build) {
-    $this->build = $build;
-  }
-
-  /**
    * Get the display.
    *
    * @return \Drupal\Core\Entity\Display\EntityViewDisplayInterface
