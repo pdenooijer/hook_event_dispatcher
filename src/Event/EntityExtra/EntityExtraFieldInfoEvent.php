@@ -24,7 +24,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO;
   }
 
@@ -34,7 +34,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * @param array $fieldInfo
    *   Field info.
    */
-  public function setFieldInfo(array $fieldInfo) {
+  public function setFieldInfo(array $fieldInfo): void {
     $this->fieldInfo = $fieldInfo;
   }
 
@@ -44,7 +44,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * @return array
    *   Field info.
    */
-  public function getFieldInfo() {
+  public function getFieldInfo(): array {
     return $this->fieldInfo;
   }
 
@@ -60,7 +60,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * @param array $info
    *   The field info.
    */
-  public function addDisplayFieldInfo($entityType, $bundle, $fieldName, array $info) {
+  public function addDisplayFieldInfo(string $entityType, string $bundle, string $fieldName, array $info): void {
     $this->addFieldInfo($entityType, $bundle, $fieldName, $info, 'display');
   }
 
@@ -76,7 +76,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * @param array $info
    *   The field info.
    */
-  public function addFormFieldInfo($entityType, $bundle, $fieldName, array $info) {
+  public function addFormFieldInfo(string $entityType, string $bundle, string $fieldName, array $info): void {
     $this->addFieldInfo($entityType, $bundle, $fieldName, $info, 'form');
   }
 
@@ -94,7 +94,7 @@ class EntityExtraFieldInfoEvent extends Event implements EventInterface {
    * @param string $type
    *   The type.
    */
-  private function addFieldInfo($entityType, $bundle, $fieldName, array $info, $type) {
+  private function addFieldInfo(string $entityType, string $bundle, string $fieldName, array $info, string $type): void {
     $this->fieldInfo[$entityType][$bundle][$type][$fieldName] = $info;
   }
 
