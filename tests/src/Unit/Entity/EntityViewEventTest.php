@@ -33,7 +33,7 @@ final class EntityViewEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
@@ -44,7 +44,7 @@ final class EntityViewEventTest extends UnitTestCase {
   /**
    * Test EntityViewEvent by reference.
    */
-  public function testEntityViewEventByReference() {
+  public function testEntityViewEventByReference(): void {
     $build = $expectedBuild = ['testBuild' => ['someBuild']];
     $entity = $this->createMock(EntityInterface::class);
     $display = $this->createMock(EntityViewDisplayInterface::class);
@@ -71,7 +71,7 @@ final class EntityViewEventTest extends UnitTestCase {
   /**
    * Test EntityViewAlterEvent.
    */
-  public function testEntityViewAlterEvent() {
+  public function testEntityViewAlterEvent(): void {
     $build = $expectedBuild = ['testBuild' => ['someBuild']];
     $entity = $this->createMock(EntityInterface::class);
     $display = $this->createMock(EntityViewDisplayInterface::class);

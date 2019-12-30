@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Entity;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\hook_event_dispatcher\Event\Entity\EntityOperationAlterEvent;
@@ -9,6 +10,8 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityOperationEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_entity_operation;
+use function hook_event_dispatcher_entity_operation_alter;
 
 /**
  * Class EntityOperationsTest.
@@ -29,18 +32,18 @@ class EntityOperationsTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * EntityOperationEvent test.
    */
-  public function testEntityOperation() {
+  public function testEntityOperation(): void {
     $entity = $this->createMock(EntityInterface::class);
 
     $operations = [
@@ -71,7 +74,7 @@ class EntityOperationsTest extends UnitTestCase {
   /**
    * EntityOperationAlterEvent test.
    */
-  public function testEntityOperationAlter() {
+  public function testEntityOperationAlter(): void {
     $entity = $this->createMock(EntityInterface::class);
     $operations = [
       'my_opt' => [

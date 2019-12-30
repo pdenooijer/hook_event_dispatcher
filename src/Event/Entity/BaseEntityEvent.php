@@ -34,7 +34,7 @@ abstract class BaseEntityEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Entity\EntityInterface
    *   The Entity.
    */
-  public function getEntity() {
+  public function getEntity(): EntityInterface {
     return $this->entity;
   }
 

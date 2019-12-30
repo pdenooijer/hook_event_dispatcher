@@ -12,7 +12,7 @@ class EntityInsertEvent extends BaseEntityEvent {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_INSERT;
   }
 

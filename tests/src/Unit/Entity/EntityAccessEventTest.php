@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Entity;
 
+use Drupal;
 use Drupal\Core\Access\AccessResultAllowed;
 use Drupal\Core\Access\AccessResultForbidden;
 use Drupal\Core\Access\AccessResultNeutral;
@@ -12,6 +13,7 @@ use Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_entity_access;
 
 /**
  * Class EntityAccessEventTest.
@@ -32,18 +34,18 @@ class EntityAccessEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * EntityAccessEvent with no changes test.
    */
-  public function testEntityAccessEventWithNoChanges() {
+  public function testEntityAccessEventWithNoChanges(): void {
     $entity = $this->createMock(EntityInterface::class);
     $operation = 'test';
     $account = $this->createMock(AccountInterface::class);
@@ -64,10 +66,10 @@ class EntityAccessEventTest extends UnitTestCase {
   /**
    * EntityAccessEvent with neutral result test.
    */
-  public function testEntityAccessEventNeutralResult() {
+  public function testEntityAccessEventNeutralResult(): void {
     $accessResult = new AccessResultNeutral();
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => static function (EntityAccessEvent $event) use ($accessResult) {
         $event->addAccessResult($accessResult);
       },
     ]);
@@ -86,10 +88,10 @@ class EntityAccessEventTest extends UnitTestCase {
   /**
    * EntityAccessEvent with allowed result test.
    */
-  public function testEntityAccessEventAllowedResult() {
+  public function testEntityAccessEventAllowedResult(): void {
     $accessResult = new AccessResultAllowed();
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => static function (EntityAccessEvent $event) use ($accessResult) {
         $event->addAccessResult($accessResult);
       },
     ]);
@@ -108,10 +110,10 @@ class EntityAccessEventTest extends UnitTestCase {
   /**
    * EntityAccessEvent with forbidden result test.
    */
-  public function testEntityAccessEventForbiddenResult() {
+  public function testEntityAccessEventForbiddenResult(): void {
     $accessResult = new AccessResultForbidden();
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResult) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => static function (EntityAccessEvent $event) use ($accessResult) {
         $event->addAccessResult($accessResult);
       },
     ]);
@@ -133,14 +135,14 @@ class EntityAccessEventTest extends UnitTestCase {
    * This simulates multiple event listeners adding their own access results to
    * this event.
    */
-  public function testEntityAccessEventCombinedResults() {
+  public function testEntityAccessEventCombinedResults(): void {
     $accessResults = [
       new AccessResultNeutral(),
       new AccessResultAllowed(),
       new AccessResultForbidden(),
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_ACCESS => function (EntityAccessEvent $event) use ($accessResults) {
+      HookEventDispatcherInterface::ENTITY_ACCESS => static function (EntityAccessEvent $event) use ($accessResults) {
         foreach ($accessResults as $accessResult) {
           $event->addAccessResult($accessResult);
         }

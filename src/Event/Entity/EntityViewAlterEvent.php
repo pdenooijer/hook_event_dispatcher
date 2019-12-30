@@ -16,13 +16,13 @@ class EntityViewAlterEvent extends BaseEntityEvent {
    *
    * @var array
    */
-  protected $build;
+  private $build;
   /**
    * The entity view display.
    *
    * @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface
    */
-  protected $display;
+  private $display;
 
   /**
    * EntityViewAlterEventEvent constructor.
@@ -50,7 +50,7 @@ class EntityViewAlterEvent extends BaseEntityEvent {
    * @return array
    *   The build.
    */
-  public function &getBuild() {
+  public function &getBuild(): array {
     return $this->build;
   }
 
@@ -60,14 +60,14 @@ class EntityViewAlterEvent extends BaseEntityEvent {
    * @return \Drupal\Core\Entity\Display\EntityViewDisplayInterface
    *   The display.
    */
-  public function getDisplay() {
+  public function getDisplay(): EntityViewDisplayInterface {
     return $this->display;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_VIEW_ALTER;
   }
 

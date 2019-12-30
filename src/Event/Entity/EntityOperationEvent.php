@@ -42,7 +42,7 @@ class EntityOperationEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Entity\EntityInterface
    *   The entity.
    */
-  public function getEntity() {
+  public function getEntity(): EntityInterface {
     return $this->entity;
   }
 
@@ -52,7 +52,7 @@ class EntityOperationEvent extends Event implements EventInterface {
    * @return array
    *   The operations.
    */
-  public function getOperations() {
+  public function getOperations(): array {
     return $this->operations;
   }
 
@@ -62,7 +62,7 @@ class EntityOperationEvent extends Event implements EventInterface {
    * @param array $operations
    *   An array of operations.
    */
-  public function setOperations(array $operations) {
+  public function setOperations(array $operations): void {
     $this->operations = $operations;
   }
 
@@ -74,14 +74,14 @@ class EntityOperationEvent extends Event implements EventInterface {
    * @param array $operation
    *   Operation definition.
    */
-  public function addOperation($name, array $operation) {
+  public function addOperation(string $name, array $operation): void {
     $this->operations[$name] = $operation;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_OPERATION;
   }
 

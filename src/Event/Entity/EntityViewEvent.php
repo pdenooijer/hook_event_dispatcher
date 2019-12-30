@@ -16,19 +16,19 @@ class EntityViewEvent extends BaseEntityEvent {
    *
    * @var array
    */
-  protected $build;
+  private $build;
   /**
    * The entity view display.
    *
    * @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface
    */
-  protected $display;
+  private $display;
   /**
    * The view mode.
    *
    * @var string
    */
-  protected $viewMode;
+  private $viewMode;
 
   /**
    * EntityViewEvent constructor.
@@ -45,7 +45,12 @@ class EntityViewEvent extends BaseEntityEvent {
    * @param string $viewMode
    *   The view mode the entity is rendered in.
    */
-  public function __construct(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $viewMode) {
+  public function __construct(
+    array &$build,
+    EntityInterface $entity,
+    EntityViewDisplayInterface $display,
+    string $viewMode
+  ) {
     parent::__construct($entity);
 
     $this->build = &$build;
@@ -59,7 +64,7 @@ class EntityViewEvent extends BaseEntityEvent {
    * @return array
    *   The build.
    */
-  public function &getBuild() {
+  public function &getBuild(): array {
     return $this->build;
   }
 
@@ -69,7 +74,7 @@ class EntityViewEvent extends BaseEntityEvent {
    * @return \Drupal\Core\Entity\Display\EntityViewDisplayInterface
    *   The display.
    */
-  public function getDisplay() {
+  public function getDisplay(): EntityViewDisplayInterface {
     return $this->display;
   }
 
@@ -79,14 +84,14 @@ class EntityViewEvent extends BaseEntityEvent {
    * @return string
    *   The view mode.
    */
-  public function getViewMode() {
+  public function getViewMode(): string {
     return $this->viewMode;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_VIEW;
   }
 
