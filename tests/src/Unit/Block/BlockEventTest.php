@@ -48,10 +48,6 @@ class BlockEventTest extends UnitTestCase {
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::BLOCK_BUILD_ALTER);
     $this->assertEquals($build, $event->getBuild());
     $this->assertEquals($block, $event->getBlock());
-
-    $newBuild = ['newBuild'];
-    $event->setBuild($newBuild);
-    $this->assertEquals($newBuild, $event->getBuild());
   }
 
 }
