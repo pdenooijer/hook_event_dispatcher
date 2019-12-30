@@ -44,7 +44,7 @@ class BlockBuildAlterEvent extends Event implements EventInterface {
    * @return array
    *   The build array.
    */
-  public function &getBuild() {
+  public function &getBuild(): array {
     return $this->build;
   }
 
@@ -54,7 +54,7 @@ class BlockBuildAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Block\BlockPluginInterface
    *   The block object.
    */
-  public function getBlock() {
+  public function getBlock(): BlockPluginInterface {
     return $this->block;
   }
 
