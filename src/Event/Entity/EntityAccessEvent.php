@@ -11,7 +11,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityAccessEvent.
  */
-class EntityAccessEvent extends BaseEntityEvent {
+class EntityAccessEvent extends AbstractEntityEvent {
 
   /**
    * The operation that is to be performed on $entity.

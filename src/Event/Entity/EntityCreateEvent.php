@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityCreateEvent.
  */
-class EntityCreateEvent extends BaseEntityEvent {
+class EntityCreateEvent extends AbstractEntityEvent {
 
   /**
    * {@inheritdoc}

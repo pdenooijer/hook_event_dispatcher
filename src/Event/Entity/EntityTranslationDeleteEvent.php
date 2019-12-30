@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityTranslationDeleteEvent.
  */
-class EntityTranslationDeleteEvent extends BaseEntityEvent {
+class EntityTranslationDeleteEvent extends AbstractEntityEvent {
 
   /**
    * {@inheritdoc}

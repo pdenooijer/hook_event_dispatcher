@@ -9,7 +9,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityViewAlterEventEvent.
  */
-class EntityViewAlterEvent extends BaseEntityEvent {
+class EntityViewAlterEvent extends AbstractEntityEvent {
 
   /**
    * A renderable array representing the entity content.

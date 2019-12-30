@@ -8,7 +8,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityUpdateEvent.
  */
-class EntityUpdateEvent extends BaseEntityEvent {
+class EntityUpdateEvent extends AbstractEntityEvent {
 
   /**
    * Get the original Entity.

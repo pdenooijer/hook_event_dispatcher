@@ -8,7 +8,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityPresaveEvent.
  */
-class EntityPresaveEvent extends BaseEntityEvent {
+class EntityPresaveEvent extends AbstractEntityEvent {
 
   /**
    * Get the original Entity.

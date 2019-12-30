@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * Class BaseEntityEvent.
  */
-abstract class BaseEntityEvent extends Event implements EventInterface {
+abstract class AbstractEntityEvent extends Event implements EventInterface {
 
   /**
    * The Entity.
