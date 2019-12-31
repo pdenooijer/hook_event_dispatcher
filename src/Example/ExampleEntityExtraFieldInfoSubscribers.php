@@ -27,7 +27,7 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
    * @param \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event
    *   The event.
    */
-  public function fieldInfo(EntityExtraFieldInfoEvent $event) {
+  public function fieldInfo(EntityExtraFieldInfoEvent $event): void {
     // Set the field info directly.
     $fieldInfo = [];
     $event->setFieldInfo($fieldInfo);
@@ -49,7 +49,7 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
    * @param \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent $event
    *   The event.
    */
-  public function fieldInfoAlter(EntityExtraFieldInfoAlterEvent $event) {
+  public function fieldInfoAlter(EntityExtraFieldInfoAlterEvent $event): void {
     $fieldInfo = &$event->getFieldInfo();
 
     // Manipulate the field info.
@@ -59,7 +59,7 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO => 'fieldInfo',
       HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO_ALTER => 'fieldInfoAlter',

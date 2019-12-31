@@ -34,7 +34,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPreViewEvent $event
    *   The event.
    */
-  public function preView(ViewsPreViewEvent $event) {
+  public function preView(ViewsPreViewEvent $event): void {
     $args = &$event->getArgs();
 
     // Do something with the arguments.
@@ -47,7 +47,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event
    *   The event.
    */
-  public function preBuild(ViewsPreBuildEvent $event) {
+  public function preBuild(ViewsPreBuildEvent $event): void {
     $view = $event->getView();
 
     // Do something with the view.
@@ -60,7 +60,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event
    *   The event.
    */
-  public function queryAlter(ViewsQueryAlterEvent $event) {
+  public function queryAlter(ViewsQueryAlterEvent $event): void {
     $query = $event->getQuery();
 
     // Do something with the query.
@@ -73,10 +73,8 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event
    *   The event.
    */
-  public function querySubstitutions(ViewsQuerySubstitutionsEvent $event) {
-    $event->setSubstitutions([
-      '***CURRENT_TIME***' => \Drupal::time()->getRequestTime(),
-    ]);
+  public function querySubstitutions(ViewsQuerySubstitutionsEvent $event): void {
+    $event->addSubstitution('***CURRENT_TIME***', \Drupal::time()->getRequestTime());
   }
 
   /**
@@ -85,7 +83,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent $event
    *   The event.
    */
-  public function postBuild(ViewsPostBuildEvent $event) {
+  public function postBuild(ViewsPostBuildEvent $event): void {
     $view = $event->getView();
 
     // Do something with the view.
@@ -98,7 +96,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPreExecuteEvent $event
    *   The event.
    */
-  public function preExecute(ViewsPreExecuteEvent $event) {
+  public function preExecute(ViewsPreExecuteEvent $event): void {
     $view = $event->getView();
 
     // Do something with the view.
@@ -111,7 +109,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent $event
    *   The event.
    */
-  public function postExecute(ViewsPostExecuteEvent $event) {
+  public function postExecute(ViewsPostExecuteEvent $event): void {
     $view = $event->getView();
 
     // Do something with the view.
@@ -124,7 +122,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPreRenderEvent $event
    *   The event.
    */
-  public function preRender(ViewsPreRenderEvent $event) {
+  public function preRender(ViewsPreRenderEvent $event): void {
     $view = $event->getView();
 
     // Do something with the view.
@@ -137,7 +135,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPostRenderEvent $event
    *   The event.
    */
-  public function postRender(ViewsPostRenderEvent $event) {
+  public function postRender(ViewsPostRenderEvent $event): void {
     $cache = $event->getCache();
 
     // Do something with the cache settings.
@@ -147,7 +145,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     // In order of execution.
     return [
       HookEventDispatcherInterface::VIEWS_PRE_VIEW => 'preView',

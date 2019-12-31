@@ -17,7 +17,7 @@ final class ExampleTokenEventSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       HookEventDispatcherInterface::TOKEN_REPLACEMENT => 'tokenReplacement',
       HookEventDispatcherInterface::TOKEN_INFO => 'tokenInfo',
@@ -29,8 +29,10 @@ final class ExampleTokenEventSubscriber implements EventSubscriberInterface {
    *
    * @param \Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent $event
    *   The token info event.
+   *
+   * @throws \UnexpectedValueException
    */
-  public function tokenInfo(TokensInfoEvent $event) {
+  public function tokenInfo(TokensInfoEvent $event): void {
     // The node type already exists, but it's just an example how to add a type.
     $type = TokenType::create('node', t('Node'))
       ->setDescription('Node tokens')
@@ -47,8 +49,10 @@ final class ExampleTokenEventSubscriber implements EventSubscriberInterface {
    *
    * @param \Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent $event
    *   The token replacement event.
+   *
+   * @throws \UnexpectedValueException
    */
-  public function tokenReplacement(TokensReplacementEvent $event) {
+  public function tokenReplacement(TokensReplacementEvent $event): void {
     if ($event->forToken('node', 'serialized')) {
       $event->setReplacementValue('node', 'serialized',
         serialize($event->getData('node')));

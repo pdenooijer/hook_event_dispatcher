@@ -30,7 +30,7 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event
    *   The event.
    */
-  public function alterForm(FormAlterEvent $event) {
+  public function alterForm(FormAlterEvent $event): void {
     $form = &$event->getForm();
 
     $form['extra_markup'] = [
@@ -44,7 +44,7 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent $event
    *   The event.
    */
-  public function alterSearchForm(FormIdAlterEvent $event) {
+  public function alterSearchForm(FormIdAlterEvent $event): void {
     $form = &$event->getForm();
     // Add placeholder.
     $form['keys']['#attributes']['placeholder'] = 'Search some things';
@@ -56,7 +56,7 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event
    *   The event.
    */
-  public function alterNodeForm(FormBaseAlterEvent $event) {
+  public function alterNodeForm(FormBaseAlterEvent $event): void {
     $form = &$event->getForm();
     $form['title']['widget'][0]['value']['#title'] = 'A new title!';
   }
@@ -67,7 +67,7 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent $event
    *   The event.
    */
-  public function alterWidgetForm(WidgetFormAlterEvent $event) {
+  public function alterWidgetForm(WidgetFormAlterEvent $event): void {
     $element = &$event->getElement();
     $element['extra_field'] = [
       '#type' => 'textfield',
@@ -81,7 +81,7 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent $event
    *   The event.
    */
-  public function alterWidgetStringTextField(WidgetTypeFormAlterEvent $event) {
+  public function alterWidgetStringTextField(WidgetTypeFormAlterEvent $event): void {
     $element = &$event->getElement();
     // Do something cool.
     $element['special_label'] = [
@@ -93,7 +93,7 @@ class ExampleFormEventSubscribers implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       HookEventDispatcherInterface::FORM_ALTER => 'alterForm',
       // React on "search_block_form" form.
