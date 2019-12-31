@@ -34,7 +34,7 @@ class ToolbarAlterEvent extends Event implements EventInterface {
    * @return array
    *   The items.
    */
-  public function &getItems() {
+  public function &getItems(): array {
     return $this->items;
   }
 
