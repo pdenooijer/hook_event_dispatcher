@@ -18,7 +18,6 @@ final class ThemeEvent extends Event implements EventInterface {
    * @var array
    */
   private $existing;
-
   /**
    * Added themes.
    *
@@ -47,7 +46,7 @@ final class ThemeEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::THEME;
   }
 
@@ -57,7 +56,7 @@ final class ThemeEvent extends Event implements EventInterface {
    * @return array
    *   The existing implementations.
    */
-  public function getExisting() {
+  public function getExisting(): array {
     return $this->existing;
   }
 
@@ -67,7 +66,7 @@ final class ThemeEvent extends Event implements EventInterface {
    * @return array
    *   The new theme information.
    */
-  public function getNewThemes() {
+  public function getNewThemes(): array {
     return $this->newThemes;
   }
 

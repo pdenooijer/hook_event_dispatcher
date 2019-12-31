@@ -15,21 +15,19 @@ abstract class BaseThemeSuggestionsEvent extends Event implements EventInterface
    *
    * @var array
    */
-  protected $suggestions;
-
+  private $suggestions;
   /**
    * Variables.
    *
    * @var array
    */
-  protected $variables;
-
+  private $variables;
   /**
    * Hook name.
    *
    * @var string
    */
-  protected $hook;
+  private $hook;
 
   /**
    * BaseThemeSuggestionsEvent constructor.
@@ -41,7 +39,7 @@ abstract class BaseThemeSuggestionsEvent extends Event implements EventInterface
    * @param string $hook
    *   Hook name.
    */
-  public function __construct(array &$suggestions, array $variables, $hook) {
+  public function __construct(array &$suggestions, array $variables, string $hook) {
     $this->suggestions = &$suggestions;
     $this->variables = $variables;
     $this->hook = $hook;
@@ -53,7 +51,7 @@ abstract class BaseThemeSuggestionsEvent extends Event implements EventInterface
    * @return array
    *   Array of suggestions.
    */
-  public function &getSuggestions() {
+  public function &getSuggestions(): array {
     return $this->suggestions;
   }
 
@@ -63,7 +61,7 @@ abstract class BaseThemeSuggestionsEvent extends Event implements EventInterface
    * @return array
    *   Array of variables.
    */
-  public function getVariables() {
+  public function getVariables(): array {
     return $this->variables;
   }
 
@@ -73,7 +71,7 @@ abstract class BaseThemeSuggestionsEvent extends Event implements EventInterface
    * @return string
    *   Name of the hook.
    */
-  public function getHook() {
+  public function getHook(): string {
     return $this->hook;
   }
 

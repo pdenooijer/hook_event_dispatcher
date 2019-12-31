@@ -48,7 +48,7 @@ final class JsAlterEvent extends Event implements EventInterface {
    * @return array
    *   Javascript.
    */
-  public function &getJavascript() {
+  public function &getJavascript(): array {
     return $this->javascript;
   }
 
@@ -58,7 +58,7 @@ final class JsAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Asset\AttachedAssetsInterface
    *   AttachedAssets.
    */
-  public function getAttachedAssets() {
+  public function getAttachedAssets(): AttachedAssetsInterface {
     return $this->attachedAssets;
   }
 
@@ -68,7 +68,7 @@ final class JsAlterEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::JS_ALTER;
   }
 

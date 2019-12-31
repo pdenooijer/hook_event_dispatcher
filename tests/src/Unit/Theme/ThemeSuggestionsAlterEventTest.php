@@ -2,11 +2,13 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_theme_suggestions_alter;
 
 /**
  * Class ThemeSuggestionsAlterEventTest.
@@ -27,18 +29,18 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
   /**
    * Sets up the test.
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * Tests the themeSuggestionsAlterEvent.
    */
-  public function testThemeSuggestionsAlterEvent() {
+  public function testThemeSuggestionsAlterEvent(): void {
     $this->manager->setMaxEventCount(2);
     $suggestions = $expectedSuggestions = [
       'container_theme_function_1',
@@ -50,7 +52,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     $hook = 'container';
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER => function (ThemeSuggestionsAlterEvent $event) {
+      HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER => static function (ThemeSuggestionsAlterEvent $event) {
         $suggestions = &$event->getSuggestions();
         $suggestions[] = 'extra_suggestion';
       },
@@ -68,7 +70,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
   /**
    * Tests the ThemeSuggestionsAlterIdEvent.
    */
-  public function testThemeSuggestionsAlterIdEvent() {
+  public function testThemeSuggestionsAlterIdEvent(): void {
     $this->manager->setMaxEventCount(2);
     $suggestions = [
       'container_theme_function_1',

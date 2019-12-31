@@ -34,14 +34,14 @@ class ThemesInstalledEvent extends Event implements EventInterface {
    * @return array
    *   Theme list.
    */
-  public function getThemeList() {
+  public function getThemeList(): array {
     return $this->themeList;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::THEMES_INSTALLED;
   }
 
