@@ -22,28 +22,24 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * @var string
    */
   private $operation;
-
   /**
    * The field definition.
    *
    * @var \Drupal\Core\Field\FieldDefinitionInterface
    */
   private $fieldDefinition;
-
   /**
    * The account.
    *
    * @var \Drupal\Core\Session\AccountInterface
    */
   private $account;
-
   /**
    * The field item list.
    *
    * @var \Drupal\Core\Field\FieldItemListInterface
    */
   private $items;
-
   /**
    * Get the access result.
    *
@@ -63,17 +59,23 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * @param \Drupal\Core\Field\FieldItemListInterface|null $items
    *   The field item list interface.
    */
-  public function __construct($operation, FieldDefinitionInterface $fieldDefinition, AccountInterface $account, FieldItemListInterface $items = NULL) {
+  public function __construct(
+    string $operation,
+    FieldDefinitionInterface $fieldDefinition,
+    AccountInterface $account,
+    FieldItemListInterface $items = NULL
+  ) {
     $this->operation = $operation;
     $this->fieldDefinition = $fieldDefinition;
     $this->account = $account;
     $this->items = $items;
+    $this->accessResult = AccessResultNeutral::neutral();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_FIELD_ACCESS;
   }
 
@@ -83,7 +85,7 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * @return string
    *   The operation.
    */
-  public function getOperation() {
+  public function getOperation(): string {
     return $this->operation;
   }
 
@@ -93,7 +95,7 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Field\FieldDefinitionInterface
    *   The field definition.
    */
-  public function getFieldDefinition() {
+  public function getFieldDefinition(): FieldDefinitionInterface {
     return $this->fieldDefinition;
   }
 
@@ -103,7 +105,7 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Session\AccountInterface
    *   Account interface.
    */
-  public function getAccount() {
+  public function getAccount(): AccountInterface {
     return $this->account;
   }
 
@@ -113,7 +115,7 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Field\FieldItemListInterface
    *   The items.
    */
-  public function getItems() {
+  public function getItems(): FieldItemListInterface {
     return $this->items;
   }
 
@@ -123,8 +125,8 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function getAccessResult() {
-    return $this->accessResult ?: AccessResultNeutral::neutral();
+  public function getAccessResult(): AccessResultInterface {
+    return $this->accessResult;
   }
 
   /**
@@ -133,7 +135,7 @@ class EntityFieldAccessEvent extends Event implements EventInterface {
    * @param \Drupal\Core\Access\AccessResultInterface $accessResult
    *   The access result.
    */
-  public function setAccessResult(AccessResultInterface $accessResult) {
+  public function setAccessResult(AccessResultInterface $accessResult): void {
     $this->accessResult = $accessResult;
   }
 
