@@ -25,7 +25,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * text strings, or an object implementing MarkupInterface if they are
    * HTML-formatted.
    *
-   * @var string|\Drupal\Component\Render\MarkupInterface[]
+   * @var string[]|\Drupal\Component\Render\MarkupInterface[]
    */
   private $replacementValues = [];
   /**
@@ -87,7 +87,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    *   implementations of this hook must add the corresponding metadata.
    */
   public function __construct(
-    $type,
+    string $type,
     array $tokens,
     array $data,
     array $options,
@@ -110,7 +110,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * @return string
    *   The type.
    */
-  public function getType() {
+  public function getType(): string {
     return $this->type;
   }
 
@@ -124,7 +124,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * @return array
    *   The tokens.
    */
-  public function getTokens() {
+  public function getTokens(): array {
     return $this->tokens;
   }
 
@@ -139,8 +139,8 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * @return mixed
    *   The value.
    */
-  public function getData($key, $default = NULL) {
-    return isset($this->data[$key]) ? $this->data[$key] : $default;
+  public function getData(string $key, $default = NULL) {
+    return $this->data[$key] ?? $default;
   }
 
   /**
@@ -153,7 +153,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * @return array
    *   The raw data given inside the hook_tokens.
    */
-  public function getRawData() {
+  public function getRawData(): array {
     return $this->data;
   }
 
@@ -166,7 +166,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * @return array
    *   The raw options given inside the hook_tokens.
    */
-  public function getOptions() {
+  public function getOptions(): array {
     return $this->options;
   }
 
@@ -184,7 +184,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Render\BubbleableMetadata
    *   The metadata.
    */
-  public function getBubbleableMetadata() {
+  public function getBubbleableMetadata(): BubbleableMetadata {
     return $this->bubbleableMetadata;
   }
 
@@ -196,10 +196,10 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * text strings, or an object implementing MarkupInterface if they are
    * HTML-formatted.
    *
-   * @return string|\Drupal\Component\Render\MarkupInterface[]
+   * @return string[]|\Drupal\Component\Render\MarkupInterface[]
    *   The replacement values for the token.
    */
-  public function getReplacementValues() {
+  public function getReplacementValues(): array {
     return $this->replacementValues;
   }
 
@@ -215,13 +215,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    *
    * @throws \UnexpectedValueException
    */
-  public function setReplacementValue($type, $token, $replacement) {
-    if (!is_string($type)) {
-      throw new UnexpectedValueException('Type should be a string');
-    }
-    if (!is_string($token)) {
-      throw new UnexpectedValueException('Token should be a string');
-    }
+  public function setReplacementValue(string $type, string $token, $replacement): void {
     if (!$this->forToken($type, $token)) {
       throw new UnexpectedValueException('Requested replacement is not requested');
     }
@@ -234,7 +228,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::TOKEN_REPLACEMENT;
   }
 
@@ -249,7 +243,7 @@ final class TokensReplacementEvent extends Event implements EventInterface {
    * @return bool
    *   TRUE if there is one.
    */
-  public function forToken($type, $token) {
+  public function forToken(string $type, string $token): bool {
     return $this->type === $type && isset($this->tokens[$token]);
   }
 

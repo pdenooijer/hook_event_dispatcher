@@ -4,6 +4,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Token;
 
 use Drupal\hook_event_dispatcher\Value\TokenType;
 use Drupal\Tests\UnitTestCase;
+use UnexpectedValueException;
 
 /**
  * Class TokenTypeTest.
@@ -15,35 +16,19 @@ use Drupal\Tests\UnitTestCase;
 class TokenTypeTest extends UnitTestCase {
 
   /**
-   * Test TokenType invalid type exception.
-   */
-  public function testTokenTypeInvalidTypeException() {
-    $this->setExpectedException(\UnexpectedValueException::class);
-    TokenType::create(NULL, '');
-  }
-
-  /**
    * Test TokenType invalid name exception.
    */
-  public function testTokenTypeInvalidNameException() {
-    $this->setExpectedException(\UnexpectedValueException::class);
+  public function testTokenTypeInvalidNameException(): void {
+    $this->setExpectedException(UnexpectedValueException::class);
     TokenType::create('', NULL);
   }
 
   /**
    * Test TokenType invalid description exception.
    */
-  public function testTokenTypeInvalidDescriptionException() {
-    $this->setExpectedException(\UnexpectedValueException::class);
+  public function testTokenTypeInvalidDescriptionException(): void {
+    $this->setExpectedException(UnexpectedValueException::class);
     TokenType::create('', '')->setDescription(NULL);
-  }
-
-  /**
-   * Test TokenType invalid needs data exception.
-   */
-  public function testTokenTypeInvalidNeedsDataException() {
-    $this->setExpectedException(\UnexpectedValueException::class);
-    TokenType::create('', '')->setNeedsData(TRUE);
   }
 
 }

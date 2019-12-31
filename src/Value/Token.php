@@ -65,14 +65,8 @@ final class Token {
    *
    * @throws \UnexpectedValueException
    */
-  public static function create($type, $token, $name) {
+  public static function create(string $type, string $token, $name): self {
     $instance = new self();
-    if (!is_string($type)) {
-      throw new UnexpectedValueException('Type should be a string');
-    }
-    if (!is_string($token)) {
-      throw new UnexpectedValueException('Token should be a string');
-    }
     if (!is_string($name) && !$name instanceof MarkupInterface) {
       throw new UnexpectedValueException('Name should be a string or an instance of MarkupInterface');
     }
@@ -85,7 +79,7 @@ final class Token {
   /**
    * Set description and return a new instance.
    *
-   * @param string $description
+   * @param string|\Drupal\Component\Render\MarkupInterface $description
    *   The description of the token type.
    *
    * @return \Drupal\hook_event_dispatcher\Value\Token
@@ -93,7 +87,7 @@ final class Token {
    *
    * @throws \UnexpectedValueException
    */
-  public function setDescription($description) {
+  public function setDescription($description): self {
     if (!is_string($description) && !$description instanceof MarkupInterface) {
       throw new UnexpectedValueException('Description should be a string or an instance of MarkupInterface');
     }
@@ -111,7 +105,7 @@ final class Token {
    * @return \Drupal\hook_event_dispatcher\Value\Token
    *   New instance with the given dynamic.
    */
-  public function setDynamic($dynamic) {
+  public function setDynamic(bool $dynamic): self {
     $clone = clone $this;
     $clone->dynamic = $dynamic;
     return $clone;
@@ -133,7 +127,7 @@ final class Token {
    * @return string
    *   The type like 'node'.
    */
-  public function getType() {
+  public function getType(): string {
     return $this->type;
   }
 
@@ -153,7 +147,7 @@ final class Token {
    * @return string
    *   The token name like 'url'.
    */
-  public function getToken() {
+  public function getToken(): string {
     return $this->token;
   }
 
@@ -163,7 +157,7 @@ final class Token {
    * @return bool
    *   Whether or not the token is dynamic.
    */
-  public function isDynamic() {
+  public function isDynamic(): bool {
     return $this->dynamic;
   }
 
