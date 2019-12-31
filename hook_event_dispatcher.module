@@ -576,9 +576,13 @@ function hook_event_dispatcher_views_pre_render(ViewExecutable $view) {
 /**
  * Implements hook_views_post_render().
  *
+ * @see https://www.drupal.org/project/drupal/issues/2793169
+ *   Drupal core issue regarding $output being documented as a string when it is
+ *   in fact a render array.
+ *
  * {@inheritdoc}
  */
-function hook_event_dispatcher_views_post_render(ViewExecutable $view, string &$output, CachePluginBase $cache) {
+function hook_event_dispatcher_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPostRenderEvent($view, $output, $cache);
