@@ -36,7 +36,7 @@ class ToolbarAlterEventTest extends UnitTestCase {
   }
 
   /**
-   * Test the ToolbarAlterEvent by reference.
+   * Test the ToolbarAlterEvent.
    */
   public function testToolbarAlterEventByReference() {
     $newItem = ['test' => 'item'];
@@ -45,32 +45,6 @@ class ToolbarAlterEventTest extends UnitTestCase {
       HookEventDispatcherInterface::TOOLBAR_ALTER => function (ToolbarAlterEvent $event) use ($newItem) {
         $items = &$event->getItems();
         $items += $newItem;
-      },
-    ]);
-
-    $items = [
-      'user' => [],
-      'manage' => [],
-    ];
-
-    $expectedItems = $items + $newItem;
-
-    hook_event_dispatcher_toolbar_alter($items);
-
-    $this->assertSame($expectedItems, $items);
-  }
-
-  /**
-   * Test the ToolbarAlterEvent by reference.
-   */
-  public function testToolbarAlterEventBySet() {
-    $newItem = ['test' => 'item'];
-
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::TOOLBAR_ALTER => function (ToolbarAlterEvent $event) use ($newItem) {
-        $items = $event->getItems();
-        $items += $newItem;
-        $event->setItems($items);
       },
     ]);
 
