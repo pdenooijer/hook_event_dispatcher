@@ -12,11 +12,12 @@ use Drupal\views\ViewExecutable;
 class ViewsPostRenderEvent extends BaseViewsEvent {
 
   /**
-   * A flat string with the rendered output of the view.
+   * A renderable array containing the output of the view.
    *
-   * @var string
+   * @var array
    */
   private $output;
+
   /**
    * The cache settings.
    *
@@ -51,12 +52,16 @@ class ViewsPostRenderEvent extends BaseViewsEvent {
   }
 
   /**
-   * Get the output string.
+   * Get the output render array.
    *
-   * @return string
-   *   A flat string with the rendered output of the view.
+   * @return array
+   *   A renderable array containing the output of the view.
+   *
+   * @see https://www.drupal.org/project/drupal/issues/2793169
+   *   Drupal core issue regarding $output being documented as a string when it
+   *   is in fact a render array.
    */
-  public function &getOutput(): string {
+  public function &getOutput(): array {
     return $this->output;
   }
 
