@@ -152,7 +152,16 @@ class ViewEventTest extends UnitTestCase {
   public function testPostRenderEvent(): void {
     /** @var \Drupal\views\ViewExecutable $view */
     $view = $this->createMock(ViewExecutable::class);
-    $output = '<h1>test</h1>';
+    $output = $expectedOutput = [
+      '#theme' => [
+        'views_view',
+      ],
+      '#attached' => [
+        'library' => [
+          'views/views.module',
+        ],
+      ],
+    ];
     /** @var \Drupal\views\Plugin\views\cache\CachePluginBase $cache */
     $cache = $this->createMock(CachePluginBase::class);
     $cache->options['results_lifespan'] = 0;
@@ -160,7 +169,7 @@ class ViewEventTest extends UnitTestCase {
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::VIEWS_POST_RENDER => static function (ViewsPostRenderEvent $event) {
         $output = &$event->getOutput();
-        $output = '<h2>Test</h2>';
+        $output['#attached']['library'][] = 'test';
         $cache = $event->getCache();
         $cache->options['results_lifespan'] = 10;
       },
@@ -168,7 +177,7 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_post_render($view, $output, $cache);
 
-    $expectedOutput = '<h2>Test</h2>';
+    $expectedOutput['#attached']['library'][] = 'test';
 
     /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPostRenderEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_RENDER);
