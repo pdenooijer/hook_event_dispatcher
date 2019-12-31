@@ -58,16 +58,6 @@ abstract class BaseThemeSuggestionsEvent extends Event implements EventInterface
   }
 
   /**
-   * Set suggestions.
-   *
-   * @param array $suggestions
-   *   Array of suggestions.
-   */
-  public function setSuggestions(array $suggestions) {
-    $this->suggestions = $suggestions;
-  }
-
-  /**
    * Get variables.
    *
    * @return array

@@ -53,16 +53,6 @@ final class JsAlterEvent extends Event implements EventInterface {
   }
 
   /**
-   * Set the javascript.
-   *
-   * @param array $javascript
-   *   Javascript.
-   */
-  public function setJavascript(array $javascript) {
-    $this->javascript = $javascript;
-  }
-
-  /**
    * Get the attached assets.
    *
    * @return \Drupal\Core\Asset\AttachedAssetsInterface

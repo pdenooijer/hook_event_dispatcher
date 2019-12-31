@@ -52,14 +52,4 @@ final class TemplatePreprocessDefaultVariablesAlterEvent extends Event implement
     return $this->variables;
   }
 
-  /**
-   * Set the updated default template variables.
-   *
-   * @param array $variables
-   *   The updated associative array of default template variables.
-   */
-  public function setVariables(array $variables) {
-    $this->variables = $variables;
-  }
-
 }

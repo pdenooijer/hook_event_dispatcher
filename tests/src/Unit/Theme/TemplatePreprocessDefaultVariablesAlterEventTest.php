@@ -69,39 +69,4 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
     $this->assertSame($expectedVariables, $event->getVariables());
   }
 
-  /**
-   * TemplatePreprocessDefaultVariablesAlterEvent by set test.
-   */
-  public function testTemplatePreprocessDefaultVariablesAlterEventBySet() {
-    $newVariable = [
-      'test_variable' => TRUE
-    ];
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER => function (TemplatePreprocessDefaultVariablesAlterEvent $event) use ($newVariable) {
-        $variables = $event->getVariables();
-        $variables += $newVariable;
-        $event->setVariables($variables);
-      },
-    ]);
-
-    $variables = [
-      'attributes' => [],
-      'title_attributes' => [],
-      'content_attributes' => [],
-      'title_prefix' => [],
-      'title_suffix' => [],
-      'db_is_active' => !defined('MAINTENANCE_MODE'),
-      'is_admin' => FALSE,
-      'logged_in' => FALSE,
-    ];
-
-    $expectedVariables = $variables + $newVariable;
-
-    hook_event_dispatcher_template_preprocess_default_variables_alter($variables);
-
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
-    $this->assertSame($expectedVariables, $event->getVariables());
-  }
-
 }

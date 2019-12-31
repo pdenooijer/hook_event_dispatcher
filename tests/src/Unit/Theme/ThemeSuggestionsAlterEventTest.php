@@ -40,43 +40,19 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
    */
   public function testThemeSuggestionsAlterEvent() {
     $this->manager->setMaxEventCount(2);
-    $suggestions = [
+    $suggestions = $expectedSuggestions = [
       'container_theme_function_1',
       'container_theme_function_2',
-      'container_theme_function_3'
+      'container_theme_function_3',
     ];
+    $expectedSuggestions[] = 'extra_suggestion';
     $variables = ['content' => 'test'];
     $hook = 'container';
-
-    hook_event_dispatcher_theme_suggestions_alter($suggestions, $variables, $hook);
-
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER);
-    $this->assertEquals($suggestions, $event->getSuggestions());
-    $this->assertEquals($variables, $event->getVariables());
-  }
-
-  /**
-   * Tests the themeSuggestionsAlterEvent with setSuggestion.
-   */
-  public function testThemeSuggestionsAlterEventWithSetSuggestions() {
-    $this->manager->setMaxEventCount(2);
-    $suggestions = [
-      'container_theme_function_1',
-      'container_theme_function_2',
-      'container_theme_function_3'
-    ];
-    $variables = ['content' => 'test'];
-    $hook = 'container';
-
-    $newSuggestions = [
-      'container_theme_function_1',
-      'container_theme_function_2',
-    ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER => function (ThemeSuggestionsAlterEvent $event) use ($newSuggestions) {
-        $event->setSuggestions($newSuggestions);
+      HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER => function (ThemeSuggestionsAlterEvent $event) {
+        $suggestions = &$event->getSuggestions();
+        $suggestions[] = 'extra_suggestion';
       },
     ]);
 
@@ -84,7 +60,8 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER);
-    $this->assertEquals($newSuggestions, $event->getSuggestions());
+    $this->assertSame($expectedSuggestions, $suggestions);
+    $this->assertEquals($suggestions, $event->getSuggestions());
     $this->assertEquals($variables, $event->getVariables());
   }
 
@@ -96,7 +73,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     $suggestions = [
       'container_theme_function_1',
       'container_theme_function_2',
-      'container_theme_function_3'
+      'container_theme_function_3',
     ];
     $variables = ['content' => 'test'];
     $hook = 'container';

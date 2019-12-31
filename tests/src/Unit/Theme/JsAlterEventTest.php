@@ -37,9 +37,9 @@ final class JsAlterEventTest extends UnitTestCase {
   }
 
   /**
-   * JsAlterEvent by reference test.
+   * JsAlterEvent test.
    */
-  public function testJsAlterEventByReference() {
+  public function testJsAlterEvent() {
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::JS_ALTER => function (JsAlterEvent $event) {
         $javascript = &$event->getJavascript();
@@ -52,38 +52,6 @@ final class JsAlterEventTest extends UnitTestCase {
       'other' => ['other_data'],
     ];
     unset($expectedJavascript['unset']);
-
-    $attachedAssets = new AttachedAssets();
-
-    hook_event_dispatcher_js_alter($javascript, $attachedAssets);
-
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::JS_ALTER);
-
-    $this->assertSame($expectedJavascript, $event->getJavascript());
-    $this->assertSame($attachedAssets, $event->getAttachedAssets());
-  }
-
-  /**
-   * JsAlterEvent by set test.
-   */
-  public function testJsAlterEventBySet() {
-    $newJavascript = [
-      'new' => ['new-data'],
-    ];
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::JS_ALTER => function (JsAlterEvent $event) use ($newJavascript) {
-        $javascript = $event->getJavascript();
-        $javascript += $newJavascript;
-        $event->setJavascript($javascript);
-      },
-    ]);
-
-    $javascript = $expectedJavascript = [
-      'some' => ['data'],
-      'other' => ['other_data'],
-    ];
-    $expectedJavascript += $newJavascript;
 
     $attachedAssets = new AttachedAssets();
 
