@@ -39,16 +39,6 @@ final class ViewsDataAlterEvent extends Event implements EventInterface {
   }
 
   /**
-   * Set data.
-   *
-   * @param array $data
-   *   Data.
-   */
-  public function setData(array $data) {
-    $this->data = $data;
-  }
-
-  /**
    * Get the dispatcher type.
    *
    * @return string

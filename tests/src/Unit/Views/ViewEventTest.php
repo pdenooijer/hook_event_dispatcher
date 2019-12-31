@@ -186,7 +186,8 @@ class ViewEventTest extends UnitTestCase {
 
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::VIEWS_QUERY_SUBSTITUTIONS => function (ViewsQuerySubstitutionsEvent $event) use ($expected) {
-        $event->setSubstitutions($expected);
+        $substitutions = &$event->getSubstitutions();
+        $substitutions = $expected;
       },
     ]);
 

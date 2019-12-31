@@ -102,9 +102,9 @@ class ViewDataEventTest extends UnitTestCase {
   }
 
   /**
-   * ViewsDataAlterEvent by reference test.
+   * ViewsDataAlterEvent test.
    */
-  public function testViewsDataAlterEventByReference() {
+  public function testViewsDataAlterEvent() {
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
         $data = &$event->getData();
@@ -120,29 +120,6 @@ class ViewDataEventTest extends UnitTestCase {
     hook_event_dispatcher_views_data_alter($data);
 
     $expectedData['test']['other_test'] = ['some_data'];
-    $this->assertSame($expectedData, $data);
-  }
-
-  /**
-   * ViewsDataAlterEvent by set test.
-   */
-  public function testViewsDataAlterEventBySet() {
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
-        $data = $event->getData();
-        $data['other'] = ['other_data'];
-        $event->setData($data);
-      },
-    ]);
-
-    $data = $expectedData = [
-      'test' => [
-        'test' => 'test_array_data',
-      ],
-    ];
-    hook_event_dispatcher_views_data_alter($data);
-
-    $expectedData['other'] = ['other_data'];
     $this->assertSame($expectedData, $data);
   }
 
