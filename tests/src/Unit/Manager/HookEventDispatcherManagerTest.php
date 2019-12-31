@@ -18,14 +18,14 @@ class HookEventDispatcherManagerTest extends UnitTestCase {
   /**
    * Test event dispatcher.
    */
-  public function testEventDispatcher() {
+  public function testEventDispatcher(): void {
     $event = new FakeEvent('test');
     $dispatcher = $this->createMock(EventDispatcherInterface::class);
     $dispatcher->method('dispatch')->with('test', $event)->willReturn($event);
 
     $manager = new HookEventDispatcherManager($dispatcher);
     $returnedEvent = $manager->register($event);
-    $this->assertEquals($event, $returnedEvent);
+    $this->assertSame($event, $returnedEvent);
   }
 
 }

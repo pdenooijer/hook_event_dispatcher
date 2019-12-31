@@ -3,6 +3,7 @@
 namespace Drupal\hook_event_dispatcher\Manager;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -33,7 +34,7 @@ final class HookEventDispatcherManager implements HookEventDispatcherManagerInte
   /**
    * {@inheritdoc}
    */
-  public function register(EventInterface $event) {
+  public function register(EventInterface $event): Event {
     return $this->eventDispatcher->dispatch($event->getDispatcherType(), $event);
   }
 

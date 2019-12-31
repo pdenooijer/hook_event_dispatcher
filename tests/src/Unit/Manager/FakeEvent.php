@@ -35,7 +35,7 @@ class FakeEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return $this->dispatcherType;
   }
 
