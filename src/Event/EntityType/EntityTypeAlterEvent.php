@@ -31,7 +31,7 @@ class EntityTypeAlterEvent extends Event implements EventInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_TYPE_ALTER;
   }
 
@@ -41,7 +41,7 @@ class EntityTypeAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Entity\EntityTypeInterface[]
    *   Entity types info.
    */
-  public function &getEntityTypes() {
+  public function &getEntityTypes(): array {
     return $this->entityTypes;
   }
 

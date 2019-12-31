@@ -7,12 +7,12 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityTranslationDeleteEvent.
  */
-class EntityTranslationDeleteEvent extends BaseEntityEvent {
+class EntityTranslationDeleteEvent extends AbstractEntityEvent {
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_TRANSLATION_DELETE;
   }
 

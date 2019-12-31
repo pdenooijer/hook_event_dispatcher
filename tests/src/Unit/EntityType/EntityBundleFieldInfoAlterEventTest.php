@@ -2,12 +2,14 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\EntityType;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityBundleFieldInfoAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_entity_bundle_field_info_alter;
 
 /**
  * Class EntityBundleFieldInfoAlterEventTest.
@@ -28,20 +30,20 @@ class EntityBundleFieldInfoAlterEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * Test the EntityBundleFieldInfoAlterEventTest.
    */
-  public function testEntityBundleFieldInfoAlterEvent() {
+  public function testEntityBundleFieldInfoAlterEvent(): void {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_BUNDLE_FIELD_INFO_ALTER => function (EntityBundleFieldInfoAlterEvent $event) {
+      HookEventDispatcherInterface::ENTITY_BUNDLE_FIELD_INFO_ALTER => static function (EntityBundleFieldInfoAlterEvent $event) {
         $fields = &$event->getFields();
         $fields['field_test'] = 'test_altered';
       },
@@ -55,13 +57,13 @@ class EntityBundleFieldInfoAlterEventTest extends UnitTestCase {
     hook_event_dispatcher_entity_bundle_field_info_alter($fields, $entityType, $bundle);
 
     $expectedFields['field_test'] = 'test_altered';
-    $this->assertEquals($fields, $expectedFields);
+    $this->assertSame($expectedFields, $fields);
 
     /** @var \Drupal\hook_event_dispatcher\Event\EntityType\EntityBundleFieldInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_BUNDLE_FIELD_INFO_ALTER);
-
-    $this->assertEquals($entityType, $event->getEntityType());
-    $this->assertEquals($bundle, $event->getBundle());
+    $this->assertSame($expectedFields, $event->getFields());
+    $this->assertSame($entityType, $event->getEntityType());
+    $this->assertSame($bundle, $event->getBundle());
   }
 
 }

@@ -18,14 +18,12 @@ class LanguageSwitchLinksAlterEvent extends Event implements EventInterface {
    * @var array
    */
   private $links;
-
   /**
    * The language type.
    *
    * @var string
    */
   private $type;
-
   /**
    * The request path.
    *
@@ -43,7 +41,7 @@ class LanguageSwitchLinksAlterEvent extends Event implements EventInterface {
    * @param \Drupal\Core\Url $path
    *   The request path.
    */
-  public function __construct(array &$links, $type, Url $path) {
+  public function __construct(array &$links, string $type, Url $path) {
     $this->links = &$links;
     $this->type = $type;
     $this->path = $path;
@@ -55,18 +53,8 @@ class LanguageSwitchLinksAlterEvent extends Event implements EventInterface {
    * @return array
    *   The links array.
    */
-  public function &getLinks() {
+  public function &getLinks(): array {
     return $this->links;
-  }
-
-  /**
-   * Set the links.
-   *
-   * @param array $links
-   *   The links array.
-   */
-  public function setLinks(array $links) {
-    $this->links = $links;
   }
 
   /**
@@ -87,7 +75,7 @@ class LanguageSwitchLinksAlterEvent extends Event implements EventInterface {
    * @return string
    *   The language type.
    */
-  public function getType() {
+  public function getType(): string {
     return $this->type;
   }
 
@@ -97,14 +85,14 @@ class LanguageSwitchLinksAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Url
    *   The link path.
    */
-  public function getPath() {
+  public function getPath(): Url {
     return $this->path;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER;
   }
 

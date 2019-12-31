@@ -18,14 +18,12 @@ class EntityBundleFieldInfoAlterEvent extends Event implements EventInterface {
    * @var array
    */
   private $fields;
-
   /**
    * The entity type.
    *
    * @var \Drupal\Core\Entity\EntityTypeInterface
    */
   private $entityType;
-
   /**
    * The bundle name.
    *
@@ -43,7 +41,7 @@ class EntityBundleFieldInfoAlterEvent extends Event implements EventInterface {
    * @param string $bundle
    *   The bundle name.
    */
-  public function __construct(array &$fields, EntityTypeInterface $entityType, $bundle) {
+  public function __construct(array &$fields, EntityTypeInterface $entityType, string $bundle) {
     $this->fields = &$fields;
     $this->entityType = $entityType;
     $this->bundle = $bundle;
@@ -52,7 +50,7 @@ class EntityBundleFieldInfoAlterEvent extends Event implements EventInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_BUNDLE_FIELD_INFO_ALTER;
   }
 
@@ -62,7 +60,7 @@ class EntityBundleFieldInfoAlterEvent extends Event implements EventInterface {
    * @return array
    *   Extra field info.
    */
-  public function &getFields() {
+  public function &getFields(): array {
     return $this->fields;
   }
 
@@ -72,7 +70,7 @@ class EntityBundleFieldInfoAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Entity\EntityTypeInterface
    *   The EntityType.
    */
-  public function getEntityType() {
+  public function getEntityType(): EntityTypeInterface {
     return $this->entityType;
   }
 
@@ -82,7 +80,7 @@ class EntityBundleFieldInfoAlterEvent extends Event implements EventInterface {
    * @return string
    *   The Bundle.
    */
-  public function getBundle() {
+  public function getBundle(): string {
     return $this->bundle;
   }
 

@@ -16,13 +16,13 @@ class EntityLoadEvent extends Event implements EventInterface {
    *
    * @var array
    */
-  protected $entities;
+  private $entities;
   /**
    * The entity type id.
    *
    * @var string
    */
-  protected $entityTypeId;
+  private $entityTypeId;
 
   /**
    * EntityLoadEvent constructor.
@@ -43,7 +43,7 @@ class EntityLoadEvent extends Event implements EventInterface {
    * @return array
    *   The entities.
    */
-  public function getEntities() {
+  public function getEntities(): array {
     return $this->entities;
   }
 
@@ -53,14 +53,14 @@ class EntityLoadEvent extends Event implements EventInterface {
    * @return string
    *   The entity type id.
    */
-  public function getEntityTypeId() {
+  public function getEntityTypeId(): string {
     return $this->entityTypeId;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_LOAD;
   }
 

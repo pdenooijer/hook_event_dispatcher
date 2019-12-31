@@ -35,7 +35,7 @@ class LibraryInfoAlterEvent extends Event implements EventInterface {
    *   Can either be 'core' or the machine name of the extension
    *   that registered the libraries.
    */
-  public function __construct(array &$libraries, $extension) {
+  public function __construct(array &$libraries, string $extension) {
     $this->libraries = &$libraries;
     $this->extension = $extension;
   }
@@ -46,7 +46,7 @@ class LibraryInfoAlterEvent extends Event implements EventInterface {
    * @return array
    *   Libraries info.
    */
-  public function &getLibraries() {
+  public function &getLibraries(): array {
     return $this->libraries;
   }
 
@@ -56,14 +56,14 @@ class LibraryInfoAlterEvent extends Event implements EventInterface {
    * @return string
    *   The extension.
    */
-  public function getExtension() {
+  public function getExtension(): string {
     return $this->extension;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::LIBRARY_INFO_ALTER;
   }
 

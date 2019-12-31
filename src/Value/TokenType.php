@@ -57,11 +57,8 @@ final class TokenType {
    *
    * @throws \UnexpectedValueException
    */
-  public static function create($type, $name) {
+  public static function create(string $type, $name): self {
     $instance = new self();
-    if (!is_string($type)) {
-      throw new UnexpectedValueException('Type should be a string');
-    }
     if (!is_string($name) && !$name instanceof MarkupInterface) {
       throw new UnexpectedValueException('Name should be a string or an instance of MarkupInterface');
     }
@@ -73,7 +70,7 @@ final class TokenType {
   /**
    * Set description and return a new instance.
    *
-   * @param string $description
+   * @param string|\Drupal\Component\Render\MarkupInterface $description
    *   The description of the token type.
    *
    * @return self
@@ -81,7 +78,7 @@ final class TokenType {
    *
    * @throws \UnexpectedValueException
    */
-  public function setDescription($description) {
+  public function setDescription($description): self {
     if (!is_string($description) && !$description instanceof MarkupInterface) {
       throw new UnexpectedValueException('Description should be a string or an instance of MarkupInterface');
     }
@@ -98,13 +95,8 @@ final class TokenType {
    *
    * @return self
    *   A new instance with the needs data property.
-   *
-   * @throws \UnexpectedValueException
    */
-  public function setNeedsData($needsData) {
-    if ($needsData && !is_string($needsData)) {
-      throw new UnexpectedValueException('NeedsData should be a string');
-    }
+  public function setNeedsData(string $needsData): self {
     $clone = clone $this;
     $clone->needsData = $needsData;
     return $clone;
@@ -113,7 +105,7 @@ final class TokenType {
   /**
    * Getter.
    *
-   * @return string|null
+   * @return string|\Drupal\Component\Render\MarkupInterface|null
    *   The description.
    */
   public function getDescription() {
@@ -126,7 +118,7 @@ final class TokenType {
    * @return string|null
    *   The needs data property.
    */
-  public function getNeedsData() {
+  public function getNeedsData(): ?string {
     return $this->needsData;
   }
 
@@ -136,7 +128,7 @@ final class TokenType {
    * @return string
    *   The token type like 'node'.
    */
-  public function getType() {
+  public function getType(): string {
     return $this->type;
   }
 
@@ -146,7 +138,7 @@ final class TokenType {
    * @return string
    *   The token type label, like 'The Node type'.
    */
-  public function getName() {
+  public function getName(): string {
     return $this->name;
   }
 

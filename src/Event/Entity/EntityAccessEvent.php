@@ -11,26 +11,26 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityAccessEvent.
  */
-class EntityAccessEvent extends BaseEntityEvent {
+class EntityAccessEvent extends AbstractEntityEvent {
 
   /**
    * The operation that is to be performed on $entity.
    *
    * @var string
    */
-  protected $operation;
+  private $operation;
   /**
    * The account trying to access the entity.
    *
    * @var \Drupal\Core\Session\AccountInterface
    */
-  protected $account;
+  private $account;
   /**
    * The access result.
    *
    * @var \Drupal\Core\Access\AccessResultInterface
    */
-  protected $accessResult;
+  private $accessResult;
 
   /**
    * EntityAccessEvent constructor.
@@ -42,7 +42,7 @@ class EntityAccessEvent extends BaseEntityEvent {
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The account trying to access the entity.
    */
-  public function __construct(EntityInterface $entity, $operation, AccountInterface $account) {
+  public function __construct(EntityInterface $entity, string $operation, AccountInterface $account) {
     parent::__construct($entity);
 
     $this->operation = $operation;
@@ -56,7 +56,7 @@ class EntityAccessEvent extends BaseEntityEvent {
    * @return string
    *   The Operation.
    */
-  public function getOperation() {
+  public function getOperation(): string {
     return $this->operation;
   }
 
@@ -66,7 +66,7 @@ class EntityAccessEvent extends BaseEntityEvent {
    * @return \Drupal\Core\Session\AccountInterface
    *   The account.
    */
-  public function getAccount() {
+  public function getAccount(): AccountInterface {
     return $this->account;
   }
 
@@ -76,20 +76,8 @@ class EntityAccessEvent extends BaseEntityEvent {
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function getAccessResult() {
+  public function getAccessResult(): AccessResultInterface {
     return $this->accessResult;
-  }
-
-  /**
-   * Set the access result.
-   *
-   * @param \Drupal\Core\Access\AccessResultInterface $accessResult
-   *   The access result.
-   *
-   * @deprecated in favour of addAccessResult() which is more descriptive.
-   */
-  public function setAccessResult(AccessResultInterface $accessResult) {
-    $this->addAccessResult($accessResult);
   }
 
   /**
@@ -98,14 +86,14 @@ class EntityAccessEvent extends BaseEntityEvent {
    * @param \Drupal\Core\Access\AccessResultInterface $accessResult
    *   The access result.
    */
-  public function addAccessResult(AccessResultInterface $accessResult) {
+  public function addAccessResult(AccessResultInterface $accessResult): void {
     $this->accessResult = $this->accessResult->orIf($accessResult);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_ACCESS;
   }
 

@@ -2,11 +2,13 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Theme\LibraryInfoAlterEvent;
 use Drupal\Tests\UnitTestCase;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
+use function hook_event_dispatcher_library_info_alter;
 
 /**
  * Class LibraryInfoAlterEventTest.
@@ -27,20 +29,20 @@ class LibraryInfoAlterEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * Test the LibraryInfoAlterEventTest.
    */
-  public function testLibraryInfoAlterEvent() {
+  public function testLibraryInfoAlterEvent(): void {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::LIBRARY_INFO_ALTER => function (LibraryInfoAlterEvent $event) {
+      HookEventDispatcherInterface::LIBRARY_INFO_ALTER => static function (LibraryInfoAlterEvent $event) {
         $libraries = &$event->getLibraries();
         $libraries['test_library'] = 'test_altered';
       },
@@ -54,12 +56,11 @@ class LibraryInfoAlterEventTest extends UnitTestCase {
     hook_event_dispatcher_library_info_alter($libraries, $extension);
 
     $expectedLibraries['test_library'] = 'test_altered';
-    $this->assertSame($libraries, $expectedLibraries);
+    $this->assertSame($expectedLibraries, $libraries);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\LibraryInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LIBRARY_INFO_ALTER);
-
-    $this->assertSame($libraries, $event->getLibraries());
+    $this->assertSame($expectedLibraries, $event->getLibraries());
     $this->assertSame($extension, $event->getExtension());
   }
 

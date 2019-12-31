@@ -19,19 +19,6 @@ final class ViewsQuerySubstitutionsEvent extends BaseViewsEvent {
   private $substitutions = [];
 
   /**
-   * Set the query substitutions.
-   *
-   * @param array $substitutions
-   *   An associative array where each key is a string to be replaced, and the
-   *   corresponding value is its replacement. The strings to replace are often
-   *   surrounded with '***', as illustrated in the example implementation, to
-   *   avoid collisions with other values in the query.
-   */
-  public function setSubstitutions(array $substitutions) {
-    $this->substitutions = $substitutions;
-  }
-
-  /**
    * Get the query substitutions.
    *
    * @return array
@@ -40,8 +27,20 @@ final class ViewsQuerySubstitutionsEvent extends BaseViewsEvent {
    *   surrounded with '***', as illustrated in the example implementation, to
    *   avoid collisions with other values in the query.
    */
-  public function &getSubstitutions() {
+  public function &getSubstitutions(): array {
     return $this->substitutions;
+  }
+
+  /**
+   * Add a substitution.
+   *
+   * @param string $target
+   *   String target to be replaced.
+   * @param string $replacement
+   *   The replacement of the given target.
+   */
+  public function addSubstitution(string $target, string $replacement): void {
+    $this->substitutions[$target] = $replacement;
   }
 
   /**
@@ -50,7 +49,7 @@ final class ViewsQuerySubstitutionsEvent extends BaseViewsEvent {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::VIEWS_QUERY_SUBSTITUTIONS;
   }
 

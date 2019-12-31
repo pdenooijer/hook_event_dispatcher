@@ -14,7 +14,7 @@ class FormBaseAlterEvent extends BaseFormEvent {
    *
    * @var string
    */
-  protected $baseFormId;
+  private $baseFormId;
 
   /**
    * FormBaseAlterEvent constructor.
@@ -31,7 +31,12 @@ class FormBaseAlterEvent extends BaseFormEvent {
    * @param string $baseFormId
    *   The base form id.
    */
-  public function __construct(array &$form, FormStateInterface $formState, $formId, $baseFormId) {
+  public function __construct(
+    array &$form,
+    FormStateInterface $formState,
+    string $formId,
+    string $baseFormId
+  ) {
     parent::__construct($form, $formState, $formId);
     $this->baseFormId = $baseFormId;
   }
@@ -39,7 +44,7 @@ class FormBaseAlterEvent extends BaseFormEvent {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return 'hook_event_dispatcher.form_base_' . $this->getBaseFormId() . '.alter';
   }
 
@@ -49,7 +54,7 @@ class FormBaseAlterEvent extends BaseFormEvent {
    * @return string
    *   The base form id.
    */
-  public function getBaseFormId() {
+  public function getBaseFormId(): string {
     return $this->baseFormId;
   }
 

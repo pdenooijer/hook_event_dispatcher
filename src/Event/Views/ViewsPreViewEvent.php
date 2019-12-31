@@ -15,8 +15,7 @@ class ViewsPreViewEvent extends BaseViewsEvent {
    *
    * @var array
    */
-  private $arguments = [];
-
+  private $arguments;
   /**
    * The machine name of the active display.
    *
@@ -46,7 +45,7 @@ class ViewsPreViewEvent extends BaseViewsEvent {
    * @return string
    *   The machine name of the active display.
    */
-  public function getDisplayId() {
+  public function getDisplayId(): string {
     return $this->displayId;
   }
 
@@ -56,14 +55,14 @@ class ViewsPreViewEvent extends BaseViewsEvent {
    * @return array
    *   The array of arguments passed into the view.
    */
-  public function &getArguments() {
+  public function &getArguments(): array {
     return $this->arguments;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::VIEWS_PRE_VIEW;
   }
 

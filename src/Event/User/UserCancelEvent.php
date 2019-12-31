@@ -18,14 +18,12 @@ final class UserCancelEvent extends Event implements EventInterface {
    * @var array
    */
   private $edit;
-
   /**
    * Account.
    *
    * @var \Drupal\Core\Session\AccountInterface
    */
   private $account;
-
   /**
    * The account cancellation method.
    *
@@ -43,7 +41,7 @@ final class UserCancelEvent extends Event implements EventInterface {
    * @param string $method
    *   The account cancellation method.
    */
-  public function __construct(array $edit, AccountInterface $account, $method) {
+  public function __construct(array $edit, AccountInterface $account, string $method) {
     $this->edit = $edit;
     $this->account = $account;
     $this->method = $method;
@@ -55,7 +53,7 @@ final class UserCancelEvent extends Event implements EventInterface {
    * @return array
    *   The array of form values submitted by the user.
    */
-  public function getEdit() {
+  public function getEdit(): array {
     return $this->edit;
   }
 
@@ -65,7 +63,7 @@ final class UserCancelEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Session\AccountInterface
    *   Account.
    */
-  public function getAccount() {
+  public function getAccount(): AccountInterface {
     return $this->account;
   }
 
@@ -75,7 +73,7 @@ final class UserCancelEvent extends Event implements EventInterface {
    * @return string
    *   The account cancellation method.
    */
-  public function getMethod() {
+  public function getMethod(): string {
     return $this->method;
   }
 
@@ -85,7 +83,7 @@ final class UserCancelEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::USER_CANCEL;
   }
 

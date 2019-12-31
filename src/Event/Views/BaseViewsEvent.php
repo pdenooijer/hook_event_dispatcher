@@ -34,7 +34,7 @@ abstract class BaseViewsEvent extends Event implements EventInterface {
    * @return \Drupal\views\ViewExecutable
    *   The view.
    */
-  public function getView() {
+  public function getView(): ViewExecutable {
     return $this->view;
   }
 

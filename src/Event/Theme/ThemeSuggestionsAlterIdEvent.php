@@ -13,7 +13,7 @@ class ThemeSuggestionsAlterIdEvent extends BaseThemeSuggestionsEvent {
    * @return string
    *   Dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return 'hook_event_dispatcher.theme.suggestions_' . $this->getHook() . '_alter';
   }
 

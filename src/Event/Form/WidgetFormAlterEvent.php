@@ -17,19 +17,19 @@ class WidgetFormAlterEvent extends Event implements EventInterface {
    *
    * @var array
    */
-  protected $element;
+  private $element;
   /**
    * The form state.
    *
    * @var \Drupal\Core\Form\FormStateInterface
    */
-  protected $formState;
+  private $formState;
   /**
    * The context.
    *
    * @var array
    */
-  protected $context;
+  private $context;
 
   /**
    * WidgetFormAlterEvent constructor.
@@ -61,20 +61,8 @@ class WidgetFormAlterEvent extends Event implements EventInterface {
    * @return array
    *   The element.
    */
-  public function &getElement() {
+  public function &getElement(): array {
     return $this->element;
-  }
-
-  /**
-   * Set the element.
-   *
-   * @param array $element
-   *   The element.
-   *
-   * @deprecated This is not needed anymore, use the element by reference.
-   */
-  public function setElement(array $element) {
-    $this->element = $element;
   }
 
   /**
@@ -83,7 +71,7 @@ class WidgetFormAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Form\FormStateInterface
    *   The form state.
    */
-  public function getFormState() {
+  public function getFormState(): FormStateInterface {
     return $this->formState;
   }
 
@@ -93,14 +81,14 @@ class WidgetFormAlterEvent extends Event implements EventInterface {
    * @return array
    *   The context.
    */
-  public function getContext() {
+  public function getContext(): array {
     return $this->context;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::WIDGET_FORM_ALTER;
   }
 

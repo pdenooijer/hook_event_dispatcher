@@ -7,12 +7,12 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityPredeleteEvent.
  */
-class EntityPredeleteEvent extends BaseEntityEvent {
+class EntityPredeleteEvent extends AbstractEntityEvent {
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_PRE_DELETE;
   }
 

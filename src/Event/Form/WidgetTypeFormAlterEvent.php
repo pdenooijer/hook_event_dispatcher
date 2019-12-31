@@ -10,7 +10,7 @@ class WidgetTypeFormAlterEvent extends WidgetFormAlterEvent {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     /* @var \Drupal\Core\Field\FieldItemListInterface $items */
     $items = $this->getContext()['items'];
     $fieldDefinition = $items->getFieldDefinition();

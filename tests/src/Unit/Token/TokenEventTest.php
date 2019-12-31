@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Token;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
@@ -11,6 +12,9 @@ use Drupal\hook_event_dispatcher\Value\Token;
 use Drupal\hook_event_dispatcher\Value\TokenType;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use UnexpectedValueException;
+use function hook_event_dispatcher_token_info;
+use function hook_event_dispatcher_tokens;
 
 /**
  * Class TokenEventTest.
@@ -31,18 +35,18 @@ class TokenEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * Test TokenInfoEvent.
    */
-  public function testTokenInfoEvent() {
+  public function testTokenInfoEvent(): void {
     $types = [
       TokenType::create('test_type', 'Test type')->setDescription('Test type desc'),
       TokenType::create('other_type', 'Other type')->setDescription('Other type!')->setNeedsData('test_data'),
@@ -55,7 +59,7 @@ class TokenEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::TOKEN_INFO => function (TokensInfoEvent $event) use ($types, $tokens) {
+      HookEventDispatcherInterface::TOKEN_INFO => static function (TokensInfoEvent $event) use ($types, $tokens) {
         foreach ($types as $type) {
           $event->addTokenType($type);
         }
@@ -109,21 +113,21 @@ class TokenEventTest extends UnitTestCase {
     ];
     /* @var \Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_INFO);
-    $this->assertEquals($expectedTypes, $result['types']);
-    $this->assertEquals($expectedTokens, $result['tokens']);
-    $this->assertEquals($expectedTypes, $event->getTokenTypes());
-    $this->assertEquals($expectedTokens, $event->getTokens());
+    $this->assertSame($expectedTypes, $result['types']);
+    $this->assertSame($expectedTokens, $result['tokens']);
+    $this->assertSame($expectedTypes, $event->getTokenTypes());
+    $this->assertSame($expectedTokens, $event->getTokens());
   }
 
   /**
    * Test TokenReplacementEvent.
    */
-  public function testTokenReplacementEvent() {
+  public function testTokenReplacementEvent(): void {
     $replacement1 = 'Replacement value 1';
     $replacement2 = 'Replacement value 2';
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::TOKEN_REPLACEMENT => function (TokensReplacementEvent $event) use ($replacement1, $replacement2) {
+      HookEventDispatcherInterface::TOKEN_REPLACEMENT => static function (TokensReplacementEvent $event) use ($replacement1, $replacement2) {
         $event->setReplacementValue('test_type', 'token1', $replacement1);
         $event->setReplacementValue('test_type', 'token2', $replacement2);
       },
@@ -151,59 +155,37 @@ class TokenEventTest extends UnitTestCase {
     ];
     /* @var \Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_REPLACEMENT);
-    $this->assertEquals($expectedResult, $result);
-    $this->assertEquals($type, $event->getType());
-    $this->assertEquals($tokens, $event->getTokens());
-    $this->assertEquals($data, $event->getRawData());
-    $this->assertEquals($options, $event->getOptions());
-    $this->assertEquals($metaData, $event->getBubbleableMetadata());
-    $this->assertEquals('test!', $event->getData('test_data'));
+    $this->assertSame($expectedResult, $result);
+    $this->assertSame($type, $event->getType());
+    $this->assertSame($tokens, $event->getTokens());
+    $this->assertSame($data, $event->getRawData());
+    $this->assertSame($options, $event->getOptions());
+    $this->assertSame($metaData, $event->getBubbleableMetadata());
+    $this->assertSame('test!', $event->getData('test_data'));
     $this->assertNull($event->getData('none_existing'));
     $this->assertFalse($event->forToken('none_existing', 'token1'));
     $this->assertFalse($event->forToken('test_type', 'none_existing'));
   }
 
   /**
-   * Test TokenReplacementEvent invalid type exception.
-   */
-  public function testTokenReplacementEventInvalidTypeException() {
-    $metaData = $this->createMock(BubbleableMetadata::class);
-    $event = new TokensReplacementEvent('', [], [], [], $metaData);
-
-    $this->setExpectedException(\UnexpectedValueException::class);
-    $event->setReplacementValue(NULL, '', '');
-  }
-
-  /**
-   * Test TokenReplacementEvent invalid token exception.
-   */
-  public function testTokenReplacementEventInvalidTokenException() {
-    $metaData = $this->createMock(BubbleableMetadata::class);
-    $event = new TokensReplacementEvent('', [], [], [], $metaData);
-
-    $this->setExpectedException(\UnexpectedValueException::class);
-    $event->setReplacementValue('', NULL, '');
-  }
-
-  /**
    * Test TokenReplacementEvent wrong replacement exception.
    */
-  public function testTokenReplacementEventWrongReplacementException() {
+  public function testTokenReplacementEventWrongReplacementException(): void {
     $metaData = $this->createMock(BubbleableMetadata::class);
     $event = new TokensReplacementEvent('', [], [], [], $metaData);
 
-    $this->setExpectedException(\UnexpectedValueException::class);
+    $this->setExpectedException(UnexpectedValueException::class);
     $event->setReplacementValue('', '', '');
   }
 
   /**
    * Test TokenReplacementEvent invalid replacement Exception.
    */
-  public function testTokenReplacementEventInvalidReplacementException() {
+  public function testTokenReplacementEventInvalidReplacementException(): void {
     $metaData = $this->createMock(BubbleableMetadata::class);
     $event = new TokensReplacementEvent('test', ['token' => '[test:token]'], [], [], $metaData);
 
-    $this->setExpectedException(\UnexpectedValueException::class);
+    $this->setExpectedException(UnexpectedValueException::class);
     $event->setReplacementValue('test', 'token', NULL);
   }
 

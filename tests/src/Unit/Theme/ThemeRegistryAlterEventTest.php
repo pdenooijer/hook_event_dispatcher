@@ -8,6 +8,7 @@ use Drupal\hook_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_theme_registry_alter;
 
 /**
  * Class ThemeRegistryAlterEventTest.
@@ -28,7 +29,7 @@ class ThemeRegistryAlterEventTest extends UnitTestCase {
   /**
    * Sets up the test.
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
@@ -39,7 +40,7 @@ class ThemeRegistryAlterEventTest extends UnitTestCase {
   /**
    * ThemeRegistryAlterEvent with theme implementation alter test.
    */
-  public function testThemeRegistryAlterEventWithThemeAlter() {
+  public function testThemeRegistryAlterEventWithThemeAlter(): void {
     $themeRegistry = $expected = [
       'existing_theme_hook__with_information' => [
         'variables' => [
@@ -53,7 +54,7 @@ class ThemeRegistryAlterEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::THEME_REGISTRY_ALTER => function (
+      HookEventDispatcherInterface::THEME_REGISTRY_ALTER => static function (
         ThemeRegistryAlterEvent $event
       ) {
         $themeRegistry = &$event->getThemeRegistry();

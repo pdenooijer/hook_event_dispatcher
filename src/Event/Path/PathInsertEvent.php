@@ -15,7 +15,7 @@ final class PathInsertEvent extends BasePathEvent {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::PATH_INSERT;
   }
 

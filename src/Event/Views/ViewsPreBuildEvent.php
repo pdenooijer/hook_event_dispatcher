@@ -12,7 +12,7 @@ class ViewsPreBuildEvent extends BaseViewsEvent {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::VIEWS_PRE_BUILD;
   }
 

@@ -2,12 +2,15 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\EntityExtra;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_entity_extra_field_info;
+use function hook_event_dispatcher_entity_extra_field_info_alter;
 
 /**
  * Class EntityExtraEventTest.
@@ -28,20 +31,20 @@ class EntityExtraEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * Test EntityExtraFieldInfoEvent with helper functions.
    */
-  public function testEntityExtraFieldInfoEventWithHelperFunctions() {
+  public function testEntityExtraFieldInfoEventWithHelperFunctions(): void {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO => function (EntityExtraFieldInfoEvent $event) {
+      HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO => static function (EntityExtraFieldInfoEvent $event) {
         $event->addDisplayFieldInfo('node', 'test', 'field_test', ['test' => 'node']);
         $event->addFormFieldInfo('entity', 'test_entity', 'field_node', ['test' => 'entity']);
       },
@@ -68,17 +71,17 @@ class EntityExtraEventTest extends UnitTestCase {
       ],
     ];
     $hookFieldInfoResult = hook_event_dispatcher_entity_extra_field_info();
-    $this->assertEquals($expectedFieldInfo, $hookFieldInfoResult);
+    $this->assertSame($expectedFieldInfo, $hookFieldInfoResult);
 
     /* @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO);
-    $this->assertEquals($expectedFieldInfo, $event->getFieldInfo());
+    $this->assertSame($expectedFieldInfo, $event->getFieldInfo());
   }
 
   /**
    * Test EntityExtraFieldInfoEvent with set function.
    */
-  public function testEntityExtraFieldInfoEventWithSetFunction() {
+  public function testEntityExtraFieldInfoEventWithSetFunction(): void {
     $fieldInfo = [
       'node' => [
         'test' => [
@@ -101,25 +104,25 @@ class EntityExtraEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO => function (EntityExtraFieldInfoEvent $event) use ($fieldInfo) {
+      HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO => static function (EntityExtraFieldInfoEvent $event) use ($fieldInfo) {
         $event->setFieldInfo($fieldInfo);
       },
     ]);
 
     $hookFieldInfoResult = hook_event_dispatcher_entity_extra_field_info();
-    $this->assertEquals($fieldInfo, $hookFieldInfoResult);
+    $this->assertSame($fieldInfo, $hookFieldInfoResult);
 
     /* @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO);
-    $this->assertEquals($fieldInfo, $event->getFieldInfo());
+    $this->assertSame($fieldInfo, $event->getFieldInfo());
   }
 
   /**
    * Test EntityExtraFieldInfoAlterEvent.
    */
-  public function testEntityExtraFieldInfoAlterEvent() {
+  public function testEntityExtraFieldInfoAlterEvent(): void {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO_ALTER => function (EntityExtraFieldInfoAlterEvent $event) {
+      HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO_ALTER => static function (EntityExtraFieldInfoAlterEvent $event) {
         $info = &$event->getFieldInfo();
         $info['taxonomy_term']['sheep']['display']['field_herd']['sheep'] = 'herd';
       },
@@ -151,8 +154,8 @@ class EntityExtraEventTest extends UnitTestCase {
 
     /* @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO_ALTER);
-    $this->assertEquals($expectedFieldInfo, $event->getFieldInfo());
-    $this->assertEquals($expectedFieldInfo, $fieldInfo);
+    $this->assertSame($expectedFieldInfo, $event->getFieldInfo());
+    $this->assertSame($expectedFieldInfo, $fieldInfo);
   }
 
 }

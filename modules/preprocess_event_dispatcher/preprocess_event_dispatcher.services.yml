@@ -1,0 +1,87 @@
+services:
+  preprocess_event.service:
+    class: Drupal\preprocess_event_dispatcher\Service\PreprocessEventService
+    arguments: [ '@event_dispatcher', '@preprocess_event.factory_mapper' ]
+
+  preprocess_event.factory_mapper:
+    class: Drupal\preprocess_event_dispatcher\Service\PreprocessEventFactoryMapper
+
+  preprocess_event.factory.block:
+    class: Drupal\preprocess_event_dispatcher\Factory\BlockPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.comment:
+    class: Drupal\preprocess_event_dispatcher\Factory\CommentPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.eck_entity:
+    class: Drupal\preprocess_event_dispatcher\Factory\EckEntityPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.field:
+    class: Drupal\preprocess_event_dispatcher\Factory\FieldPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.form:
+    class: Drupal\preprocess_event_dispatcher\Factory\FormPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.html:
+    class: Drupal\preprocess_event_dispatcher\Factory\HtmlPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.image:
+    class: Drupal\preprocess_event_dispatcher\Factory\ImagePreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.node:
+    class: Drupal\preprocess_event_dispatcher\Factory\NodePreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.page:
+    class: Drupal\preprocess_event_dispatcher\Factory\PagePreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.taxonomy_term:
+    class: Drupal\preprocess_event_dispatcher\Factory\TaxonomyTermPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.status_messages:
+    class: Drupal\preprocess_event_dispatcher\Factory\StatusMessagesPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.username:
+    class: Drupal\preprocess_event_dispatcher\Factory\UsernamePreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.view_field:
+    class: Drupal\preprocess_event_dispatcher\Factory\ViewFieldPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.view_table:
+    class: Drupal\preprocess_event_dispatcher\Factory\ViewTablePreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.view:
+    class: Drupal\preprocess_event_dispatcher\Factory\ViewPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }
+
+  preprocess_event.factory.paragraph:
+    class: Drupal\preprocess_event_dispatcher\Factory\ParagraphPreprocessEventFactory
+    tags:
+      - { name: preprocess_event_default_factory }

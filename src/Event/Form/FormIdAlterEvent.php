@@ -10,7 +10,7 @@ class FormIdAlterEvent extends BaseFormEvent {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return 'hook_event_dispatcher.form_' . $this->getFormId() . '.alter';
   }
 

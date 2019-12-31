@@ -15,37 +15,38 @@ abstract class BasePathEvent extends Event implements EventInterface {
    *
    * @var string
    */
-  protected $source;
+  private $source;
   /**
    * The alias for the source.
    *
    * @var string
    */
-  protected $alias;
+  private $alias;
   /**
    * Lang code.
    *
    * @var string
    */
-  protected $langcode;
+  private $langcode;
   /**
    * The path id.
    *
    * @var int
    */
-  protected $pid;
+  private $pid;
 
   /**
-   * BaseEntityEvent constructor.
+   * BasePathEvent constructor.
    *
-   * @param array $fields
-   *   The Entity.
+   * @param array $path
+   *   The array structure is identical to that of the return value of
+   *   \Drupal\Core\Path\AliasStorageInterface::save().
    */
-  public function __construct(array $fields) {
-    $this->source = $fields['source'];
-    $this->alias = $fields['alias'];
-    $this->langcode = $fields['langcode'];
-    $this->pid = (int) $fields['pid'];
+  public function __construct(array $path) {
+    $this->source = $path['source'];
+    $this->alias = $path['alias'];
+    $this->langcode = $path['langcode'];
+    $this->pid = (int) $path['pid'];
   }
 
   /**
@@ -54,7 +55,7 @@ abstract class BasePathEvent extends Event implements EventInterface {
    * @return int
    *   The path id.
    */
-  public function getPid() {
+  public function getPid(): int {
     return $this->pid;
   }
 
@@ -64,7 +65,7 @@ abstract class BasePathEvent extends Event implements EventInterface {
    * @return string
    *   The source like '/node/1'.
    */
-  public function getSource() {
+  public function getSource(): string {
     return $this->source;
   }
 
@@ -74,7 +75,7 @@ abstract class BasePathEvent extends Event implements EventInterface {
    * @return string
    *   The alias.
    */
-  public function getAlias() {
+  public function getAlias(): string {
     return $this->alias;
   }
 
@@ -84,7 +85,7 @@ abstract class BasePathEvent extends Event implements EventInterface {
    * @return string
    *   The langcode like 'nl'.
    */
-  public function getLangcode() {
+  public function getLangcode(): string {
     return $this->langcode;
   }
 

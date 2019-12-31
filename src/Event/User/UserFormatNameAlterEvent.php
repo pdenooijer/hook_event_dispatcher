@@ -18,7 +18,6 @@ final class UserFormatNameAlterEvent extends Event implements EventInterface {
    * @var string
    */
   private $name;
-
   /**
    * Account.
    *
@@ -45,18 +44,8 @@ final class UserFormatNameAlterEvent extends Event implements EventInterface {
    * @return string
    *   Name.
    */
-  public function &getName() {
+  public function &getName(): string {
     return $this->name;
-  }
-
-  /**
-   * Set the new name.
-   *
-   * @param string $name
-   *   Name.
-   */
-  public function setName($name) {
-    $this->name = $name;
   }
 
   /**
@@ -65,7 +54,7 @@ final class UserFormatNameAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Session\AccountInterface
    *   Account.
    */
-  public function getAccount() {
+  public function getAccount(): AccountInterface {
     return $this->account;
   }
 
@@ -75,7 +64,7 @@ final class UserFormatNameAlterEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER;
   }
 

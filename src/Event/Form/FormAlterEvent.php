@@ -12,7 +12,7 @@ class FormAlterEvent extends BaseFormEvent {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::FORM_ALTER;
   }
 

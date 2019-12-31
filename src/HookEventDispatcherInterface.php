@@ -18,7 +18,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_INSERT = 'hook_event_dispatcher.entity.insert';
+  public const ENTITY_INSERT = 'hook_event_dispatcher.entity.insert';
 
   /**
    * Respond to updates to an entity.
@@ -30,7 +30,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_UPDATE = 'hook_event_dispatcher.entity.update';
+  public const ENTITY_UPDATE = 'hook_event_dispatcher.entity.update';
 
   /**
    * Act before entity deletion.
@@ -42,7 +42,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_PRE_DELETE = 'hook_event_dispatcher.entity.predelete';
+  public const ENTITY_PRE_DELETE = 'hook_event_dispatcher.entity.predelete';
 
   /**
    * Respond to entity deletion.
@@ -54,7 +54,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_DELETE = 'hook_event_dispatcher.entity.delete';
+  public const ENTITY_DELETE = 'hook_event_dispatcher.entity.delete';
 
   /**
    * Act on an entity before it is created or updated.
@@ -66,7 +66,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_PRE_SAVE = 'hook_event_dispatcher.entity.presave';
+  public const ENTITY_PRE_SAVE = 'hook_event_dispatcher.entity.presave';
 
   /**
    * Act on entities being assembled before rendering.
@@ -78,7 +78,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_VIEW = 'hook_event_dispatcher.entity.view';
+  public const ENTITY_VIEW = 'hook_event_dispatcher.entity.view';
 
   /**
    * Alter a entity being assembled right before rendering.
@@ -90,7 +90,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_VIEW_ALTER = 'hook_event_dispatcher.entity.view_alter';
+  public const ENTITY_VIEW_ALTER = 'hook_event_dispatcher.entity.view_alter';
 
   /**
    * Control entity operation access.
@@ -102,7 +102,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_ACCESS = 'hook_event_dispatcher.entity.access';
+  public const ENTITY_ACCESS = 'hook_event_dispatcher.entity.access';
 
   /**
    * Acts when creating a new entity.
@@ -114,7 +114,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_CREATE = 'hook_event_dispatcher.entity.create';
+  public const ENTITY_CREATE = 'hook_event_dispatcher.entity.create';
 
   /**
    * Act on entities when loaded.
@@ -126,7 +126,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_LOAD = 'hook_event_dispatcher.entity.load';
+  public const ENTITY_LOAD = 'hook_event_dispatcher.entity.load';
 
   /**
    * Respond to creation of a new entity translation.
@@ -138,7 +138,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_TRANSLATION_INSERT = 'hook_event_dispatcher.entity.translation_insert';
+  public const ENTITY_TRANSLATION_INSERT = 'hook_event_dispatcher.entity.translation_insert';
 
   /**
    * Respond to deletion of a new entity translation.
@@ -150,7 +150,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_TRANSLATION_DELETE = 'hook_event_dispatcher.entity.translation_delete';
+  public const ENTITY_TRANSLATION_DELETE = 'hook_event_dispatcher.entity.translation_delete';
 
   // ENTITY FIELD EVENTS.
   /**
@@ -163,7 +163,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_FIELD_ACCESS = 'hook_event_dispatcher.entity_field.access';
+  public const ENTITY_FIELD_ACCESS = 'hook_event_dispatcher.entity_field.access';
 
   // ENTITY EXTRA FIELD EVENTS.
   /**
@@ -176,7 +176,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_EXTRA_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_extra_field.info';
+  public const ENTITY_EXTRA_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_extra_field.info';
 
   /**
    * Alter "pseudo-field" components on content entities.
@@ -188,7 +188,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_EXTRA_FIELD_INFO = 'hook_event_dispatcher.entity_extra_field.info_alter';
+  public const ENTITY_EXTRA_FIELD_INFO = 'hook_event_dispatcher.entity_extra_field.info_alter';
 
   // ENTITY TYPE EVENTS.
   /**
@@ -201,7 +201,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_BASE_FIELD_INFO = 'hook_event_dispatcher.entity_base.field_info';
+  public const ENTITY_BASE_FIELD_INFO = 'hook_event_dispatcher.entity_base.field_info';
 
   /**
    * Alter base field definitions for a content entity type.
@@ -213,7 +213,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_BASE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_base.field_info_alter';
+  public const ENTITY_BASE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_base.field_info_alter';
 
   /**
    * Alter bundle field definitions.
@@ -225,7 +225,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_BUNDLE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_bundle.field_info_alter';
+  public const ENTITY_BUNDLE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_bundle.field_info_alter';
 
   /**
    * Entity operation.
@@ -237,7 +237,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_OPERATION = 'hook_event_dispatcher.entity.operation';
+  public const ENTITY_OPERATION = 'hook_event_dispatcher.entity.operation';
 
   /**
    * Entity operation alter.
@@ -249,7 +249,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_OPERATION_ALTER = 'hook_event_dispatcher.entity.operation_alter';
+  public const ENTITY_OPERATION_ALTER = 'hook_event_dispatcher.entity.operation_alter';
 
   /**
    * Add to entity type definitions..
@@ -261,7 +261,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_TYPE_ALTER = 'hook_event_dispatcher.entity_type.alter';
+  public const ENTITY_TYPE_ALTER = 'hook_event_dispatcher.entity_type.alter';
 
   /**
    * Add to entity type definitions..
@@ -273,7 +273,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_TYPE_BUILD = 'hook_event_dispatcher.entity_type.build';
+  public const ENTITY_TYPE_BUILD = 'hook_event_dispatcher.entity_type.build';
 
   // FORM EVENTS.
   /**
@@ -286,7 +286,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const FORM_ALTER = 'hook_event_dispatcher.form.alter';
+  public const FORM_ALTER = 'hook_event_dispatcher.form.alter';
 
   /**
    * Alter forms for field widgets provided by other modules.
@@ -298,7 +298,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
+  public const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
 
   // BLOCK EVENTS.
   /**
@@ -311,7 +311,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const BLOCK_BUILD_ALTER = 'hook_event_dispatcher.block_build.alter';
+  public const BLOCK_BUILD_ALTER = 'hook_event_dispatcher.block_build.alter';
 
   // TOKEN EVENTS.
   /**
@@ -324,7 +324,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const TOKEN_REPLACEMENT = 'hook_event_dispatcher.token.replacement';
+  public const TOKEN_REPLACEMENT = 'hook_event_dispatcher.token.replacement';
 
   /**
    * Provide information about available placeholder tokens and token types.
@@ -336,7 +336,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const TOKEN_INFO = 'hook_event_dispatcher.token.info';
+  public const TOKEN_INFO = 'hook_event_dispatcher.token.info';
 
   // PATH EVENTS.
   /**
@@ -349,7 +349,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const PATH_INSERT = 'hook_event_dispatcher.path.insert';
+  public const PATH_INSERT = 'hook_event_dispatcher.path.insert';
 
   /**
    * Respond to a path being deleted.
@@ -361,7 +361,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const PATH_DELETE = 'hook_event_dispatcher.path.delete';
+  public const PATH_DELETE = 'hook_event_dispatcher.path.delete';
 
   /**
    * Respond to a path being updated.
@@ -373,7 +373,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const PATH_UPDATE = 'hook_event_dispatcher.path.update';
+  public const PATH_UPDATE = 'hook_event_dispatcher.path.update';
 
   // VIEWS EVENTS.
   /**
@@ -386,7 +386,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_DATA = 'hook_event_dispatcher.views.data';
+  public const VIEWS_DATA = 'hook_event_dispatcher.views.data';
 
   /**
    * Alter the table and field information from hook_views_data().
@@ -398,7 +398,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_DATA_ALTER = 'hook_event_dispatcher.views.data_alter';
+  public const VIEWS_DATA_ALTER = 'hook_event_dispatcher.views.data_alter';
 
   /**
    * Alter a view at the very beginning of Views processing.
@@ -410,7 +410,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_PRE_VIEW = 'hook_event_dispatcher.views.pre_view';
+  public const VIEWS_PRE_VIEW = 'hook_event_dispatcher.views.pre_view';
 
   /**
    * Act on the view after the query is built and just before it is executed.
@@ -422,7 +422,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_PRE_EXECUTE = 'hook_event_dispatcher.views.pre_execute';
+  public const VIEWS_PRE_EXECUTE = 'hook_event_dispatcher.views.pre_execute';
 
   /**
    * Act on the view immediately before rendering it.
@@ -434,7 +434,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_PRE_RENDER = 'hook_event_dispatcher.views.pre_render';
+  public const VIEWS_PRE_RENDER = 'hook_event_dispatcher.views.pre_render';
 
   /**
    * Act on the view immediately after the query has been executed.
@@ -446,7 +446,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_POST_EXECUTE = 'hook_event_dispatcher.views.post_execute';
+  public const VIEWS_POST_EXECUTE = 'hook_event_dispatcher.views.post_execute';
 
   /**
    * Post-process any rendered data.
@@ -458,7 +458,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_POST_RENDER = 'hook_event_dispatcher.views.post_render';
+  public const VIEWS_POST_RENDER = 'hook_event_dispatcher.views.post_render';
 
   /**
    * Act on the view before the query is built, but after displays are attached.
@@ -470,7 +470,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_PRE_BUILD = 'hook_event_dispatcher.views.pre_build';
+  public const VIEWS_PRE_BUILD = 'hook_event_dispatcher.views.pre_build';
 
   /**
    * Act on the view immediately after the query is built.
@@ -482,7 +482,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const VIEWS_POST_BUILD = 'hook_event_dispatcher.views.post_build';
+  public const VIEWS_POST_BUILD = 'hook_event_dispatcher.views.post_build';
 
   /**
    * Alter the query before it is executed.
@@ -492,7 +492,7 @@ interface HookEventDispatcherInterface {
    * @see hook_event_dispatcher_views_query_alter()
    * @see hook_views_query_alter()
    */
-  const VIEWS_QUERY_ALTER = 'hook_event_dispatcher.views.query_alter';
+  public const VIEWS_QUERY_ALTER = 'hook_event_dispatcher.views.query_alter';
 
   /**
    * Replace special strings in the query before it is executed.
@@ -502,7 +502,7 @@ interface HookEventDispatcherInterface {
    * @see hook_event_dispatcher_views_query_substitutions()
    * @see hook_views_query_substitutions()
    */
-  const VIEWS_QUERY_SUBSTITUTIONS = 'hook_event_dispatcher.views.query_substitutions';
+  public const VIEWS_QUERY_SUBSTITUTIONS = 'hook_event_dispatcher.views.query_substitutions';
 
   // THEME EVENTS.
   /**
@@ -515,7 +515,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const THEME = 'hook_event_dispatcher.theme';
+  public const THEME = 'hook_event_dispatcher.theme';
 
   /**
    * Alter the theme registry information returned from hook_theme().
@@ -527,7 +527,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const THEME_REGISTRY_ALTER = 'hook_event_dispatcher.theme.registry_alter';
+  public const THEME_REGISTRY_ALTER = 'hook_event_dispatcher.theme.registry_alter';
 
   /**
    * Alters named suggestions for all theme hooks.
@@ -539,7 +539,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const THEME_SUGGESTIONS_ALTER = 'hook_event_dispatcher.theme.suggestions_alter';
+  public const THEME_SUGGESTIONS_ALTER = 'hook_event_dispatcher.theme.suggestions_alter';
 
   /**
    * Respond to themes being installed.
@@ -551,7 +551,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const THEMES_INSTALLED = 'hook_event_dispatcher.theme.installed';
+  public const THEMES_INSTALLED = 'hook_event_dispatcher.theme.installed';
 
   /**
    * Alter the default, hook-independent variables for all templates.
@@ -563,7 +563,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER = 'hook_event_dispatcher.theme.template_preprocess_default_variables_alter';
+  public const TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER = 'hook_event_dispatcher.theme.template_preprocess_default_variables_alter';
 
   /**
    * Perform necessary alterations to the JS before it is presented on the page.
@@ -575,7 +575,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const JS_ALTER = 'hook_event_dispatcher.js.alter';
+  public const JS_ALTER = 'hook_event_dispatcher.js.alter';
 
   /**
    * Alter the library info provided by an extension.
@@ -587,7 +587,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const LIBRARY_INFO_ALTER = 'hook_event_dispatcher.library.info_alter';
+  public const LIBRARY_INFO_ALTER = 'hook_event_dispatcher.library.info_alter';
 
   // USER EVENTS.
   /**
@@ -600,7 +600,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const USER_CANCEL = 'hook_event_dispatcher.user.cancel';
+  public const USER_CANCEL = 'hook_event_dispatcher.user.cancel';
 
   /**
    * Modify account cancellation methods.
@@ -612,7 +612,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const USER_CANCEL_METHODS_ALTER = 'hook_event_dispatcher.user.cancel_methods_alter';
+  public const USER_CANCEL_METHODS_ALTER = 'hook_event_dispatcher.user.cancel_methods_alter';
 
   /**
    * The user just logged in.
@@ -624,7 +624,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const USER_LOGIN = 'hook_event_dispatcher.user.login';
+  public const USER_LOGIN = 'hook_event_dispatcher.user.login';
 
   /**
    * The user just logged out.
@@ -636,7 +636,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const USER_LOGOUT = 'hook_event_dispatcher.user.logout';
+  public const USER_LOGOUT = 'hook_event_dispatcher.user.logout';
 
   /**
    * Alter the username that is displayed for a user.
@@ -648,7 +648,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const USER_FORMAT_NAME_ALTER = 'hook_event_dispatcher.user.format_name_alter';
+  public const USER_FORMAT_NAME_ALTER = 'hook_event_dispatcher.user.format_name_alter';
 
   // TOOLBAR EVENTS.
   /**
@@ -661,7 +661,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const TOOLBAR_ALTER = 'hook_event_dispatcher.toolbar.alter';
+  public const TOOLBAR_ALTER = 'hook_event_dispatcher.toolbar.alter';
 
   // PAGE EVENTS.
   /**
@@ -674,7 +674,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const PAGE_TOP = 'hook_event_dispatcher.page.top';
+  public const PAGE_TOP = 'hook_event_dispatcher.page.top';
 
   /**
    * Add a renderable array to the bottom of the page.
@@ -686,7 +686,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const PAGE_BOTTOM = 'hook_event_dispatcher.page.bottom';
+  public const PAGE_BOTTOM = 'hook_event_dispatcher.page.bottom';
 
   /**
    * Add attachments (typically assets) to a page before it is rendered.
@@ -702,7 +702,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const PAGE_ATTACHMENTS = 'hook_event_dispatcher.page.attachments';
+  public const PAGE_ATTACHMENTS = 'hook_event_dispatcher.page.attachments';
 
   // CRON EVENTS.
   /**
@@ -715,7 +715,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const CRON = 'hook_event_dispatcher.cron';
+  public const CRON = 'hook_event_dispatcher.cron';
 
   // LANGUAGE EVENTS.
   /**
@@ -728,7 +728,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const LANGUAGE_SWITCH_LINKS_ALTER = 'hook_event_dispatcher.language.switch_links_alter';
+  public const LANGUAGE_SWITCH_LINKS_ALTER = 'hook_event_dispatcher.language.switch_links_alter';
 
   // WEBFORM EVENTS.
   /**
@@ -741,7 +741,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const WEBFORM_ELEMENT_ALTER = 'hook_event_dispatcher.webform.element.alter';
+  public const WEBFORM_ELEMENT_ALTER = 'hook_event_dispatcher.webform.element.alter';
 
   /**
    * Respond to webform element info being initialized.
@@ -753,7 +753,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const WEBFORM_ELEMENT_INFO_ALTER = 'hook_event_dispatcher.webform.element.info.alter';
+  public const WEBFORM_ELEMENT_INFO_ALTER = 'hook_event_dispatcher.webform.element.info.alter';
 
   // MEDIA EVENTS.
   /**

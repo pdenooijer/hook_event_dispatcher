@@ -7,12 +7,12 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class EntityTranslationInsertEvent.
  */
-class EntityTranslationInsertEvent extends BaseEntityEvent {
+class EntityTranslationInsertEvent extends AbstractEntityEvent {
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_TRANSLATION_INSERT;
   }
 

@@ -34,7 +34,7 @@ class EntityExtraFieldInfoAlterEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO_ALTER;
   }
 
@@ -44,7 +44,7 @@ class EntityExtraFieldInfoAlterEvent extends Event implements EventInterface {
    * @return array
    *   Extra field info.
    */
-  public function &getFieldInfo() {
+  public function &getFieldInfo(): array {
     return $this->fieldInfo;
   }
 

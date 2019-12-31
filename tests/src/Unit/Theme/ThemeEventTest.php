@@ -2,11 +2,13 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_theme;
 
 /**
  * Class ThemeEventTest.
@@ -27,18 +29,18 @@ class ThemeEventTest extends UnitTestCase {
   /**
    * Sets up the test.
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * ThemeEvent with addNewThemes test.
    */
-  public function testThemeEventWithAddNewThemes() {
+  public function testThemeEventWithAddNewThemes(): void {
     $newThemes = [
       'some_custom__hook_theme' => [
         'variables' => [
@@ -48,7 +50,7 @@ class ThemeEventTest extends UnitTestCase {
       ],
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::THEME => function (ThemeEvent $event) use ($newThemes) {
+      HookEventDispatcherInterface::THEME => static function (ThemeEvent $event) use ($newThemes) {
         $event->addNewThemes($newThemes);
       },
     ]);
@@ -73,12 +75,13 @@ class ThemeEventTest extends UnitTestCase {
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME);
     $this->assertSame($existing, $event->getExisting());
     $this->assertSame($newThemes, $hookNewInformation);
+    $this->assertSame($newThemes, $event->getNewThemes());
   }
 
   /**
    * ThemeEvent with addNewThemes test.
    */
-  public function testThemeEventWithAddNewThemesPathException() {
+  public function testThemeEventWithAddNewThemesPathException(): void {
     $newThemes = [
       'some_custom__hook_theme' => [
         'variables' => [
@@ -87,7 +90,7 @@ class ThemeEventTest extends UnitTestCase {
       ],
     ];
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::THEME => function (ThemeEvent $event) use ($newThemes) {
+      HookEventDispatcherInterface::THEME => static function (ThemeEvent $event) use ($newThemes) {
         $event->addNewThemes($newThemes);
       },
     ]);
@@ -101,7 +104,7 @@ class ThemeEventTest extends UnitTestCase {
   /**
    * ThemeEvent with addNewTheme test.
    */
-  public function testThemeEventWithAddNewTheme() {
+  public function testThemeEventWithAddNewTheme(): void {
     $themeHook = 'extra_theme__hook';
     $information = [
       'test' => 'extra_theme_information',
@@ -110,7 +113,7 @@ class ThemeEventTest extends UnitTestCase {
     $expectedNewTheme[$themeHook] = $information;
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::THEME => function (ThemeEvent $event) use ($themeHook, $information) {
+      HookEventDispatcherInterface::THEME => static function (ThemeEvent $event) use ($themeHook, $information) {
         $event->addNewTheme($themeHook, $information);
       },
     ]);
@@ -135,19 +138,20 @@ class ThemeEventTest extends UnitTestCase {
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME);
     $this->assertSame($existing, $event->getExisting());
     $this->assertSame($expectedNewTheme, $hookNewInformation);
+    $this->assertSame($expectedNewTheme, $event->getNewThemes());
   }
 
   /**
    * ThemeEvent with addNewTheme test.
    */
-  public function testThemeEventWithAddNewThemeWithPathException() {
+  public function testThemeEventWithAddNewThemeWithPathException(): void {
     $themeHook = 'extra_theme__hook';
     $information = [
       'test' => 'extra_theme_information',
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::THEME => function (ThemeEvent $event) use ($themeHook, $information) {
+      HookEventDispatcherInterface::THEME => static function (ThemeEvent $event) use ($themeHook, $information) {
         $event->addNewTheme($themeHook, $information);
       },
     ]);

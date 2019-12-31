@@ -37,7 +37,7 @@ final class TemplatePreprocessDefaultVariablesAlterEvent extends Event implement
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER;
   }
 
@@ -48,18 +48,8 @@ final class TemplatePreprocessDefaultVariablesAlterEvent extends Event implement
    *   The associative array of default template variables, as set up by
    *   _template_preprocess_default_variables(). Passed by reference.
    */
-  public function &getVariables() {
+  public function &getVariables(): array {
     return $this->variables;
-  }
-
-  /**
-   * Set the updated default template variables.
-   *
-   * @param array $variables
-   *   The updated associative array of default template variables.
-   */
-  public function setVariables(array $variables) {
-    $this->variables = $variables;
   }
 
 }

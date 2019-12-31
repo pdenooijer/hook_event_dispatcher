@@ -34,7 +34,7 @@ final class TokensInfoEvent extends Event implements EventInterface {
    * @param \Drupal\hook_event_dispatcher\Value\TokenType $type
    *   The token type.
    */
-  public function addTokenType(TokenType $type) {
+  public function addTokenType(TokenType $type): void {
     $this->tokenTypes[$type->getType()] = [
       'name' => $type->getName(),
       'description' => $type->getDescription(),
@@ -48,7 +48,7 @@ final class TokensInfoEvent extends Event implements EventInterface {
    * @param \Drupal\hook_event_dispatcher\Value\Token $type
    *   The token.
    */
-  public function addToken(Token $type) {
+  public function addToken(Token $type): void {
     $this->tokens[$type->getType()][$type->getToken()] = [
       'name' => $type->getName(),
       'description' => $type->getDescription(),
@@ -78,7 +78,7 @@ final class TokensInfoEvent extends Event implements EventInterface {
    * @return array
    *   All the different token types.
    */
-  public function getTokenTypes() {
+  public function getTokenTypes(): array {
     return $this->tokenTypes;
   }
 
@@ -100,7 +100,7 @@ final class TokensInfoEvent extends Event implements EventInterface {
    * @return array
    *   The tokens.
    */
-  public function getTokens() {
+  public function getTokens(): array {
     return $this->tokens;
   }
 
@@ -110,7 +110,7 @@ final class TokensInfoEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::TOKEN_INFO;
   }
 

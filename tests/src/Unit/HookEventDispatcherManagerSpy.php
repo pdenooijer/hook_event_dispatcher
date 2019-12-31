@@ -5,6 +5,7 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface;
 use InvalidArgumentException;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class HookEventDispatcherManagerSpy.
@@ -43,7 +44,7 @@ class HookEventDispatcherManagerSpy implements HookEventDispatcherManagerInterfa
    *
    * @throws \Drupal\Tests\hook_event_dispatcher\Unit\TooManyEventsException
    */
-  public function register(EventInterface $event) {
+  public function register(EventInterface $event): Event {
     $this->eventCount++;
     if ($this->eventCount > $this->maxEventCount) {
       throw new TooManyEventsException(
@@ -56,6 +57,8 @@ class HookEventDispatcherManagerSpy implements HookEventDispatcherManagerInterfa
     if (isset($this->eventCallbacks[$type])) {
       $this->eventCallbacks[$type]($event);
     }
+
+    return $event;
   }
 
   /**
@@ -64,7 +67,7 @@ class HookEventDispatcherManagerSpy implements HookEventDispatcherManagerInterfa
    * @param int $maxEventCount
    *   Event count.
    */
-  public function setMaxEventCount($maxEventCount) {
+  public function setMaxEventCount($maxEventCount): void {
     $this->maxEventCount = $maxEventCount;
   }
 
@@ -74,7 +77,7 @@ class HookEventDispatcherManagerSpy implements HookEventDispatcherManagerInterfa
    * @param array $eventCallbacks
    *   Associative event callbacks array.
    */
-  public function setEventCallbacks(array $eventCallbacks) {
+  public function setEventCallbacks(array $eventCallbacks): void {
     $this->eventCallbacks = $eventCallbacks;
   }
 
@@ -86,8 +89,10 @@ class HookEventDispatcherManagerSpy implements HookEventDispatcherManagerInterfa
    *
    * @return \Drupal\hook_event_dispatcher\Event\EventInterface
    *   Registered event by name.
+   *
+   * @throws \InvalidArgumentException
    */
-  public function getRegisteredEvent($eventName) {
+  public function getRegisteredEvent($eventName): EventInterface {
     if (!isset($this->registeredEvents[$eventName])) {
       throw new InvalidArgumentException("The event '$eventName' was not registered");
     }

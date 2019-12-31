@@ -10,6 +10,7 @@ use Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_language_switch_links_alter;
 
 /**
  * Class LanguageSwitchLinksAlterEventTest.
@@ -30,7 +31,7 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
   /**
    * Sets up the test.
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
@@ -41,7 +42,7 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
   /**
    * Test adding a new link by reference.
    */
-  public function testAddLinksByReference() {
+  public function testAddLinksByReference(): void {
     $currentLinks = [
       'nl_nl' => [
         'url' => new Url('<current>'),
@@ -85,51 +86,9 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
   }
 
   /**
-   * Test adding a new link by reference.
-   */
-  public function testAddLinksBySet() {
-    $currentLinks = [
-      'nl_nl' => [
-        'url' => new Url('<current>'),
-        'title' => 'Nederlands - Dutch',
-        'language' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
-        'attributes' => [],
-        'query' => [],
-      ],
-    ];
-    $currentPath = new Url('<current>');
-    $currentType = 'language_interface';
-
-    $testLink = [
-      'url' => new Url('<current>'),
-      'title' => 'Deutsch - German',
-      'language' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
-      'attributes' => [],
-      'query' => [],
-    ];
-
-    $expectedLinks = $currentLinks;
-    $expectedLinks['de_de'] = $testLink;
-
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER => static function (LanguageSwitchLinksAlterEvent $event) use ($testLink) {
-        $links = $event->getLinks();
-        $links['de_de'] = $testLink;
-        $event->setLinks($links);
-      },
-    ]);
-
-    hook_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
-    $this->assertSame($expectedLinks, $event->getLinks());
-  }
-
-  /**
    * Test adding a new language link.
    */
-  public function testSetLinkForLanguage() {
+  public function testSetLinkForLanguage(): void {
     $currentLinks = $expectedLinks = [
       'nl_nl' => [
         'url' => new Url('<current>'),
@@ -161,6 +120,7 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
 
     /* @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
+    $this->assertSame($expectedLinks, $currentLinks);
     $this->assertSame($expectedLinks, $event->getLinks());
   }
 

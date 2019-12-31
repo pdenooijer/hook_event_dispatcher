@@ -34,14 +34,14 @@ class ThemeRegistryAlterEvent extends Event implements EventInterface {
    * @return array
    *   The theme registry.
    */
-  public function &getThemeRegistry() {
+  public function &getThemeRegistry(): array {
     return $this->themeRegistry;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::THEME_REGISTRY_ALTER;
   }
 

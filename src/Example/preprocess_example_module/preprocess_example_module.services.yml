@@ -1,5 +1,5 @@
 services:
   preprocess_event.factory.example:
-    class: \Drupal\preprocess_example_module\Event\Factory\ExamplePreprocessEventFactory
+    class: Drupal\preprocess_example_module\Factory\ExamplePreprocessEventFactory
     tags:
       -  { name: preprocess_event_factory }

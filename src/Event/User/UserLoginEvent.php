@@ -35,7 +35,7 @@ final class UserLoginEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Session\AccountInterface
    *   Account.
    */
-  public function getAccount() {
+  public function getAccount(): AccountInterface {
     return $this->account;
   }
 
@@ -45,7 +45,7 @@ final class UserLoginEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::USER_LOGIN;
   }
 

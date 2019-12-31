@@ -47,7 +47,7 @@ class EntityOperationAlterEvent extends Event implements EventInterface {
    * @return array
    *   The operations.
    */
-  public function &getOperations() {
+  public function &getOperations(): array {
     return $this->operations;
   }
 
@@ -57,14 +57,14 @@ class EntityOperationAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Entity\EntityInterface
    *   The entity.
    */
-  public function getEntity() {
+  public function getEntity(): EntityInterface {
     return $this->entity;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_OPERATION_ALTER;
   }
 

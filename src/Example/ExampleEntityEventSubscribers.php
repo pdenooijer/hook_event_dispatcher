@@ -32,7 +32,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event
    *   The event.
    */
-  public function alterEntityView(EntityViewEvent $event) {
+  public function alterEntityView(EntityViewEvent $event): void {
     $entity = $event->getEntity();
 
     // Only do this for entities of type Node.
@@ -50,7 +50,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent $event
    *   The event.
    */
-  public function entityPreSave(EntityPresaveEvent $event) {
+  public function entityPreSave(EntityPresaveEvent $event): void {
     $entity = $event->getEntity();
     $entity->special_field->value = 'PreSave!';
   }
@@ -61,7 +61,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent $event
    *   The event.
    */
-  public function entityInsert(EntityInsertEvent $event) {
+  public function entityInsert(EntityInsertEvent $event): void {
     // Do some fancy stuff with new entity.
     $entity = $event->getEntity();
     $entity->special_field->value = 'Insert!';
@@ -73,7 +73,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent $event
    *   The event.
    */
-  public function entityUpdate(EntityUpdateEvent $event) {
+  public function entityUpdate(EntityUpdateEvent $event): void {
     // Do some fancy stuff, when entity is updated.
     $entity = $event->getEntity();
     $entity->special_field->value = 'Update!';
@@ -85,7 +85,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent $event
    *   The event.
    */
-  public function entityPreDelete(EntityPredeleteEvent $event) {
+  public function entityPreDelete(EntityPredeleteEvent $event): void {
     // Do something before entity is deleted.
     $entity = $event->getEntity();
     $entity->special_field->value = 'PreDelete!';
@@ -97,7 +97,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
    * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent $event
    *   The event.
    */
-  public function entityDelete(EntityDeleteEvent $event) {
+  public function entityDelete(EntityDeleteEvent $event): void {
     // Do some fancy stuff, after entity is deleted.
     $entity = $event->getEntity();
     $entity->special_field->value = 'Deleted!';
@@ -106,7 +106,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       HookEventDispatcherInterface::ENTITY_VIEW => 'alterEntityView',
       HookEventDispatcherInterface::ENTITY_PRE_SAVE => 'entityPreSave',

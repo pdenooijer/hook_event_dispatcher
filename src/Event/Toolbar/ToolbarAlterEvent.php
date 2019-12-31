@@ -34,24 +34,14 @@ class ToolbarAlterEvent extends Event implements EventInterface {
    * @return array
    *   The items.
    */
-  public function &getItems() {
+  public function &getItems(): array {
     return $this->items;
-  }
-
-  /**
-   * Set the items.
-   *
-   * @param array $items
-   *   The items.
-   */
-  public function setItems(array $items) {
-    $this->items = $items;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::TOOLBAR_ALTER;
   }
 
