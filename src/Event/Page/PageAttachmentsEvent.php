@@ -34,14 +34,14 @@ class PageAttachmentsEvent extends Event implements EventInterface {
    * @return array
    *   The attachments array.
    */
-  public function &getAttachments() {
+  public function &getAttachments(): array {
     return $this->attachments;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::PAGE_ATTACHMENTS;
   }
 

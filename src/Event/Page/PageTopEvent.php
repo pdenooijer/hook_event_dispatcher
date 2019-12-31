@@ -34,14 +34,14 @@ class PageTopEvent extends Event implements EventInterface {
    * @return array
    *   The build array.
    */
-  public function &getBuild() {
+  public function &getBuild(): array {
     return $this->build;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::PAGE_TOP;
   }
 
