@@ -12,7 +12,7 @@ class ViewsPostExecuteEvent extends BaseViewsEvent {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::VIEWS_POST_EXECUTE;
   }
 

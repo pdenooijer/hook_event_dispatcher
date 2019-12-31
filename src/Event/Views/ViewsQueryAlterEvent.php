@@ -39,7 +39,7 @@ final class ViewsQueryAlterEvent extends BaseViewsEvent {
    * @return \Drupal\views\Plugin\views\query\QueryPluginBase
    *   The query.
    */
-  public function getQuery() {
+  public function getQuery(): QueryPluginBase {
     return $this->query;
   }
 
@@ -49,7 +49,7 @@ final class ViewsQueryAlterEvent extends BaseViewsEvent {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::VIEWS_QUERY_ALTER;
   }
 

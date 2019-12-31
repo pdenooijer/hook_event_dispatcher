@@ -34,7 +34,7 @@ final class ViewsDataAlterEvent extends Event implements EventInterface {
    * @return array
    *   Data.
    */
-  public function &getData() {
+  public function &getData(): array {
     return $this->data;
   }
 
@@ -44,7 +44,7 @@ final class ViewsDataAlterEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::VIEWS_DATA_ALTER;
   }
 

@@ -41,7 +41,7 @@ class ToolbarAlterEvent extends Event implements EventInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::TOOLBAR_ALTER;
   }
 

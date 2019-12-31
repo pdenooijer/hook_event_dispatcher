@@ -5,6 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Views;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
+use function array_merge_recursive;
 
 /**
  * Class ViewsDataEvent.
@@ -27,7 +28,7 @@ final class ViewsDataEvent extends Event implements EventInterface {
    * @see \hook_views_data()
    */
   public function addData(array $data) {
-    $this->data = \array_merge_recursive($this->data, $data);
+    $this->data = array_merge_recursive($this->data, $data);
   }
 
   /**
@@ -36,7 +37,7 @@ final class ViewsDataEvent extends Event implements EventInterface {
    * @return array
    *   Data.
    */
-  public function getData() {
+  public function getData(): array {
     return $this->data;
   }
 
@@ -46,7 +47,7 @@ final class ViewsDataEvent extends Event implements EventInterface {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::VIEWS_DATA;
   }
 

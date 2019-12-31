@@ -2,12 +2,15 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Views;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsDataAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Views\ViewsDataEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_views_data;
+use function hook_event_dispatcher_views_data_alter;
 
 /**
  * Class ViewDataEventTest.
@@ -28,18 +31,18 @@ class ViewDataEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * ViewsDataEvent test.
    */
-  public function testViewsDataEvent() {
+  public function testViewsDataEvent(): void {
     $data = [
       'test' => [
         'test_array_data',
@@ -47,7 +50,7 @@ class ViewDataEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::VIEWS_DATA => function (ViewsDataEvent $event) use ($data) {
+      HookEventDispatcherInterface::VIEWS_DATA => static function (ViewsDataEvent $event) use ($data) {
         $event->addData($data);
       },
     ]);
@@ -60,7 +63,7 @@ class ViewDataEventTest extends UnitTestCase {
   /**
    * ViewsDataEvent multiple adds test.
    */
-  public function testViewsDataEventMultipleAdds() {
+  public function testViewsDataEventMultipleAdds(): void {
     $data1 = [
       'test' => [
         'test_array_data',
@@ -80,7 +83,7 @@ class ViewDataEventTest extends UnitTestCase {
     ];
 
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::VIEWS_DATA => function (ViewsDataEvent $event) use ($data1, $data2, $data3) {
+      HookEventDispatcherInterface::VIEWS_DATA => static function (ViewsDataEvent $event) use ($data1, $data2, $data3) {
         $event->addData($data1);
         $event->addData($data2);
         $event->addData($data3);
@@ -104,9 +107,9 @@ class ViewDataEventTest extends UnitTestCase {
   /**
    * ViewsDataAlterEvent test.
    */
-  public function testViewsDataAlterEvent() {
+  public function testViewsDataAlterEvent(): void {
     $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::VIEWS_DATA_ALTER => function (ViewsDataAlterEvent $event) {
+      HookEventDispatcherInterface::VIEWS_DATA_ALTER => static function (ViewsDataAlterEvent $event) {
         $data = &$event->getData();
         $data['test']['other_test'] = ['some_data'];
       },

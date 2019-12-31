@@ -17,7 +17,6 @@ class ViewsPostRenderEvent extends BaseViewsEvent {
    * @var string
    */
   private $output;
-
   /**
    * The cache settings.
    *
@@ -47,7 +46,7 @@ class ViewsPostRenderEvent extends BaseViewsEvent {
    * @return \Drupal\views\Plugin\views\cache\CachePluginBase
    *   The cache settings.
    */
-  public function getCache() {
+  public function getCache(): CachePluginBase {
     return $this->cache;
   }
 
@@ -57,14 +56,14 @@ class ViewsPostRenderEvent extends BaseViewsEvent {
    * @return string
    *   A flat string with the rendered output of the view.
    */
-  public function &getOutput() {
+  public function &getOutput(): string {
     return $this->output;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::VIEWS_POST_RENDER;
   }
 
