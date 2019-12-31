@@ -2,12 +2,14 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\EntityType;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityTypeBuildEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_entity_type_build;
 
 /**
  * Class EntityTypeBuildEventTest.
@@ -28,18 +30,18 @@ class EntityTypeBuildEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * Test the EntityTypeBuildEvent.
    */
-  public function testEntityTypeBuildEvent() {
+  public function testEntityTypeBuildEvent(): void {
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::ENTITY_TYPE_BUILD => static function (EntityTypeBuildEvent $event) {
         $entityTypes = &$event->getEntityTypes();
@@ -58,8 +60,7 @@ class EntityTypeBuildEventTest extends UnitTestCase {
 
     /** @var \Drupal\hook_event_dispatcher\Event\EntityType\EntityTypeBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_TYPE_BUILD);
-
-    $this->assertEquals($entityTypes, $event->getEntityTypes());
+    $this->assertSame($entityTypes, $event->getEntityTypes());
   }
 
 }

@@ -18,7 +18,6 @@ class EntityBaseFieldInfoAlterEvent extends Event implements EventInterface {
    * @var array
    */
   private $fields;
-
   /**
    * The entity type.
    *
@@ -42,7 +41,7 @@ class EntityBaseFieldInfoAlterEvent extends Event implements EventInterface {
   /**
    * {@inheritdoc}
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::ENTITY_BASE_FIELD_INFO_ALTER;
   }
 
@@ -52,7 +51,7 @@ class EntityBaseFieldInfoAlterEvent extends Event implements EventInterface {
    * @return array
    *   Extra field info.
    */
-  public function &getFields() {
+  public function &getFields(): array {
     return $this->fields;
   }
 
@@ -62,7 +61,7 @@ class EntityBaseFieldInfoAlterEvent extends Event implements EventInterface {
    * @return \Drupal\Core\Entity\EntityTypeInterface
    *   The entity type.
    */
-  public function getEntityType() {
+  public function getEntityType(): EntityTypeInterface {
     return $this->entityType;
   }
 
