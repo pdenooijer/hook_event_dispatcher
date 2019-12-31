@@ -60,16 +60,6 @@ class LanguageSwitchLinksAlterEvent extends Event implements EventInterface {
   }
 
   /**
-   * Set the links.
-   *
-   * @param array $links
-   *   The links array.
-   */
-  public function setLinks(array $links) {
-    $this->links = $links;
-  }
-
-  /**
    * Set the link for a specific language code.
    *
    * @param string $langcode
