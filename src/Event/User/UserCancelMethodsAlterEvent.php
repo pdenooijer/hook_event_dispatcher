@@ -34,7 +34,7 @@ final class UserCancelMethodsAlterEvent extends Event implements EventInterface 
    * @return array
    *   Methods.
    */
-  public function &getMethods() {
+  public function &getMethods(): array {
     return $this->methods;
   }
 
@@ -44,7 +44,7 @@ final class UserCancelMethodsAlterEvent extends Event implements EventInterface 
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER;
   }
 
