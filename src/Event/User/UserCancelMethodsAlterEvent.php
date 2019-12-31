@@ -39,16 +39,6 @@ final class UserCancelMethodsAlterEvent extends Event implements EventInterface 
   }
 
   /**
-   * Set the new name.
-   *
-   * @param array $methods
-   *   Methods.
-   */
-  public function setMethods(array $methods) {
-    $this->methods = $methods;
-  }
-
-  /**
    * Get the dispatcher type.
    *
    * @return string

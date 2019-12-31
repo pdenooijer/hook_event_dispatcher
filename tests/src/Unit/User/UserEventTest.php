@@ -56,9 +56,9 @@ class UserEventTest extends UnitTestCase {
   }
 
   /**
-   * User cancel methods alter event by reference test.
+   * User cancel methods alter event test.
    */
-  public function testUserCancelMethodsAlterEventByReference() {
+  public function testUserCancelMethodsAlterEvent() {
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER => function (UserCancelMethodsAlterEvent $event) {
         $name = &$event->getMethods()[0];
@@ -73,25 +73,6 @@ class UserEventTest extends UnitTestCase {
     /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
     $this->assertSame(['Test method improved!'], $event->getMethods());
-  }
-
-  /**
-   * User cancel methods alter event with set test.
-   */
-  public function testUserCancelMethodsAlterEventWithSet() {
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER => function (UserCancelMethodsAlterEvent $event) {
-        $event->setMethods(['New method']);
-      },
-    ]);
-
-    $methods = ['Test method'];
-
-    hook_event_dispatcher_user_cancel_methods_alter($methods);
-
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
-    $this->assertSame(['New method'], $event->getMethods());
   }
 
   /**
@@ -123,9 +104,9 @@ class UserEventTest extends UnitTestCase {
   }
 
   /**
-   * User format name alter event by reference test.
+   * User format name alter event test.
    */
-  public function testUserFormatNameAlterEventByReference() {
+  public function testUserFormatNameAlterEvent() {
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER => function (UserFormatNameAlterEvent $event) {
         $name = &$event->getName();
@@ -142,28 +123,6 @@ class UserEventTest extends UnitTestCase {
     /* @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
     $this->assertSame('Test name improved!', $event->getName());
-    $this->assertSame($account, $event->getAccount());
-  }
-
-  /**
-   * User format name alter event with set test.
-   */
-  public function testUserFormatNameAlterEventWithSet() {
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER => function (UserFormatNameAlterEvent $event) {
-        $event->setName('New name!');
-      },
-    ]);
-
-    $name = 'Test name';
-    /** @var \Drupal\Core\Session\AccountInterface $account */
-    $account = $this->createMock(AccountInterface::class);
-
-    hook_event_dispatcher_user_format_name_alter($name, $account);
-
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
-    $this->assertSame('New name!', $event->getName());
     $this->assertSame($account, $event->getAccount());
   }
 

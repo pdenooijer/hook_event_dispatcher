@@ -50,16 +50,6 @@ final class UserFormatNameAlterEvent extends Event implements EventInterface {
   }
 
   /**
-   * Set the new name.
-   *
-   * @param string $name
-   *   Name.
-   */
-  public function setName($name) {
-    $this->name = $name;
-  }
-
-  /**
    * Get the account.
    *
    * @return \Drupal\Core\Session\AccountInterface
