@@ -54,10 +54,6 @@ class FormEventTest extends UnitTestCase {
     $this->assertEquals($form, $event->getForm());
     $this->assertEquals($formState, $event->getFormState());
     $this->assertEquals($formId, $event->getFormId());
-
-    $newForm = ['NewForm'];
-    $event->setForm($newForm);
-    $this->assertEquals($newForm, $event->getForm());
   }
 
   /**
@@ -127,10 +123,6 @@ class FormEventTest extends UnitTestCase {
     $this->assertEquals($element, $event->getElement());
     $this->assertEquals($formState, $event->getFormState());
     $this->assertEquals($context, $event->getContext());
-
-    $newElement = ['NewElement'];
-    $event->setElement($newElement);
-    $this->assertEquals($newElement, $event->getElement());
   }
 
   /**

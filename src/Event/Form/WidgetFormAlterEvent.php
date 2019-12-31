@@ -66,18 +66,6 @@ class WidgetFormAlterEvent extends Event implements EventInterface {
   }
 
   /**
-   * Set the element.
-   *
-   * @param array $element
-   *   The element.
-   *
-   * @deprecated This is not needed anymore, use the element by reference.
-   */
-  public function setElement(array $element) {
-    $this->element = $element;
-  }
-
-  /**
    * Get the form state.
    *
    * @return \Drupal\Core\Form\FormStateInterface

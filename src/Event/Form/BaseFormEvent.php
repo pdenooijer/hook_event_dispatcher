@@ -60,18 +60,6 @@ abstract class BaseFormEvent extends Event implements EventInterface {
   }
 
   /**
-   * Set the form.
-   *
-   * @param array $form
-   *   The form.
-   *
-   * @deprecated This is not needed, the form is passed by reference.
-   */
-  public function setForm(array $form) {
-    $this->form = $form;
-  }
-
-  /**
    * Get the form state.
    *
    * @return \Drupal\Core\Form\FormStateInterface
