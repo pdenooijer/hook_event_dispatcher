@@ -36,9 +36,9 @@ class PageBottomEventTest extends UnitTestCase {
   }
 
   /**
-   * Test the PageBottomEvent by reference.
+   * Test the PageBottomEvent.
    */
-  public function testPageBottomEventByReference() {
+  public function testPageBottomEvent() {
     $pageBottom = [];
     $renderArray = [
       '#markup' => 'Bottom!',
@@ -49,31 +49,6 @@ class PageBottomEventTest extends UnitTestCase {
       HookEventDispatcherInterface::PAGE_BOTTOM => function (PageBottomEvent $event) use ($renderArray) {
         $build = &$event->getBuild();
         $build['new'] = $renderArray;
-      },
-    ]);
-
-    hook_event_dispatcher_page_bottom($pageBottom);
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_BOTTOM);
-    $this->assertSame($expectedBuild, $event->getBuild());
-  }
-
-  /**
-   * Test the PageBottomEvent by set.
-   */
-  public function testPageBottomEventBySet() {
-    $pageBottom = [];
-    $renderArray = [
-      '#markup' => 'Bottom!',
-    ];
-    $expectedBuild['new'] = $renderArray;
-
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::PAGE_BOTTOM => function (PageBottomEvent $event) use ($renderArray) {
-        $build = $event->getBuild();
-        $build['new'] = $renderArray;
-        $event->setBuild($build);
       },
     ]);
 

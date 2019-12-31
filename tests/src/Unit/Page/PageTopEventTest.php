@@ -36,9 +36,9 @@ class PageTopEventTest extends UnitTestCase {
   }
 
   /**
-   * Test the PageTopEvent by reference.
+   * Test the PageTopEvent.
    */
-  public function testPageTopEventByReference() {
+  public function testPageTopEvent() {
     $pageTop = [];
     $renderArray = [
       '#markup' => 'Top!',
@@ -49,31 +49,6 @@ class PageTopEventTest extends UnitTestCase {
       HookEventDispatcherInterface::PAGE_TOP => function (PageTopEvent $event) use ($renderArray) {
         $build = &$event->getBuild();
         $build['new'] = $renderArray;
-      },
-    ]);
-
-    hook_event_dispatcher_page_top($pageTop);
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageTopEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_TOP);
-    $this->assertSame($expectedBuild, $event->getBuild());
-  }
-
-  /**
-   * Test the PageTopEvent by set.
-   */
-  public function testPageTopEventBySet() {
-    $pageTop = [];
-    $renderArray = [
-      '#markup' => 'Top!',
-    ];
-    $expectedBuild['new'] = $renderArray;
-
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::PAGE_TOP => function (PageTopEvent $event) use ($renderArray) {
-        $build = $event->getBuild();
-        $build['new'] = $renderArray;
-        $event->setBuild($build);
       },
     ]);
 

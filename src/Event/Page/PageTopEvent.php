@@ -39,16 +39,6 @@ class PageTopEvent extends Event implements EventInterface {
   }
 
   /**
-   * Set the build.
-   *
-   * @param array $build
-   *   The build array.
-   */
-  public function setBuild(array $build) {
-    $this->build = $build;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getDispatcherType() {

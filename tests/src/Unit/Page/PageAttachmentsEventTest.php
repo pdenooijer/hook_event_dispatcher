@@ -36,9 +36,9 @@ class PageAttachmentsEventTest extends UnitTestCase {
   }
 
   /**
-   * Test the PageAttachmentsEvent by reference.
+   * Test the PageAttachmentsEvent.
    */
-  public function testPageAttachmentsByReference() {
+  public function testPageAttachments() {
     $currentAttachments['current']['#attached']['library'] = ['current/current'];
     $testAttachment['#attached']['library'] = ['test/test'];
 
@@ -49,32 +49,6 @@ class PageAttachmentsEventTest extends UnitTestCase {
       HookEventDispatcherInterface::PAGE_ATTACHMENTS => static function (PageAttachmentsEvent $event) use ($testAttachment) {
         $eventAttachments = &$event->getAttachments();
         $eventAttachments['new'] = $testAttachment;
-      },
-    ]);
-
-    hook_event_dispatcher_page_attachments($currentAttachments);
-
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent $event */
-    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_ATTACHMENTS);
-    $this->assertSame($expectedAttachments, $event->getAttachments());
-    $this->assertSame($expectedAttachments, $currentAttachments);
-  }
-
-  /**
-   * Test the PageAttachmentsEvent by set.
-   */
-  public function testPageAttachmentsBySet() {
-    $currentAttachments['current']['#attached']['library'] = ['current/current'];
-    $testAttachment['#attached']['library'] = ['test/test'];
-
-    $expectedAttachments = $currentAttachments;
-    $expectedAttachments['new'] = $testAttachment;
-
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::PAGE_ATTACHMENTS => static function (PageAttachmentsEvent $event) use ($testAttachment) {
-        $eventAttachments = $event->getAttachments();
-        $eventAttachments['new'] = $testAttachment;
-        $event->setAttachments($eventAttachments);
       },
     ]);
 

@@ -39,16 +39,6 @@ class PageAttachmentsEvent extends Event implements EventInterface {
   }
 
   /**
-   * Set the attachments.
-   *
-   * @param array $attachments
-   *   The attachments array.
-   */
-  public function setAttachments(array $attachments) {
-    $this->attachments = $attachments;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getDispatcherType() {
