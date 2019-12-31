@@ -7,6 +7,9 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function hook_event_dispatcher_path_delete;
+use function hook_event_dispatcher_path_insert;
+use function hook_event_dispatcher_path_update;
 
 /**
  * Class PathEventTest.
@@ -27,7 +30,7 @@ class PathEventTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
@@ -38,7 +41,7 @@ class PathEventTest extends UnitTestCase {
   /**
    * Test PathDeleteEvent.
    */
-  public function testPathDeleteEvent() {
+  public function testPathDeleteEvent(): void {
     $source = 'testSource';
     $alias = 'testAlias';
     $langcode = 'NL';
@@ -55,17 +58,43 @@ class PathEventTest extends UnitTestCase {
 
     /* @var \Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
-    $this->assertEquals($source, $event->getSource());
-    $this->assertEquals($alias, $event->getAlias());
-    $this->assertEquals($langcode, $event->getLangcode());
-    $this->assertEquals($pid, $event->getPid());
+    $this->assertSame($source, $event->getSource());
+    $this->assertSame($alias, $event->getAlias());
+    $this->assertSame($langcode, $event->getLangcode());
+    $this->assertSame($pid, $event->getPid());
     $this->assertTrue($event->isRedirect());
+  }
+
+  /**
+   * Test PathDeleteEvent.
+   */
+  public function testPathDeleteEventWithoutRedirect(): void {
+    $source = 'testSource';
+    $alias = 'testAlias';
+    $langcode = 'NL';
+    $pid = 1337;
+    $path = [
+      'source' => $source,
+      'alias' => $alias,
+      'langcode' => $langcode,
+      'pid' => $pid,
+    ];
+
+    hook_event_dispatcher_path_delete($path);
+
+    /* @var \Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
+    $this->assertSame($source, $event->getSource());
+    $this->assertSame($alias, $event->getAlias());
+    $this->assertSame($langcode, $event->getLangcode());
+    $this->assertSame($pid, $event->getPid());
+    $this->assertFalse($event->isRedirect());
   }
 
   /**
    * Test PathInsertEvent.
    */
-  public function testPathInsertEvent() {
+  public function testPathInsertEvent(): void {
     $source = 'testSource';
     $alias = 'testAlias';
     $langcode = 'NL';
@@ -81,16 +110,16 @@ class PathEventTest extends UnitTestCase {
 
     /* @var \Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_INSERT);
-    $this->assertEquals($source, $event->getSource());
-    $this->assertEquals($alias, $event->getAlias());
-    $this->assertEquals($langcode, $event->getLangcode());
-    $this->assertEquals($pid, $event->getPid());
+    $this->assertSame($source, $event->getSource());
+    $this->assertSame($alias, $event->getAlias());
+    $this->assertSame($langcode, $event->getLangcode());
+    $this->assertSame($pid, $event->getPid());
   }
 
   /**
    * Test PathUpdateEvent.
    */
-  public function testPathUpdateEvent() {
+  public function testPathUpdateEvent(): void {
     $source = 'testSource';
     $alias = 'testAlias';
     $langcode = 'NL';
@@ -106,16 +135,16 @@ class PathEventTest extends UnitTestCase {
 
     /* @var \Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_UPDATE);
-    $this->assertEquals($source, $event->getSource());
-    $this->assertEquals($alias, $event->getAlias());
-    $this->assertEquals($langcode, $event->getLangcode());
-    $this->assertEquals($pid, $event->getPid());
+    $this->assertSame($source, $event->getSource());
+    $this->assertSame($alias, $event->getAlias());
+    $this->assertSame($langcode, $event->getLangcode());
+    $this->assertSame($pid, $event->getPid());
   }
 
   /**
    * Test with empty path array.
    */
-  public function testWithEmptyPath() {
+  public function testWithEmptyPath(): void {
     $this->manager->setMaxEventCount(0);
 
     hook_event_dispatcher_path_delete([]);

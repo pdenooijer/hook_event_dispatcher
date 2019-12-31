@@ -19,12 +19,13 @@ final class PathDeleteEvent extends BasePathEvent {
   /**
    * Constructor.
    *
-   * @param array $fields
-   *   The raw database path fields.
+   * @param array $path
+   *   The array structure is identical to that of the return value of
+   *   \Drupal\Core\Path\AliasStorageInterface::save().
    */
-  public function __construct(array $fields) {
-    parent::__construct($fields);
-    $this->redirect = isset($fields['redirect']) ? $fields['redirect'] : NULL;
+  public function __construct(array $path) {
+    parent::__construct($path);
+    $this->redirect = $path['redirect'] ?? FALSE;
   }
 
   /**
@@ -33,8 +34,8 @@ final class PathDeleteEvent extends BasePathEvent {
    * @return bool
    *   If it's a redirect.
    */
-  public function isRedirect() {
-    return $this->redirect === TRUE;
+  public function isRedirect(): bool {
+    return $this->redirect;
   }
 
   /**
@@ -43,7 +44,7 @@ final class PathDeleteEvent extends BasePathEvent {
    * @return string
    *   The dispatcher type.
    */
-  public function getDispatcherType() {
+  public function getDispatcherType(): string {
     return HookEventDispatcherInterface::PATH_DELETE;
   }
 
