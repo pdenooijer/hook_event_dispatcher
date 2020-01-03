@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Field event dispatcher submodule.
+ */
+
+use Drupal\field_event_dispatcher\Event\Field\FieldFormatterInfoAlterEvent;
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ *
+ * {@inheritdoc}
+ */
+function field_event_dispatcher_field_formatter_info_alter(array &$info) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = \Drupal::service('hook_event_dispatcher.manager');
+  $event = new FieldFormatterInfoAlterEvent($info);
+  $manager->register($event);
+}
