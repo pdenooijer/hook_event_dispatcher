@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class FormBaserAlterEvent.
  */
-class FormBaseAlterEvent extends BaseFormEvent {
+class FormBaseAlterEvent extends AbstractFormEvent {
 
   /**
    * The base form id.

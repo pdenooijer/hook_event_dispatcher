@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class FormAlterEvent.
  */
-class FormAlterEvent extends BaseFormEvent {
+class FormAlterEvent extends AbstractFormEvent {
 
   /**
    * {@inheritdoc}

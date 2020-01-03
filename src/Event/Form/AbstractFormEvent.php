@@ -7,9 +7,9 @@ use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class BaseFormEvent.
+ * Class AbstractFormEvent.
  */
-abstract class BaseFormEvent extends Event implements EventInterface {
+abstract class AbstractFormEvent extends Event implements EventInterface {
 
   /**
    * The form.
@@ -31,7 +31,7 @@ abstract class BaseFormEvent extends Event implements EventInterface {
   private $formId;
 
   /**
-   * BaseFormEvent constructor.
+   * AbstractFormEvent constructor.
    *
    * @param array $form
    *   Nested array of form elements that comprise the form.
