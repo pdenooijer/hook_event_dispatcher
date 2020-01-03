@@ -9,6 +9,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\media_event_dispatcher\Event\Media\OEmbedResourceUrlAlterEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
+use function media_event_dispatcher_oembed_resource_url_alter;
 
 /**
  * Class OEmbedResourceUrlAlterEventTest.
@@ -83,7 +84,7 @@ class OEmbedResourceUrlAlterEventTest extends UnitTestCase {
     ]);
 
     // Run the procedural hook which should trigger the above handler.
-    \media_event_dispatcher_oembed_resource_url_alter($url, $provider);
+    media_event_dispatcher_oembed_resource_url_alter($url, $provider);
 
     $expected['query']['width'] = '1280';
 
