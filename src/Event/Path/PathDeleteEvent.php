@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class PathDeleteEvent.
  */
-final class PathDeleteEvent extends BasePathEvent {
+final class PathDeleteEvent extends AbstractPathEvent {
 
   /**
    * The redirect.
