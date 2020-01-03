@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class ThemeSuggestionsAlterEvent.
  */
-class ThemeSuggestionsAlterEvent extends BaseThemeSuggestionsEvent {
+class ThemeSuggestionsAlterEvent extends AbstractThemeSuggestionsEvent {
 
   /**
    * Returns the hook dispatcher type.
