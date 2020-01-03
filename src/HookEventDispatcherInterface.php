@@ -306,7 +306,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_form_alter()
+   * @see core_event_dispatcher_form_alter()
    * @see hook_form_alter()
    *
    * @var string

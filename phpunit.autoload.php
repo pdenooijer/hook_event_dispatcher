@@ -7,6 +7,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/hook_event_dispatcher.module';
+require __DIR__ . '/modules/core_event_dispatcher/core_event_dispatcher.module';
 require __DIR__ . '/modules/field_event_dispatcher/field_event_dispatcher.module';
 require __DIR__ . '/modules/media_event_dispatcher/media_event_dispatcher.module';
 require __DIR__ . '/modules/preprocess_event_dispatcher/preprocess_event_dispatcher.module';

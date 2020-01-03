@@ -12,7 +12,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -40,9 +39,6 @@ use Drupal\hook_event_dispatcher\Event\EntityType\EntityBaseFieldInfoEvent;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityBundleFieldInfoAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityTypeAlterEvent;
 use Drupal\hook_event_dispatcher\Event\EntityType\EntityTypeBuildEvent;
-use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent;
 use Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent;
@@ -262,24 +258,6 @@ function hook_event_dispatcher_entity_operation_alter(array &$operations, Entity
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityOperationAlterEvent($operations, $entity));
-}
-
-/**
- * Implements hook_form_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_form_alter(array &$form, FormStateInterface $formState, string $formId) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new FormAlterEvent($form, $formState, $formId));
-
-  $buildInfo = $formState->getBuildInfo();
-  if (!empty($buildInfo['base_form_id'])) {
-    /* @var \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
-    $manager->register(new FormBaseAlterEvent($form, $formState, $formId, $buildInfo['base_form_id']));
-  }
-  $manager->register(new FormIdAlterEvent($form, $formState, $formId));
 }
 
 /**

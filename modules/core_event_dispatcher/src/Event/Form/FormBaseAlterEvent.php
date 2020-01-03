@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Form;
+namespace Drupal\core_event_dispatcher\Event\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 
