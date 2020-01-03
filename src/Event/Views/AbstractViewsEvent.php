@@ -7,9 +7,9 @@ use Drupal\views\ViewExecutable;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class BaseViewsEvent.
+ * Class AbstractViewsEvent.
  */
-abstract class BaseViewsEvent extends Event implements EventInterface {
+abstract class AbstractViewsEvent extends Event implements EventInterface {
 
   /**
    * The view.
@@ -19,7 +19,7 @@ abstract class BaseViewsEvent extends Event implements EventInterface {
   private $view;
 
   /**
-   * ViewsPreExecuteEevent constructor.
+   * AbstractViewsEvent constructor.
    *
    * @param \Drupal\views\ViewExecutable $view
    *   The view.

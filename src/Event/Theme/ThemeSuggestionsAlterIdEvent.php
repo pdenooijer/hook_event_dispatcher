@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Theme;
 /**
  * Class ThemeSuggestionsAlterIdEvent.
  */
-class ThemeSuggestionsAlterIdEvent extends BaseThemeSuggestionsEvent {
+class ThemeSuggestionsAlterIdEvent extends AbstractThemeSuggestionsEvent {
 
   /**
    * Returns the hook dispatcher type.

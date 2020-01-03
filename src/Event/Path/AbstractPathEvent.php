@@ -6,9 +6,9 @@ use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class BasePathEvent.
+ * Class AbstractPathEvent.
  */
-abstract class BasePathEvent extends Event implements EventInterface {
+abstract class AbstractPathEvent extends Event implements EventInterface {
 
   /**
    * The source like '/node/1'.
@@ -36,7 +36,7 @@ abstract class BasePathEvent extends Event implements EventInterface {
   private $pid;
 
   /**
-   * BasePathEvent constructor.
+   * AbstractPathEvent constructor.
    *
    * @param array $path
    *   The array structure is identical to that of the return value of

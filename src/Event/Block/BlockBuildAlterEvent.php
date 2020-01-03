@@ -8,7 +8,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class EntityInsertEvent.
+ * Class BlockBuildAlterEvent.
  */
 class BlockBuildAlterEvent extends Event implements EventInterface {
 
@@ -26,7 +26,7 @@ class BlockBuildAlterEvent extends Event implements EventInterface {
   private $block;
 
   /**
-   * BaseBlockEvent constructor.
+   * BlockBuildAlterEvent constructor.
    *
    * @param array $build
    *   The build array.

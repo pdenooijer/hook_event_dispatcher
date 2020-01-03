@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class ViewsPreBuildEvent.
  */
-class ViewsPreBuildEvent extends BaseViewsEvent {
+class ViewsPreBuildEvent extends AbstractViewsEvent {
 
   /**
    * {@inheritdoc}

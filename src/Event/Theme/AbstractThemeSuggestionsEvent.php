@@ -6,9 +6,9 @@ use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class BaseThemeSuggestionsEvent.
+ * Class AbstractThemeSuggestionsEvent.
  */
-abstract class BaseThemeSuggestionsEvent extends Event implements EventInterface {
+abstract class AbstractThemeSuggestionsEvent extends Event implements EventInterface {
 
   /**
    * Array of suggestions.
@@ -30,7 +30,7 @@ abstract class BaseThemeSuggestionsEvent extends Event implements EventInterface
   private $hook;
 
   /**
-   * BaseThemeSuggestionsEvent constructor.
+   * AbstractThemeSuggestionsEvent constructor.
    *
    * @param array $suggestions
    *   Suggestions.

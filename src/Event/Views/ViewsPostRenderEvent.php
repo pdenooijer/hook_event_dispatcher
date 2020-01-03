@@ -9,7 +9,7 @@ use Drupal\views\ViewExecutable;
 /**
  * Class ViewsPostRenderEvent.
  */
-class ViewsPostRenderEvent extends BaseViewsEvent {
+class ViewsPostRenderEvent extends AbstractViewsEvent {
 
   /**
    * A renderable array containing the output of the view.

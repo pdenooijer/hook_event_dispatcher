@@ -5,7 +5,7 @@ namespace Drupal\hook_event_dispatcher\Event\Form;
 /**
  * Class FormIdAlterEvent.
  */
-class FormIdAlterEvent extends BaseFormEvent {
+class FormIdAlterEvent extends AbstractFormEvent {
 
   /**
    * {@inheritdoc}

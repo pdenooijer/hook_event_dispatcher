@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class BaseEntityEvent.
+ * Class AbstractEntityEvent.
  */
 abstract class AbstractEntityEvent extends Event implements EventInterface {
 
@@ -19,7 +19,7 @@ abstract class AbstractEntityEvent extends Event implements EventInterface {
   protected $entity;
 
   /**
-   * BaseEntityEvent constructor.
+   * AbstractEntityEvent constructor.
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Entity.

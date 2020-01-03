@@ -7,7 +7,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 /**
  * Class UpdatePathEvent.
  */
-final class PathUpdateEvent extends BasePathEvent {
+final class PathUpdateEvent extends AbstractPathEvent {
 
   /**
    * Get the dispatcher type.
