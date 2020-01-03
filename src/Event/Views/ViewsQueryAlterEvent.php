@@ -11,7 +11,7 @@ use Drupal\views\ViewExecutable;
  *
  * @package Drupal\hook_event_dispatcher\Event\Views
  */
-final class ViewsQueryAlterEvent extends BaseViewsEvent {
+final class ViewsQueryAlterEvent extends AbstractViewsEvent {
 
   /**
    * The query.

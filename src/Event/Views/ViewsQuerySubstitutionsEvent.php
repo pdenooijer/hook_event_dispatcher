@@ -9,7 +9,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
  *
  * @package Drupal\hook_event_dispatcher\Event\Views
  */
-final class ViewsQuerySubstitutionsEvent extends BaseViewsEvent {
+final class ViewsQuerySubstitutionsEvent extends AbstractViewsEvent {
 
   /**
    * Views query substitutions.

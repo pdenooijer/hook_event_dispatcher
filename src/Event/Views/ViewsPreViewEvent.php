@@ -8,7 +8,7 @@ use Drupal\views\ViewExecutable;
 /**
  * Class ViewsPreRenderEvent.
  */
-class ViewsPreViewEvent extends BaseViewsEvent {
+class ViewsPreViewEvent extends AbstractViewsEvent {
 
   /**
    * Array of arguments passed into the view.
