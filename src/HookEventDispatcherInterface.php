@@ -275,6 +275,19 @@ interface HookEventDispatcherInterface {
    */
   public const ENTITY_TYPE_BUILD = 'hook_event_dispatcher.entity_type.build';
 
+  // FIELD EVENTS.
+  /**
+   * Perform alterations on Field API formatter types.
+   *
+   * @Event
+   *
+   * @see field_event_dispatcher_field_formatter_info_alter()
+   * @see hook_field_formatter_info_alter()
+   *
+   * @var string
+   */
+  public const FIELD_FORMATTER_INFO_ALTER = 'hook_event_dispatcher.field_formatter.info.alter';
+
   // FORM EVENTS.
   /**
    * Perform alterations before a form is rendered.
