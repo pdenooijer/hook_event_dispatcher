@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Token;
+namespace Drupal\core_event_dispatcher\Event\Token;
 
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\Core\Render\BubbleableMetadata;

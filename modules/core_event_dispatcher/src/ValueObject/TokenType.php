@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Value;
+namespace Drupal\core_event_dispatcher\ValueObject;
 
 use Drupal\Component\Render\MarkupInterface;
 use UnexpectedValueException;
@@ -9,9 +9,9 @@ use function is_string;
 /**
  * Token ValueObject.
  *
- * Convenience object to handle the integrity and assembly of tokens.
+ * Convenience object to handle the integrity and assembly of token types.
  */
-final class Token {
+final class TokenType {
 
   /**
    * Type.
@@ -20,29 +20,23 @@ final class Token {
    */
   private $type;
   /**
-   * Token.
-   *
-   * @var string
-   */
-  private $token;
-  /**
-   * Description.
-   *
-   * @var string
-   */
-  private $description;
-  /**
    * Name.
    *
-   * @var string|\Drupal\Component\Render\MarkupInterface
+   * @var string
    */
   private $name;
   /**
-   * Is a dynamic field.
+   * Description.
    *
-   * @var bool
+   * @var string|\Drupal\Component\Render\MarkupInterface
    */
-  private $dynamic = FALSE;
+  private $description;
+  /**
+   * Needs data.
+   *
+   * @var string
+   */
+  private $needsData;
 
   /**
    * Use create function instead.
@@ -51,27 +45,24 @@ final class Token {
   }
 
   /**
-   * Token factory function.
+   * Token type factory.
    *
    * @param string $type
    *   The group name, like 'node'.
-   * @param string $token
-   *   The token, like 'url' or 'id'.
    * @param string|\Drupal\Component\Render\MarkupInterface $name
    *   The print-able name of the type.
    *
-   * @return \Drupal\hook_event_dispatcher\Value\Token
-   *   Creates a new token.
+   * @return self
+   *   A new instance.
    *
    * @throws \UnexpectedValueException
    */
-  public static function create(string $type, string $token, $name): self {
+  public static function create(string $type, $name): self {
     $instance = new self();
     if (!is_string($name) && !$name instanceof MarkupInterface) {
       throw new UnexpectedValueException('Name should be a string or an instance of MarkupInterface');
     }
     $instance->type = $type;
-    $instance->token = $token;
     $instance->name = $name;
     return $instance;
   }
@@ -82,8 +73,8 @@ final class Token {
    * @param string|\Drupal\Component\Render\MarkupInterface $description
    *   The description of the token type.
    *
-   * @return \Drupal\hook_event_dispatcher\Value\Token
-   *   New instance with the given description.
+   * @return self
+   *   A new instance with the description.
    *
    * @throws \UnexpectedValueException
    */
@@ -97,24 +88,24 @@ final class Token {
   }
 
   /**
-   * Set whether or not the token is dynamic.
+   * Set the needs data and return a new instance.
    *
-   * @param bool $dynamic
-   *   TRUE if the token is dynamic.
+   * @param string $needsData
+   *   The needs data.
    *
-   * @return \Drupal\hook_event_dispatcher\Value\Token
-   *   New instance with the given dynamic.
+   * @return self
+   *   A new instance with the needs data property.
    */
-  public function setDynamic(bool $dynamic): self {
+  public function setNeedsData(string $needsData): self {
     $clone = clone $this;
-    $clone->dynamic = $dynamic;
+    $clone->needsData = $needsData;
     return $clone;
   }
 
   /**
    * Getter.
    *
-   * @return string|MarkupInterface|null
+   * @return string|\Drupal\Component\Render\MarkupInterface|null
    *   The description.
    */
   public function getDescription() {
@@ -124,8 +115,18 @@ final class Token {
   /**
    * Getter.
    *
+   * @return string|null
+   *   The needs data property.
+   */
+  public function getNeedsData(): ?string {
+    return $this->needsData;
+  }
+
+  /**
+   * Getter.
+   *
    * @return string
-   *   The type like 'node'.
+   *   The token type like 'node'.
    */
   public function getType(): string {
     return $this->type;
@@ -134,31 +135,11 @@ final class Token {
   /**
    * Getter.
    *
-   * @return string|MarkupInterface
-   *   The label of the token.
-   */
-  public function getName() {
-    return $this->name;
-  }
-
-  /**
-   * Getter.
-   *
    * @return string
-   *   The token name like 'url'.
+   *   The token type label, like 'The Node type'.
    */
-  public function getToken(): string {
-    return $this->token;
-  }
-
-  /**
-   * Getter.
-   *
-   * @return bool
-   *   Whether or not the token is dynamic.
-   */
-  public function isDynamic(): bool {
-    return $this->dynamic;
+  public function getName(): string {
+    return $this->name;
   }
 
 }

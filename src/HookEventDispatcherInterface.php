@@ -329,7 +329,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_tokens()
+   * @see core_event_dispatcher_tokens()
    * @see hook_tokens()
    *
    * @var string
@@ -341,7 +341,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_token_info()
+   * @see core_event_dispatcher_token_info()
    * @see hook_token_info()
    *
    * @var string

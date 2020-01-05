@@ -2,11 +2,11 @@
 
 namespace Drupal\hook_event_dispatcher\Example;
 
-use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
-use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
+use Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent;
+use Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
-use Drupal\hook_event_dispatcher\Value\Token;
-use Drupal\hook_event_dispatcher\Value\TokenType;
+use Drupal\core_event_dispatcher\ValueObject\Token;
+use Drupal\core_event_dispatcher\ValueObject\TokenType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -27,7 +27,7 @@ final class ExampleTokenEventSubscriber implements EventSubscriberInterface {
   /**
    * Provides new token types and tokens.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent $event
    *   The token info event.
    *
    * @throws \UnexpectedValueException
@@ -47,7 +47,7 @@ final class ExampleTokenEventSubscriber implements EventSubscriberInterface {
   /**
    * Replace tokens.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent $event
    *   The token replacement event.
    *
    * @throws \UnexpectedValueException

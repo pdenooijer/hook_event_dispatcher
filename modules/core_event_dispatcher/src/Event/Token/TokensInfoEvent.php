@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Token;
+namespace Drupal\core_event_dispatcher\Event\Token;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
-use Drupal\hook_event_dispatcher\Value\Token;
-use Drupal\hook_event_dispatcher\Value\TokenType;
+use Drupal\core_event_dispatcher\ValueObject\Token;
+use Drupal\core_event_dispatcher\ValueObject\TokenType;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -31,7 +31,7 @@ final class TokensInfoEvent extends Event implements EventInterface {
   /**
    * Add token type.
    *
-   * @param \Drupal\hook_event_dispatcher\Value\TokenType $type
+   * @param \Drupal\core_event_dispatcher\ValueObject\TokenType $type
    *   The token type.
    */
   public function addTokenType(TokenType $type): void {
@@ -45,7 +45,7 @@ final class TokensInfoEvent extends Event implements EventInterface {
   /**
    * Add token.
    *
-   * @param \Drupal\hook_event_dispatcher\Value\Token $type
+   * @param \Drupal\core_event_dispatcher\ValueObject\Token $type
    *   The token.
    */
   public function addToken(Token $type): void {

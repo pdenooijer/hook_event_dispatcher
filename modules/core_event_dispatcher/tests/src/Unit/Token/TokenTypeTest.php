@@ -1,15 +1,13 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Token;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Token;
 
-use Drupal\hook_event_dispatcher\Value\TokenType;
+use Drupal\core_event_dispatcher\ValueObject\TokenType;
 use Drupal\Tests\UnitTestCase;
 use UnexpectedValueException;
 
 /**
  * Class TokenTypeTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Token
  *
  * @group hook_event_dispatcher
  */

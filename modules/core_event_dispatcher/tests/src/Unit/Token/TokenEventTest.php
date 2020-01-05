@@ -1,25 +1,23 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Token;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Token;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
-use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
+use Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent;
+use Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
-use Drupal\hook_event_dispatcher\Value\Token;
-use Drupal\hook_event_dispatcher\Value\TokenType;
+use Drupal\core_event_dispatcher\ValueObject\Token;
+use Drupal\core_event_dispatcher\ValueObject\TokenType;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 use UnexpectedValueException;
-use function hook_event_dispatcher_token_info;
-use function hook_event_dispatcher_tokens;
+use function core_event_dispatcher_token_info;
+use function core_event_dispatcher_tokens;
 
 /**
  * Class TokenEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Form
  *
  * @group hook_event_dispatcher
  */
@@ -69,7 +67,7 @@ class TokenEventTest extends UnitTestCase {
       },
     ]);
 
-    $result = hook_event_dispatcher_token_info();
+    $result = core_event_dispatcher_token_info();
 
     $expectedTypes = [
       'test_type' => [
@@ -111,7 +109,7 @@ class TokenEventTest extends UnitTestCase {
         ],
       ],
     ];
-    /* @var \Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent $event */
+    /* @var \Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_INFO);
     $this->assertSame($expectedTypes, $result['types']);
     $this->assertSame($expectedTokens, $result['tokens']);
@@ -147,13 +145,13 @@ class TokenEventTest extends UnitTestCase {
     ];
     $metaData = $this->createMock(BubbleableMetadata::class);
 
-    $result = hook_event_dispatcher_tokens($type, $tokens, $data, $options, $metaData);
+    $result = core_event_dispatcher_tokens($type, $tokens, $data, $options, $metaData);
 
     $expectedResult = [
       '[test_type:token1]' => $replacement1,
       '[test_type:token2]' => $replacement2,
     ];
-    /* @var \Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent $event */
+    /* @var \Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_REPLACEMENT);
     $this->assertSame($expectedResult, $result);
     $this->assertSame($type, $event->getType());
