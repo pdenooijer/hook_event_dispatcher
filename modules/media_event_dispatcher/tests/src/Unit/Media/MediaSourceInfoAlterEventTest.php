@@ -14,8 +14,6 @@ use function media_event_dispatcher_media_source_info_alter;
 /**
  * Class MediaSourceInfoAlterEventTest.
  *
- * @package Drupal\Tests\media_event_dispatcher\Unit\Media
- *
  * @group media_event_dispatcher
  */
 class MediaSourceInfoAlterEventTest extends UnitTestCase {

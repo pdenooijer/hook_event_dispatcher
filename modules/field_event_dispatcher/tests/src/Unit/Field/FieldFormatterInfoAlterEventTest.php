@@ -13,8 +13,6 @@ use function field_event_dispatcher_field_formatter_info_alter;
 /**
  * Class FieldFormatterInfoAlterEventTest.
  *
- * @package Drupal\Tests\field_event_dispatcher\Unit\Field
- *
  * @group field_event_dispatcher
  */
 class FieldFormatterInfoAlterEventTest extends UnitTestCase {

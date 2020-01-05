@@ -2,12 +2,12 @@
 
 namespace Drupal\hook_event_dispatcher\Example;
 
-use Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent;
-use Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent;
-use Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent;
-use Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent;
-use Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent;
-use Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityInsertEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityPredeleteEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityUpdateEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityViewEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -29,7 +29,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   /**
    * Alter entity view.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Entity\EntityViewEvent $event
    *   The event.
    */
   public function alterEntityView(EntityViewEvent $event): void {
@@ -47,7 +47,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   /**
    * Entity pre save.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityPresaveEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent $event
    *   The event.
    */
   public function entityPreSave(EntityPresaveEvent $event): void {
@@ -58,7 +58,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   /**
    * Entity insert.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityInsertEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Entity\EntityInsertEvent $event
    *   The event.
    */
   public function entityInsert(EntityInsertEvent $event): void {
@@ -70,7 +70,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   /**
    * Entity update.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityUpdateEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Entity\EntityUpdateEvent $event
    *   The event.
    */
   public function entityUpdate(EntityUpdateEvent $event): void {
@@ -82,7 +82,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   /**
    * Entity pre delete.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityPredeleteEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Entity\EntityPredeleteEvent $event
    *   The event.
    */
   public function entityPreDelete(EntityPredeleteEvent $event): void {
@@ -94,7 +94,7 @@ class ExampleEntityEventSubscribers implements EventSubscriberInterface {
   /**
    * Entity delete.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Entity\EntityDeleteEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent $event
    *   The event.
    */
   public function entityDelete(EntityDeleteEvent $event): void {

@@ -16,8 +16,6 @@ use function array_merge_recursive;
 /**
  * Class WebformElementEventTest.
  *
- * @package Drupal\Tests\webform_event_dispatcher\Unit\Element
- *
  * @group hook_event_dispatcher
  */
 class WebformElementEventTest extends UnitTestCase {

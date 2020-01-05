@@ -9,8 +9,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class WebformElementAlterEvent.
- *
- * @package Drupal\webform_event_dispatcher\Event\Element
  */
 class WebformElementAlterEvent extends Event implements EventInterface {
 

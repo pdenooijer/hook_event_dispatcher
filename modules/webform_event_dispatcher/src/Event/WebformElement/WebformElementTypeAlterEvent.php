@@ -4,8 +4,6 @@ namespace Drupal\webform_event_dispatcher\Event\WebformElement;
 
 /**
  * Class WebformElementTypeAlterEvent.
- *
- * @package Drupal\webform_event_dispatcher\Event\Element
  */
 class WebformElementTypeAlterEvent extends WebformElementAlterEvent {
 
