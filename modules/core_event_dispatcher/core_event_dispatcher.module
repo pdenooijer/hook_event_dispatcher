@@ -5,14 +5,338 @@
  * Core event dispatcher submodule.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\core_event_dispatcher\Event\Entity\EntityAccessEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoAlterEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityBundleFieldInfoAlterEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityCreateEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoAlterEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityFieldAccessEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityInsertEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityLoadEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityOperationAlterEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityOperationEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityPredeleteEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityTranslationDeleteEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityTranslationInsertEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityTypeAlterEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityTypeBuildEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityUpdateEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityViewAlterEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityViewEvent;
 use Drupal\core_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\core_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\core_event_dispatcher\Event\Form\FormIdAlterEvent;
 
+// Entity.
+// @todo hook_entity_create_access()
+// @todo hook_entity_view_mode_info_alter()
+// @todo hook_entity_bundle_info()
+// @todo hook_entity_bundle_info_alter()
+// @todo hook_entity_bundle_create()
+// @todo hook_entity_bundle_delete()
+// @todo hook_entity_revision_create()
+// @todo hook_entity_preload()
+// @todo hook_entity_storage_load()
+// @todo hook_entity_translation_create()
+// @todo hook_entity_revision_delete()
+// @todo hook_entity_prepare_view()
+// @todo hook_entity_view_mode_alter()
+// @todo hook_entity_build_defaults_alter()
+// @todo hook_entity_view_display_alter()
+// @todo hook_entity_display_build_alter()
+// @todo hook_entity_prepare_form()
+// @todo hook_entity_form_display_alter()
+// @todo hook_entity_bundle_field_info()
+// @todo hook_entity_field_storage_info()
+// @todo hook_entity_field_storage_info_alter()
+// @todo hook_entity_field_access_alter()
+// @todo hook_entity_field_values_init()
+
 // Form.
 // @todo hook_ajax_render_alter()
 // @todo hook_batch_alter()
+
+/**
+ * Implements hook_entity_access().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_access(EntityInterface $entity, string $operation, AccountInterface $account) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityAccessEvent($entity, $operation, $account);
+  $manager->register($event);
+
+  return $event->getAccessResult();
+}
+
+/**
+ * Implements hook_entity_type_build().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_type_build(array &$entityTypes) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityTypeBuildEvent($entityTypes);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_type_alter(array &$entityTypes) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityTypeAlterEvent($entityTypes);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_entity_create().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_create(EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityCreateEvent($entity));
+}
+
+/**
+ * Implements hook_entity_load().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_load(array $entities, string $entityTypeId) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityLoadEvent($entities, $entityTypeId));
+}
+
+/**
+ * Implements hook_entity_presave().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_presave(EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityPresaveEvent($entity));
+}
+
+/**
+ * Implements hook_entity_insert().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_insert(EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityInsertEvent($entity));
+}
+
+/**
+ * Implements hook_entity_update().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_update(EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityUpdateEvent($entity));
+}
+
+/**
+ * Implements hook_entity_translation_insert().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_translation_insert(EntityInterface $translation) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityTranslationInsertEvent($translation));
+}
+
+/**
+ * Implements hook_entity_translation_delete().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_translation_delete(EntityInterface $translation) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityTranslationDeleteEvent($translation));
+}
+
+/**
+ * Implements hook_entity_predelete().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_predelete(EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityPredeleteEvent($entity));
+}
+
+/**
+ * Implements hook_entity_delete().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_delete(EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityDeleteEvent($entity));
+}
+
+/**
+ * Implements hook_entity_view().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_view(
+  array &$build,
+  EntityInterface $entity,
+  EntityViewDisplayInterface $display,
+  string $viewMode
+) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityViewEvent($build, $entity, $display, $viewMode));
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_view_alter(
+  array &$build,
+  EntityInterface $entity,
+  EntityViewDisplayInterface $display
+) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityViewAlterEvent($build, $entity, $display));
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_base_field_info(EntityTypeInterface $entityType) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityBaseFieldInfoEvent($entityType);
+  $manager->register($event);
+  return $event->getFields();
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_base_field_info_alter(array &$fields, EntityTypeInterface $entityType) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityBaseFieldInfoAlterEvent($fields, $entityType);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_bundle_field_info_alter(array &$fields, EntityTypeInterface $entityType, string $bundle) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityBundleFieldInfoAlterEvent($fields, $entityType, $bundle);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_entity_operation().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_operation(EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityOperationEvent($entity);
+  $manager->register($event);
+
+  return $event->getOperations();
+}
+
+/**
+ * Implements hook_entity_operation_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_operation_alter(array &$operations, EntityInterface $entity) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityOperationAlterEvent($operations, $entity));
+}
+
+/**
+ * Implements hook_entity_field_access().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_field_access(
+  string $operation,
+  FieldDefinitionInterface $fieldDefinition,
+  AccountInterface $account,
+  FieldItemListInterface $items = NULL
+) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityFieldAccessEvent($operation, $fieldDefinition, $account, $items);
+  $manager->register($event);
+  return $event->getAccessResult();
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function core_event_dispatcher_entity_extra_field_info() {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityExtraFieldInfoEvent();
+  $manager->register($event);
+  return $event->getFieldInfo();
+}
+
+/**
+ * Implements hook_entity_extra_field_info_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_extra_field_info_alter(array &$info) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new EntityExtraFieldInfoAlterEvent($info);
+  $manager->register($event);
+}
 
 /**
  * Implements hook_form_alter().

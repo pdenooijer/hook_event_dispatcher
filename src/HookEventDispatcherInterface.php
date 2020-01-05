@@ -13,7 +13,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_insert()
+   * @see core_event_dispatcher_entity_insert()
    * @see hook_entity_insert()
    *
    * @var string
@@ -25,7 +25,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_update()
+   * @see core_event_dispatcher_entity_update()
    * @see hook_entity_update()
    *
    * @var string
@@ -37,7 +37,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_predelete()
+   * @see core_event_dispatcher_entity_predelete()
    * @see hook_entity_predelete()
    *
    * @var string
@@ -49,7 +49,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_delete()
+   * @see core_event_dispatcher_entity_delete()
    * @see hook_entity_delete()
    *
    * @var string
@@ -61,7 +61,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_presave()
+   * @see core_event_dispatcher_entity_presave()
    * @see hook_entity_presave()
    *
    * @var string
@@ -73,7 +73,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_view()
+   * @see core_event_dispatcher_entity_view()
    * @see hook_entity_view()
    *
    * @var string
@@ -85,7 +85,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_view_alter()
+   * @see core_event_dispatcher_entity_view_alter()
    * @see hook_entity_view_alter()
    *
    * @var string
@@ -97,7 +97,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_access()
+   * @see core_event_dispatcher_entity_access()
    * @see hook_entity_access()
    *
    * @var string
@@ -109,7 +109,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_create()
+   * @see core_event_dispatcher_entity_create()
    * @see hook_entity_create()
    *
    * @var string
@@ -121,7 +121,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_load()
+   * @see core_event_dispatcher_entity_load()
    * @see hook_entity_load()
    *
    * @var string
@@ -133,7 +133,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_translation_insert()
+   * @see core_event_dispatcher_entity_translation_insert()
    * @see hook_entity_translation_insert()
    *
    * @var string
@@ -145,14 +145,13 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_translation_delete()
+   * @see core_event_dispatcher_entity_translation_delete()
    * @see hook_entity_translation_delete()
    *
    * @var string
    */
   public const ENTITY_TRANSLATION_DELETE = 'hook_event_dispatcher.entity.translation_delete';
 
-  // ENTITY FIELD EVENTS.
   /**
    * Alter forms for field widgets provided by other modules.
    *
@@ -170,20 +169,19 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_field_access()
+   * @see core_event_dispatcher_entity_field_access()
    * @see hook_entity_field_access()
    *
    * @var string
    */
   public const ENTITY_FIELD_ACCESS = 'hook_event_dispatcher.entity_field.access';
 
-  // ENTITY EXTRA FIELD EVENTS.
   /**
    * Exposes "pseudo-field" components on content entities.
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_extra_field_info()
+   * @see core_event_dispatcher_entity_extra_field_info()
    * @see hook_entity_extra_field_info()
    *
    * @var string
@@ -195,20 +193,19 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_extra_field_info_alter()
+   * @see core_event_dispatcher_entity_extra_field_info_alter()
    * @see hook_entity_extra_field_info_alter()
    *
    * @var string
    */
   public const ENTITY_EXTRA_FIELD_INFO = 'hook_event_dispatcher.entity_extra_field.info_alter';
 
-  // ENTITY TYPE EVENTS.
   /**
    * Provides custom base field definitions for a content entity type.
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_base_field_info()
+   * @see core_event_dispatcher_entity_base_field_info()
    * @see hook_entity_base_field_info()
    *
    * @var string
@@ -220,7 +217,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_base_field_info_alter()
+   * @see core_event_dispatcher_entity_base_field_info_alter()
    * @see hook_entity_base_field_info_alter()
    *
    * @var string
@@ -232,7 +229,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_bundle_field_info_alter()
+   * @see core_event_dispatcher_entity_bundle_field_info_alter()
    * @see hook_entity_bundle_field_info_alter()
    *
    * @var string
@@ -244,7 +241,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_operation()
+   * @see core_event_dispatcher_entity_operation()
    * @see hook_entity_operation()
    *
    * @var string
@@ -256,7 +253,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_operation_alter()
+   * @see core_event_dispatcher_entity_operation_alter()
    * @see hook_entity_operation_alter()
    *
    * @var string
@@ -268,7 +265,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_type_alter()
+   * @see core_event_dispatcher_entity_type_alter()
    * @see hook_entity_type_alter()
    *
    * @var string
@@ -280,7 +277,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_entity_type_build()
+   * @see core_event_dispatcher_entity_type_build()
    * @see hook_entity_type_build()
    *
    * @var string

@@ -2,8 +2,8 @@
 
 namespace Drupal\hook_event_dispatcher\Example;
 
-use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent;
-use Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoAlterEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -24,7 +24,7 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
   /**
    * Entity extra field info.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoEvent $event
    *   The event.
    */
   public function fieldInfo(EntityExtraFieldInfoEvent $event): void {
@@ -46,7 +46,7 @@ class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface
   /**
    * Entity extra field info.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent $event
+   * @param \Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoAlterEvent $event
    *   The event.
    */
   public function fieldInfoAlter(EntityExtraFieldInfoAlterEvent $event): void {

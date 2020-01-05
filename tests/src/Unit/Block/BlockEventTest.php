@@ -6,7 +6,7 @@ use Drupal;
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
