@@ -1,21 +1,19 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Language;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Language;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
-use Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
+use Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_language_switch_links_alter;
+use function core_event_dispatcher_language_switch_links_alter;
 
 /**
  * Class LanguageSwitchLinksAlterEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Language
  *
  * @group hook_event_dispatcher
  */
@@ -75,9 +73,9 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
+    core_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
+    /* @var \Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
     $this->assertSame($expectedLinks, $event->getLinks());
     $this->assertSame($expectedLinks, $currentLinks);
@@ -116,9 +114,9 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
+    core_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
+    /* @var \Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
     $this->assertSame($expectedLinks, $currentLinks);
     $this->assertSame($expectedLinks, $event->getLinks());

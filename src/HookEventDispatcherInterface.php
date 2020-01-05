@@ -733,7 +733,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_language_switch_links_alter()
+   * @see core_event_dispatcher_language_switch_links_alter()
    * @see hook_language_switch_links_alter()
    *
    * @var string

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Language;
+namespace Drupal\core_event_dispatcher\Event\Language;
 
 use Drupal\Core\Url;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
