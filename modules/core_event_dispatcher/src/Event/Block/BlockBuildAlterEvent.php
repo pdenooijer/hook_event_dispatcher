@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Block;
+namespace Drupal\core_event_dispatcher\Event\Block;
 
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\hook_event_dispatcher\Event\EventInterface;

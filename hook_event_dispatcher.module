@@ -5,11 +5,9 @@
  * Hook event dispatcher module.
  */
 
-use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
-use Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Cron\CronEvent;
 use Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent;
@@ -50,17 +48,6 @@ function hook_event_dispatcher_help(string $routeName) {
     return '<pre>' . $output . '</pre>';
   }
   return '';
-}
-
-/**
- * Implements hook_block_build_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_block_build_alter(array &$build, BlockPluginInterface $block) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new BlockBuildAlterEvent($build, $block));
 }
 
 /**

@@ -316,7 +316,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_block_build_alter()
+   * @see core_event_dispatcher_block_build_alter()
    * @see hook_block_build_alter()
    *
    * @var string

@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Asset\AttachedAssetsInterface;
+use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -13,6 +14,7 @@ use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\core_event_dispatcher\Event\Block\BlockBuildAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoEvent;
@@ -49,6 +51,10 @@ use Drupal\core_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent;
 use Drupal\core_event_dispatcher\Event\Theme\ThemesInstalledEvent;
 use Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
 use Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
+
+// Block.
+// @todo hook_block_view_alter()
+// @todo hook_block_access()
 
 // Entity.
 // @todo hook_entity_create_access()
@@ -90,6 +96,17 @@ use Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
 // @todo hook_js_settings_alter()
 // @todo hook_css_alter()
 // @todo hook_page_attachments_alter()
+
+/**
+ * Implements hook_block_build_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_block_build_alter(array &$build, BlockPluginInterface $block) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new BlockBuildAlterEvent($build, $block));
+}
 
 /**
  * Implements hook_entity_access().
