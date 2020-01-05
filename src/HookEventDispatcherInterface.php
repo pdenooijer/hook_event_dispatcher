@@ -783,7 +783,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see media_event_dispatcher_oembed_resource_data_alter()
+   * @see media_event_dispatcher_oembed_resource_url_alter()
    * @see hook_oembed_resource_url_alter()
    *
    * @var string
