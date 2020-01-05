@@ -1,19 +1,17 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Theme;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
+use Drupal\core_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_theme;
+use function core_event_dispatcher_theme;
 
 /**
  * Class ThemeEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Theme
  *
  * @group hook_event_dispatcher
  */
@@ -69,9 +67,9 @@ class ThemeEventTest extends UnitTestCase {
       ],
     ];
 
-    $hookNewInformation = hook_event_dispatcher_theme($existing);
+    $hookNewInformation = core_event_dispatcher_theme($existing);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME);
     $this->assertSame($existing, $event->getExisting());
     $this->assertSame($newThemes, $hookNewInformation);
@@ -98,7 +96,7 @@ class ThemeEventTest extends UnitTestCase {
     $this->expectException(\RuntimeException::class);
     $this->expectExceptionMessage('Missing path in the information array. ThemeEvent needs the path to be set manually, to have a proper default theme implementation. See \hook_theme() for more information.');
 
-    hook_event_dispatcher_theme([]);
+    core_event_dispatcher_theme([]);
   }
 
   /**
@@ -132,9 +130,9 @@ class ThemeEventTest extends UnitTestCase {
       ],
     ];
 
-    $hookNewInformation = hook_event_dispatcher_theme($existing);
+    $hookNewInformation = core_event_dispatcher_theme($existing);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME);
     $this->assertSame($existing, $event->getExisting());
     $this->assertSame($expectedNewTheme, $hookNewInformation);
@@ -159,7 +157,7 @@ class ThemeEventTest extends UnitTestCase {
     $this->expectException(\RuntimeException::class);
     $this->expectExceptionMessage('Missing path in the information array. ThemeEvent needs the path to be set manually, to have a proper default theme implementation. See \hook_theme() for more information.');
 
-    hook_event_dispatcher_theme([]);
+    core_event_dispatcher_theme([]);
   }
 
 }

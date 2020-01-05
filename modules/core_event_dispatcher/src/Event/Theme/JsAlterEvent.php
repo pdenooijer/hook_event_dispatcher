@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Theme;
+namespace Drupal\core_event_dispatcher\Event\Theme;
 
 use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\hook_event_dispatcher\Event\EventInterface;

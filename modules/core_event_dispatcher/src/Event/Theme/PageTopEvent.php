@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Page;
+namespace Drupal\core_event_dispatcher\Event\Theme;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class PageBottomEvent.
+ * Class PageTopEvent.
  */
-class PageBottomEvent extends Event implements EventInterface {
+class PageTopEvent extends Event implements EventInterface {
 
   /**
    * The build array.
@@ -19,7 +19,7 @@ class PageBottomEvent extends Event implements EventInterface {
   private $build;
 
   /**
-   * PageBottomEvent constructor.
+   * PageTopEvent constructor.
    *
    * @param array $build
    *   The build array.
@@ -42,7 +42,7 @@ class PageBottomEvent extends Event implements EventInterface {
    * {@inheritdoc}
    */
   public function getDispatcherType(): string {
-    return HookEventDispatcherInterface::PAGE_BOTTOM;
+    return HookEventDispatcherInterface::PAGE_TOP;
   }
 
 }

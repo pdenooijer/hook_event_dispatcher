@@ -4,20 +4,18 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Page;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent;
-use Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent;
-use Drupal\hook_event_dispatcher\Event\Page\PageTopEvent;
+use Drupal\core_event_dispatcher\Event\Theme\PageAttachmentsEvent;
+use Drupal\core_event_dispatcher\Event\Theme\PageBottomEvent;
+use Drupal\core_event_dispatcher\Event\Theme\PageTopEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_page_attachments;
-use function hook_event_dispatcher_page_bottom;
-use function hook_event_dispatcher_page_top;
+use function core_event_dispatcher_page_attachments;
+use function core_event_dispatcher_page_bottom;
+use function core_event_dispatcher_page_top;
 
 /**
  * Class PageEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Page
  *
  * @group hook_event_dispatcher
  */
@@ -58,9 +56,9 @@ class PageEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_page_attachments($currentAttachments);
+    core_event_dispatcher_page_attachments($currentAttachments);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent $event */
+    /* @var \Drupal\core_event_dispatcher\Event\Theme\PageAttachmentsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_ATTACHMENTS);
     $this->assertSame($expectedAttachments, $event->getAttachments());
     $this->assertSame($expectedAttachments, $currentAttachments);
@@ -83,9 +81,9 @@ class PageEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_page_bottom($pageBottom);
+    core_event_dispatcher_page_bottom($pageBottom);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent $event */
+    /* @var \Drupal\core_event_dispatcher\Event\Theme\PageBottomEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_BOTTOM);
     $this->assertSame($expectedBuild, $pageBottom);
     $this->assertSame($expectedBuild, $event->getBuild());
@@ -108,9 +106,9 @@ class PageEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_page_top($pageTop);
+    core_event_dispatcher_page_top($pageTop);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageTopEvent $event */
+    /* @var \Drupal\core_event_dispatcher\Event\Theme\PageTopEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_TOP);
     $this->assertSame($expectedBuild, $pageTop);
     $this->assertSame($expectedBuild, $event->getBuild());

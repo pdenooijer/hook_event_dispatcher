@@ -1,19 +1,17 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Theme;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_template_preprocess_default_variables_alter;
+use function core_event_dispatcher_template_preprocess_default_variables_alter;
 
 /**
  * Class TemplatePreprocessDefaultVariablesAlterEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Theme
  *
  * @group hook_event_dispatcher
  */
@@ -63,9 +61,9 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
     ];
     $expectedVariables = $variables + $newVariable;
 
-    hook_event_dispatcher_template_preprocess_default_variables_alter($variables);
+    core_event_dispatcher_template_preprocess_default_variables_alter($variables);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
     $this->assertSame($expectedVariables, $variables);
     $this->assertSame($expectedVariables, $event->getVariables());

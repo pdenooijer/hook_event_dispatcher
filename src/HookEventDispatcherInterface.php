@@ -520,7 +520,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_theme()
+   * @see core_event_dispatcher_theme()
    * @see hook_theme()
    *
    * @var string
@@ -532,7 +532,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_theme_registry_alter()
+   * @see core_event_dispatcher_theme_registry_alter()
    * @see hook_theme_registry_alter()
    *
    * @var string
@@ -544,7 +544,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_theme_suggestions_alter()
+   * @see core_event_dispatcher_theme_suggestions_alter()
    * @see hook_theme_suggestions_alter()
    *
    * @var string
@@ -556,7 +556,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_themes_installed()
+   * @see core_event_dispatcher_themes_installed()
    * @see hook_themes_installed()
    *
    * @var string
@@ -568,7 +568,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_template_preprocess_default_variables_alter()
+   * @see core_event_dispatcher_template_preprocess_default_variables_alter()
    * @see hook_template_preprocess_default_variables_alter()
    *
    * @var string
@@ -580,7 +580,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_js_alter()
+   * @see core_event_dispatcher_js_alter()
    * @see hook_js_alter()
    *
    * @var string
@@ -592,7 +592,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_library_info_alter()
+   * @see core_event_dispatcher_library_info_alter()
    * @see hook_library_info_alter()
    *
    * @var string
@@ -679,7 +679,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_page_top()
+   * @see core_event_dispatcher_page_top()
    * @see hook_page_top()
    *
    * @var string
@@ -691,7 +691,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_page_bottom()
+   * @see core_event_dispatcher_page_bottom()
    * @see hook_page_bottom()
    *
    * @var string
@@ -707,7 +707,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_page_attachments()
+   * @see core_event_dispatcher_page_attachments()
    * @see hook_page_attachments()
    *
    * @var string

@@ -1,19 +1,17 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Theme;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_theme_suggestions_alter;
+use function core_event_dispatcher_theme_suggestions_alter;
 
 /**
  * Class ThemeSuggestionsAlterEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Theme
  *
  * @group hook_event_dispatcher
  */
@@ -58,9 +56,9 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_theme_suggestions_alter($suggestions, $variables, $hook);
+    core_event_dispatcher_theme_suggestions_alter($suggestions, $variables, $hook);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER);
     $this->assertSame($expectedSuggestions, $suggestions);
     $this->assertEquals($suggestions, $event->getSuggestions());
@@ -80,9 +78,9 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     $variables = ['content' => 'test'];
     $hook = 'container';
 
-    hook_event_dispatcher_theme_suggestions_alter($suggestions, $variables, $hook);
+    core_event_dispatcher_theme_suggestions_alter($suggestions, $variables, $hook);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent $event */
     $event = $this->manager->getRegisteredEvent('hook_event_dispatcher.theme.suggestions_' . $hook . '_alter');
     $this->assertEquals($suggestions, $event->getSuggestions());
     $this->assertEquals($variables, $event->getVariables());

@@ -1,19 +1,17 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Theme;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_theme_registry_alter;
+use function core_event_dispatcher_theme_registry_alter;
 
 /**
  * Class ThemeRegistryAlterEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Theme
  *
  * @group hook_event_dispatcher
  */
@@ -62,12 +60,12 @@ class ThemeRegistryAlterEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_theme_registry_alter($themeRegistry);
+    core_event_dispatcher_theme_registry_alter($themeRegistry);
 
     $expected['existing_theme_hook__with_information']['variables']['variable2'] = TRUE;
     $this->assertSame($expected, $themeRegistry);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(
       HookEventDispatcherInterface::THEME_REGISTRY_ALTER
     );

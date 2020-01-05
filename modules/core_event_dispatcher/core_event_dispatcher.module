@@ -5,6 +5,7 @@
  * Core event dispatcher submodule.
  */
 
+use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -37,6 +38,17 @@ use Drupal\core_event_dispatcher\Event\Entity\EntityViewEvent;
 use Drupal\core_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\core_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\core_event_dispatcher\Event\Form\FormIdAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\JsAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\LibraryInfoAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\PageAttachmentsEvent;
+use Drupal\core_event_dispatcher\Event\Theme\PageBottomEvent;
+use Drupal\core_event_dispatcher\Event\Theme\PageTopEvent;
+use Drupal\core_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\ThemeEvent;
+use Drupal\core_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\ThemesInstalledEvent;
+use Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
 
 // Entity.
 // @todo hook_entity_create_access()
@@ -66,6 +78,18 @@ use Drupal\core_event_dispatcher\Event\Form\FormIdAlterEvent;
 // Form.
 // @todo hook_ajax_render_alter()
 // @todo hook_batch_alter()
+
+// Theme.
+// @todo hook_form_system_theme_settings_alter()
+// @todo hook_themes_uninstalled()
+// @todo hook_extension()
+// @todo hook_render_template()
+// @todo hook_element_info_alter()
+// @todo hook_library_info_build()
+// @todo hook_js_settings_build()
+// @todo hook_js_settings_alter()
+// @todo hook_css_alter()
+// @todo hook_page_attachments_alter()
 
 /**
  * Implements hook_entity_access().
@@ -354,4 +378,122 @@ function core_event_dispatcher_form_alter(array &$form, FormStateInterface $form
     $manager->register(new FormBaseAlterEvent($form, $formState, $formId, $buildInfo['base_form_id']));
   }
   $manager->register(new FormIdAlterEvent($form, $formState, $formId));
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_theme_suggestions_alter(array &$suggestions, array $variables, string $hook) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new ThemeSuggestionsAlterEvent($suggestions, $variables, $hook));
+  $manager->register(new ThemeSuggestionsAlterIdEvent($suggestions, $variables, $hook));
+}
+
+/**
+ * Implements hook_themes_installed().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_themes_installed(array $themeList) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new ThemesInstalledEvent($themeList));
+}
+
+/**
+ * Implements hook_js_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_js_alter(array &$javascript, AttachedAssetsInterface $assets) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new JsAlterEvent($javascript, $assets);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_library_info_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_library_info_alter(array &$libraries, string $extension) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new LibraryInfoAlterEvent($libraries, $extension);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_page_attachments().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_page_attachments(array &$attachments) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PageAttachmentsEvent($attachments);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_page_top().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_page_top(array &$pageTop) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PageTopEvent($pageTop);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_page_bottom().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_page_bottom(array &$pageBottom) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PageBottomEvent($pageBottom);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_theme(array $existing) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ThemeEvent($existing);
+  $manager->register($event);
+  return $event->getNewThemes();
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_theme_registry_alter(array &$themeRegistry) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new ThemeRegistryAlterEvent($themeRegistry));
+}
+
+/**
+ * Implements hook_template_preprocess_default_variables_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_template_preprocess_default_variables_alter(array &$variables) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new TemplatePreprocessDefaultVariablesAlterEvent($variables));
 }

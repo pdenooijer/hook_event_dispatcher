@@ -1,20 +1,18 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Theme;
 
 use Drupal;
 use Drupal\Core\Asset\AttachedAssets;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\JsAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_js_alter;
+use function core_event_dispatcher_js_alter;
 
 /**
  * Class JsAlterEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Theme
  *
  * @group hook_event_dispatcher
  */
@@ -57,9 +55,9 @@ final class JsAlterEventTest extends UnitTestCase {
 
     $attachedAssets = new AttachedAssets();
 
-    hook_event_dispatcher_js_alter($javascript, $attachedAssets);
+    core_event_dispatcher_js_alter($javascript, $attachedAssets);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\JsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::JS_ALTER);
     $this->assertSame($expectedJavascript, $event->getJavascript());
     $this->assertSame($attachedAssets, $event->getAttachedAssets());

@@ -5,7 +5,6 @@
  * Hook event dispatcher module.
  */
 
-use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
@@ -13,20 +12,9 @@ use Drupal\Core\Url;
 use Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Cron\CronEvent;
 use Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent;
-use Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent;
-use Drupal\hook_event_dispatcher\Event\Page\PageTopEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
 use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\LibraryInfoAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemesInstalledEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent;
 use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
@@ -62,17 +50,6 @@ function hook_event_dispatcher_help(string $routeName) {
     return '<pre>' . $output . '</pre>';
   }
   return '';
-}
-
-/**
- * Implements hook_template_preprocess_default_variables_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_template_preprocess_default_variables_alter(array &$variables) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new TemplatePreprocessDefaultVariablesAlterEvent($variables));
 }
 
 /**
@@ -304,53 +281,6 @@ function hook_event_dispatcher_views_query_substitutions(ViewExecutable $view) {
 }
 
 /**
- * Implements hook_theme_suggestions_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_theme_suggestions_alter(array &$suggestions, array $variables, string $hook) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new ThemeSuggestionsAlterEvent($suggestions, $variables, $hook));
-  $manager->register(new ThemeSuggestionsAlterIdEvent($suggestions, $variables, $hook));
-}
-
-/**
- * Implements hook_themes_installed().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_themes_installed(array $themeList) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new ThemesInstalledEvent($themeList));
-}
-
-/**
- * Implements hook_theme().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_theme(array $existing) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new ThemeEvent($existing);
-  $manager->register($event);
-  return $event->getNewThemes();
-}
-
-/**
- * Implements hook_theme_registry_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_theme_registry_alter(array &$themeRegistry) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new ThemeRegistryAlterEvent($themeRegistry));
-}
-
-/**
  * Implements hook_user_cancel().
  *
  * {@inheritdoc}
@@ -419,66 +349,6 @@ function hook_event_dispatcher_toolbar_alter(array &$items) {
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ToolbarAlterEvent($items);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_js_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_js_alter(array &$javascript, AttachedAssetsInterface $assets) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new JsAlterEvent($javascript, $assets);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_library_info_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_library_info_alter(array &$libraries, string $extension) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new LibraryInfoAlterEvent($libraries, $extension);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_page_top().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_page_top(array &$pageTop) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new PageTopEvent($pageTop);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_page_bottom().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_page_bottom(array &$pageBottom) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new PageBottomEvent($pageBottom);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_page_attachments().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_page_attachments(array &$attachments) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new PageAttachmentsEvent($attachments);
   $manager->register($event);
 }
 

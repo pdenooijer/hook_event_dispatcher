@@ -1,19 +1,17 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
+namespace Drupal\Tests\core_event_dispatcher\Unit\Theme;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Theme\LibraryInfoAlterEvent;
+use Drupal\core_event_dispatcher\Event\Theme\LibraryInfoAlterEvent;
 use Drupal\Tests\UnitTestCase;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
-use function hook_event_dispatcher_library_info_alter;
+use function core_event_dispatcher_library_info_alter;
 
 /**
  * Class LibraryInfoAlterEventTest.
- *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Library
  *
  * @group hook_event_dispatcher
  */
@@ -53,12 +51,12 @@ class LibraryInfoAlterEventTest extends UnitTestCase {
     ];
     $extension = 'test_module';
 
-    hook_event_dispatcher_library_info_alter($libraries, $extension);
+    core_event_dispatcher_library_info_alter($libraries, $extension);
 
     $expectedLibraries['test_library'] = 'test_altered';
     $this->assertSame($expectedLibraries, $libraries);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Theme\LibraryInfoAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\LibraryInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LIBRARY_INFO_ALTER);
     $this->assertSame($expectedLibraries, $event->getLibraries());
     $this->assertSame($extension, $event->getExtension());
