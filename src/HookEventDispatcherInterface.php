@@ -154,6 +154,18 @@ interface HookEventDispatcherInterface {
 
   // ENTITY FIELD EVENTS.
   /**
+   * Alter forms for field widgets provided by other modules.
+   *
+   * @Event
+   *
+   * @see field_event_dispatcher_field_widget_form_alter()
+   * @see hook_field_widget_form_alter()
+   *
+   * @var string
+   */
+  public const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
+
+  /**
    * Control access to fields.
    *
    * @Event
@@ -300,18 +312,6 @@ interface HookEventDispatcherInterface {
    * @var string
    */
   public const FORM_ALTER = 'hook_event_dispatcher.form.alter';
-
-  /**
-   * Alter forms for field widgets provided by other modules.
-   *
-   * @Event
-   *
-   * @see hook_event_dispatcher_field_widget_form_alter()
-   * @see hook_field_widget_form_alter()
-   *
-   * @var string
-   */
-  public const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
 
   // BLOCK EVENTS.
   /**

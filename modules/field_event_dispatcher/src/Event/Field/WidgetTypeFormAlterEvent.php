@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Form;
+namespace Drupal\field_event_dispatcher\Event\Field;
 
 /**
  * Class WidgetTypeFormAlterEvent.
