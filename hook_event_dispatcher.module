@@ -43,8 +43,6 @@ use Drupal\hook_event_dispatcher\Event\EntityType\EntityTypeBuildEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Form\FormIdAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 use Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent;
 use Drupal\hook_event_dispatcher\Event\Page\PageBottomEvent;
@@ -282,18 +280,6 @@ function hook_event_dispatcher_form_alter(array &$form, FormStateInterface $form
     $manager->register(new FormBaseAlterEvent($form, $formState, $formId, $buildInfo['base_form_id']));
   }
   $manager->register(new FormIdAlterEvent($form, $formState, $formId));
-}
-
-/**
- * Implements hook_field_widget_form_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_field_widget_form_alter(array &$element, FormStateInterface $formState, array $context) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $manager->register(new WidgetFormAlterEvent($element, $formState, $context));
-  $manager->register(new WidgetTypeFormAlterEvent($element, $formState, $context));
 }
 
 /**
