@@ -7,8 +7,6 @@ use Drupal\preprocess_event_dispatcher\Factory\PreprocessEventFactoryInterface;
 
 /**
  * Class FakePreprocessEventFactory.
- *
- * @package Drupal\Tests\preprocess_event_dispatcher\Preprocess\Helpers
  */
 final class FakePreprocessEventFactory implements PreprocessEventFactoryInterface {
 

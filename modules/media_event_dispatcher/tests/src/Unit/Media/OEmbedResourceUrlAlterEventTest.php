@@ -14,8 +14,6 @@ use function media_event_dispatcher_oembed_resource_url_alter;
 /**
  * Class OEmbedResourceUrlAlterEventTest.
  *
- * @package Drupal\Tests\media_event_dispatcher\Unit\Media
- *
  * @group media_event_dispatcher
  */
 class OEmbedResourceUrlAlterEventTest extends UnitTestCase {

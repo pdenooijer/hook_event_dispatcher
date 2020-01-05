@@ -9,8 +9,6 @@ use function file_get_contents;
 
 /**
  * Class YamlDefinitionsLoader.
- *
- * @package Drupal\Tests\preprocess_event_dispatcher\Preprocess\Helpers
  */
 final class YamlDefinitionsLoader {
 
