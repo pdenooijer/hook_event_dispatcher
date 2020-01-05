@@ -714,13 +714,13 @@ interface HookEventDispatcherInterface {
    */
   public const PAGE_ATTACHMENTS = 'hook_event_dispatcher.page.attachments';
 
-  // CRON EVENTS.
+  // CORE EVENTS.
   /**
    * Perform periodic actions.
    *
    * @Event
    *
-   * @see hook_event_dispatcher_cron()
+   * @see core_event_dispatcher_cron()
    * @see hook_cron()
    *
    * @var string

@@ -16,6 +16,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\core_event_dispatcher\Event\Block\BlockBuildAlterEvent;
+use Drupal\core_event_dispatcher\Event\Core\CronEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoEvent;
@@ -58,6 +59,21 @@ use Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent;
 // Block.
 // @todo hook_block_view_alter()
 // @todo hook_block_access()
+
+// Core.
+// @todo hook_data_type_info_alter()
+// @todo hook_queue_info_alter()
+// @todo hook_mail_alter()
+// @todo hook_mail()
+// @todo hook_mail_backend_info_alter()
+// @todo hook_countries_alter()
+// @todo hook_display_variant_plugin_alter()
+// @todo hook_layout_alter()
+// @todo hook_cache_flush()
+// @todo hook_rebuild()
+// @todo hook_config_import_steps_alter()
+// @todo hook_config_schema_info_alter()
+// @todo hook_validation_constraint_alter()
 
 // Entity.
 // @todo hook_entity_create_access()
@@ -113,6 +129,18 @@ function core_event_dispatcher_block_build_alter(array &$build, BlockPluginInter
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new BlockBuildAlterEvent($build, $block));
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_cron() {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new CronEvent();
+  $manager->register($event);
 }
 
 /**

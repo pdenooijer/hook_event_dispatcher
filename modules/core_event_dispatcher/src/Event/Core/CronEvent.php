@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Cron;
+namespace Drupal\core_event_dispatcher\Event\Core;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
