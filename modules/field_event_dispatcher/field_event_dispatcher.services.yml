@@ -3,3 +3,8 @@ services:
     class: Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityViewDisplayEditAlterSubscriber
     tags:
       - { name: 'event_subscriber' }
+
+  field_event_dispatcher.form.entity_form_display_edit.alter.subscriber:
+    class: \Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityFormDisplayEditAlterEventSubscriber
+    tags:
+      - { name: 'event_subscriber' }
