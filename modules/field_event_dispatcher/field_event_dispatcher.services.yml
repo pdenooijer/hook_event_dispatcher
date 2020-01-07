@@ -1,0 +1,6 @@
+services:
+  field_event_dispatcher.form_entity_view_display_edit_alter_event_subscriber:
+    class: \Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityViewDisplayEditAlterEventSubscriber
+    arguments: []
+    tags:
+      - { name: 'event_subscriber' }

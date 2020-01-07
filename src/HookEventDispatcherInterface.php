@@ -297,6 +297,18 @@ interface HookEventDispatcherInterface {
    */
   public const FIELD_FORMATTER_INFO_ALTER = 'hook_event_dispatcher.field_formatter.info.alter';
 
+  /**
+   * Allow modules to add settings to field formatters provided by other modules.
+   *
+   * @Event
+   *
+   * @see field_event_dispatcher_field_formatter_third_party_settings_form()
+   * @see hook_field_formatter_third_party_settings_form()
+   *
+   * @var string
+   */
+  public const FIELD_FORMATTER_THIRD_PARTY_SETTINGS_FORM = 'hook_event_dispatcher.field_formatter.third_party.settings_form';
+
   // FORM EVENTS.
   /**
    * Perform alterations before a form is rendered.
