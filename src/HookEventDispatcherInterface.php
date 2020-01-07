@@ -322,6 +322,18 @@ interface HookEventDispatcherInterface {
   public const FIELD_FORMATTER_THIRD_PARTY_SETTINGS_FORM = 'hook_event_dispatcher.field_formatter.third_party.settings_form';
 
   /**
+   * Alters the field widget settings summary.
+   *
+   * @Event
+   *
+   * @see field_event_dispatcher_field_widget_settings_summary_alter()
+   * @see hook_field_widget_settings_summary_alter()
+   *
+   * @var string
+   */
+  public const FIELD_WIDGET_SETTINGS_SUMMARY_ALTER = 'hook_event_dispatcher.field_widget.settings_summary.alter';
+
+  /**
    * Allow modules to add settings to field widgets provided by other modules.
    *
    * @Event
