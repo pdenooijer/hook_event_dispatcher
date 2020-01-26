@@ -5,8 +5,11 @@
  * Field event dispatcher submodule.
  */
 
+use Drupal\Core\Field\FormatterInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field_event_dispatcher\Event\Field\FieldFormatterInfoAlterEvent;
+use Drupal\field_event_dispatcher\Event\Field\FieldFormatterThirdPartySettingsFormEvent;
 use Drupal\field_event_dispatcher\Event\Field\WidgetFormAlterEvent;
 use Drupal\field_event_dispatcher\Event\Field\WidgetTypeFormAlterEvent;
 
@@ -18,6 +21,28 @@ use Drupal\field_event_dispatcher\Event\Field\WidgetTypeFormAlterEvent;
 // @todo hook_field_info_max_weight()
 // @todo hook_field_purge_field_storage()
 // @todo hook_field_purge_field()
+
+/**
+ * Implements hook_field_formatter_third_party_settings_form().
+ *
+ * {@inheritdoc}
+ */
+function field_event_dispatcher_field_formatter_third_party_settings_form(
+  FormatterInterface $plugin,
+  FieldDefinitionInterface $fieldDefinition,
+  string $viewMode,
+  array $form,
+  FormStateInterface $formState
+) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new FieldFormatterThirdPartySettingsFormEvent(
+    $plugin, $fieldDefinition, $viewMode, $form, $formState
+  );
+  $manager->register($event);
+
+  return $event->getElements();
+}
 
 /**
  * Implements hook_field_widget_form_alter().
