@@ -5,17 +5,17 @@ namespace Drupal\Tests\field_event_dispatcher\Unit\Field;
 use Drupal\Tests\field_event_dispatcher\Unit\Field\AbstractFormEntityDisplayEditAlterEventSubscriberTestCase;
 
 /**
- * Class FormEntityFormDisplayEditAlterEventSubscriberTest.
+ * Class FormEntityViewDisplayEditAlterEventSubscriberTest.
  *
  * @group field_event_dispatcher
  */
-class FormEntityFormDisplayEditAlterEventSubscriberTest extends AbstractFormEntityDisplayEditAlterEventSubscriberTestCase {
+class FormEntityViewDisplayEditAlterEventSubscriberTest extends AbstractFormEntityDisplayEditAlterEventSubscriberTestCase {
 
   /**
    * The form ID we're testing.
    *
    * @var string
    */
-  protected $formId = 'entity_form_display_edit_form';
+  protected $formId = 'entity_view_display_edit_form';
 
 }

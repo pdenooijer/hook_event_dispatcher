@@ -7,16 +7,17 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\core_event_dispatcher\Event\Form\FormIdAlterEvent;
-use Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityViewDisplayEditAlterSubscriber;
+use Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityDisplayEditAlterEventSubscriber;
+use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class FormEntityViewDisplayEditAlterSubscriberTest.
+ * Class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase.
  *
  * @group field_event_dispatcher
  */
-class FormEntityViewDisplayEditAlterSubscriberTest extends UnitTestCase {
+abstract class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase extends UnitTestCase {
 
   /**
    * The manager.
@@ -71,18 +72,18 @@ class FormEntityViewDisplayEditAlterSubscriberTest extends UnitTestCase {
    *
    * @param array &$form
    *   This is the form array to be passed to
-   *   FormEntityViewDisplayEditAlterEventSubscriber for it to alter.
+   *   FormEntityDisplayEditAlterEventSubscriber for it to alter.
    * @param array &$expectedForm
    *   This is a duplicate of $form that is altered here in this method to match
-   *   the expected changes FormEntityViewDisplayEditAlterEventSubscriber
+   *   the expected changes FormEntityDisplayEditAlterEventSubscriber
    *   performs on $form.
    *
-   * @see \Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityViewDisplayEditAlterSubscriber::formAlter()
+   * @see \Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityDisplayEditAlterEventSubscriber::formAlter()
    */
   private function alterForm(array &$form, array &$expectedForm): void {
-    $eventSubscriber = new FormEntityViewDisplayEditAlterSubscriber();
+    $eventSubscriber = new FormEntityDisplayEditAlterEventSubscriber();
     $formState = $this->createMock(FormStateInterface::class);
-    $event = new FormIdAlterEvent($form, $formState, 'entity_view_display_edit_form');
+    $event = new FormIdAlterEvent($form, $formState, $this->formId);
 
     $eventSubscriber->formAlter($event);
 
@@ -107,9 +108,9 @@ class FormEntityViewDisplayEditAlterSubscriberTest extends UnitTestCase {
   }
 
   /**
-   * FormEntityViewDisplayEditAlterEventSubscriber test with no fields.
+   * FormEntityDisplayEditAlterEventSubscriber test with no fields.
    *
-   * This tests that FormEntityViewDisplayEditAlterEventSubscriber::formAlter()
+   * This tests that FormEntityDisplayEditAlterEventSubscriber::formAlter()
    * handles forms with no fields it can alter correctly.
    */
   public function testFormAlterNoFields(): void {
@@ -123,9 +124,9 @@ class FormEntityViewDisplayEditAlterSubscriberTest extends UnitTestCase {
   }
 
   /**
-   * FormEntityViewDisplayEditAlterEventSubscriber test with one field.
+   * FormEntityDisplayEditAlterEventSubscriber test with one field.
    *
-   * This tests that FormEntityViewDisplayEditAlterEventSubscriber::formAlter()
+   * This tests that FormEntityDisplayEditAlterEventSubscriber::formAlter()
    * alters the $form array as expected when one field is provided.
    */
   public function testFormAlterOneField(): void {
@@ -139,9 +140,9 @@ class FormEntityViewDisplayEditAlterSubscriberTest extends UnitTestCase {
   }
 
   /**
-   * FormEntityViewDisplayEditAlterEventSubscriber test with two fields.
+   * FormEntityDisplayEditAlterEventSubscriber test with two fields.
    *
-   * This tests that FormEntityViewDisplayEditAlterEventSubscriber::formAlter()
+   * This tests that FormEntityDisplayEditAlterEventSubscriber::formAlter()
    * alters the $form array as expected when two fields are provided.
    */
   public function testFormAlterTwoFields(): void {
@@ -158,9 +159,9 @@ class FormEntityViewDisplayEditAlterSubscriberTest extends UnitTestCase {
   }
 
   /**
-   * FormEntityViewDisplayEditAlterEventSubscriber test with multiple merges.
+   * FormEntityDisplayEditAlterEventSubscriber test with multiple merges.
    *
-   * This tests that FormEntityViewDisplayEditAlterEventSubscriber::formAlter()
+   * This tests that FormEntityDisplayEditAlterEventSubscriber::formAlter()
    * alters the $form array as expected when a field has third-party settings
    * merged in more than once.
    */
