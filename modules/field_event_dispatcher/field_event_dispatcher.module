@@ -7,9 +7,11 @@
 
 use Drupal\Core\Field\FormatterInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\WidgetInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field_event_dispatcher\Event\Field\FieldFormatterInfoAlterEvent;
 use Drupal\field_event_dispatcher\Event\Field\FieldFormatterThirdPartySettingsFormEvent;
+use Drupal\field_event_dispatcher\Event\Field\FieldWidgetThirdPartySettingsFormEvent;
 use Drupal\field_event_dispatcher\Event\Field\WidgetFormAlterEvent;
 use Drupal\field_event_dispatcher\Event\Field\WidgetTypeFormAlterEvent;
 
@@ -66,4 +68,26 @@ function field_event_dispatcher_field_formatter_info_alter(array &$info) {
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $event = new FieldFormatterInfoAlterEvent($info);
   $manager->register($event);
+}
+
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ *
+ * {@inheritdoc}
+ */
+function field_event_dispatcher_field_widget_third_party_settings_form(
+  WidgetInterface $plugin,
+  FieldDefinitionInterface $fieldDefinition,
+  string $formMode,
+  array $form,
+  FormStateInterface $formState
+) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new FieldWidgetThirdPartySettingsFormEvent(
+    $plugin, $fieldDefinition, $formMode, $form, $formState
+  );
+  $manager->register($event);
+
+  return $event->getElements();
 }
