@@ -298,6 +298,18 @@ interface HookEventDispatcherInterface {
   public const FIELD_FORMATTER_INFO_ALTER = 'hook_event_dispatcher.field_formatter.info.alter';
 
   /**
+   * Alters the field formatter settings summary.
+   *
+   * @Event
+   *
+   * @see field_event_dispatcher_field_formatter_settings_summary_alter()
+   * @see hook_field_formatter_settings_summary_alter()
+   *
+   * @var string
+   */
+  public const FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER = 'hook_event_dispatcher.field_formatter.settings_summary.alter';
+
+  /**
    * Allow modules to add settings to field formatters provided by other modules.
    *
    * @Event
