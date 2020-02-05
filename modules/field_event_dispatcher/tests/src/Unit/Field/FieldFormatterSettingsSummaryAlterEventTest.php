@@ -2,14 +2,10 @@
 
 namespace Drupal\Tests\field_event_dispatcher\Unit\Field;
 
-use Drupal;
-use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\BasicStringFormatter;
-use Drupal\field_event_dispatcher\Event\Field\FieldFormatterSettingsSummaryAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
-use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use Drupal\Tests\field_event_dispatcher\Unit\Field\AbstractFieldSettingsSummaryAlterEventTestCase;
 use function field_event_dispatcher_field_formatter_settings_summary_alter;
 
 /**
@@ -17,86 +13,32 @@ use function field_event_dispatcher_field_formatter_settings_summary_alter;
  *
  * @group field_event_dispatcher
  */
-class FieldFormatterSettingsSummaryAlterEventTest extends UnitTestCase {
+class FieldFormatterSettingsSummaryAlterEventTest extends AbstractFieldSettingsSummaryAlterEventTestCase {
 
   /**
-   * The manager.
-   *
-   * @var \Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy
+   * {@inheritdoc}
    */
-  private $manager;
-
-  /**
-   * Sets up the test.
-   */
-  public function setUp() {
-    $builder = new ContainerBuilder();
-    $this->manager = new HookEventDispatcherManagerSpy();
-    $builder->set('hook_event_dispatcher.manager', $this->manager);
-    $builder->compile();
-    Drupal::setContainer($builder);
+  protected function getProceduralHookName(): string {
+    return 'field_event_dispatcher_field_formatter_settings_summary_alter';
   }
 
   /**
-   * FieldFormatterSettingsSummaryAlterEventTest adding summary test.
-   *
-   * This tests adding an additional summary.
+   * {@inheritdoc}
    */
-  public function testAddSummary() {
-    $summary = $expectedSummary = [];
-
-    $this->manager->setEventCallbacks([
-      HookEventDispatcherInterface::FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER => static function (
-        FieldFormatterSettingsSummaryAlterEvent $event
-      ) {
-        $event->getSummary()[] = 'Test';
-      },
-    ]);
-
-    // Run the procedural hook which should trigger the above handler.
-    field_event_dispatcher_field_formatter_settings_summary_alter($summary, []);
-
-    /** @var \Drupal\field_event_dispatcher\Event\Field\FieldFormatterSettingsSummaryAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(
-      HookEventDispatcherInterface::FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER
-    );
-
-    $this->assertSame($summary, $event->getSummary());
-
-    $expectedSummary[] = 'Test';
-
-    $this->assertSame($expectedSummary, $summary);
+  protected function getEventName(): string {
+    return HookEventDispatcherInterface::FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER;
   }
 
   /**
-   * FieldFormatterSettingsSummaryAlterEventTest context test.
-   *
-   * This tests that the context parameter returns expected values.
+   * {@inheritdoc}
    */
-  public function testContext() {
-    $testFieldDefinition = new BaseFieldDefinition();
-
-    $context = $expectedContext = [
+  protected function getTestContext(BaseFieldDefinition $fieldDefinition): array {
+    return [
       'formatter' => new BasicStringFormatter(
-        'test_formatter', [], $testFieldDefinition, [], 'label', 'view_mode', []
+        'test_formatter', [], $fieldDefinition, [], 'label', 'view_mode', []
       ),
-      'field_definition' => $testFieldDefinition,
       'view_mode' => 'test'
     ];
-
-    $summary = [];
-
-    // Run the procedural hook which should trigger the event.
-    field_event_dispatcher_field_formatter_settings_summary_alter(
-      $summary, $context
-    );
-
-    /** @var \Drupal\field_event_dispatcher\Event\Field\FieldFormatterSettingsSummaryAlterEvent $event */
-    $event = $this->manager->getRegisteredEvent(
-      HookEventDispatcherInterface::FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER
-    );
-
-    $this->assertSame($expectedContext, $event->getContext());
   }
 
 }
