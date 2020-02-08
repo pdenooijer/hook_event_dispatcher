@@ -3,30 +3,30 @@
 namespace Drupal\Tests\field_event_dispatcher\Unit\Field;
 
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Field\Plugin\Field\FieldFormatter\BasicStringFormatter;
+use Drupal\Core\Field\Plugin\Field\FieldWidget\StringTextfieldWidget;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\field_event_dispatcher\Unit\Field\AbstractFieldSettingsSummaryAlterEventTestCase;
-use function field_event_dispatcher_field_formatter_settings_summary_alter;
+use function field_event_dispatcher_field_widget_settings_summary_alter;
 
 /**
- * Class FieldFormatterSettingsSummaryAlterEventTest.
+ * Class FieldWidgetSettingsSummaryAlterEventTest.
  *
  * @group field_event_dispatcher
  */
-class FieldFormatterSettingsSummaryAlterEventTest extends AbstractFieldSettingsSummaryAlterEventTestCase {
+class FieldWidgetSettingsSummaryAlterEventTest extends AbstractFieldSettingsSummaryAlterEventTestCase {
 
   /**
    * {@inheritdoc}
    */
   protected function getProceduralHookName(): string {
-    return 'field_event_dispatcher_field_formatter_settings_summary_alter';
+    return 'field_event_dispatcher_field_widget_settings_summary_alter';
   }
 
   /**
    * {@inheritdoc}
    */
   protected function getEventName(): string {
-    return HookEventDispatcherInterface::FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER;
+    return HookEventDispatcherInterface::FIELD_WIDGET_SETTINGS_SUMMARY_ALTER;
   }
 
   /**
@@ -34,10 +34,10 @@ class FieldFormatterSettingsSummaryAlterEventTest extends AbstractFieldSettingsS
    */
   protected function getTestContext(BaseFieldDefinition $fieldDefinition): array {
     return [
-      'formatter' => new BasicStringFormatter(
-        'test_formatter', [], $fieldDefinition, [], 'label', 'view_mode', []
+      'widget' => new StringTextfieldWidget(
+        'test_widget', [], $fieldDefinition, [], []
       ),
-      'view_mode' => 'test'
+      'form_mode' => 'test'
     ];
   }
 

@@ -8,15 +8,15 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class FieldFormatterSettingsSummaryAlterEvent.
+ * Class FieldWidgetSettingsSummaryAlterEvent.
  */
-class FieldFormatterSettingsSummaryAlterEvent extends AbstractFieldSettingsSummaryFormEvent {
+class FieldWidgetSettingsSummaryAlterEvent extends AbstractFieldSettingsSummaryFormEvent {
 
   /**
    * {@inheritdoc}
    */
   public function getDispatcherType(): string {
-    return HookEventDispatcherInterface::FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER;
+    return HookEventDispatcherInterface::FIELD_WIDGET_SETTINGS_SUMMARY_ALTER;
   }
 
 }
