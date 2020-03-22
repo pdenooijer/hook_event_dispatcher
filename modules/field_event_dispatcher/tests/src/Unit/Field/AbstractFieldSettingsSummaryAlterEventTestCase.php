@@ -3,14 +3,9 @@
 namespace Drupal\Tests\field_event_dispatcher\Unit\Field;
 
 use Drupal;
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\core_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\field_event_dispatcher\Event\Field\AbstractFieldSettingsSummaryFormEvent;
-use Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityDisplayEditAlterEventSubscriber;
-use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 
