@@ -1,13 +1,13 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Path;
+namespace Drupal\path_event_dispatcher\Event\Path;
 
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
- * Class PathInsertEvent.
+ * Class UpdatePathEvent.
  */
-final class PathInsertEvent extends AbstractPathEvent {
+final class PathUpdateEvent extends AbstractPathEvent {
 
   /**
    * Get the dispatcher type.
@@ -16,7 +16,7 @@ final class PathInsertEvent extends AbstractPathEvent {
    *   The dispatcher type.
    */
   public function getDispatcherType(): string {
-    return HookEventDispatcherInterface::PATH_INSERT;
+    return HookEventDispatcherInterface::PATH_UPDATE;
   }
 
 }

@@ -34,6 +34,7 @@
       "Drupal\\core_event_dispatcher\\": "modules/core_event_dispatcher/src/",
       "Drupal\\field_event_dispatcher\\": "modules/field_event_dispatcher/src/",
       "Drupal\\media_event_dispatcher\\": "modules/media_event_dispatcher/src/",
+      "Drupal\\path_event_dispatcher\\": "modules/path_event_dispatcher/src/",
       "Drupal\\preprocess_event_dispatcher\\": "modules/preprocess_event_dispatcher/src/",
       "Drupal\\webform_event_dispatcher\\": "modules/webform_event_dispatcher/src/"
     }
@@ -44,6 +45,7 @@
       "Drupal\\Tests\\core_event_dispatcher\\": "modules/core_event_dispatcher/tests/src/",
       "Drupal\\Tests\\field_event_dispatcher\\": "modules/field_event_dispatcher/tests/src/",
       "Drupal\\Tests\\media_event_dispatcher\\": "modules/media_event_dispatcher/tests/src/",
+      "Drupal\\Tests\\path_event_dispatcher\\": "modules/path_event_dispatcher/tests/src/",
       "Drupal\\Tests\\preprocess_event_dispatcher\\": "modules/preprocess_event_dispatcher/tests/src/",
       "Drupal\\Tests\\webform_event_dispatcher\\": "modules/webform_event_dispatcher/tests/src/",
       "Drupal\\Tests\\": "vendor/drupal/core/tests/Drupal/Tests",

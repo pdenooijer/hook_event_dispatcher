@@ -6,9 +6,6 @@
  */
 
 use Drupal\Core\Session\AccountInterface;
-use Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent;
-use Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent;
-use Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent;
 use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserCancelEvent;
 use Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent;
@@ -42,51 +39,6 @@ function hook_event_dispatcher_help(string $routeName) {
     return '<pre>' . $output . '</pre>';
   }
   return '';
-}
-
-/**
- * Implements hook_path_insert().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_path_insert(array $path) {
-  if ($path === []) {
-    return;
-  }
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new PathInsertEvent($path);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_path_update().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_path_update(array $path) {
-  if ($path === []) {
-    return;
-  }
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new PathUpdateEvent($path);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_path_delete().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_path_delete(array $path) {
-  if ($path === []) {
-    return;
-  }
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new PathDeleteEvent($path);
-  $manager->register($event);
 }
 
 /**
