@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Path;
+namespace Drupal\path_event_dispatcher\Event\Path;
 
 use Drupal\hook_event_dispatcher\Event\EventInterface;
 use Symfony\Component\EventDispatcher\Event;

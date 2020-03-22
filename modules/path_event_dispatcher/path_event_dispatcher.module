@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Path event dispatcher submodule.
+ */
+
+use Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent;
+use Drupal\path_event_dispatcher\Event\Path\PathInsertEvent;
+use Drupal\path_event_dispatcher\Event\Path\PathUpdateEvent;
+
+/**
+ * Implements hook_path_insert().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_path_insert(array $path) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PathInsertEvent($path);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_path_update().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_path_update(array $path) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PathUpdateEvent($path);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_path_delete().
+ *
+ * {@inheritdoc}
+ */
+function hook_event_dispatcher_path_delete(array $path) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new PathDeleteEvent($path);
+  $manager->register($event);
+}

@@ -14,9 +14,7 @@ use function hook_event_dispatcher_path_update;
 /**
  * Class PathEventTest.
  *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Form
- *
- * @group hook_event_dispatcher
+ * @group path_event_dispatcher
  */
 class PathEventTest extends UnitTestCase {
 
@@ -56,7 +54,7 @@ class PathEventTest extends UnitTestCase {
 
     hook_event_dispatcher_path_delete($path);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent $event */
+    /* @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
     $this->assertSame($source, $event->getSource());
     $this->assertSame($alias, $event->getAlias());
@@ -82,7 +80,7 @@ class PathEventTest extends UnitTestCase {
 
     hook_event_dispatcher_path_delete($path);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent $event */
+    /* @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
     $this->assertSame($source, $event->getSource());
     $this->assertSame($alias, $event->getAlias());
@@ -108,7 +106,7 @@ class PathEventTest extends UnitTestCase {
 
     hook_event_dispatcher_path_insert($path);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent $event */
+    /* @var \Drupal\path_event_dispatcher\Event\Path\PathInsertEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_INSERT);
     $this->assertSame($source, $event->getSource());
     $this->assertSame($alias, $event->getAlias());
@@ -133,26 +131,12 @@ class PathEventTest extends UnitTestCase {
 
     hook_event_dispatcher_path_update($path);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent $event */
+    /* @var \Drupal\path_event_dispatcher\Event\Path\PathUpdateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_UPDATE);
     $this->assertSame($source, $event->getSource());
     $this->assertSame($alias, $event->getAlias());
     $this->assertSame($langcode, $event->getLangcode());
     $this->assertSame($pid, $event->getPid());
-  }
-
-  /**
-   * Test with empty path array.
-   */
-  public function testWithEmptyPath(): void {
-    $this->manager->setMaxEventCount(0);
-
-    hook_event_dispatcher_path_delete([]);
-    hook_event_dispatcher_path_insert([]);
-    hook_event_dispatcher_path_update([]);
-
-    // Add this check so phpunit won't trigger incomplete test.
-    $this->assertTrue(TRUE);
   }
 
 }
