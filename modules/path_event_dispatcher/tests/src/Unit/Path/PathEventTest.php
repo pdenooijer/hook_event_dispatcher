@@ -7,9 +7,9 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_path_delete;
-use function hook_event_dispatcher_path_insert;
-use function hook_event_dispatcher_path_update;
+use function path_event_dispatcher_path_delete;
+use function path_event_dispatcher_path_insert;
+use function path_event_dispatcher_path_update;
 
 /**
  * Class PathEventTest.
@@ -52,7 +52,7 @@ class PathEventTest extends UnitTestCase {
       'redirect' => TRUE,
     ];
 
-    hook_event_dispatcher_path_delete($path);
+    path_event_dispatcher_path_delete($path);
 
     /* @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
@@ -78,7 +78,7 @@ class PathEventTest extends UnitTestCase {
       'pid' => $pid,
     ];
 
-    hook_event_dispatcher_path_delete($path);
+    path_event_dispatcher_path_delete($path);
 
     /* @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
@@ -104,7 +104,7 @@ class PathEventTest extends UnitTestCase {
       'pid' => $pid,
     ];
 
-    hook_event_dispatcher_path_insert($path);
+    path_event_dispatcher_path_insert($path);
 
     /* @var \Drupal\path_event_dispatcher\Event\Path\PathInsertEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_INSERT);
@@ -129,7 +129,7 @@ class PathEventTest extends UnitTestCase {
       'pid' => $pid,
     ];
 
-    hook_event_dispatcher_path_update($path);
+    path_event_dispatcher_path_update($path);
 
     /* @var \Drupal\path_event_dispatcher\Event\Path\PathUpdateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_UPDATE);
