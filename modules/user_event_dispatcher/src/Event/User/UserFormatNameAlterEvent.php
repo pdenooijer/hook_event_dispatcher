@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\User;
+namespace Drupal\user_event_dispatcher\Event\User;
 
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
@@ -8,10 +8,16 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class UserLoginEvent.
+ * Class UserFormatNameAlterEvent.
  */
-final class UserLoginEvent extends Event implements EventInterface {
+final class UserFormatNameAlterEvent extends Event implements EventInterface {
 
+  /**
+   * Name.
+   *
+   * @var string
+   */
+  private $name;
   /**
    * Account.
    *
@@ -20,13 +26,26 @@ final class UserLoginEvent extends Event implements EventInterface {
   private $account;
 
   /**
-   * UserLoginEvent constructor.
+   * UserFormatNameAlterEvent constructor.
    *
+   * @param string|\Drupal\Component\Render\MarkupInterface $name
+   *   Name.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Account.
    */
-  public function __construct(AccountInterface $account) {
+  public function __construct(&$name, AccountInterface $account) {
+    $this->name = &$name;
     $this->account = $account;
+  }
+
+  /**
+   * Get the name by reference.
+   *
+   * @return string
+   *   Name.
+   */
+  public function &getName(): string {
+    return $this->name;
   }
 
   /**
@@ -46,7 +65,7 @@ final class UserLoginEvent extends Event implements EventInterface {
    *   The dispatcher type.
    */
   public function getDispatcherType(): string {
-    return HookEventDispatcherInterface::USER_LOGIN;
+    return HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER;
   }
 
 }

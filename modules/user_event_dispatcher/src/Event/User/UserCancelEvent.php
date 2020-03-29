@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\User;
+namespace Drupal\user_event_dispatcher\Event\User;
 
 use Drupal\Core\Session\AccountInterface;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
