@@ -5,14 +5,6 @@
  * Hook event dispatcher module.
  */
 
-use Drupal\Core\Session\AccountInterface;
-use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
-use Drupal\hook_event_dispatcher\Event\User\UserCancelEvent;
-use Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent;
-use Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent;
-use Drupal\hook_event_dispatcher\Event\User\UserLoginEvent;
-use Drupal\hook_event_dispatcher\Event\User\UserLogoutEvent;
-
 /**
  * Implements hook_help().
  *
@@ -25,64 +17,4 @@ function hook_event_dispatcher_help(string $routeName) {
     return '<pre>' . $output . '</pre>';
   }
   return '';
-}
-
-/**
- * Implements hook_user_cancel().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_user_cancel(array $edit, AccountInterface $account, string $method) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new UserCancelEvent($edit, $account, $method);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_user_cancel_methods_alter.
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_user_cancel_methods_alter(array &$methods) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new UserCancelMethodsAlterEvent($methods);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_user_login().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_user_login(AccountInterface $account) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new UserLoginEvent($account);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_user_logout().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_user_logout(AccountInterface $account) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new UserLogoutEvent($account);
-  $manager->register($event);
-}
-
-/**
- * Implements hook_user_format_name_alter().
- *
- * {@inheritdoc}
- */
-function hook_event_dispatcher_user_format_name_alter(&$name, AccountInterface $account) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
-  $manager = Drupal::service('hook_event_dispatcher.manager');
-  $event = new UserFormatNameAlterEvent($name, $account);
-  $manager->register($event);
 }

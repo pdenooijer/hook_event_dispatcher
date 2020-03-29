@@ -1,27 +1,25 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\User;
+namespace Drupal\Tests\user_event_dispatcher\Unit\User;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent;
-use Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent;
+use Drupal\user_event_dispatcher\Event\User\UserCancelMethodsAlterEvent;
+use Drupal\user_event_dispatcher\Event\User\UserFormatNameAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_user_cancel;
-use function hook_event_dispatcher_user_cancel_methods_alter;
-use function hook_event_dispatcher_user_format_name_alter;
-use function hook_event_dispatcher_user_login;
-use function hook_event_dispatcher_user_logout;
+use function user_event_dispatcher_user_cancel;
+use function user_event_dispatcher_user_cancel_methods_alter;
+use function user_event_dispatcher_user_format_name_alter;
+use function user_event_dispatcher_user_login;
+use function user_event_dispatcher_user_logout;
 
 /**
  * Class UserEventTest.
  *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\User
- *
- * @group hook_event_dispatcher
+ * @group user_event_dispatcher
  */
 class UserEventTest extends UnitTestCase {
 
@@ -52,9 +50,9 @@ class UserEventTest extends UnitTestCase {
     $account = $this->createMock(AccountInterface::class);
     $method = 'Test method';
 
-    hook_event_dispatcher_user_cancel($edit, $account, $method);
+    user_event_dispatcher_user_cancel($edit, $account, $method);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelEvent $event */
+    /* @var \Drupal\user_event_dispatcher\Event\User\UserCancelEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL);
     $this->assertSame($edit, $event->getEdit());
     $this->assertSame($account, $event->getAccount());
@@ -75,9 +73,9 @@ class UserEventTest extends UnitTestCase {
     $methods = ['Test method'];
     $expectedMethods = ['Test method improved!'];
 
-    hook_event_dispatcher_user_cancel_methods_alter($methods);
+    user_event_dispatcher_user_cancel_methods_alter($methods);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
+    /* @var \Drupal\user_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
     $this->assertSame($expectedMethods, $methods);
     $this->assertSame($expectedMethods, $event->getMethods());
@@ -90,9 +88,9 @@ class UserEventTest extends UnitTestCase {
     /** @var \Drupal\Core\Session\AccountInterface $account */
     $account = $this->createMock(AccountInterface::class);
 
-    hook_event_dispatcher_user_login($account);
+    user_event_dispatcher_user_login($account);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserLoginEvent $event */
+    /* @var \Drupal\user_event_dispatcher\Event\User\UserLoginEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGIN);
     $this->assertEquals($account, $event->getAccount());
   }
@@ -104,9 +102,9 @@ class UserEventTest extends UnitTestCase {
     /** @var \Drupal\Core\Session\AccountInterface $account */
     $account = $this->createMock(AccountInterface::class);
 
-    hook_event_dispatcher_user_logout($account);
+    user_event_dispatcher_user_logout($account);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserLogoutEvent $event */
+    /* @var \Drupal\user_event_dispatcher\Event\User\UserLogoutEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGOUT);
     $this->assertEquals($account, $event->getAccount());
   }
@@ -126,9 +124,9 @@ class UserEventTest extends UnitTestCase {
     /** @var \Drupal\Core\Session\AccountInterface $account */
     $account = $this->createMock(AccountInterface::class);
 
-    hook_event_dispatcher_user_format_name_alter($name, $account);
+    user_event_dispatcher_user_format_name_alter($name, $account);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
+    /* @var \Drupal\user_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
     $this->assertSame('Test name improved!', $event->getName());
     $this->assertSame($account, $event->getAccount());
