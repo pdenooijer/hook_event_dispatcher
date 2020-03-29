@@ -1,5 +1,5 @@
 services:
   field_event_dispatcher.form.entity_display_edit.alter.subscriber:
-    class: \Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityDisplayEditAlterEventSubscriber
+    class: Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityDisplayEditAlterEventSubscriber
     tags:
       - { name: 'event_subscriber' }
