@@ -1,0 +1,186 @@
+<?php
+
+/**
+ * @file
+ * Views event dispatcher submodule.
+ */
+
+use Drupal\views_event_dispatcher\Event\Views\ViewsDataAlterEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsDataEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPostBuildEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPostRenderEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreExecuteEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreRenderEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsQueryAlterEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+
+// @todo hook_views_analyze()
+// @todo hook_field_views_data()
+// @todo hook_field_views_data_alter()
+// @todo hook_field_views_data_views_data_alter()
+// @todo hook_views_form_substitutions()
+// @todo hook_views_preview_info_alter()
+// @todo hook_views_ui_display_top_links_alter()
+// @todo hook_views_invalidate_cache()
+// @todo hook_views_plugins_access_alter()
+// @todo hook_views_plugins_argument_default_alter()
+// @todo hook_views_plugins_argument_validator_alter()
+// @todo hook_views_plugins_cache_alter()
+// @todo hook_views_plugins_display_extenders_alter()
+// @todo hook_views_plugins_display_alter()
+// @todo hook_views_plugins_exposed_form_alter()
+// @todo hook_views_plugins_join_alter()
+// @todo hook_views_plugins_pager_alter()
+// @todo hook_views_plugins_query_alter()
+// @todo hook_views_plugins_row_alter()
+// @todo hook_views_plugins_style_alter()
+// @todo hook_views_plugins_wizard_alter()
+// @todo hook_views_plugins_area_alter()
+// @todo hook_views_plugins_argument_alter()
+// @todo hook_views_plugins_field_alter()
+// @todo hook_views_plugins_filter_alter()
+// @todo hook_views_plugins_relationship_alter()
+// @todo hook_views_plugins_sort_alter()
+
+/**
+ * Implements hook_views_pre_view().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_pre_view(ViewExecutable $view, string $displayId, array &$args) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPreViewEvent($view, $displayId, $args);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_data().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_data() {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsDataEvent();
+  $manager->register($event);
+  return $event->getData();
+}
+
+/**
+ * Implements hook_views_data_alter().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_data_alter(array &$data) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new ViewsDataAlterEvent($data));
+}
+
+/**
+ * Implements hook_views_pre_execute().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_pre_execute(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPreExecuteEvent($view);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_post_execute().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_post_execute(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPostExecuteEvent($view);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_pre_build().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_pre_build(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPreBuildEvent($view);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_post_build().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_post_build(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPostBuildEvent($view);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_pre_render(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPreRenderEvent($view);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_post_render().
+ *
+ * @see https://www.drupal.org/project/drupal/issues/2793169
+ *   Drupal core issue regarding $output being documented as a string when it is
+ *   in fact a render array.
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsPostRenderEvent($view, $output, $cache);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsQueryAlterEvent($view, $query);
+  $manager->register($event);
+}
+
+/**
+ * Implements hook_views_query_substitutions().
+ *
+ * {@inheritdoc}
+ */
+function views_event_dispatcher_views_query_substitutions(ViewExecutable $view) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $event = new ViewsQuerySubstitutionsEvent($view);
+  $manager->register($event);
+  return $event->getSubstitutions();
+}

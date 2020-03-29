@@ -1,23 +1,21 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Views;
+namespace Drupal\Tests\views_event_dispatcher\Unit\Views;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsDataAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsDataEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsDataAlterEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsDataEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
-use function hook_event_dispatcher_views_data;
-use function hook_event_dispatcher_views_data_alter;
+use function views_event_dispatcher_views_data;
+use function views_event_dispatcher_views_data_alter;
 
 /**
  * Class ViewDataEventTest.
  *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Views
- *
- * @group hook_event_dispatcher
+ * @group views_event_dispatcher
  */
 class ViewDataEventTest extends UnitTestCase {
 
@@ -55,7 +53,7 @@ class ViewDataEventTest extends UnitTestCase {
       },
     ]);
 
-    $result = hook_event_dispatcher_views_data();
+    $result = views_event_dispatcher_views_data();
 
     $this->assertSame($data, $result);
   }
@@ -90,7 +88,7 @@ class ViewDataEventTest extends UnitTestCase {
       },
     ]);
 
-    $result = hook_event_dispatcher_views_data();
+    $result = views_event_dispatcher_views_data();
 
     $expectedResult = [
       'test' => [
@@ -120,7 +118,7 @@ class ViewDataEventTest extends UnitTestCase {
         'test' => 'test_array_data',
       ],
     ];
-    hook_event_dispatcher_views_data_alter($data);
+    views_event_dispatcher_views_data_alter($data);
 
     $expectedData['test']['other_test'] = ['some_data'];
     $this->assertSame($expectedData, $data);

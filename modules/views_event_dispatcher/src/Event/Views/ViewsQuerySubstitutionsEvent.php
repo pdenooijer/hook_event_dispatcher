@@ -1,13 +1,11 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Views;
+namespace Drupal\views_event_dispatcher\Event\Views;
 
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**
  * Class ViewsQuerySubstitutionEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Views
  */
 final class ViewsQuerySubstitutionsEvent extends AbstractViewsEvent {
 

@@ -2,15 +2,15 @@
 
 namespace Drupal\hook_event_dispatcher\Example;
 
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPostRenderEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPreExecuteEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPreRenderEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPreViewEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsQueryAlterEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPostBuildEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPostRenderEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreExecuteEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreRenderEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsQueryAlterEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -31,7 +31,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Pre view event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPreViewEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent $event
    *   The event.
    */
   public function preView(ViewsPreViewEvent $event): void {
@@ -44,7 +44,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Pre build event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event
    *   The event.
    */
   public function preBuild(ViewsPreBuildEvent $event): void {
@@ -57,7 +57,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Query alter event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event
    *   The event.
    */
   public function queryAlter(ViewsQueryAlterEvent $event): void {
@@ -70,7 +70,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Query substitutions event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event
    *   The event.
    */
   public function querySubstitutions(ViewsQuerySubstitutionsEvent $event): void {
@@ -80,7 +80,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Post build event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPostBuildEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsPostBuildEvent $event
    *   The event.
    */
   public function postBuild(ViewsPostBuildEvent $event): void {
@@ -93,7 +93,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Pre execute event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPreExecuteEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsPreExecuteEvent $event
    *   The event.
    */
   public function preExecute(ViewsPreExecuteEvent $event): void {
@@ -106,7 +106,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Post execute event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPostExecuteEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsPostExecuteEvent $event
    *   The event.
    */
   public function postExecute(ViewsPostExecuteEvent $event): void {
@@ -119,7 +119,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Pre render event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPreRenderEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsPreRenderEvent $event
    *   The event.
    */
   public function preRender(ViewsPreRenderEvent $event): void {
@@ -132,7 +132,7 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
   /**
    * Post render event handler.
    *
-   * @param \Drupal\hook_event_dispatcher\Event\Views\ViewsPostRenderEvent $event
+   * @param \Drupal\views_event_dispatcher\Event\Views\ViewsPostRenderEvent $event
    *   The event.
    */
   public function postRender(ViewsPostRenderEvent $event): void {
