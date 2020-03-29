@@ -1,21 +1,19 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Toolbar;
+namespace Drupal\Tests\toolbar_event_dispatcher\Unit\Toolbar;
 
 use Drupal;
-use Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
+use Drupal\toolbar_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use function hook_event_dispatcher_toolbar_alter;
+use function toolbar_event_dispatcher_toolbar_alter;
 
 /**
  * Class ToolbarAlterEventTest.
  *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Toolbar
- *
- * @group hook_event_dispatcher
+ * @group toolbar_event_dispatcher
  */
 class ToolbarAlterEventTest extends UnitTestCase {
 
@@ -57,9 +55,9 @@ class ToolbarAlterEventTest extends UnitTestCase {
 
     $expectedItems = $items + $newItem;
 
-    hook_event_dispatcher_toolbar_alter($items);
+    toolbar_event_dispatcher_toolbar_alter($items);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Toolbar\ToolbarAlterEvent $event */
+    /** @var \Drupal\toolbar_event_dispatcher\Event\Toolbar\ToolbarAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOOLBAR_ALTER);
     $this->assertSame($expectedItems, $items);
     $this->assertSame($expectedItems, $event->getItems());
