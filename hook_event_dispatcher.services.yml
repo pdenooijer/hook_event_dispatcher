@@ -1,4 +1,5 @@
 services:
   hook_event_dispatcher.manager:
     class: Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManager
-    arguments: ['@event_dispatcher']
+    arguments:
+      - '@event_dispatcher'
