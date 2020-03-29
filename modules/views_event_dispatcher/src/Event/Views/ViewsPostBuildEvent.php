@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Views;
+namespace Drupal\views_event_dispatcher\Event\Views;
 
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Event\Views;
+namespace Drupal\views_event_dispatcher\Event\Views;
 
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
@@ -8,8 +8,6 @@ use Drupal\views\ViewExecutable;
 
 /**
  * Class ViewsQueryAlterEvent.
- *
- * @package Drupal\hook_event_dispatcher\Event\Views
  */
 final class ViewsQueryAlterEvent extends AbstractViewsEvent {
 

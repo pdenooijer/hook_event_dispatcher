@@ -1,33 +1,31 @@
 <?php
 
-namespace Drupal\Tests\hook_event_dispatcher\Unit\Views;
+namespace Drupal\Tests\views_event_dispatcher\Unit\Views;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPostRenderEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsPreViewEvent;
-use Drupal\hook_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPostRenderEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\Tests\UnitTestCase;
 use Drupal\views\Plugin\views\cache\CachePluginBase;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
-use function hook_event_dispatcher_views_post_build;
-use function hook_event_dispatcher_views_post_execute;
-use function hook_event_dispatcher_views_post_render;
-use function hook_event_dispatcher_views_pre_build;
-use function hook_event_dispatcher_views_pre_execute;
-use function hook_event_dispatcher_views_pre_render;
-use function hook_event_dispatcher_views_query_alter;
-use function hook_event_dispatcher_views_query_substitutions;
+use function views_event_dispatcher_views_post_build;
+use function views_event_dispatcher_views_post_execute;
+use function views_event_dispatcher_views_post_render;
+use function views_event_dispatcher_views_pre_build;
+use function views_event_dispatcher_views_pre_execute;
+use function views_event_dispatcher_views_pre_render;
+use function views_event_dispatcher_views_query_alter;
+use function views_event_dispatcher_views_query_substitutions;
 
 /**
  * Class ViewEventTest.
  *
- * @package Drupal\Tests\hook_event_dispatcher\Unit\Views
- *
- * @group hook_event_dispatcher
+ * @group views_event_dispatcher
  */
 class ViewEventTest extends UnitTestCase {
 
@@ -67,9 +65,9 @@ class ViewEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_views_pre_view($view, $displayId, $arguments);
+    views_event_dispatcher_views_pre_view($view, $displayId, $arguments);
 
-    /** @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreViewEvent $event */
+    /** @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_VIEW);
     $this->assertSame($view, $event->getView());
     $this->assertSame($displayId, $event->getDisplayId());
@@ -83,9 +81,9 @@ class ViewEventTest extends UnitTestCase {
     /** @var \Drupal\views\ViewExecutable $view */
     $view = $this->createMock(ViewExecutable::class);
 
-    hook_event_dispatcher_views_pre_build($view);
+    views_event_dispatcher_views_pre_build($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_BUILD);
     $this->assertSame($view, $event->getView());
   }
@@ -97,9 +95,9 @@ class ViewEventTest extends UnitTestCase {
     /** @var \Drupal\views\ViewExecutable $view */
     $view = $this->createMock(ViewExecutable::class);
 
-    hook_event_dispatcher_views_post_build($view);
+    views_event_dispatcher_views_post_build($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_BUILD);
     $this->assertSame($view, $event->getView());
   }
@@ -111,9 +109,9 @@ class ViewEventTest extends UnitTestCase {
     /** @var \Drupal\views\ViewExecutable $view */
     $view = $this->createMock(ViewExecutable::class);
 
-    hook_event_dispatcher_views_pre_execute($view);
+    views_event_dispatcher_views_pre_execute($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_EXECUTE);
     $this->assertSame($view, $event->getView());
   }
@@ -125,9 +123,9 @@ class ViewEventTest extends UnitTestCase {
     /** @var \Drupal\views\ViewExecutable $view */
     $view = $this->createMock(ViewExecutable::class);
 
-    hook_event_dispatcher_views_post_execute($view);
+    views_event_dispatcher_views_post_execute($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_EXECUTE);
     $this->assertSame($view, $event->getView());
   }
@@ -139,9 +137,9 @@ class ViewEventTest extends UnitTestCase {
     /** @var \Drupal\views\ViewExecutable $view */
     $view = $this->createMock(ViewExecutable::class);
 
-    hook_event_dispatcher_views_pre_render($view);
+    views_event_dispatcher_views_pre_render($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_RENDER);
     $this->assertSame($view, $event->getView());
   }
@@ -175,11 +173,11 @@ class ViewEventTest extends UnitTestCase {
       },
     ]);
 
-    hook_event_dispatcher_views_post_render($view, $output, $cache);
+    views_event_dispatcher_views_post_render($view, $output, $cache);
 
     $expectedOutput['#attached']['library'][] = 'test';
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPostRenderEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPostRenderEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_RENDER);
     $this->assertSame($expectedOutput, $event->getOutput());
     $this->assertSame($expectedOutput, $output);
@@ -196,9 +194,9 @@ class ViewEventTest extends UnitTestCase {
     /** @var \Drupal\views\Plugin\views\query\QueryPluginBase $query */
     $query = $this->createMock(QueryPluginBase::class);
 
-    hook_event_dispatcher_views_query_alter($view, $query);
+    views_event_dispatcher_views_query_alter($view, $query);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_QUERY_ALTER);
     $this->assertSame($view, $event->getView());
     $this->assertSame($query, $event->getQuery());
@@ -219,9 +217,9 @@ class ViewEventTest extends UnitTestCase {
       },
     ]);
 
-    $result = hook_event_dispatcher_views_query_substitutions($view);
+    $result = views_event_dispatcher_views_query_substitutions($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_QUERY_SUBSTITUTIONS);
     $this->assertSame($view, $event->getView());
     $this->assertSame($expected, $event->getSubstitutions());
@@ -242,9 +240,9 @@ class ViewEventTest extends UnitTestCase {
     ]);
 
     $expected = ['test' => 'replacement'];
-    $result = hook_event_dispatcher_views_query_substitutions($view);
+    $result = views_event_dispatcher_views_query_substitutions($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event */
+    /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_QUERY_SUBSTITUTIONS);
     $this->assertSame($view, $event->getView());
     $this->assertSame($expected, $event->getSubstitutions());
