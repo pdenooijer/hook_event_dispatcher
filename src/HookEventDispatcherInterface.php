@@ -407,7 +407,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_path_insert()
+   * @see path_event_dispatcher_path_insert()
    * @see hook_path_insert()
    *
    * @var string
@@ -419,7 +419,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_path_delete()
+   * @see path_event_dispatcher_path_delete()
    * @see hook_path_delete()
    *
    * @var string
@@ -431,7 +431,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_path_update()
+   * @see path_event_dispatcher_path_update()
    * @see hook_path_update()
    *
    * @var string
@@ -444,7 +444,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_data()
+   * @see views_event_dispatcher_views_data()
    * @see hook_views_data()
    *
    * @var string
@@ -456,7 +456,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_data_alter()
+   * @see views_event_dispatcher_views_data_alter()
    * @see hook_views_data_alter()
    *
    * @var string
@@ -468,7 +468,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_pre_view()
+   * @see views_event_dispatcher_views_pre_view()
    * @see hook_views_pre_view()
    *
    * @var string
@@ -480,7 +480,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_pre_execute()
+   * @see views_event_dispatcher_views_pre_execute()
    * @see hook_views_pre_execute()
    *
    * @var string
@@ -492,7 +492,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_pre_render()
+   * @see views_event_dispatcher_views_pre_render()
    * @see hook_views_pre_render()
    *
    * @var string
@@ -504,7 +504,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_post_execute()
+   * @see views_event_dispatcher_views_post_execute()
    * @see hook_views_post_execute()
    *
    * @var string
@@ -516,7 +516,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_post_render()
+   * @see views_event_dispatcher_views_post_render()
    * @see hook_views_post_render()
    *
    * @var string
@@ -528,7 +528,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_pre_build()
+   * @see views_event_dispatcher_views_pre_build()
    * @see hook_views_pre_build()
    *
    * @var string
@@ -540,7 +540,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_post_build()
+   * @see views_event_dispatcher_views_post_build()
    * @see hook_views_post_build()
    *
    * @var string
@@ -552,7 +552,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_query_alter()
+   * @see views_event_dispatcher_views_query_alter()
    * @see hook_views_query_alter()
    */
   public const VIEWS_QUERY_ALTER = self::PREFIX . 'views.query_alter';
@@ -562,7 +562,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_views_query_substitutions()
+   * @see views_event_dispatcher_views_query_substitutions()
    * @see hook_views_query_substitutions()
    */
   public const VIEWS_QUERY_SUBSTITUTIONS = self::PREFIX . 'views.query_substitutions';
@@ -658,7 +658,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_user_cancel()
+   * @see user_event_dispatcher_user_cancel()
    * @see hook_user_cancel()
    *
    * @var string
@@ -670,7 +670,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_user_cancel_methods_alter()
+   * @see user_event_dispatcher_user_cancel_methods_alter()
    * @see hook_user_cancel_methods_alter()
    *
    * @var string
@@ -682,7 +682,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_user_login()
+   * @see user_event_dispatcher_user_login()
    * @see hook_user_login()
    *
    * @var string
@@ -694,7 +694,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_user_logout()
+   * @see user_event_dispatcher_user_logout()
    * @see hook_user_logout()
    *
    * @var string
@@ -706,7 +706,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_user_format_name_alter()
+   * @see user_event_dispatcher_user_format_name_alter()
    * @see hook_user_format_name_alter()
    *
    * @var string
@@ -719,7 +719,7 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
-   * @see hook_event_dispatcher_toolbar_alter()
+   * @see toolbar_event_dispatcher_toolbar_alter()
    * @see hook_toolbar_alter()
    *
    * @var string
