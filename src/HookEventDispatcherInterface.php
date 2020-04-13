@@ -7,6 +7,11 @@ namespace Drupal\hook_event_dispatcher;
  */
 interface HookEventDispatcherInterface {
 
+  /**
+   * Event name prefix to prevent name collision.
+   */
+  public const PREFIX = 'hook_event_dispatcher.';
+
   // ENTITY EVENTS.
   /**
    * Respond to creation of a new entity.
@@ -18,7 +23,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_INSERT = 'hook_event_dispatcher.entity.insert';
+  public const ENTITY_INSERT = self::PREFIX . 'entity.insert';
 
   /**
    * Respond to updates to an entity.
@@ -30,7 +35,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_UPDATE = 'hook_event_dispatcher.entity.update';
+  public const ENTITY_UPDATE = self::PREFIX . 'entity.update';
 
   /**
    * Act before entity deletion.
@@ -42,7 +47,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_PRE_DELETE = 'hook_event_dispatcher.entity.predelete';
+  public const ENTITY_PRE_DELETE = self::PREFIX . 'entity.predelete';
 
   /**
    * Respond to entity deletion.
@@ -54,7 +59,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_DELETE = 'hook_event_dispatcher.entity.delete';
+  public const ENTITY_DELETE = self::PREFIX . 'entity.delete';
 
   /**
    * Act on an entity before it is created or updated.
@@ -66,7 +71,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_PRE_SAVE = 'hook_event_dispatcher.entity.presave';
+  public const ENTITY_PRE_SAVE = self::PREFIX . 'entity.presave';
 
   /**
    * Act on entities being assembled before rendering.
@@ -78,7 +83,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_VIEW = 'hook_event_dispatcher.entity.view';
+  public const ENTITY_VIEW = self::PREFIX . 'entity.view';
 
   /**
    * Alter a entity being assembled right before rendering.
@@ -90,7 +95,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_VIEW_ALTER = 'hook_event_dispatcher.entity.view_alter';
+  public const ENTITY_VIEW_ALTER = self::PREFIX . 'entity.view_alter';
 
   /**
    * Control entity operation access.
@@ -102,7 +107,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_ACCESS = 'hook_event_dispatcher.entity.access';
+  public const ENTITY_ACCESS = self::PREFIX . 'entity.access';
 
   /**
    * Acts when creating a new entity.
@@ -114,7 +119,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_CREATE = 'hook_event_dispatcher.entity.create';
+  public const ENTITY_CREATE = self::PREFIX . 'entity.create';
 
   /**
    * Act on entities when loaded.
@@ -126,7 +131,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_LOAD = 'hook_event_dispatcher.entity.load';
+  public const ENTITY_LOAD = self::PREFIX . 'entity.load';
 
   /**
    * Respond to creation of a new entity translation.
@@ -138,7 +143,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_TRANSLATION_INSERT = 'hook_event_dispatcher.entity.translation_insert';
+  public const ENTITY_TRANSLATION_INSERT = self::PREFIX . 'entity.translation_insert';
 
   /**
    * Respond to deletion of a new entity translation.
@@ -150,7 +155,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_TRANSLATION_DELETE = 'hook_event_dispatcher.entity.translation_delete';
+  public const ENTITY_TRANSLATION_DELETE = self::PREFIX . 'entity.translation_delete';
 
   /**
    * Alter forms for field widgets provided by other modules.
@@ -162,7 +167,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const WIDGET_FORM_ALTER = 'hook_event_dispatcher.widget_form.alter';
+  public const WIDGET_FORM_ALTER = self::PREFIX . 'widget_form.alter';
 
   /**
    * Control access to fields.
@@ -174,7 +179,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_FIELD_ACCESS = 'hook_event_dispatcher.entity_field.access';
+  public const ENTITY_FIELD_ACCESS = self::PREFIX . 'entity_field.access';
 
   /**
    * Exposes "pseudo-field" components on content entities.
@@ -186,7 +191,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_EXTRA_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_extra_field.info';
+  public const ENTITY_EXTRA_FIELD_INFO_ALTER = self::PREFIX . 'entity_extra_field.info';
 
   /**
    * Alter "pseudo-field" components on content entities.
@@ -198,7 +203,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_EXTRA_FIELD_INFO = 'hook_event_dispatcher.entity_extra_field.info_alter';
+  public const ENTITY_EXTRA_FIELD_INFO = self::PREFIX . 'entity_extra_field.info_alter';
 
   /**
    * Provides custom base field definitions for a content entity type.
@@ -210,7 +215,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_BASE_FIELD_INFO = 'hook_event_dispatcher.entity_base.field_info';
+  public const ENTITY_BASE_FIELD_INFO = self::PREFIX . 'entity_base.field_info';
 
   /**
    * Alter base field definitions for a content entity type.
@@ -222,7 +227,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_BASE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_base.field_info_alter';
+  public const ENTITY_BASE_FIELD_INFO_ALTER = self::PREFIX . 'entity_base.field_info_alter';
 
   /**
    * Alter bundle field definitions.
@@ -234,7 +239,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_BUNDLE_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_bundle.field_info_alter';
+  public const ENTITY_BUNDLE_FIELD_INFO_ALTER = self::PREFIX . 'entity_bundle.field_info_alter';
 
   /**
    * Entity operation.
@@ -246,7 +251,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_OPERATION = 'hook_event_dispatcher.entity.operation';
+  public const ENTITY_OPERATION = self::PREFIX . 'entity.operation';
 
   /**
    * Entity operation alter.
@@ -258,7 +263,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_OPERATION_ALTER = 'hook_event_dispatcher.entity.operation_alter';
+  public const ENTITY_OPERATION_ALTER = self::PREFIX . 'entity.operation_alter';
 
   /**
    * Add to entity type definitions..
@@ -270,7 +275,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_TYPE_ALTER = 'hook_event_dispatcher.entity_type.alter';
+  public const ENTITY_TYPE_ALTER = self::PREFIX . 'entity_type.alter';
 
   /**
    * Add to entity type definitions..
@@ -282,7 +287,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_TYPE_BUILD = 'hook_event_dispatcher.entity_type.build';
+  public const ENTITY_TYPE_BUILD = self::PREFIX . 'entity_type.build';
 
   // FIELD EVENTS.
   /**
@@ -295,7 +300,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const FIELD_FORMATTER_INFO_ALTER = 'hook_event_dispatcher.field_formatter.info.alter';
+  public const FIELD_FORMATTER_INFO_ALTER = self::PREFIX . 'field_formatter.info.alter';
 
   /**
    * Alters the field formatter settings summary.
@@ -307,7 +312,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER = 'hook_event_dispatcher.field_formatter.settings_summary.alter';
+  public const FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER = self::PREFIX . 'field_formatter.settings_summary.alter';
 
   /**
    * Allow modules to add settings to field formatters provided by other modules.
@@ -319,7 +324,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const FIELD_FORMATTER_THIRD_PARTY_SETTINGS_FORM = 'hook_event_dispatcher.field_formatter.third_party.settings_form';
+  public const FIELD_FORMATTER_THIRD_PARTY_SETTINGS_FORM = self::PREFIX . 'field_formatter.third_party.settings_form';
 
   /**
    * Alters the field widget settings summary.
@@ -331,7 +336,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const FIELD_WIDGET_SETTINGS_SUMMARY_ALTER = 'hook_event_dispatcher.field_widget.settings_summary.alter';
+  public const FIELD_WIDGET_SETTINGS_SUMMARY_ALTER = self::PREFIX . 'field_widget.settings_summary.alter';
 
   /**
    * Allow modules to add settings to field widgets provided by other modules.
@@ -343,7 +348,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const FIELD_WIDGET_THIRD_PARTY_SETTINGS_FORM = 'hook_event_dispatcher.field_widget.third_party.settings_form';
+  public const FIELD_WIDGET_THIRD_PARTY_SETTINGS_FORM = self::PREFIX . 'field_widget.third_party.settings_form';
 
   // FORM EVENTS.
   /**
@@ -356,7 +361,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const FORM_ALTER = 'hook_event_dispatcher.form.alter';
+  public const FORM_ALTER = self::PREFIX . 'form.alter';
 
   // BLOCK EVENTS.
   /**
@@ -369,7 +374,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const BLOCK_BUILD_ALTER = 'hook_event_dispatcher.block_build.alter';
+  public const BLOCK_BUILD_ALTER = self::PREFIX . 'block_build.alter';
 
   // TOKEN EVENTS.
   /**
@@ -382,7 +387,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const TOKEN_REPLACEMENT = 'hook_event_dispatcher.token.replacement';
+  public const TOKEN_REPLACEMENT = self::PREFIX . 'token.replacement';
 
   /**
    * Provide information about available placeholder tokens and token types.
@@ -394,7 +399,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const TOKEN_INFO = 'hook_event_dispatcher.token.info';
+  public const TOKEN_INFO = self::PREFIX . 'token.info';
 
   // PATH EVENTS.
   /**
@@ -407,7 +412,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const PATH_INSERT = 'hook_event_dispatcher.path.insert';
+  public const PATH_INSERT = self::PREFIX . 'path.insert';
 
   /**
    * Respond to a path being deleted.
@@ -419,7 +424,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const PATH_DELETE = 'hook_event_dispatcher.path.delete';
+  public const PATH_DELETE = self::PREFIX . 'path.delete';
 
   /**
    * Respond to a path being updated.
@@ -431,7 +436,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const PATH_UPDATE = 'hook_event_dispatcher.path.update';
+  public const PATH_UPDATE = self::PREFIX . 'path.update';
 
   // VIEWS EVENTS.
   /**
@@ -444,7 +449,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_DATA = 'hook_event_dispatcher.views.data';
+  public const VIEWS_DATA = self::PREFIX . 'views.data';
 
   /**
    * Alter the table and field information from hook_views_data().
@@ -456,7 +461,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_DATA_ALTER = 'hook_event_dispatcher.views.data_alter';
+  public const VIEWS_DATA_ALTER = self::PREFIX . 'views.data_alter';
 
   /**
    * Alter a view at the very beginning of Views processing.
@@ -468,7 +473,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_PRE_VIEW = 'hook_event_dispatcher.views.pre_view';
+  public const VIEWS_PRE_VIEW = self::PREFIX . 'views.pre_view';
 
   /**
    * Act on the view after the query is built and just before it is executed.
@@ -480,7 +485,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_PRE_EXECUTE = 'hook_event_dispatcher.views.pre_execute';
+  public const VIEWS_PRE_EXECUTE = self::PREFIX . 'views.pre_execute';
 
   /**
    * Act on the view immediately before rendering it.
@@ -492,7 +497,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_PRE_RENDER = 'hook_event_dispatcher.views.pre_render';
+  public const VIEWS_PRE_RENDER = self::PREFIX . 'views.pre_render';
 
   /**
    * Act on the view immediately after the query has been executed.
@@ -504,7 +509,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_POST_EXECUTE = 'hook_event_dispatcher.views.post_execute';
+  public const VIEWS_POST_EXECUTE = self::PREFIX . 'views.post_execute';
 
   /**
    * Post-process any rendered data.
@@ -516,7 +521,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_POST_RENDER = 'hook_event_dispatcher.views.post_render';
+  public const VIEWS_POST_RENDER = self::PREFIX . 'views.post_render';
 
   /**
    * Act on the view before the query is built, but after displays are attached.
@@ -528,7 +533,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_PRE_BUILD = 'hook_event_dispatcher.views.pre_build';
+  public const VIEWS_PRE_BUILD = self::PREFIX . 'views.pre_build';
 
   /**
    * Act on the view immediately after the query is built.
@@ -540,7 +545,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const VIEWS_POST_BUILD = 'hook_event_dispatcher.views.post_build';
+  public const VIEWS_POST_BUILD = self::PREFIX . 'views.post_build';
 
   /**
    * Alter the query before it is executed.
@@ -550,7 +555,7 @@ interface HookEventDispatcherInterface {
    * @see hook_event_dispatcher_views_query_alter()
    * @see hook_views_query_alter()
    */
-  public const VIEWS_QUERY_ALTER = 'hook_event_dispatcher.views.query_alter';
+  public const VIEWS_QUERY_ALTER = self::PREFIX . 'views.query_alter';
 
   /**
    * Replace special strings in the query before it is executed.
@@ -560,7 +565,7 @@ interface HookEventDispatcherInterface {
    * @see hook_event_dispatcher_views_query_substitutions()
    * @see hook_views_query_substitutions()
    */
-  public const VIEWS_QUERY_SUBSTITUTIONS = 'hook_event_dispatcher.views.query_substitutions';
+  public const VIEWS_QUERY_SUBSTITUTIONS = self::PREFIX . 'views.query_substitutions';
 
   // THEME EVENTS.
   /**
@@ -573,7 +578,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const THEME = 'hook_event_dispatcher.theme';
+  public const THEME = self::PREFIX . 'theme';
 
   /**
    * Alter the theme registry information returned from hook_theme().
@@ -585,7 +590,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const THEME_REGISTRY_ALTER = 'hook_event_dispatcher.theme.registry_alter';
+  public const THEME_REGISTRY_ALTER = self::PREFIX . 'theme.registry_alter';
 
   /**
    * Alters named suggestions for all theme hooks.
@@ -597,7 +602,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const THEME_SUGGESTIONS_ALTER = 'hook_event_dispatcher.theme.suggestions_alter';
+  public const THEME_SUGGESTIONS_ALTER = self::PREFIX . 'theme.suggestions_alter';
 
   /**
    * Respond to themes being installed.
@@ -609,7 +614,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const THEMES_INSTALLED = 'hook_event_dispatcher.theme.installed';
+  public const THEMES_INSTALLED = self::PREFIX . 'theme.installed';
 
   /**
    * Alter the default, hook-independent variables for all templates.
@@ -621,7 +626,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER = 'hook_event_dispatcher.theme.template_preprocess_default_variables_alter';
+  public const TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER = self::PREFIX . 'theme.template_preprocess_default_variables_alter';
 
   /**
    * Perform necessary alterations to the JS before it is presented on the page.
@@ -633,7 +638,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const JS_ALTER = 'hook_event_dispatcher.js.alter';
+  public const JS_ALTER = self::PREFIX . 'js.alter';
 
   /**
    * Alter the library info provided by an extension.
@@ -645,7 +650,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const LIBRARY_INFO_ALTER = 'hook_event_dispatcher.library.info_alter';
+  public const LIBRARY_INFO_ALTER = self::PREFIX . 'library.info_alter';
 
   // USER EVENTS.
   /**
@@ -658,7 +663,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const USER_CANCEL = 'hook_event_dispatcher.user.cancel';
+  public const USER_CANCEL = self::PREFIX . 'user.cancel';
 
   /**
    * Modify account cancellation methods.
@@ -670,7 +675,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const USER_CANCEL_METHODS_ALTER = 'hook_event_dispatcher.user.cancel_methods_alter';
+  public const USER_CANCEL_METHODS_ALTER = self::PREFIX . 'user.cancel_methods_alter';
 
   /**
    * The user just logged in.
@@ -682,7 +687,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const USER_LOGIN = 'hook_event_dispatcher.user.login';
+  public const USER_LOGIN = self::PREFIX . 'user.login';
 
   /**
    * The user just logged out.
@@ -694,7 +699,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const USER_LOGOUT = 'hook_event_dispatcher.user.logout';
+  public const USER_LOGOUT = self::PREFIX . 'user.logout';
 
   /**
    * Alter the username that is displayed for a user.
@@ -706,7 +711,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const USER_FORMAT_NAME_ALTER = 'hook_event_dispatcher.user.format_name_alter';
+  public const USER_FORMAT_NAME_ALTER = self::PREFIX . 'user.format_name_alter';
 
   // TOOLBAR EVENTS.
   /**
@@ -719,7 +724,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const TOOLBAR_ALTER = 'hook_event_dispatcher.toolbar.alter';
+  public const TOOLBAR_ALTER = self::PREFIX . 'toolbar.alter';
 
   // PAGE EVENTS.
   /**
@@ -732,7 +737,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const PAGE_TOP = 'hook_event_dispatcher.page.top';
+  public const PAGE_TOP = self::PREFIX . 'page.top';
 
   /**
    * Add a renderable array to the bottom of the page.
@@ -744,7 +749,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const PAGE_BOTTOM = 'hook_event_dispatcher.page.bottom';
+  public const PAGE_BOTTOM = self::PREFIX . 'page.bottom';
 
   /**
    * Add attachments (typically assets) to a page before it is rendered.
@@ -760,7 +765,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const PAGE_ATTACHMENTS = 'hook_event_dispatcher.page.attachments';
+  public const PAGE_ATTACHMENTS = self::PREFIX . 'page.attachments';
 
   // CORE EVENTS.
   /**
@@ -773,7 +778,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const CRON = 'hook_event_dispatcher.cron';
+  public const CRON = self::PREFIX . 'cron';
 
   // LANGUAGE EVENTS.
   /**
@@ -786,7 +791,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const LANGUAGE_SWITCH_LINKS_ALTER = 'hook_event_dispatcher.language.switch_links_alter';
+  public const LANGUAGE_SWITCH_LINKS_ALTER = self::PREFIX . 'language.switch_links_alter';
 
   // WEBFORM EVENTS.
   /**
@@ -799,7 +804,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const WEBFORM_ELEMENT_ALTER = 'hook_event_dispatcher.webform.element.alter';
+  public const WEBFORM_ELEMENT_ALTER = self::PREFIX . 'webform.element.alter';
 
   /**
    * Respond to webform element info being initialized.
@@ -811,7 +816,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const WEBFORM_ELEMENT_INFO_ALTER = 'hook_event_dispatcher.webform.element.info.alter';
+  public const WEBFORM_ELEMENT_INFO_ALTER = self::PREFIX . 'webform.element.info.alter';
 
   // MEDIA EVENTS.
   /**
@@ -824,7 +829,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const MEDIA_SOURCE_INFO_ALTER = 'hook_event_dispatcher.media.source_info_alter';
+  public const MEDIA_SOURCE_INFO_ALTER = self::PREFIX . 'media.source_info_alter';
 
   /**
    * Alters an oEmbed resource URL before it is fetched.
@@ -836,6 +841,6 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const MEDIA_OEMBED_RESOURCE_DATA_ALTER = 'hook_event_dispatcher.media.oembed_url_alter';
+  public const MEDIA_OEMBED_RESOURCE_DATA_ALTER = self::PREFIX . 'media.oembed_url_alter';
 
 }
