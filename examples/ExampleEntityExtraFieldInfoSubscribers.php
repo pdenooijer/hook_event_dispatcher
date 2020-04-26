@@ -1,10 +1,9 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Example;
+namespace Drupal\hook_event_dispatcher;
 
 use Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -14,10 +13,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * an "event_subscriber":
  *
  * services:
- *   hook_event_dispatcher.example_entity_extra_field_info_subscribers:
- *   class:'\Drupal\hook_event_dispatcher\Example\ExampleEntityExtraFieldInfoSubscribers'
+ *  hook_event_dispatcher.example_entity_extra_field_info_subscribers:
+ *   class: Drupal\hook_event_dispatcher\ExampleEntityExtraFieldInfoSubscribers
  * tags:
- *     - { name: 'event_subscriber' }
+ *     - { name: event_subscriber }
  */
 class ExampleEntityExtraFieldInfoSubscribers implements EventSubscriberInterface {
 
