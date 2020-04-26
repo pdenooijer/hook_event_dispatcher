@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Example;
+namespace Drupal\hook_event_dispatcher;
 
 use Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityInsertEvent;
@@ -8,7 +8,6 @@ use Drupal\core_event_dispatcher\Event\Entity\EntityPredeleteEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityUpdateEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityViewEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -19,10 +18,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * an "event_subscriber":
  *
  * services:
- *   hook_event_dispatcher.example_entity_subscribers:
- *   class:'\Drupal\hook_event_dispatcher\Example\ExampleEntityEventSubscribers'
+ *  hook_event_dispatcher.example_entity_subscribers:
+ *   class: Drupal\hook_event_dispatcher\ExampleEntityEventSubscribers
  *   tags:
- *     - { name: 'event_subscriber' }
+ *     - { name: event_subscriber }
  */
 class ExampleEntityEventSubscribers implements EventSubscriberInterface {
 

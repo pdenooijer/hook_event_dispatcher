@@ -1,16 +1,24 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Example;
+namespace Drupal\hook_event_dispatcher;
 
 use Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\core_event_dispatcher\ValueObject\Token;
 use Drupal\core_event_dispatcher\ValueObject\TokenType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class ExampleTokenEventSubscriber.
+ *
+ * Don't forget to define your class as a service and tag it as
+ * an "event_subscriber":
+ *
+ * services:
+ *  hook_event_dispatcher.example_token_subscribers:
+ *   class: Drupal\hook_event_dispatcher\ExampleTokenEventSubscribers
+ *   tags:
+ *     - { name: event_subscriber }
  */
 final class ExampleTokenEventSubscriber implements EventSubscriberInterface {
 

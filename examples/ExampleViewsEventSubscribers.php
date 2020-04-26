@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Example;
+namespace Drupal\hook_event_dispatcher;
 
 use Drupal\views_event_dispatcher\Event\Views\ViewsPostBuildEvent;
 use Drupal\views_event_dispatcher\Event\Views\ViewsPostExecuteEvent;
@@ -11,7 +11,6 @@ use Drupal\views_event_dispatcher\Event\Views\ViewsPreRenderEvent;
 use Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent;
 use Drupal\views_event_dispatcher\Event\Views\ViewsQueryAlterEvent;
 use Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -21,10 +20,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * an "event_subscriber":
  *
  * services:
- *   hook_event_dispatcher.example_views_subscribers:
- *   class: '\Drupal\hook_event_dispatcher\Example\ExampleViewsEventSubscribers'
+ *  hook_event_dispatcher.example_views_subscribers:
+ *   class: Drupal\hook_event_dispatcher\ExampleViewsEventSubscribers
  *   tags:
- *     - { name: 'event_subscriber' }
+ *     - { name: event_subscriber }
  */
 class ExampleViewsEventSubscribers implements EventSubscriberInterface {
 
@@ -146,7 +145,6 @@ class ExampleViewsEventSubscribers implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
-    // In order of execution.
     return [
       HookEventDispatcherInterface::VIEWS_PRE_VIEW => 'preView',
       HookEventDispatcherInterface::VIEWS_PRE_BUILD => 'preBuild',

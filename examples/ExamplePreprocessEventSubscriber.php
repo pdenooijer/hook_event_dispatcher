@@ -1,24 +1,49 @@
 <?php
 
-namespace Drupal\hook_event_dispatcher\Example;
+namespace Drupal\hook_event_dispatcher;
 
 use Drupal\preprocess_event_dispatcher\Event\BlockPreprocessEvent;
+use Drupal\preprocess_event_dispatcher\Event\NodePreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\PagePreprocessEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class ExamplePreprocessorEventSubscriber.
+ *
+ * Don't forget to define your class as a service and tag it as
+ * an "event_subscriber":
+ *
+ * services:
+ *  hook_event_dispatcher.example_preprocess_subscribers:
+ *   class: Drupal\hook_event_dispatcher\ExamplePreprocessEventSubscribers
+ *   tags:
+ *     - { name: event_subscriber }
  */
-final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterface {
+final class ExamplePreprocessEventSubscriber implements EventSubscriberInterface {
 
   /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
     return [
+      NodePreprocessEvent::name('article', 'full') => 'preprocessArticleFull',
       PagePreprocessEvent::name() => 'preprocessPage',
       BlockPreprocessEvent::name() => 'preprocessBlock',
     ];
+  }
+
+  /**
+   * Preprocess a node with bundle type article in view mode full.
+   *
+   * @param \Drupal\preprocess_event_dispatcher\Event\NodePreprocessEvent $event
+   *   Event.
+   */
+  public function preprocessArticleFull(NodePreprocessEvent $event): void {
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\NodeEventVariables $variables */
+    $variables = $event->getVariables();
+    $node = $variables->getNode();
+    $someField = $node->get('field_some_field')->view();
+    $variables->set('some_field', $someField);
   }
 
   /**
