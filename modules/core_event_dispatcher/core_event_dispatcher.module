@@ -21,6 +21,7 @@ use Drupal\core_event_dispatcher\Event\Core\CronEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoEvent;
+use Drupal\core_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityBundleFieldInfoAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityCreateEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent;
@@ -91,7 +92,6 @@ use Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 // @todo hook_entity_revision_delete()
 // @todo hook_entity_prepare_view()
 // @todo hook_entity_view_mode_alter()
-// @todo hook_entity_build_defaults_alter()
 // @todo hook_entity_view_display_alter()
 // @todo hook_entity_display_build_alter()
 // @todo hook_entity_prepare_form()
@@ -217,6 +217,21 @@ function core_event_dispatcher_entity_presave(EntityInterface $entity) {
   /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityPresaveEvent($entity));
+}
+
+/**
+ * Implements hook_entity_build_defaults_alter().
+ *
+ * {@inheritdoc}
+ */
+function core_event_dispatcher_entity_build_defaults_alter(
+  array &$build,
+  EntityInterface $entity,
+  $viewMode
+) {
+  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new EntityBuildDefaultsAlterEvent($build, $entity, (string) $viewMode));
 }
 
 /**
