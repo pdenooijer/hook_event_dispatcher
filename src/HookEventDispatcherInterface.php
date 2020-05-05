@@ -69,6 +69,18 @@ interface HookEventDispatcherInterface {
   const ENTITY_PRE_SAVE = 'hook_event_dispatcher.entity.presave';
 
   /**
+   * Alter entity renderable values before cache checking in drupal_render().
+   *
+   * @Event
+   *
+   * @see hook_event_dispatcher_entity_build_defaults_alter()
+   * @see hook_entity_build_defaults_alter()
+   *
+   * @var string
+   */
+  const ENTITY_BUILD_DEFAULTS_ALTER = 'hook_event_dispatcher.entity.build_defaults_alter';
+
+  /**
    * Act on entities being assembled before rendering.
    *
    * @Event
@@ -91,6 +103,7 @@ interface HookEventDispatcherInterface {
    * @var string
    */
   const ENTITY_VIEW_ALTER = 'hook_event_dispatcher.entity.view_alter';
+
 
   /**
    * Control entity operation access.
