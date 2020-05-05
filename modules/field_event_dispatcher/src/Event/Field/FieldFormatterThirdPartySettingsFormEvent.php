@@ -5,7 +5,6 @@ namespace Drupal\field_event_dispatcher\Event\Field;
 use Drupal\Core\Field\FormatterInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\field_event_dispatcher\Event\Field\AbstractFieldThirdPartySettingsFormEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 
 /**

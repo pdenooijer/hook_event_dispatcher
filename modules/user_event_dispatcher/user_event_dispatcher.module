@@ -25,7 +25,7 @@ function user_event_dispatcher_user_cancel(array $edit, AccountInterface $accoun
 }
 
 /**
- * Implements hook_user_cancel_methods_alter.
+ * Implements hook_user_cancel_methods_alter().
  *
  * {@inheritdoc}
  */

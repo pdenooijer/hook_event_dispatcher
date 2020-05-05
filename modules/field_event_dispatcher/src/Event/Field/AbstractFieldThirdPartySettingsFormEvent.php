@@ -6,7 +6,6 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\hook_event_dispatcher\Event\EventInterface;
-use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -100,7 +99,7 @@ abstract class AbstractFieldThirdPartySettingsFormEvent extends Event implements
       [
         // Nest the new elements under the module's machine name for our form
         // alter event subscriber.
-        $moduleName => $newElements
+        $moduleName => $newElements,
       ]
     );
   }
