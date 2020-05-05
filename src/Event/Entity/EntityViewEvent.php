@@ -69,7 +69,7 @@ class EntityViewEvent extends BaseEntityEvent {
    * @param array $build
    *   The build.
    *
-   * @deprecated This is not needed, this array is past by reference.
+   * @deprecated This is not needed, this array is passed by reference.
    */
   public function setBuild(array $build) {
     $this->build = $build;
