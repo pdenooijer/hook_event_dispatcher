@@ -1,11 +1,10 @@
 #
 # Travis CI
 #
-
 language: php
 
 php:
-- 5.6
+- 7.2
 - 7.3
 
 cache:
