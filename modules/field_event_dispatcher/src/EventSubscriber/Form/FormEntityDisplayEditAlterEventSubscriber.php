@@ -3,7 +3,6 @@
 namespace Drupal\field_event_dispatcher\EventSubscriber\Form;
 
 use Drupal\Component\Utility\NestedArray;
-use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\core_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

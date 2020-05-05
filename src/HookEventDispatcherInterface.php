@@ -328,7 +328,7 @@ interface HookEventDispatcherInterface {
   public const FIELD_FORMATTER_SETTINGS_SUMMARY_ALTER = self::PREFIX . 'field_formatter.settings_summary.alter';
 
   /**
-   * Allow modules to add settings to field formatters provided by other modules.
+   * Allow modules to add field formatter settings provided by other modules.
    *
    * @Event
    *

@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\field_event_dispatcher\Unit\Field;
 
-use Drupal\Tests\field_event_dispatcher\Unit\Field\AbstractFormEntityDisplayEditAlterEventSubscriberTestCase;
-
 /**
  * Class FormEntityViewDisplayEditAlterEventSubscriberTest.
  *

@@ -12,7 +12,6 @@ use Drupal\preprocess_event_dispatcher\Event\StatusMessagesPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\ViewFieldPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\ViewPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Service\PreprocessEventService;
-use Drupal\preprocess_event_dispatcher\Variables\AbstractEventVariables;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\SpyEventDispatcher;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;

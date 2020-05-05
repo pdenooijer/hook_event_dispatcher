@@ -5,8 +5,6 @@ namespace Drupal\Tests\field_event_dispatcher\Unit\Field;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter\BasicStringFormatter;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
-use Drupal\Tests\field_event_dispatcher\Unit\Field\AbstractFieldSettingsSummaryAlterEventTestCase;
-use function field_event_dispatcher_field_formatter_settings_summary_alter;
 
 /**
  * Class FieldFormatterSettingsSummaryAlterEventTest.
@@ -37,7 +35,7 @@ class FieldFormatterSettingsSummaryAlterEventTest extends AbstractFieldSettingsS
       'formatter' => new BasicStringFormatter(
         'test_formatter', [], $fieldDefinition, [], 'label', 'view_mode', []
       ),
-      'view_mode' => 'test'
+      'view_mode' => 'test',
     ];
   }
 
