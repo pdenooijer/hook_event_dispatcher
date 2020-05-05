@@ -15,11 +15,11 @@ class EntityPresaveEvent extends AbstractEntityEvent {
    *
    * @see hook_entity_update()
    *
-   * @return \Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface|null
    *   The original entity.
    */
-  public function getOriginalEntity(): EntityInterface {
-    return $this->entity->original;
+  public function getOriginalEntity(): ?EntityInterface {
+    return $this->entity->original ?? NULL;
   }
 
   /**
