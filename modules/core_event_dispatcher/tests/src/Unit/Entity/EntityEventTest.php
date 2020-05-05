@@ -157,6 +157,20 @@ class EntityEventTest extends UnitTestCase {
   }
 
   /**
+   * Test EntityPresaveEvent without original.
+   */
+  public function testEntityPresaveEventWithoutOriginal(): void {
+    $entity = $this->createMock(EntityInterface::class);
+
+    core_event_dispatcher_entity_presave($entity);
+
+    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent $event */
+    $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_PRE_SAVE);
+    $this->assertSame($entity, $event->getEntity());
+    $this->assertNull($event->getOriginalEntity());
+  }
+
+  /**
    * Test EntityUpdateEvent.
    */
   public function testEntityUpdateEvent(): void {
