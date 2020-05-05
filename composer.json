@@ -4,7 +4,6 @@
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
   "require-dev": {
-    "drupal/coder": "8.3.1",
     "drupal/core": "^8.8",
     "drupal/eck": "^1.0@alpha",
     "drupal/paragraphs": "^1.10",
@@ -75,5 +74,8 @@
   "suggest": {
     "drupal/token": "Provides additional tokens not supported by core (most notably fields), as well as a UI for browsing tokens.",
     "drupal/paragraphs": "Enables the creation of paragraphs entities."
+  },
+  "require": {
+    "drupal/coder": "^8.3"
   }
 }
