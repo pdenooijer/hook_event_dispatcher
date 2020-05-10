@@ -204,7 +204,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_EXTRA_FIELD_INFO_ALTER = self::PREFIX . 'entity_extra_field.info';
+  public const ENTITY_EXTRA_FIELD_INFO = self::PREFIX . 'entity_extra_field.info';
 
   /**
    * Alter "pseudo-field" components on content entities.
@@ -216,7 +216,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  public const ENTITY_EXTRA_FIELD_INFO = self::PREFIX . 'entity_extra_field.info_alter';
+  public const ENTITY_EXTRA_FIELD_INFO_ALTER = self::PREFIX . 'entity_extra_field.info_alter';
 
   /**
    * Provides custom base field definitions for a content entity type.
