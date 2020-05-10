@@ -189,7 +189,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_EXTRA_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_extra_field.info';
+  const ENTITY_EXTRA_FIELD_INFO = 'hook_event_dispatcher.entity_extra_field.info';
 
   /**
    * Alter "pseudo-field" components on content entities.
@@ -201,7 +201,7 @@ interface HookEventDispatcherInterface {
    *
    * @var string
    */
-  const ENTITY_EXTRA_FIELD_INFO = 'hook_event_dispatcher.entity_extra_field.info_alter';
+  const ENTITY_EXTRA_FIELD_INFO_ALTER = 'hook_event_dispatcher.entity_extra_field.info_alter';
 
   // ENTITY TYPE EVENTS.
   /**
