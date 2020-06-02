@@ -1,7 +1,7 @@
 name: Path Event Dispatcher
 type: module
 description: Dispatches events for multiple path hooks
-core: 8.x
+core_version_requirement: ^8 || ^9
 package: Development
 dependencies:
   - hook_event_dispatcher:hook_event_dispatcher
