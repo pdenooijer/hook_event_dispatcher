@@ -1,8 +1,8 @@
 name: Media Event Dispatcher
 type: module
 description: Registers event dispatchers for several media hooks
-core: 8.x
-package: Development
+core_version_requirement: ^8 || ^9
+package: Hook events
 dependencies:
   - hook_event_dispatcher:hook_event_dispatcher
   - drupal:media
