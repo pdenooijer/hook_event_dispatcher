@@ -3,8 +3,10 @@
   "description": "Dispatches events for several drupal core hooks.",
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
+  "require": {},
   "require-dev": {
-    "drupal/core": "^8.8",
+    "drupal/coder": "^8.3",
+    "drupal/core-recommended": "^8.9",
     "drupal/eck": "^1.0@alpha",
     "drupal/paragraphs": "^1.10",
     "mockery/mockery": "^1.3",
@@ -74,8 +76,5 @@
   "suggest": {
     "drupal/token": "Provides additional tokens not supported by core (most notably fields), as well as a UI for browsing tokens.",
     "drupal/paragraphs": "Enables the creation of paragraphs entities."
-  },
-  "require": {
-    "drupal/coder": "^8.3"
   }
 }
