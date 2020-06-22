@@ -15,6 +15,8 @@ use function field_event_dispatcher_field_widget_form_alter;
 
 /**
  * Class WidgetFormAlterEventTest.
+ *
+ * @group field_event_dispatcher
  */
 final class WidgetFormAlterEventTest extends UnitTestCase {
 
