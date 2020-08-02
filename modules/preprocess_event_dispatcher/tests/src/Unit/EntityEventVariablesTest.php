@@ -65,7 +65,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
     /* @var \Drupal\preprocess_event_dispatcher\Variables\CommentEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(CommentPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(CommentEventVariables::class, $variables);
-    self::assertAbstractEntityEventVariables($variables, $comment);
+    $this->assertAbstractEntityEventVariables($variables, $comment);
     self::assertSame($comment, $variables->getComment());
     self::assertSame($commentedEntity, $variables->getCommentedEntity());
   }
@@ -87,7 +87,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
     /* @var \Drupal\preprocess_event_dispatcher\Variables\EckEntityEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(EckEntityPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(EckEntityEventVariables::class, $variables);
-    self::assertAbstractEntityEventVariables($variables, $eckEntity);
+    $this->assertAbstractEntityEventVariables($variables, $eckEntity);
     self::assertSame($eckEntity, $variables->getEckEntity());
   }
 
@@ -104,7 +104,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
     /* @var \Drupal\preprocess_event_dispatcher\Variables\NodeEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(NodePreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(NodeEventVariables::class, $variables);
-    self::assertAbstractEntityEventVariables($variables, $node);
+    $this->assertAbstractEntityEventVariables($variables, $node);
     self::assertSame($node, $variables->getNode());
   }
 
@@ -121,7 +121,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
     /** @var \Drupal\preprocess_event_dispatcher\Variables\ParagraphEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ParagraphPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(ParagraphEventVariables::class, $variables);
-    self::assertAbstractEntityEventVariables($variables, $paragraph);
+    $this->assertAbstractEntityEventVariables($variables, $paragraph);
     self::assertSame($paragraph, $variables->getParagraph());
   }
 
@@ -138,7 +138,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
     /* @var \Drupal\preprocess_event_dispatcher\Variables\TaxonomyTermEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(TaxonomyTermPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(TaxonomyTermEventVariables::class, $variables);
-    self::assertAbstractEntityEventVariables($variables, $term);
+    $this->assertAbstractEntityEventVariables($variables, $term);
     self::assertSame($term, $variables->getTerm());
   }
 
@@ -151,7 +151,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
    *   Entity mock.
    */
   private function assertAbstractEntityEventVariables(AbstractEntityEventVariables $variables, EntityInterface $entity): void {
-    self::assertAbstractEventVariables($variables);
+    $this->assertAbstractEventVariables($variables);
 
     self::assertSame($entity, $variables->getEntity());
     self::assertSame($entity->getEntityType(), $variables->getEntityType());
