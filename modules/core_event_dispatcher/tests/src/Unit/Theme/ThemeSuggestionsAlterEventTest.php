@@ -60,9 +60,9 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
 
     /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER);
-    $this->assertSame($expectedSuggestions, $suggestions);
-    $this->assertEquals($suggestions, $event->getSuggestions());
-    $this->assertEquals($variables, $event->getVariables());
+    self::assertSame($expectedSuggestions, $suggestions);
+    self::assertEquals($suggestions, $event->getSuggestions());
+    self::assertEquals($variables, $event->getVariables());
   }
 
   /**
@@ -82,8 +82,8 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
 
     /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent $event */
     $event = $this->manager->getRegisteredEvent('hook_event_dispatcher.theme.suggestions_' . $hook . '_alter');
-    $this->assertEquals($suggestions, $event->getSuggestions());
-    $this->assertEquals($variables, $event->getVariables());
+    self::assertEquals($suggestions, $event->getSuggestions());
+    self::assertEquals($variables, $event->getVariables());
   }
 
 }

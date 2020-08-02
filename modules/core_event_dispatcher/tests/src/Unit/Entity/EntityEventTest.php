@@ -53,7 +53,7 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityCreateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_CREATE);
-    $this->assertSame($entity, $event->getEntity());
+    self::assertSame($entity, $event->getEntity());
   }
 
   /**
@@ -66,7 +66,7 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_DELETE);
-    $this->assertSame($entity, $event->getEntity());
+    self::assertSame($entity, $event->getEntity());
   }
 
   /**
@@ -79,7 +79,7 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityInsertEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_INSERT);
-    $this->assertSame($entity, $event->getEntity());
+    self::assertSame($entity, $event->getEntity());
   }
 
   /**
@@ -97,8 +97,8 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityLoadEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_LOAD);
-    $this->assertSame($entities, $event->getEntities());
-    $this->assertSame($entityTypeId, $event->getEntityTypeId());
+    self::assertSame($entities, $event->getEntities());
+    self::assertSame($entityTypeId, $event->getEntityTypeId());
   }
 
   /**
@@ -111,7 +111,7 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityTranslationInsertEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_TRANSLATION_INSERT);
-    $this->assertSame($entity, $event->getEntity());
+    self::assertSame($entity, $event->getEntity());
   }
 
   /**
@@ -124,7 +124,7 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityTranslationDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_TRANSLATION_DELETE);
-    $this->assertSame($entity, $event->getEntity());
+    self::assertSame($entity, $event->getEntity());
   }
 
   /**
@@ -137,7 +137,7 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityPredeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_PRE_DELETE);
-    $this->assertSame($entity, $event->getEntity());
+    self::assertSame($entity, $event->getEntity());
   }
 
   /**
@@ -152,8 +152,8 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_PRE_SAVE);
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($originalEntity, $event->getOriginalEntity());
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($originalEntity, $event->getOriginalEntity());
   }
 
   /**
@@ -166,8 +166,8 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityPresaveEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_PRE_SAVE);
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertNull($event->getOriginalEntity());
+    self::assertSame($entity, $event->getEntity());
+    self::assertNull($event->getOriginalEntity());
   }
 
   /**
@@ -182,8 +182,8 @@ class EntityEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityUpdateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_UPDATE);
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($originalEntity, $event->getOriginalEntity());
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($originalEntity, $event->getOriginalEntity());
   }
 
 }

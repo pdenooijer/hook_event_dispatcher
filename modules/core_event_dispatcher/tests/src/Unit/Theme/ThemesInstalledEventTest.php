@@ -44,7 +44,7 @@ class ThemesInstalledEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Theme\ThemesInstalledEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEMES_INSTALLED);
-    $this->assertSame($themes, $event->getThemeList());
+    self::assertSame($themes, $event->getThemeList());
   }
 
 }

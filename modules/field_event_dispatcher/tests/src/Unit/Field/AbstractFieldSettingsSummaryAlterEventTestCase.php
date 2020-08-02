@@ -85,11 +85,11 @@ abstract class AbstractFieldSettingsSummaryAlterEventTestCase extends UnitTestCa
     /** @var \Drupal\field_event_dispatcher\Event\Field\AbstractFieldSettingsSummaryFormEvent $event */
     $event = $this->manager->getRegisteredEvent($eventName);
 
-    $this->assertSame($summary, $event->getSummary());
+    self::assertSame($summary, $event->getSummary());
 
     $expectedSummary[] = 'Test';
 
-    $this->assertSame($expectedSummary, $summary);
+    self::assertSame($expectedSummary, $summary);
   }
 
   /**
@@ -114,7 +114,7 @@ abstract class AbstractFieldSettingsSummaryAlterEventTestCase extends UnitTestCa
     /** @var \Drupal\field_event_dispatcher\Event\Field\AbstractFieldSettingsSummaryFormEvent $event */
     $event = $this->manager->getRegisteredEvent($this->getEventName());
 
-    $this->assertSame($expectedContext, $event->getContext());
+    self::assertSame($expectedContext, $event->getContext());
   }
 
 }

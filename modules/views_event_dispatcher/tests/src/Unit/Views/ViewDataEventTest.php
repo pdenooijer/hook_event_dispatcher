@@ -55,7 +55,7 @@ class ViewDataEventTest extends UnitTestCase {
 
     $result = views_event_dispatcher_views_data();
 
-    $this->assertSame($data, $result);
+    self::assertSame($data, $result);
   }
 
   /**
@@ -99,7 +99,7 @@ class ViewDataEventTest extends UnitTestCase {
         'other_data',
       ],
     ];
-    $this->assertSame($expectedResult, $result);
+    self::assertSame($expectedResult, $result);
   }
 
   /**
@@ -121,7 +121,7 @@ class ViewDataEventTest extends UnitTestCase {
     views_event_dispatcher_views_data_alter($data);
 
     $expectedData['test']['other_test'] = ['some_data'];
-    $this->assertSame($expectedData, $data);
+    self::assertSame($expectedData, $data);
   }
 
 }

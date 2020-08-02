@@ -69,9 +69,9 @@ class ViewEventTest extends UnitTestCase {
 
     /** @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_VIEW);
-    $this->assertSame($view, $event->getView());
-    $this->assertSame($displayId, $event->getDisplayId());
-    $this->assertSame('test2', $arguments[0]);
+    self::assertSame($view, $event->getView());
+    self::assertSame($displayId, $event->getDisplayId());
+    self::assertSame('test2', $arguments[0]);
   }
 
   /**
@@ -85,7 +85,7 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_BUILD);
-    $this->assertSame($view, $event->getView());
+    self::assertSame($view, $event->getView());
   }
 
   /**
@@ -99,7 +99,7 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_BUILD);
-    $this->assertSame($view, $event->getView());
+    self::assertSame($view, $event->getView());
   }
 
   /**
@@ -113,7 +113,7 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_EXECUTE);
-    $this->assertSame($view, $event->getView());
+    self::assertSame($view, $event->getView());
   }
 
   /**
@@ -127,7 +127,7 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_EXECUTE);
-    $this->assertSame($view, $event->getView());
+    self::assertSame($view, $event->getView());
   }
 
   /**
@@ -141,7 +141,7 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_RENDER);
-    $this->assertSame($view, $event->getView());
+    self::assertSame($view, $event->getView());
   }
 
   /**
@@ -179,10 +179,10 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsPostRenderEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_RENDER);
-    $this->assertSame($expectedOutput, $event->getOutput());
-    $this->assertSame($expectedOutput, $output);
-    $this->assertSame($cache, $event->getCache());
-    $this->assertSame(10, $cache->options['results_lifespan']);
+    self::assertSame($expectedOutput, $event->getOutput());
+    self::assertSame($expectedOutput, $output);
+    self::assertSame($cache, $event->getCache());
+    self::assertSame(10, $cache->options['results_lifespan']);
   }
 
   /**
@@ -198,8 +198,8 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_QUERY_ALTER);
-    $this->assertSame($view, $event->getView());
-    $this->assertSame($query, $event->getQuery());
+    self::assertSame($view, $event->getView());
+    self::assertSame($query, $event->getQuery());
   }
 
   /**
@@ -221,9 +221,9 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_QUERY_SUBSTITUTIONS);
-    $this->assertSame($view, $event->getView());
-    $this->assertSame($expected, $event->getSubstitutions());
-    $this->assertSame($expected, $result);
+    self::assertSame($view, $event->getView());
+    self::assertSame($expected, $event->getSubstitutions());
+    self::assertSame($expected, $result);
   }
 
   /**
@@ -244,9 +244,9 @@ class ViewEventTest extends UnitTestCase {
 
     /* @var \Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_QUERY_SUBSTITUTIONS);
-    $this->assertSame($view, $event->getView());
-    $this->assertSame($expected, $event->getSubstitutions());
-    $this->assertSame($expected, $result);
+    self::assertSame($view, $event->getView());
+    self::assertSame($expected, $event->getSubstitutions());
+    self::assertSame($expected, $result);
   }
 
 }

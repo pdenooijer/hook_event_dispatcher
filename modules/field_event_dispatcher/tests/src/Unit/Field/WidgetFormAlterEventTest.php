@@ -64,13 +64,13 @@ final class WidgetFormAlterEventTest extends UnitTestCase {
     field_event_dispatcher_field_widget_form_alter($element, $formState, $context);
 
     $expectedElement['other'] = 'key';
-    $this->assertSame($expectedElement, $element);
+    self::assertSame($expectedElement, $element);
 
     /* @var \Drupal\field_event_dispatcher\Event\Field\WidgetFormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::WIDGET_FORM_ALTER);
-    $this->assertSame($element, $event->getElement());
-    $this->assertSame($formState, $event->getFormState());
-    $this->assertSame($context, $event->getContext());
+    self::assertSame($element, $event->getElement());
+    self::assertSame($formState, $event->getFormState());
+    self::assertSame($context, $event->getContext());
   }
 
   /**
@@ -94,9 +94,9 @@ final class WidgetFormAlterEventTest extends UnitTestCase {
 
     /* @var \Drupal\field_event_dispatcher\Event\Field\WidgetTypeFormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.widget_$widgetType.alter");
-    $this->assertSame($element, $event->getElement());
-    $this->assertSame($formState, $event->getFormState());
-    $this->assertSame($context, $event->getContext());
+    self::assertSame($element, $event->getElement());
+    self::assertSame($formState, $event->getFormState());
+    self::assertSame($context, $event->getContext());
   }
 
 }

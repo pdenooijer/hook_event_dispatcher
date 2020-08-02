@@ -56,11 +56,11 @@ class PathEventTest extends UnitTestCase {
 
     /* @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
-    $this->assertSame($source, $event->getSource());
-    $this->assertSame($alias, $event->getAlias());
-    $this->assertSame($langcode, $event->getLangcode());
-    $this->assertSame($pid, $event->getPid());
-    $this->assertTrue($event->isRedirect());
+    self::assertSame($source, $event->getSource());
+    self::assertSame($alias, $event->getAlias());
+    self::assertSame($langcode, $event->getLangcode());
+    self::assertSame($pid, $event->getPid());
+    self::assertTrue($event->isRedirect());
   }
 
   /**
@@ -82,11 +82,11 @@ class PathEventTest extends UnitTestCase {
 
     /* @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
-    $this->assertSame($source, $event->getSource());
-    $this->assertSame($alias, $event->getAlias());
-    $this->assertSame($langcode, $event->getLangcode());
-    $this->assertSame($pid, $event->getPid());
-    $this->assertFalse($event->isRedirect());
+    self::assertSame($source, $event->getSource());
+    self::assertSame($alias, $event->getAlias());
+    self::assertSame($langcode, $event->getLangcode());
+    self::assertSame($pid, $event->getPid());
+    self::assertFalse($event->isRedirect());
   }
 
   /**
@@ -108,10 +108,10 @@ class PathEventTest extends UnitTestCase {
 
     /* @var \Drupal\path_event_dispatcher\Event\Path\PathInsertEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_INSERT);
-    $this->assertSame($source, $event->getSource());
-    $this->assertSame($alias, $event->getAlias());
-    $this->assertSame($langcode, $event->getLangcode());
-    $this->assertSame($pid, $event->getPid());
+    self::assertSame($source, $event->getSource());
+    self::assertSame($alias, $event->getAlias());
+    self::assertSame($langcode, $event->getLangcode());
+    self::assertSame($pid, $event->getPid());
   }
 
   /**
@@ -133,10 +133,10 @@ class PathEventTest extends UnitTestCase {
 
     /* @var \Drupal\path_event_dispatcher\Event\Path\PathUpdateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_UPDATE);
-    $this->assertSame($source, $event->getSource());
-    $this->assertSame($alias, $event->getAlias());
-    $this->assertSame($langcode, $event->getLangcode());
-    $this->assertSame($pid, $event->getPid());
+    self::assertSame($source, $event->getSource());
+    self::assertSame($alias, $event->getAlias());
+    self::assertSame($langcode, $event->getLangcode());
+    self::assertSame($pid, $event->getPid());
   }
 
 }

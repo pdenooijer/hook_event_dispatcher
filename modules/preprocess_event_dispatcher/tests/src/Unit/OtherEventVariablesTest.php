@@ -73,12 +73,12 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\BlockEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(BlockEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
-    $this->assertSame($block, $variables->getBlock());
-    $this->assertSame('22', $variables->getId());
-    $this->assertSame(['success2'], $variables->getContentChild('test'));
-    $this->assertSame([], $variables->getContentChild('none-existing'));
+    self::assertInstanceOf(BlockEventVariables::class, $variables);
+    self::assertAbstractEventVariables($variables);
+    self::assertSame($block, $variables->getBlock());
+    self::assertSame('22', $variables->getId());
+    self::assertSame(['success2'], $variables->getContentChild('test'));
+    self::assertSame([], $variables->getContentChild('none-existing'));
   }
 
   /**
@@ -91,10 +91,10 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\FieldEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(FieldPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(FieldEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
-    $this->assertSame(['element array'], $variables->getElement());
-    $this->assertSame(['items array'], $variables->getItems());
+    self::assertInstanceOf(FieldEventVariables::class, $variables);
+    self::assertAbstractEventVariables($variables);
+    self::assertSame(['element array'], $variables->getElement());
+    self::assertSame(['items array'], $variables->getItems());
   }
 
   /**
@@ -106,9 +106,9 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\FormEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(FormPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(FormEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
-    $this->assertSame(['element array'], $variables->getElement());
+    self::assertInstanceOf(FormEventVariables::class, $variables);
+    self::assertAbstractEventVariables($variables);
+    self::assertSame(['element array'], $variables->getElement());
   }
 
   /**
@@ -119,8 +119,8 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\HtmlEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(HtmlPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(HtmlEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
+    self::assertInstanceOf(HtmlEventVariables::class, $variables);
+    self::assertAbstractEventVariables($variables);
   }
 
   /**
@@ -131,8 +131,8 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\ImageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ImagePreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ImageEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
+    self::assertInstanceOf(ImageEventVariables::class, $variables);
+    self::assertAbstractEventVariables($variables);
   }
 
   /**
@@ -143,8 +143,8 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\PageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(PagePreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(PageEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
+    self::assertInstanceOf(PageEventVariables::class, $variables);
+    self::assertAbstractEventVariables($variables);
   }
 
   /**
@@ -161,10 +161,10 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\UsernameEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(UsernamePreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(UsernameEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
-    $this->assertSame($accountMock, $variables->getAccount());
-    $this->assertTrue($variables->userIsAnonymous());
+    self::assertInstanceOf(UsernameEventVariables::class, $variables);
+    self::assertAbstractEventVariables($variables);
+    self::assertSame($accountMock, $variables->getAccount());
+    self::assertTrue($variables->userIsAnonymous());
   }
 
   /**
@@ -183,13 +183,13 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewFieldEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewFieldPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ViewFieldEventVariables::class, $variables);
+    self::assertInstanceOf(ViewFieldEventVariables::class, $variables);
 
-    $this->assertAbstractEventVariables($variables);
-    $this->assertSame($field, $variables->getField());
-    $this->assertSame($output, $variables->getOutput());
-    $this->assertSame($row, $variables->getRow());
-    $this->assertSame($view, $variables->getView());
+    self::assertAbstractEventVariables($variables);
+    self::assertSame($field, $variables->getField());
+    self::assertSame($output, $variables->getOutput());
+    self::assertSame($row, $variables->getRow());
+    self::assertSame($view, $variables->getView());
   }
 
   /**
@@ -204,11 +204,11 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewTableEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewTablePreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ViewTableEventVariables::class, $variables);
+    self::assertInstanceOf(ViewTableEventVariables::class, $variables);
 
-    $this->assertAbstractEventVariables($variables);
-    $this->assertSame($rows, $variables->getRows());
-    $this->assertSame($view, $variables->getView());
+    self::assertAbstractEventVariables($variables);
+    self::assertSame($rows, $variables->getRows());
+    self::assertSame($view, $variables->getView());
   }
 
   /**
@@ -222,11 +222,11 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ViewEventVariables::class, $variables);
+    self::assertInstanceOf(ViewEventVariables::class, $variables);
 
-    $this->assertAbstractEventVariables($variables);
-    $this->assertSame(['rows'], $variables->getRows());
-    $this->assertSame($view, $variables->getView());
+    self::assertAbstractEventVariables($variables);
+    self::assertSame(['rows'], $variables->getRows());
+    self::assertSame($view, $variables->getView());
   }
 
   /**
@@ -237,8 +237,8 @@ final class OtherEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\StatusMessagesEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(StatusMessagesPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(StatusMessagesEventVariables::class, $variables);
-    $this->assertAbstractEventVariables($variables);
+    self::assertInstanceOf(StatusMessagesEventVariables::class, $variables);
+    self::assertAbstractEventVariables($variables);
   }
 
   /**
@@ -248,19 +248,19 @@ final class OtherEventVariablesTest extends UnitTestCase {
    *   Variables object.
    */
   private function assertAbstractEventVariables(AbstractEventVariables $variables): void {
-    $this->assertSame('success', $variables->get('test'));
-    $this->assertSame('default', $variables->get('test2', 'default'));
+    self::assertSame('success', $variables->get('test'));
+    self::assertSame('default', $variables->get('test2', 'default'));
 
     $reference = &$variables->getByReference('reference');
-    $this->assertSame('first', $reference);
+    self::assertSame('first', $reference);
     $reference = 'second';
-    $this->assertSame('second', $variables->get('reference'));
+    self::assertSame('second', $variables->get('reference'));
 
     $variables->set('test3', 'new set');
-    $this->assertSame('new set', $variables->get('test3'));
+    self::assertSame('new set', $variables->get('test3'));
 
     $variables->remove('test');
-    $this->assertNull($variables->get('test'));
+    self::assertNull($variables->get('test'));
   }
 
   /**
@@ -277,14 +277,14 @@ final class OtherEventVariablesTest extends UnitTestCase {
   private function getVariablesFromCreatedEvent(string $class, array $variablesArray): AbstractEventVariables {
     /* @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $class */
     $hook = $class::getHook();
-    $this->assertSame(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
+    self::assertSame(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
 
     $factory = $this->mapper->getFactory($hook);
-    $this->assertSame($hook, $factory->getEventHook());
+    self::assertSame($hook, $factory->getEventHook());
 
     /* @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $event*/
     $event = $factory->createEvent($variablesArray);
-    $this->assertInstanceOf($class, $event);
+    self::assertInstanceOf($class, $event);
 
     return $event->getVariables();
   }

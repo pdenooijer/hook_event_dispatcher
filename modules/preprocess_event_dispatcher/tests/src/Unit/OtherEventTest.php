@@ -129,7 +129,7 @@ final class OtherEventTest extends UnitTestCase {
    */
   public function testNotMappingEvent(): void {
     $this->service->createAndDispatchKnownEvents('NoneExistingHook', $this->variables);
-    $this->assertSame([], $this->dispatcher->getEvents());
+    self::assertSame([], $this->dispatcher->getEvents());
   }
 
   /**
@@ -141,16 +141,16 @@ final class OtherEventTest extends UnitTestCase {
   private function createAndAssertEvent(string $class): void {
     /* @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent $class */
     $this->service->createAndDispatchKnownEvents($class::getHook(), $this->variables);
-    $this->assertSame($class::name(), $this->dispatcher->getLastEventName());
+    self::assertSame($class::name(), $this->dispatcher->getLastEventName());
     /** @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent $event */
     $event = $this->dispatcher->getLastEvent();
-    $this->assertInstanceOf($class, $event);
+    self::assertInstanceOf($class, $event);
     $variablesClass = str_replace(
       ['\\Event\\', 'PreprocessEvent'],
       ['\\Variables\\', 'EventVariables'],
       $class
     );
-    $this->assertInstanceOf($variablesClass, $event->getVariables());
+    self::assertInstanceOf($variablesClass, $event->getVariables());
   }
 
 }

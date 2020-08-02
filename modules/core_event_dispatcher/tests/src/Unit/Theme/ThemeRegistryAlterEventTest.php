@@ -63,13 +63,13 @@ class ThemeRegistryAlterEventTest extends UnitTestCase {
     core_event_dispatcher_theme_registry_alter($themeRegistry);
 
     $expected['existing_theme_hook__with_information']['variables']['variable2'] = TRUE;
-    $this->assertSame($expected, $themeRegistry);
+    self::assertSame($expected, $themeRegistry);
 
     /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(
       HookEventDispatcherInterface::THEME_REGISTRY_ALTER
     );
-    $this->assertSame($expected, $event->getThemeRegistry());
+    self::assertSame($expected, $event->getThemeRegistry());
   }
 
 }

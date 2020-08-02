@@ -39,10 +39,10 @@ final class FactoryMapperTest extends UnitTestCase {
     $factoriesYaml = YamlDefinitionsLoader::getInstance()->getFactories();
     $classNames = $this->getFactoryClassNamesFromFilesystem();
 
-    $this->assertCount(count($factoriesYaml), $classNames);
+    self::assertCount(count($factoriesYaml), $classNames);
 
     foreach ($factoriesYaml as $entry) {
-      $this->assertContains($entry['class'], $classNames);
+      self::assertContains($entry['class'], $classNames);
     }
   }
 
@@ -80,7 +80,7 @@ final class FactoryMapperTest extends UnitTestCase {
    */
   public function testNoneExistingHook(): void {
     $factory = $this->mapper->getFactory('NoneExistingHook');
-    $this->assertNull($factory);
+    self::assertNull($factory);
   }
 
 }

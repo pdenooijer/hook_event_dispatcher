@@ -69,11 +69,11 @@ class EntityExtraEventTest extends UnitTestCase {
       ],
     ];
     $hookFieldInfoResult = core_event_dispatcher_entity_extra_field_info();
-    $this->assertSame($expectedFieldInfo, $hookFieldInfoResult);
+    self::assertSame($expectedFieldInfo, $hookFieldInfoResult);
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO);
-    $this->assertSame($expectedFieldInfo, $event->getFieldInfo());
+    self::assertSame($expectedFieldInfo, $event->getFieldInfo());
   }
 
   /**
@@ -108,11 +108,11 @@ class EntityExtraEventTest extends UnitTestCase {
     ]);
 
     $hookFieldInfoResult = core_event_dispatcher_entity_extra_field_info();
-    $this->assertSame($fieldInfo, $hookFieldInfoResult);
+    self::assertSame($fieldInfo, $hookFieldInfoResult);
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO);
-    $this->assertSame($fieldInfo, $event->getFieldInfo());
+    self::assertSame($fieldInfo, $event->getFieldInfo());
   }
 
   /**
@@ -152,8 +152,8 @@ class EntityExtraEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO_ALTER);
-    $this->assertSame($expectedFieldInfo, $event->getFieldInfo());
-    $this->assertSame($expectedFieldInfo, $fieldInfo);
+    self::assertSame($expectedFieldInfo, $event->getFieldInfo());
+    self::assertSame($expectedFieldInfo, $fieldInfo);
   }
 
 }

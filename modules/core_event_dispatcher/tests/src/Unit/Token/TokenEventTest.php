@@ -111,10 +111,10 @@ class TokenEventTest extends UnitTestCase {
     ];
     /* @var \Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_INFO);
-    $this->assertSame($expectedTypes, $result['types']);
-    $this->assertSame($expectedTokens, $result['tokens']);
-    $this->assertSame($expectedTypes, $event->getTokenTypes());
-    $this->assertSame($expectedTokens, $event->getTokens());
+    self::assertSame($expectedTypes, $result['types']);
+    self::assertSame($expectedTokens, $result['tokens']);
+    self::assertSame($expectedTypes, $event->getTokenTypes());
+    self::assertSame($expectedTokens, $event->getTokens());
   }
 
   /**
@@ -153,16 +153,16 @@ class TokenEventTest extends UnitTestCase {
     ];
     /* @var \Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_REPLACEMENT);
-    $this->assertSame($expectedResult, $result);
-    $this->assertSame($type, $event->getType());
-    $this->assertSame($tokens, $event->getTokens());
-    $this->assertSame($data, $event->getRawData());
-    $this->assertSame($options, $event->getOptions());
-    $this->assertSame($metaData, $event->getBubbleableMetadata());
-    $this->assertSame('test!', $event->getData('test_data'));
-    $this->assertNull($event->getData('none_existing'));
-    $this->assertFalse($event->forToken('none_existing', 'token1'));
-    $this->assertFalse($event->forToken('test_type', 'none_existing'));
+    self::assertSame($expectedResult, $result);
+    self::assertSame($type, $event->getType());
+    self::assertSame($tokens, $event->getTokens());
+    self::assertSame($data, $event->getRawData());
+    self::assertSame($options, $event->getOptions());
+    self::assertSame($metaData, $event->getBubbleableMetadata());
+    self::assertSame('test!', $event->getData('test_data'));
+    self::assertNull($event->getData('none_existing'));
+    self::assertFalse($event->forToken('none_existing', 'token1'));
+    self::assertFalse($event->forToken('test_type', 'none_existing'));
   }
 
   /**

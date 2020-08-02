@@ -119,7 +119,7 @@ abstract class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase extends
 
     $this->alterForm($form, $expectedForm);
 
-    $this->assertSame($expectedForm, $form);
+    self::assertSame($expectedForm, $form);
   }
 
   /**
@@ -135,7 +135,7 @@ abstract class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase extends
 
     $this->alterForm($form, $expectedForm);
 
-    $this->assertSame($expectedForm, $form);
+    self::assertSame($expectedForm, $form);
   }
 
   /**
@@ -154,7 +154,7 @@ abstract class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase extends
 
     $this->alterForm($form, $expectedForm);
 
-    $this->assertSame($expectedForm, $form);
+    self::assertSame($expectedForm, $form);
   }
 
   /**
@@ -182,7 +182,7 @@ abstract class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase extends
     // Second merge.
     $this->alterForm($form, $expectedForm);
 
-    $this->assertSame($expectedForm, $form);
+    self::assertSame($expectedForm, $form);
   }
 
 }

@@ -70,11 +70,11 @@ class MediaSourceInfoAlterEventTest extends UnitTestCase {
       HookEventDispatcherInterface::MEDIA_SOURCE_INFO_ALTER
     );
 
-    $this->assertSame($sources, $event->getSources());
+    self::assertSame($sources, $event->getSources());
 
     $expectedSources['image']['allowed_field_types'][] = 'test';
 
-    $this->assertSame($expectedSources, $sources);
+    self::assertSame($expectedSources, $sources);
   }
 
 }

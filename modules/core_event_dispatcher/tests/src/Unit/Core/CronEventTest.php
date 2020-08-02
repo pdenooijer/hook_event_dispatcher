@@ -43,7 +43,7 @@ final class CronEventTest extends UnitTestCase {
 
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::CRON);
 
-    $this->assertInstanceOf(CronEvent::class, $event);
+    self::assertInstanceOf(CronEvent::class, $event);
   }
 
 }
