@@ -136,9 +136,9 @@ final class EntityEventTest extends UnitTestCase {
     $expectedName = $class::DISPATCH_NAME_PREFIX . $class::getHook();
     $firstEvent = reset($events);
     $firstName = key($events);
-    $this->assertSame($expectedName, $firstName);
-    $this->assertInstanceOf($class, $firstEvent);
-    $this->assertNotNull($firstEvent->getVariables());
+    self::assertSame($expectedName, $firstName);
+    self::assertInstanceOf($class, $firstEvent);
+    self::assertNotNull($firstEvent->getVariables());
 
     $secondEvent = next($events);
     $secondName = key($events);
@@ -146,8 +146,8 @@ final class EntityEventTest extends UnitTestCase {
     $secondVariables = $secondEvent->getVariables();
     $bundle = $secondVariables->getEntityBundle();
     $expectedName .= '.' . $bundle;
-    $this->assertSame($expectedName, $secondName);
-    $this->assertInstanceOf($class, $secondEvent);
+    self::assertSame($expectedName, $secondName);
+    self::assertInstanceOf($class, $secondEvent);
 
     $thirdEvent = next($events);
     $thirdName = key($events);
@@ -155,8 +155,8 @@ final class EntityEventTest extends UnitTestCase {
     $thirdVariables = $thirdEvent->getVariables();
     $viewMode = $thirdVariables->getViewMode();
     $expectedName .= '.' . $viewMode;
-    $this->assertSame($expectedName, $thirdName);
-    $this->assertInstanceOf($class, $thirdEvent);
+    self::assertSame($expectedName, $thirdName);
+    self::assertInstanceOf($class, $thirdEvent);
   }
 
 }

@@ -64,10 +64,10 @@ final class EntityEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\CommentEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(CommentPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(CommentEventVariables::class, $variables);
-    $this->assertAbstractEntityEventVariables($variables, $comment);
-    $this->assertSame($comment, $variables->getComment());
-    $this->assertSame($commentedEntity, $variables->getCommentedEntity());
+    self::assertInstanceOf(CommentEventVariables::class, $variables);
+    self::assertAbstractEntityEventVariables($variables, $comment);
+    self::assertSame($comment, $variables->getComment());
+    self::assertSame($commentedEntity, $variables->getCommentedEntity());
   }
 
   /**
@@ -86,9 +86,9 @@ final class EntityEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\EckEntityEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(EckEntityPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(EckEntityEventVariables::class, $variables);
-    $this->assertAbstractEntityEventVariables($variables, $eckEntity);
-    $this->assertSame($eckEntity, $variables->getEckEntity());
+    self::assertInstanceOf(EckEntityEventVariables::class, $variables);
+    self::assertAbstractEntityEventVariables($variables, $eckEntity);
+    self::assertSame($eckEntity, $variables->getEckEntity());
   }
 
   /**
@@ -103,9 +103,9 @@ final class EntityEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\NodeEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(NodePreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(NodeEventVariables::class, $variables);
-    $this->assertAbstractEntityEventVariables($variables, $node);
-    $this->assertSame($node, $variables->getNode());
+    self::assertInstanceOf(NodeEventVariables::class, $variables);
+    self::assertAbstractEntityEventVariables($variables, $node);
+    self::assertSame($node, $variables->getNode());
   }
 
   /**
@@ -120,9 +120,9 @@ final class EntityEventVariablesTest extends UnitTestCase {
 
     /** @var \Drupal\preprocess_event_dispatcher\Variables\ParagraphEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ParagraphPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(ParagraphEventVariables::class, $variables);
-    $this->assertAbstractEntityEventVariables($variables, $paragraph);
-    $this->assertSame($paragraph, $variables->getParagraph());
+    self::assertInstanceOf(ParagraphEventVariables::class, $variables);
+    self::assertAbstractEntityEventVariables($variables, $paragraph);
+    self::assertSame($paragraph, $variables->getParagraph());
   }
 
   /**
@@ -137,9 +137,9 @@ final class EntityEventVariablesTest extends UnitTestCase {
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\TaxonomyTermEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(TaxonomyTermPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(TaxonomyTermEventVariables::class, $variables);
-    $this->assertAbstractEntityEventVariables($variables, $term);
-    $this->assertSame($term, $variables->getTerm());
+    self::assertInstanceOf(TaxonomyTermEventVariables::class, $variables);
+    self::assertAbstractEntityEventVariables($variables, $term);
+    self::assertSame($term, $variables->getTerm());
   }
 
   /**
@@ -151,12 +151,12 @@ final class EntityEventVariablesTest extends UnitTestCase {
    *   Entity mock.
    */
   private function assertAbstractEntityEventVariables(AbstractEntityEventVariables $variables, EntityInterface $entity): void {
-    $this->assertAbstractEventVariables($variables);
+    self::assertAbstractEventVariables($variables);
 
-    $this->assertSame($entity, $variables->getEntity());
-    $this->assertSame($entity->getEntityType(), $variables->getEntityType());
-    $this->assertSame($entity->bundle(), $variables->getEntityBundle());
-    $this->assertSame($entity->getViewMode(), $variables->getViewMode());
+    self::assertSame($entity, $variables->getEntity());
+    self::assertSame($entity->getEntityType(), $variables->getEntityType());
+    self::assertSame($entity->bundle(), $variables->getEntityBundle());
+    self::assertSame($entity->getViewMode(), $variables->getViewMode());
   }
 
   /**
@@ -166,19 +166,19 @@ final class EntityEventVariablesTest extends UnitTestCase {
    *   Variables object.
    */
   private function assertAbstractEventVariables(AbstractEntityEventVariables $variables): void {
-    $this->assertSame('success', $variables->get('test'));
-    $this->assertSame('default', $variables->get('test2', 'default'));
+    self::assertSame('success', $variables->get('test'));
+    self::assertSame('default', $variables->get('test2', 'default'));
 
     $reference = &$variables->getByReference('reference');
-    $this->assertSame('first', $reference);
+    self::assertSame('first', $reference);
     $reference = 'second';
-    $this->assertSame('second', $variables->get('reference'));
+    self::assertSame('second', $variables->get('reference'));
 
     $variables->set('test3', 'new set');
-    $this->assertSame('new set', $variables->get('test3'));
+    self::assertSame('new set', $variables->get('test3'));
 
     $variables->remove('test');
-    $this->assertNull($variables->get('test'));
+    self::assertNull($variables->get('test'));
   }
 
   /**
@@ -195,19 +195,19 @@ final class EntityEventVariablesTest extends UnitTestCase {
   private function getVariablesFromCreatedEvent(string $class, array $variablesArray): AbstractEntityEventVariables {
     /* @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $class */
     $hook = $class::getHook();
-    $this->assertSame(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
+    self::assertSame(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
 
     $factory = $this->mapper->getFactory($hook);
-    $this->assertSame($hook, $factory->getEventHook());
+    self::assertSame($hook, $factory->getEventHook());
 
     /* @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEntityEventInterface $event*/
     $event = $factory->createEvent($variablesArray);
-    $this->assertInstanceOf(PreprocessEntityEventInterface::class, $event);
-    $this->assertInstanceOf($class, $event);
+    self::assertInstanceOf(PreprocessEntityEventInterface::class, $event);
+    self::assertInstanceOf($class, $event);
 
     /** @var \Drupal\preprocess_event_dispatcher\Variables\AbstractEntityEventVariables $variables */
     $variables = $event->getVariables();
-    $this->assertInstanceOf(AbstractEntityEventVariables::class, $variables);
+    self::assertInstanceOf(AbstractEntityEventVariables::class, $variables);
 
     return $variables;
   }

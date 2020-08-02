@@ -55,13 +55,13 @@ class FormEventTest extends UnitTestCase {
     core_event_dispatcher_form_alter($form, $formState, $formId);
 
     $expectedForm['test2'] = 'test_altered';
-    $this->assertSame($expectedForm, $form);
+    self::assertSame($expectedForm, $form);
 
     /* @var \Drupal\core_event_dispatcher\Event\Form\FormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::FORM_ALTER);
-    $this->assertSame($form, $event->getForm());
-    $this->assertSame($formState, $event->getFormState());
-    $this->assertSame($formId, $event->getFormId());
+    self::assertSame($form, $event->getForm());
+    self::assertSame($formState, $event->getFormState());
+    self::assertSame($formId, $event->getFormId());
   }
 
   /**
@@ -82,10 +82,10 @@ class FormEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.form_base_$baseFormId.alter");
-    $this->assertEquals($form, $event->getForm());
-    $this->assertEquals($formState, $event->getFormState());
-    $this->assertEquals($formId, $event->getFormId());
-    $this->assertEquals($baseFormId, $event->getBaseFormId());
+    self::assertEquals($form, $event->getForm());
+    self::assertEquals($formState, $event->getFormState());
+    self::assertEquals($formId, $event->getFormId());
+    self::assertEquals($baseFormId, $event->getBaseFormId());
   }
 
   /**
@@ -102,9 +102,9 @@ class FormEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Form\FormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.form_$formId.alter");
-    $this->assertEquals($form, $event->getForm());
-    $this->assertEquals($formState, $event->getFormState());
-    $this->assertEquals($formId, $event->getFormId());
+    self::assertEquals($form, $event->getForm());
+    self::assertEquals($formState, $event->getFormState());
+    self::assertEquals($formId, $event->getFormId());
   }
 
 }

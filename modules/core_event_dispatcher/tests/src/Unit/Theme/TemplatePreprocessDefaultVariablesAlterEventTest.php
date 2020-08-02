@@ -65,8 +65,8 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
 
     /** @var \Drupal\core_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
-    $this->assertSame($expectedVariables, $variables);
-    $this->assertSame($expectedVariables, $event->getVariables());
+    self::assertSame($expectedVariables, $variables);
+    self::assertSame($expectedVariables, $event->getVariables());
   }
 
 }

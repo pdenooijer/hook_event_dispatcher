@@ -66,11 +66,11 @@ class FieldFormatterInfoAlterEventTest extends UnitTestCase {
       HookEventDispatcherInterface::FIELD_FORMATTER_INFO_ALTER
     );
 
-    $this->assertSame($info, $event->getInfo());
+    self::assertSame($info, $event->getInfo());
 
     $expectedInfo['image']['class'] = 'Drupal\another_module\Plugin\Field\FieldFormatter\ImageFormatter';
 
-    $this->assertSame($expectedInfo, $info);
+    self::assertSame($expectedInfo, $info);
   }
 
 }

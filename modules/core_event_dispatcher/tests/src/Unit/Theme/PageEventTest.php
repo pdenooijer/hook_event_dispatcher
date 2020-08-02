@@ -60,8 +60,8 @@ class PageEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Theme\PageAttachmentsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_ATTACHMENTS);
-    $this->assertSame($expectedAttachments, $event->getAttachments());
-    $this->assertSame($expectedAttachments, $currentAttachments);
+    self::assertSame($expectedAttachments, $event->getAttachments());
+    self::assertSame($expectedAttachments, $currentAttachments);
   }
 
   /**
@@ -85,8 +85,8 @@ class PageEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Theme\PageBottomEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_BOTTOM);
-    $this->assertSame($expectedBuild, $pageBottom);
-    $this->assertSame($expectedBuild, $event->getBuild());
+    self::assertSame($expectedBuild, $pageBottom);
+    self::assertSame($expectedBuild, $event->getBuild());
   }
 
   /**
@@ -110,8 +110,8 @@ class PageEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Theme\PageTopEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_TOP);
-    $this->assertSame($expectedBuild, $pageTop);
-    $this->assertSame($expectedBuild, $event->getBuild());
+    self::assertSame($expectedBuild, $pageTop);
+    self::assertSame($expectedBuild, $event->getBuild());
   }
 
 }

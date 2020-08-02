@@ -71,9 +71,9 @@ class ThemeEventTest extends UnitTestCase {
 
     /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME);
-    $this->assertSame($existing, $event->getExisting());
-    $this->assertSame($newThemes, $hookNewInformation);
-    $this->assertSame($newThemes, $event->getNewThemes());
+    self::assertSame($existing, $event->getExisting());
+    self::assertSame($newThemes, $hookNewInformation);
+    self::assertSame($newThemes, $event->getNewThemes());
   }
 
   /**
@@ -134,9 +134,9 @@ class ThemeEventTest extends UnitTestCase {
 
     /** @var \Drupal\core_event_dispatcher\Event\Theme\ThemeEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME);
-    $this->assertSame($existing, $event->getExisting());
-    $this->assertSame($expectedNewTheme, $hookNewInformation);
-    $this->assertSame($expectedNewTheme, $event->getNewThemes());
+    self::assertSame($existing, $event->getExisting());
+    self::assertSame($expectedNewTheme, $hookNewInformation);
+    self::assertSame($expectedNewTheme, $event->getNewThemes());
   }
 
   /**

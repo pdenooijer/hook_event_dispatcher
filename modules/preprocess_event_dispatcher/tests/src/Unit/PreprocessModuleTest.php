@@ -47,7 +47,7 @@ final class PreprocessModuleTest extends UnitTestCase {
 
     // Just test something so PHPUnit does not complain about no assertions,
     // while Mockery asserts the service being called.
-    $this->assertSame($expectedHook, $hook);
+    self::assertSame($expectedHook, $hook);
   }
 
   /**

@@ -59,8 +59,8 @@ class ToolbarAlterEventTest extends UnitTestCase {
 
     /** @var \Drupal\toolbar_event_dispatcher\Event\Toolbar\ToolbarAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOOLBAR_ALTER);
-    $this->assertSame($expectedItems, $items);
-    $this->assertSame($expectedItems, $event->getItems());
+    self::assertSame($expectedItems, $items);
+    self::assertSame($expectedItems, $event->getItems());
   }
 
 }

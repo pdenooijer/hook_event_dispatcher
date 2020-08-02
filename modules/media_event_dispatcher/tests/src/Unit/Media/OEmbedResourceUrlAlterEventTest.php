@@ -86,14 +86,14 @@ class OEmbedResourceUrlAlterEventTest extends UnitTestCase {
 
     $expected['query']['width'] = '1280';
 
-    $this->assertSame($expected, $url);
+    self::assertSame($expected, $url);
 
     /** @var \Drupal\media_event_dispatcher\Event\Media\OEmbedResourceUrlAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(
       HookEventDispatcherInterface::MEDIA_OEMBED_RESOURCE_DATA_ALTER
     );
 
-    $this->assertSame($url, $event->getParsedURL());
+    self::assertSame($url, $event->getParsedURL());
   }
 
 }

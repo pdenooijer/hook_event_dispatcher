@@ -59,8 +59,8 @@ class WebformElementEventTest extends UnitTestCase {
 
     /* @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent('hook_event_dispatcher.webform.element.info.alter');
-    $this->assertInstanceOf(WebformElementInfoAlterEvent::class, $event);
-    $this->assertSame($expectedDefinitions, $event->getDefinitions());
+    self::assertInstanceOf(WebformElementInfoAlterEvent::class, $event);
+    self::assertSame($expectedDefinitions, $event->getDefinitions());
   }
 
   /**
@@ -85,10 +85,10 @@ class WebformElementEventTest extends UnitTestCase {
 
     /* @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementAlterEvent $event */
     $event = $this->manager->getRegisteredEvent('hook_event_dispatcher.webform.element.alter');
-    $this->assertInstanceOf(WebformElementAlterEvent::class, $event);
-    $this->assertSame($expectedElement, $event->getElement());
-    $this->assertSame($formState, $event->getFormState());
-    $this->assertSame($context, $event->getContext());
+    self::assertInstanceOf(WebformElementAlterEvent::class, $event);
+    self::assertSame($expectedElement, $event->getElement());
+    self::assertSame($formState, $event->getFormState());
+    self::assertSame($context, $event->getContext());
   }
 
   /**
@@ -114,11 +114,11 @@ class WebformElementEventTest extends UnitTestCase {
 
     /* @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementTypeAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.webform.element_$elementType.alter");
-    $this->assertInstanceOf(WebformElementTypeAlterEvent::class, $event);
-    $this->assertSame($expectedElement, $event->getElement());
-    $this->assertSame($elementType, $event->getElementType());
-    $this->assertSame($formState, $event->getFormState());
-    $this->assertSame($context, $event->getContext());
+    self::assertInstanceOf(WebformElementTypeAlterEvent::class, $event);
+    self::assertSame($expectedElement, $event->getElement());
+    self::assertSame($elementType, $event->getElementType());
+    self::assertSame($formState, $event->getFormState());
+    self::assertSame($context, $event->getContext());
   }
 
 }

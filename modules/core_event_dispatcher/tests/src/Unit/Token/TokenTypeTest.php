@@ -17,7 +17,7 @@ class TokenTypeTest extends UnitTestCase {
    * Test TokenType invalid name exception.
    */
   public function testTokenTypeInvalidNameException(): void {
-    $this->setExpectedException(UnexpectedValueException::class);
+    $this->expectException(UnexpectedValueException::class);
     TokenType::create('', NULL);
   }
 
@@ -25,7 +25,7 @@ class TokenTypeTest extends UnitTestCase {
    * Test TokenType invalid description exception.
    */
   public function testTokenTypeInvalidDescriptionException(): void {
-    $this->setExpectedException(UnexpectedValueException::class);
+    $this->expectException(UnexpectedValueException::class);
     TokenType::create('', '')->setDescription(NULL);
   }
 

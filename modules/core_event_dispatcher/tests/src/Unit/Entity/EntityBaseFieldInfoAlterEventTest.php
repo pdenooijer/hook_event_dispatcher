@@ -54,12 +54,12 @@ class EntityBaseFieldInfoAlterEventTest extends UnitTestCase {
     core_event_dispatcher_entity_base_field_info_alter($fields, $entityType);
 
     $expectedFields['field_test'] = 'test_altered';
-    $this->assertSame($expectedFields, $fields);
+    self::assertSame($expectedFields, $fields);
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_BASE_FIELD_INFO_ALTER);
-    $this->assertSame($expectedFields, $event->getFields());
-    $this->assertSame($entityType, $event->getEntityType());
+    self::assertSame($expectedFields, $event->getFields());
+    self::assertSame($entityType, $event->getEntityType());
   }
 
 }

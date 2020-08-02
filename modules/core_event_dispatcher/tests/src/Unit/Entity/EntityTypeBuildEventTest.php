@@ -58,7 +58,7 @@ class EntityTypeBuildEventTest extends UnitTestCase {
 
     /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityTypeBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_TYPE_BUILD);
-    $this->assertSame($entityTypes, $event->getEntityTypes());
+    self::assertSame($entityTypes, $event->getEntityTypes());
   }
 
 }

@@ -54,9 +54,9 @@ class UserEventTest extends UnitTestCase {
 
     /* @var \Drupal\user_event_dispatcher\Event\User\UserCancelEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL);
-    $this->assertSame($edit, $event->getEdit());
-    $this->assertSame($account, $event->getAccount());
-    $this->assertSame($method, $event->getMethod());
+    self::assertSame($edit, $event->getEdit());
+    self::assertSame($account, $event->getAccount());
+    self::assertSame($method, $event->getMethod());
   }
 
   /**
@@ -77,8 +77,8 @@ class UserEventTest extends UnitTestCase {
 
     /* @var \Drupal\user_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
-    $this->assertSame($expectedMethods, $methods);
-    $this->assertSame($expectedMethods, $event->getMethods());
+    self::assertSame($expectedMethods, $methods);
+    self::assertSame($expectedMethods, $event->getMethods());
   }
 
   /**
@@ -92,7 +92,7 @@ class UserEventTest extends UnitTestCase {
 
     /* @var \Drupal\user_event_dispatcher\Event\User\UserLoginEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGIN);
-    $this->assertEquals($account, $event->getAccount());
+    self::assertEquals($account, $event->getAccount());
   }
 
   /**
@@ -106,7 +106,7 @@ class UserEventTest extends UnitTestCase {
 
     /* @var \Drupal\user_event_dispatcher\Event\User\UserLogoutEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGOUT);
-    $this->assertEquals($account, $event->getAccount());
+    self::assertEquals($account, $event->getAccount());
   }
 
   /**
@@ -128,8 +128,8 @@ class UserEventTest extends UnitTestCase {
 
     /* @var \Drupal\user_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
-    $this->assertSame('Test name improved!', $event->getName());
-    $this->assertSame($account, $event->getAccount());
+    self::assertSame('Test name improved!', $event->getName());
+    self::assertSame($account, $event->getAccount());
   }
 
 }

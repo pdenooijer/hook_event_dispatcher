@@ -52,12 +52,12 @@ class EntityFieldAccessEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityFieldAccessEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_FIELD_ACCESS);
-    $this->assertSame($operation, $event->getOperation());
-    $this->assertSame($fieldDefinition, $event->getFieldDefinition());
-    $this->assertSame($account, $event->getAccount());
-    $this->assertSame($items, $event->getItems());
-    $this->assertSame($hookAccessResult, $event->getAccessResult());
-    $this->assertTrue($event->getAccessResult()->isNeutral());
+    self::assertSame($operation, $event->getOperation());
+    self::assertSame($fieldDefinition, $event->getFieldDefinition());
+    self::assertSame($account, $event->getAccount());
+    self::assertSame($items, $event->getItems());
+    self::assertSame($hookAccessResult, $event->getAccessResult());
+    self::assertTrue($event->getAccessResult()->isNeutral());
   }
 
   /**
@@ -80,12 +80,12 @@ class EntityFieldAccessEventTest extends UnitTestCase {
 
     /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityFieldAccessEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_FIELD_ACCESS);
-    $this->assertSame($operation, $event->getOperation());
-    $this->assertSame($fieldDefinition, $event->getFieldDefinition());
-    $this->assertSame($account, $event->getAccount());
-    $this->assertSame($items, $event->getItems());
-    $this->assertSame($accessResult, $event->getAccessResult());
-    $this->assertSame($accessResult, $hookAccessResult);
+    self::assertSame($operation, $event->getOperation());
+    self::assertSame($fieldDefinition, $event->getFieldDefinition());
+    self::assertSame($account, $event->getAccount());
+    self::assertSame($items, $event->getItems());
+    self::assertSame($accessResult, $event->getAccessResult());
+    self::assertSame($accessResult, $hookAccessResult);
   }
 
 }

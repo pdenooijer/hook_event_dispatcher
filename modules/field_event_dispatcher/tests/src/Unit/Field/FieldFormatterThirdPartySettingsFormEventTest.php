@@ -75,7 +75,7 @@ class FieldFormatterThirdPartySettingsFormEventTest extends UnitTestCase {
 
     // So that PHPUnit doesn't mark this as a "risky test" because of no
     // assertions.
-    $this->assertTrue(TRUE);
+    self::assertTrue(TRUE);
   }
 
   /**
@@ -114,11 +114,11 @@ class FieldFormatterThirdPartySettingsFormEventTest extends UnitTestCase {
       HookEventDispatcherInterface::FIELD_FORMATTER_THIRD_PARTY_SETTINGS_FORM
     );
 
-    $this->assertSame($elements, $event->getElements());
+    self::assertSame($elements, $event->getElements());
 
     $expectedElements['test_module']['test'] = [];
 
-    $this->assertSame($expectedElements, $elements);
+    self::assertSame($expectedElements, $elements);
   }
 
 }
