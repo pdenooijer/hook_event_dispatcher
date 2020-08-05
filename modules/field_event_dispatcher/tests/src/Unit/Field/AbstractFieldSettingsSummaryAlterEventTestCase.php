@@ -80,7 +80,8 @@ abstract class AbstractFieldSettingsSummaryAlterEventTestCase extends UnitTestCa
     ]);
 
     // Run the procedural hook which should trigger the above handler.
-    $this->getProceduralHookName()($summary, []);
+    $hook = $this->getProceduralHookName();
+    $hook($summary, []);
 
     /** @var \Drupal\field_event_dispatcher\Event\Field\AbstractFieldSettingsSummaryFormEvent $event */
     $event = $this->manager->getRegisteredEvent($eventName);
@@ -109,7 +110,8 @@ abstract class AbstractFieldSettingsSummaryAlterEventTestCase extends UnitTestCa
     $summary = [];
 
     // Run the procedural hook which should trigger the event.
-    $this->getProceduralHookName()($summary, $context);
+    $hook = $this->getProceduralHookName();
+    $hook($summary, $context);
 
     /** @var \Drupal\field_event_dispatcher\Event\Field\AbstractFieldSettingsSummaryFormEvent $event */
     $event = $this->manager->getRegisteredEvent($this->getEventName());
