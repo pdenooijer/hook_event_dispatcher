@@ -8,6 +8,7 @@ use Drupal\core_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\UnitTestCase;
+use RuntimeException;
 use function core_event_dispatcher_theme;
 
 /**
@@ -93,7 +94,7 @@ class ThemeEventTest extends UnitTestCase {
       },
     ]);
 
-    $this->expectException(\RuntimeException::class);
+    $this->expectException(RuntimeException::class);
     $this->expectExceptionMessage('Missing path in the information array. ThemeEvent needs the path to be set manually, to have a proper default theme implementation. See \hook_theme() for more information.');
 
     core_event_dispatcher_theme([]);
@@ -108,7 +109,7 @@ class ThemeEventTest extends UnitTestCase {
       'test' => 'extra_theme_information',
       'path' => 'some/path',
     ];
-    $expectedNewTheme[$themeHook] = $information;
+    $expectedNewTheme = [$themeHook => $information];
 
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::THEME => static function (ThemeEvent $event) use ($themeHook, $information) {
@@ -154,7 +155,7 @@ class ThemeEventTest extends UnitTestCase {
       },
     ]);
 
-    $this->expectException(\RuntimeException::class);
+    $this->expectException(RuntimeException::class);
     $this->expectExceptionMessage('Missing path in the information array. ThemeEvent needs the path to be set manually, to have a proper default theme implementation. See \hook_theme() for more information.');
 
     core_event_dispatcher_theme([]);

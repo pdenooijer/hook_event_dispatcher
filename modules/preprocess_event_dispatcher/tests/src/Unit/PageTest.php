@@ -19,6 +19,7 @@ final class PageTest extends UnitTestCase {
    * Test the getter.
    */
   public function testGet(): void {
+    $vars = [];
     $vars['page']['test'] = TRUE;
     $vars['page']['array'] = ['array key' => 1];
     $vars['page']['object'] = new stdClass();
@@ -89,6 +90,7 @@ final class PageTest extends UnitTestCase {
    * Test getting a var by ref and changing it.
    */
   public function testGetVarByRef(): void {
+    $vars = [];
     $vars['page']['test'] = 'test';
     $page = new PageEventVariables($vars);
     $test = &$page->getByReference('test');
@@ -102,6 +104,7 @@ final class PageTest extends UnitTestCase {
    * Test getting root variables by reference.
    */
   public function testGetRootVariablesByReference(): void {
+    $vars = [];
     $vars['test'] = 'something';
     $page = new PageEventVariables($vars);
     $retrievedVars = &$page->getRootVariablesByReference();
@@ -120,6 +123,7 @@ final class PageTest extends UnitTestCase {
     $page = new PageEventVariables($vars);
     $page->addCacheContext('url.path');
 
+    $expectedVars = [];
     $expectedVars['#cache']['contexts'][] = 'url.path';
     self::assertSame($expectedVars, $vars);
   }
