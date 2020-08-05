@@ -18,6 +18,11 @@
   "minimum-stability": "alpha",
   "scripts": {
     "test": [
+      "@phpunit",
+      "@phpcbf",
+      "@phpmd"
+    ],
+    "ci": [
       "@phplint",
       "@phpunit",
       "@phpcs",
@@ -25,8 +30,8 @@
     ],
     "phplint": "vendor/bin/parallel-lint --exclude vendor/ --exclude .idea/ -e php,module,inc,install,profile,theme .",
     "phpunit": "vendor/bin/phpunit --configuration=phpunit.xml",
-    "phpcs": "vendor/bin/phpcs --ignore=vendor/,.idea/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 .",
-    "phpcbf": "vendor/bin/phpcbf --ignore=vendor/,.idea/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme .",
+    "phpcs": "vendor/bin/phpcs --ignore=vendor/,.idea/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme,css,info,txt,md,yml --report=full .",
+    "phpcbf": "vendor/bin/phpcbf --ignore=vendor/,.idea/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme,css,info,txt,md,yml .",
     "phpmd": "vendor/bin/phpmd --exclude vendor/,.idea/ --suffixes php,module,inc,install,profile,theme . text phpmd.xml"
   },
   "autoload": {
