@@ -6,7 +6,7 @@
   "require": {},
   "require-dev": {
     "drupal/coder": "^8.3",
-    "drupal/core-recommended": "^8.9",
+    "drupal/core-recommended": "^9.0",
     "drupal/eck": "^1.0@alpha",
     "drupal/paragraphs": "^1.10",
     "mockery/mockery": "^1.3",
@@ -68,9 +68,7 @@
     }
   },
   "config": {
-    "platform": {
-      "php": "7.2.29"
-    },
+    "preferred-install": "dist",
     "sort-packages": true
   },
   "suggest": {

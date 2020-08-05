@@ -62,7 +62,7 @@ use Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 // Block.
 // @todo hook_block_view_alter()
 // @todo hook_block_access()
-
+//
 // Core.
 // @todo hook_data_type_info_alter()
 // @todo hook_queue_info_alter()
@@ -77,7 +77,7 @@ use Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 // @todo hook_config_import_steps_alter()
 // @todo hook_config_schema_info_alter()
 // @todo hook_validation_constraint_alter()
-
+//
 // Entity.
 // @todo hook_entity_create_access()
 // @todo hook_entity_view_mode_info_alter()
@@ -101,14 +101,14 @@ use Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 // @todo hook_entity_field_storage_info_alter()
 // @todo hook_entity_field_access_alter()
 // @todo hook_entity_field_values_init()
-
+//
 // Form.
 // @todo hook_ajax_render_alter()
 // @todo hook_batch_alter()
-
+//
 // Language.
 // @todo hook_transliteration_overrides_alter()
-
+//
 // Theme.
 // @todo hook_form_system_theme_settings_alter()
 // @todo hook_themes_uninstalled()
@@ -120,7 +120,7 @@ use Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 // @todo hook_js_settings_alter()
 // @todo hook_css_alter()
 // @todo hook_page_attachments_alter()
-
+//
 // Token.
 // @todo hook_tokens_alter()
 // @todo hook_token_info_alter()
