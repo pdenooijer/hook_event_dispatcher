@@ -139,7 +139,9 @@ final class OtherEventVariablesTest extends UnitTestCase {
    * Test a PagePreprocessEvent.
    */
   public function testPageEvent(): void {
-    $variablesArray['page'] = $this->createVariablesArray();
+    $variablesArray = [
+      'page' => $this->createVariablesArray(),
+    ];
 
     /* @var \Drupal\preprocess_event_dispatcher\Variables\PageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(PagePreprocessEvent::class, $variablesArray);

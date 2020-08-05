@@ -4,22 +4,20 @@
 language: php
 
 php:
-- 7.2
-- 7.3
+  - 7.2
+  - 7.3
+  - 7.4
 
 cache:
   directories:
-  - ~/.composer
+    - ~/.composer
 
 install:
-- COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-dist
+  - COMPOSER_MEMORY_LIMIT=-1 composer install --ignore-platform-reqs
 
 script:
-- vendor/bin/parallel-lint --exclude vendor/ -e php,module,inc,install,profile,theme .
-- vendor/bin/phpunit --configuration=phpunit.xml --coverage-text
-- vendor/bin/phpcs --ignore=vendor/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 .
-- vendor/bin/phpmd --exclude vendor/ --suffixes php,module,inc,install,profile,theme . text phpmd.xml
-- composer validate
+  - composer ci
+  - composer validate
 
 branches:
   only:

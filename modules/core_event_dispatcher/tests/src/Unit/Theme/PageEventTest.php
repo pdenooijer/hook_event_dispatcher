@@ -43,7 +43,9 @@ class PageEventTest extends UnitTestCase {
    * Test the PageAttachmentsEvent.
    */
   public function testPageAttachments(): void {
+    $currentAttachments = [];
     $currentAttachments['current']['#attached']['library'] = ['current/current'];
+    $testAttachment = [];
     $testAttachment['#attached']['library'] = ['test/test'];
 
     $expectedAttachments = $currentAttachments;
@@ -72,7 +74,7 @@ class PageEventTest extends UnitTestCase {
     $renderArray = [
       '#markup' => 'Bottom!',
     ];
-    $expectedBuild['new'] = $renderArray;
+    $expectedBuild = ['new' => $renderArray];
 
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::PAGE_BOTTOM => static function (PageBottomEvent $event) use ($renderArray) {
@@ -97,7 +99,7 @@ class PageEventTest extends UnitTestCase {
     $renderArray = [
       '#markup' => 'Top!',
     ];
-    $expectedBuild['new'] = $renderArray;
+    $expectedBuild = ['new' => $renderArray];
 
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::PAGE_TOP => static function (PageTopEvent $event) use ($renderArray) {
