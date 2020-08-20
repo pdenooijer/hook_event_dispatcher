@@ -3,6 +3,7 @@
 namespace Drupal\Tests\preprocess_event_dispatcher\Unit;
 
 use Drupal\block\BlockInterface;
+use Drupal\block_content\BlockContentInterface;
 use Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\BlockPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Event\FieldPreprocessEvent;
@@ -71,7 +72,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $variablesArray['elements']['#id'] = '22';
     $variablesArray['content']['test'] = ['success2'];
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\BlockEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\BlockEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(BlockEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -79,6 +80,22 @@ final class OtherEventVariablesTest extends UnitTestCase {
     self::assertSame('22', $variables->getId());
     self::assertSame(['success2'], $variables->getContentChild('test'));
     self::assertSame([], $variables->getContentChild('none-existing'));
+    self::assertNull($variables->getBlockContent());
+  }
+
+  /**
+   * Test a BlockPreprocessEvent with block content entity.
+   */
+  public function testBlockEventWithBlockContent(): void {
+    $variablesArray = $this->createVariablesArray();
+    $blockContent = Mockery::mock(BlockContentInterface::class);
+    $variablesArray['content']['#block_content'] = $blockContent;
+
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\BlockEventVariables $variables */
+    $variables = $this->getVariablesFromCreatedEvent(BlockPreprocessEvent::class, $variablesArray);
+    self::assertInstanceOf(BlockEventVariables::class, $variables);
+    $this->assertAbstractEventVariables($variables);
+    self::assertSame($blockContent, $variables->getBlockContent());
   }
 
   /**
@@ -89,7 +106,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $variablesArray['element'] = ['element array'];
     $variablesArray['items'] = ['items array'];
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\FieldEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\FieldEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(FieldPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(FieldEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -104,7 +121,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $variablesArray = $this->createVariablesArray();
     $variablesArray['element'] = ['element array'];
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\FormEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\FormEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(FormPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(FormEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -117,7 +134,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
   public function testHtmlEvent(): void {
     $variablesArray = $this->createVariablesArray();
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\HtmlEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\HtmlEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(HtmlPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(HtmlEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -129,7 +146,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
   public function testImageEvent(): void {
     $variablesArray = $this->createVariablesArray();
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\ImageEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\ImageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ImagePreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(ImageEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -143,7 +160,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
       'page' => $this->createVariablesArray(),
     ];
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\PageEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\PageEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(PagePreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(PageEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -161,7 +178,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
       ->andReturnTrue();
     $variablesArray['account'] = $accountMock;
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\UsernameEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\UsernameEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(UsernamePreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(UsernameEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -183,7 +200,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $view = Mockery::mock(ViewExecutable::class);
     $variablesArray['view'] = $view;
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewFieldEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\ViewFieldEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewFieldPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(ViewFieldEventVariables::class, $variables);
 
@@ -204,7 +221,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
     $view = Mockery::mock(ViewExecutable::class);
     $variablesArray['view'] = $view;
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewTableEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\ViewTableEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewTablePreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(ViewTableEventVariables::class, $variables);
 
@@ -218,11 +235,11 @@ final class OtherEventVariablesTest extends UnitTestCase {
    */
   public function testViewEvent(): void {
     $variablesArray = $this->createVariablesArray();
-    $variablesArray['rows'][0]['#rows'] = ['rows'];
+    $variablesArray['rows'] = [['#rows' => ['rows']]];
     $view = Mockery::mock(ViewExecutable::class);
     $variablesArray['view'] = $view;
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\ViewEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\ViewEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(ViewPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(ViewEventVariables::class, $variables);
 
@@ -237,7 +254,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
   public function testStatusMessagesEvent(): void {
     $variablesArray = $this->createVariablesArray();
 
-    /* @var \Drupal\preprocess_event_dispatcher\Variables\StatusMessagesEventVariables $variables */
+    /** @var \Drupal\preprocess_event_dispatcher\Variables\StatusMessagesEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(StatusMessagesPreprocessEvent::class, $variablesArray);
     self::assertInstanceOf(StatusMessagesEventVariables::class, $variables);
     $this->assertAbstractEventVariables($variables);
@@ -277,14 +294,14 @@ final class OtherEventVariablesTest extends UnitTestCase {
    *   Variables object.
    */
   private function getVariablesFromCreatedEvent(string $class, array $variablesArray): AbstractEventVariables {
-    /* @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $class */
+    /** @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $class */
     $hook = $class::getHook();
     self::assertSame(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
 
     $factory = $this->mapper->getFactory($hook);
     self::assertSame($hook, $factory->getEventHook());
 
-    /* @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $event*/
+    /** @var \Drupal\preprocess_event_dispatcher\Event\PreprocessEventInterface $event*/
     $event = $factory->createEvent($variablesArray);
     self::assertInstanceOf($class, $event);
 

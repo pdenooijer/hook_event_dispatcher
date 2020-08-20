@@ -3,6 +3,7 @@
 namespace Drupal\preprocess_event_dispatcher\Variables;
 
 use Drupal\block\BlockInterface;
+use Drupal\block_content\BlockContentInterface;
 
 /**
  * Class BlockEventVariables.
@@ -40,6 +41,16 @@ class BlockEventVariables extends AbstractEventVariables {
    */
   public function getContentChild(string $childName): array {
     return $this->variables['content'][$childName] ?? [];
+  }
+
+  /**
+   * Get the block content.
+   *
+   * @return null|\Drupal\block_content\BlockContentInterface
+   *   Block Content Entity or NULL.
+   */
+  public function getBlockContent(): ?BlockContentInterface {
+    return $this->variables['content']['#block_content'] ?? NULL;
   }
 
 }
