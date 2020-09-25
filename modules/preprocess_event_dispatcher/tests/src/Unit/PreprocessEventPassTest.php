@@ -80,7 +80,7 @@ class PreprocessEventPassTest extends UnitTestCase {
     $this->pass->process($this->builder);
     $this->builder->compile();
 
-    /* @var \Drupal\preprocess_event_dispatcher\Service\PreprocessEventFactoryMapper $mapper */
+    /** @var \Drupal\preprocess_event_dispatcher\Service\PreprocessEventFactoryMapper $mapper */
     $mapper = $this->builder->get('preprocess_event.factory_mapper');
     $variables = [];
 

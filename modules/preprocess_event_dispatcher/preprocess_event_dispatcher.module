@@ -11,7 +11,7 @@
  * {@inheritdoc}
  */
 function preprocess_event_dispatcher_preprocess(array &$variables, string $hook) {
-  /* @var \Drupal\preprocess_event_dispatcher\Service\PreprocessEventServiceInterface $service */
+  /** @var \Drupal\preprocess_event_dispatcher\Service\PreprocessEventServiceInterface $service */
   $service = Drupal::service('preprocess_event.service');
   $service->createAndDispatchKnownEvents($hook, $variables);
 }

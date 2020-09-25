@@ -58,7 +58,7 @@ final class EntityViewEventTest extends UnitTestCase {
 
     core_event_dispatcher_entity_view($build, $entity, $display, $viewMode);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityViewEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityViewEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_VIEW);
     self::assertSame($build, $event->getBuild());
     self::assertSame($expectedBuild, $event->getBuild());
@@ -84,7 +84,7 @@ final class EntityViewEventTest extends UnitTestCase {
 
     core_event_dispatcher_entity_view_alter($build, $entity, $display);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityViewAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityViewAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_VIEW_ALTER);
     self::assertSame($build, $event->getBuild());
     self::assertSame($expectedBuild, $event->getBuild());
@@ -109,7 +109,7 @@ final class EntityViewEventTest extends UnitTestCase {
 
     core_event_dispatcher_entity_build_defaults_alter($build, $entity, $viewMode);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_BUILD_DEFAULTS_ALTER);
     self::assertSame($build, $event->getBuild());
     self::assertSame($expectedBuild, $event->getBuild());
@@ -127,7 +127,7 @@ final class EntityViewEventTest extends UnitTestCase {
 
     core_event_dispatcher_entity_build_defaults_alter($build, $entity, $viewMode);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_BUILD_DEFAULTS_ALTER);
     self::assertSame($build, $event->getBuild());
     self::assertSame($entity, $event->getEntity());

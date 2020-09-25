@@ -54,7 +54,7 @@ use Drupal\views\ViewExecutable;
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_pre_view(ViewExecutable $view, string $displayId, array &$args) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPreViewEvent($view, $displayId, $args);
   $manager->register($event);
@@ -66,7 +66,7 @@ function views_event_dispatcher_views_pre_view(ViewExecutable $view, string $dis
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_data() {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsDataEvent();
   $manager->register($event);
@@ -79,7 +79,7 @@ function views_event_dispatcher_views_data() {
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_data_alter(array &$data) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new ViewsDataAlterEvent($data));
 }
@@ -90,7 +90,7 @@ function views_event_dispatcher_views_data_alter(array &$data) {
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_pre_execute(ViewExecutable $view) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPreExecuteEvent($view);
   $manager->register($event);
@@ -102,7 +102,7 @@ function views_event_dispatcher_views_pre_execute(ViewExecutable $view) {
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_post_execute(ViewExecutable $view) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPostExecuteEvent($view);
   $manager->register($event);
@@ -114,7 +114,7 @@ function views_event_dispatcher_views_post_execute(ViewExecutable $view) {
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_pre_build(ViewExecutable $view) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPreBuildEvent($view);
   $manager->register($event);
@@ -126,7 +126,7 @@ function views_event_dispatcher_views_pre_build(ViewExecutable $view) {
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_post_build(ViewExecutable $view) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPostBuildEvent($view);
   $manager->register($event);
@@ -138,7 +138,7 @@ function views_event_dispatcher_views_post_build(ViewExecutable $view) {
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_pre_render(ViewExecutable $view) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPreRenderEvent($view);
   $manager->register($event);
@@ -154,7 +154,7 @@ function views_event_dispatcher_views_pre_render(ViewExecutable $view) {
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsPostRenderEvent($view, $output, $cache);
   $manager->register($event);
@@ -166,7 +166,7 @@ function views_event_dispatcher_views_post_render(ViewExecutable $view, array &$
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsQueryAlterEvent($view, $query);
   $manager->register($event);
@@ -178,7 +178,7 @@ function views_event_dispatcher_views_query_alter(ViewExecutable $view, QueryPlu
  * {@inheritdoc}
  */
 function views_event_dispatcher_views_query_substitutions(ViewExecutable $view) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ViewsQuerySubstitutionsEvent($view);
   $manager->register($event);

@@ -15,7 +15,7 @@ use Drupal\path_event_dispatcher\Event\Path\PathUpdateEvent;
  * {@inheritdoc}
  */
 function path_event_dispatcher_path_insert(array $path) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PathInsertEvent($path);
   $manager->register($event);
@@ -27,7 +27,7 @@ function path_event_dispatcher_path_insert(array $path) {
  * {@inheritdoc}
  */
 function path_event_dispatcher_path_update(array $path) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PathUpdateEvent($path);
   $manager->register($event);
@@ -39,7 +39,7 @@ function path_event_dispatcher_path_update(array $path) {
  * {@inheritdoc}
  */
 function path_event_dispatcher_path_delete(array $path) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PathDeleteEvent($path);
   $manager->register($event);

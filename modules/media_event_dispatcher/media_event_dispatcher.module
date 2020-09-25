@@ -15,7 +15,7 @@ use Drupal\media\OEmbed\Provider;
  * {@inheritdoc}
  */
 function media_event_dispatcher_media_source_info_alter(array &$sources) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $event = new MediaSourceInfoAlterEvent($sources);
   $manager->register($event);
@@ -27,7 +27,7 @@ function media_event_dispatcher_media_source_info_alter(array &$sources) {
  * {@inheritdoc}
  */
 function media_event_dispatcher_oembed_resource_url_alter(array &$parsedURL, Provider $provider) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = \Drupal::service('hook_event_dispatcher.manager');
   $event = new OEmbedResourceUrlAlterEvent($parsedURL, $provider);
   $manager->register($event);

@@ -60,7 +60,7 @@ class PageEventTest extends UnitTestCase {
 
     core_event_dispatcher_page_attachments($currentAttachments);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Theme\PageAttachmentsEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\PageAttachmentsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_ATTACHMENTS);
     self::assertSame($expectedAttachments, $event->getAttachments());
     self::assertSame($expectedAttachments, $currentAttachments);
@@ -85,7 +85,7 @@ class PageEventTest extends UnitTestCase {
 
     core_event_dispatcher_page_bottom($pageBottom);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Theme\PageBottomEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\PageBottomEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_BOTTOM);
     self::assertSame($expectedBuild, $pageBottom);
     self::assertSame($expectedBuild, $event->getBuild());
@@ -110,7 +110,7 @@ class PageEventTest extends UnitTestCase {
 
     core_event_dispatcher_page_top($pageTop);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Theme\PageTopEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Theme\PageTopEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_TOP);
     self::assertSame($expectedBuild, $pageTop);
     self::assertSame($expectedBuild, $event->getBuild());

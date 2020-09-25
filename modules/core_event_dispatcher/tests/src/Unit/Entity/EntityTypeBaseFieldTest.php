@@ -54,7 +54,7 @@ class EntityTypeBaseFieldTest extends UnitTestCase {
 
     $hookFieldInfoResult = core_event_dispatcher_entity_base_field_info($entityType);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_BASE_FIELD_INFO);
     self::assertSame($entityType, $event->getEntityType());
     self::assertSame($fields, $event->getFields());

@@ -63,7 +63,7 @@ class EntityOperationsTest extends UnitTestCase {
 
     $result = core_event_dispatcher_entity_operation($entity);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityOperationEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityOperationEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_OPERATION);
     self::assertSame($entity, $event->getEntity());
     self::assertSame($expectedOperations, $result);
@@ -94,7 +94,7 @@ class EntityOperationsTest extends UnitTestCase {
 
     core_event_dispatcher_entity_operation_alter($operations, $entity);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityOperationAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityOperationAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_OPERATION_ALTER);
     self::assertSame($entity, $event->getEntity());
     self::assertSame($expectedOperations, $event->getOperations());

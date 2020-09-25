@@ -54,7 +54,7 @@ class PathEventTest extends UnitTestCase {
 
     path_event_dispatcher_path_delete($path);
 
-    /* @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
+    /** @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
     self::assertSame($source, $event->getSource());
     self::assertSame($alias, $event->getAlias());
@@ -80,7 +80,7 @@ class PathEventTest extends UnitTestCase {
 
     path_event_dispatcher_path_delete($path);
 
-    /* @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
+    /** @var \Drupal\path_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
     self::assertSame($source, $event->getSource());
     self::assertSame($alias, $event->getAlias());
@@ -106,7 +106,7 @@ class PathEventTest extends UnitTestCase {
 
     path_event_dispatcher_path_insert($path);
 
-    /* @var \Drupal\path_event_dispatcher\Event\Path\PathInsertEvent $event */
+    /** @var \Drupal\path_event_dispatcher\Event\Path\PathInsertEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_INSERT);
     self::assertSame($source, $event->getSource());
     self::assertSame($alias, $event->getAlias());
@@ -131,7 +131,7 @@ class PathEventTest extends UnitTestCase {
 
     path_event_dispatcher_path_update($path);
 
-    /* @var \Drupal\path_event_dispatcher\Event\Path\PathUpdateEvent $event */
+    /** @var \Drupal\path_event_dispatcher\Event\Path\PathUpdateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_UPDATE);
     self::assertSame($source, $event->getSource());
     self::assertSame($alias, $event->getAlias());

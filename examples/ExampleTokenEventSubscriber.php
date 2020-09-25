@@ -2,6 +2,7 @@
 
 namespace Drupal\hook_event_dispatcher;
 
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent;
 use Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent;
 use Drupal\core_event_dispatcher\ValueObject\Token;
@@ -42,14 +43,15 @@ final class ExampleTokenEventSubscriber implements EventSubscriberInterface {
    */
   public function tokenInfo(TokensInfoEvent $event): void {
     // The node type already exists, but it's just an example how to add a type.
-    $type = TokenType::create('node', t('Node'))
+    $type = TokenType::create('node', 'Node')
       ->setDescription('Node tokens')
       ->setNeedsData('node');
     $event->addTokenType($type);
 
     // Add node token.
-    $event->addToken(Token::create('node', 'serialized',
-      t('Serialized string of the node'))->setDescription('Node serialized'));
+    $name = new TranslatableMarkup('Serialized string of the node');
+    $token = Token::create('node', 'serialized', $name)->setDescription('Node serialized');
+    $event->addToken($token);
   }
 
   /**

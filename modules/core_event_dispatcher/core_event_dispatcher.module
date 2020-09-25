@@ -131,7 +131,7 @@ use Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
  * {@inheritdoc}
  */
 function core_event_dispatcher_block_build_alter(array &$build, BlockPluginInterface $block) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new BlockBuildAlterEvent($build, $block));
 }
@@ -142,7 +142,7 @@ function core_event_dispatcher_block_build_alter(array &$build, BlockPluginInter
  * {@inheritdoc}
  */
 function core_event_dispatcher_cron() {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new CronEvent();
   $manager->register($event);
@@ -154,7 +154,7 @@ function core_event_dispatcher_cron() {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_access(EntityInterface $entity, string $operation, AccountInterface $account) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityAccessEvent($entity, $operation, $account);
   $manager->register($event);
@@ -168,7 +168,7 @@ function core_event_dispatcher_entity_access(EntityInterface $entity, string $op
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_type_build(array &$entityTypes) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityTypeBuildEvent($entityTypes);
   $manager->register($event);
@@ -180,7 +180,7 @@ function core_event_dispatcher_entity_type_build(array &$entityTypes) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_type_alter(array &$entityTypes) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityTypeAlterEvent($entityTypes);
   $manager->register($event);
@@ -192,7 +192,7 @@ function core_event_dispatcher_entity_type_alter(array &$entityTypes) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_create(EntityInterface $entity) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityCreateEvent($entity));
 }
@@ -203,7 +203,7 @@ function core_event_dispatcher_entity_create(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_load(array $entities, string $entityTypeId) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityLoadEvent($entities, $entityTypeId));
 }
@@ -214,7 +214,7 @@ function core_event_dispatcher_entity_load(array $entities, string $entityTypeId
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_presave(EntityInterface $entity) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityPresaveEvent($entity));
 }
@@ -229,7 +229,7 @@ function core_event_dispatcher_entity_build_defaults_alter(
   EntityInterface $entity,
   $viewMode
 ) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityBuildDefaultsAlterEvent($build, $entity, (string) $viewMode));
 }
@@ -240,7 +240,7 @@ function core_event_dispatcher_entity_build_defaults_alter(
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_insert(EntityInterface $entity) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityInsertEvent($entity));
 }
@@ -251,7 +251,7 @@ function core_event_dispatcher_entity_insert(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_update(EntityInterface $entity) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityUpdateEvent($entity));
 }
@@ -262,7 +262,7 @@ function core_event_dispatcher_entity_update(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_translation_insert(EntityInterface $translation) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityTranslationInsertEvent($translation));
 }
@@ -273,7 +273,7 @@ function core_event_dispatcher_entity_translation_insert(EntityInterface $transl
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_translation_delete(EntityInterface $translation) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityTranslationDeleteEvent($translation));
 }
@@ -284,7 +284,7 @@ function core_event_dispatcher_entity_translation_delete(EntityInterface $transl
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_predelete(EntityInterface $entity) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityPredeleteEvent($entity));
 }
@@ -295,7 +295,7 @@ function core_event_dispatcher_entity_predelete(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_delete(EntityInterface $entity) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityDeleteEvent($entity));
 }
@@ -311,7 +311,7 @@ function core_event_dispatcher_entity_view(
   EntityViewDisplayInterface $display,
   string $viewMode
 ) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityViewEvent($build, $entity, $display, $viewMode));
 }
@@ -326,7 +326,7 @@ function core_event_dispatcher_entity_view_alter(
   EntityInterface $entity,
   EntityViewDisplayInterface $display
 ) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityViewAlterEvent($build, $entity, $display));
 }
@@ -337,7 +337,7 @@ function core_event_dispatcher_entity_view_alter(
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_base_field_info(EntityTypeInterface $entityType) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityBaseFieldInfoEvent($entityType);
   $manager->register($event);
@@ -350,7 +350,7 @@ function core_event_dispatcher_entity_base_field_info(EntityTypeInterface $entit
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_base_field_info_alter(array &$fields, EntityTypeInterface $entityType) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityBaseFieldInfoAlterEvent($fields, $entityType);
   $manager->register($event);
@@ -362,7 +362,7 @@ function core_event_dispatcher_entity_base_field_info_alter(array &$fields, Enti
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_bundle_field_info_alter(array &$fields, EntityTypeInterface $entityType, string $bundle) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityBundleFieldInfoAlterEvent($fields, $entityType, $bundle);
   $manager->register($event);
@@ -374,7 +374,7 @@ function core_event_dispatcher_entity_bundle_field_info_alter(array &$fields, En
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_operation(EntityInterface $entity) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityOperationEvent($entity);
   $manager->register($event);
@@ -388,7 +388,7 @@ function core_event_dispatcher_entity_operation(EntityInterface $entity) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_operation_alter(array &$operations, EntityInterface $entity) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new EntityOperationAlterEvent($operations, $entity));
 }
@@ -404,7 +404,7 @@ function core_event_dispatcher_entity_field_access(
   AccountInterface $account,
   FieldItemListInterface $items = NULL
 ) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityFieldAccessEvent($operation, $fieldDefinition, $account, $items);
   $manager->register($event);
@@ -415,7 +415,7 @@ function core_event_dispatcher_entity_field_access(
  * Implements hook_entity_extra_field_info().
  */
 function core_event_dispatcher_entity_extra_field_info() {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityExtraFieldInfoEvent();
   $manager->register($event);
@@ -428,7 +428,7 @@ function core_event_dispatcher_entity_extra_field_info() {
  * {@inheritdoc}
  */
 function core_event_dispatcher_entity_extra_field_info_alter(array &$info) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new EntityExtraFieldInfoAlterEvent($info);
   $manager->register($event);
@@ -440,13 +440,13 @@ function core_event_dispatcher_entity_extra_field_info_alter(array &$info) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_form_alter(array &$form, FormStateInterface $formState, string $formId) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new FormAlterEvent($form, $formState, $formId));
 
   $buildInfo = $formState->getBuildInfo();
   if (!empty($buildInfo['base_form_id'])) {
-    /* @var \Drupal\core_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
     $manager->register(new FormBaseAlterEvent($form, $formState, $formId, $buildInfo['base_form_id']));
   }
   $manager->register(new FormIdAlterEvent($form, $formState, $formId));
@@ -458,7 +458,7 @@ function core_event_dispatcher_form_alter(array &$form, FormStateInterface $form
  * {@inheritdoc}
  */
 function core_event_dispatcher_language_switch_links_alter(array &$links, string $type, Url $path) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new LanguageSwitchLinksAlterEvent($links, $type, $path);
   $manager->register($event);
@@ -470,7 +470,7 @@ function core_event_dispatcher_language_switch_links_alter(array &$links, string
  * {@inheritdoc}
  */
 function core_event_dispatcher_theme_suggestions_alter(array &$suggestions, array $variables, string $hook) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new ThemeSuggestionsAlterEvent($suggestions, $variables, $hook));
   $manager->register(new ThemeSuggestionsAlterIdEvent($suggestions, $variables, $hook));
@@ -482,7 +482,7 @@ function core_event_dispatcher_theme_suggestions_alter(array &$suggestions, arra
  * {@inheritdoc}
  */
 function core_event_dispatcher_themes_installed(array $themeList) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new ThemesInstalledEvent($themeList));
 }
@@ -493,7 +493,7 @@ function core_event_dispatcher_themes_installed(array $themeList) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_js_alter(array &$javascript, AttachedAssetsInterface $assets) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new JsAlterEvent($javascript, $assets);
   $manager->register($event);
@@ -505,7 +505,7 @@ function core_event_dispatcher_js_alter(array &$javascript, AttachedAssetsInterf
  * {@inheritdoc}
  */
 function core_event_dispatcher_library_info_alter(array &$libraries, string $extension) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new LibraryInfoAlterEvent($libraries, $extension);
   $manager->register($event);
@@ -517,7 +517,7 @@ function core_event_dispatcher_library_info_alter(array &$libraries, string $ext
  * {@inheritdoc}
  */
 function core_event_dispatcher_page_attachments(array &$attachments) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PageAttachmentsEvent($attachments);
   $manager->register($event);
@@ -529,7 +529,7 @@ function core_event_dispatcher_page_attachments(array &$attachments) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_page_top(array &$pageTop) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PageTopEvent($pageTop);
   $manager->register($event);
@@ -541,7 +541,7 @@ function core_event_dispatcher_page_top(array &$pageTop) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_page_bottom(array &$pageBottom) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new PageBottomEvent($pageBottom);
   $manager->register($event);
@@ -553,7 +553,7 @@ function core_event_dispatcher_page_bottom(array &$pageBottom) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_theme(array $existing) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new ThemeEvent($existing);
   $manager->register($event);
@@ -566,7 +566,7 @@ function core_event_dispatcher_theme(array $existing) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_theme_registry_alter(array &$themeRegistry) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new ThemeRegistryAlterEvent($themeRegistry));
 }
@@ -577,7 +577,7 @@ function core_event_dispatcher_theme_registry_alter(array &$themeRegistry) {
  * {@inheritdoc}
  */
 function core_event_dispatcher_template_preprocess_default_variables_alter(array &$variables) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new TemplatePreprocessDefaultVariablesAlterEvent($variables));
 }
@@ -594,7 +594,7 @@ function core_event_dispatcher_tokens(
   array $options,
   BubbleableMetadata $bubbleableMetadata
 ) {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new TokensReplacementEvent($type, $tokens, $data, $options, $bubbleableMetadata);
   $manager->register($event);
@@ -607,7 +607,7 @@ function core_event_dispatcher_tokens(
  * {@inheritdoc}
  */
 function core_event_dispatcher_token_info() {
-  /* @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $event = new TokensInfoEvent();
   $manager->register($event);
