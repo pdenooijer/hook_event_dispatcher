@@ -15,6 +15,13 @@
     <rule ref="rulesets/codesize.xml"/>
     <rule ref="rulesets/controversial.xml"/>
     <rule ref="rulesets/design.xml"/>
-    <rule ref="rulesets/naming.xml"/>
+    <rule ref="rulesets/naming.xml">
+        <exclude name="LongClassName"/>
+    </rule>
+    <rule ref="rulesets/naming.xml/LongClassName">
+        <properties>
+            <property name="maximum" value="60"/>
+        </properties>
+    </rule>
     <rule ref="rulesets/unusedcode.xml"/>
 </ruleset>

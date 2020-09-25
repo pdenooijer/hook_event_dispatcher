@@ -61,6 +61,8 @@ class UserEventTest extends UnitTestCase {
 
   /**
    * User cancel methods alter event test.
+   *
+   * @SuppressWarnings(PHPMD.UnusedLocalVariable)
    */
   public function testUserCancelMethodsAlterEvent(): void {
     $this->manager->setEventCallbacks([

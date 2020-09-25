@@ -204,6 +204,8 @@ class ViewEventTest extends UnitTestCase {
 
   /**
    * Query substitutions event by reference test.
+   *
+   * @SuppressWarnings(PHPMD.UnusedLocalVariable)
    */
   public function testQuerySubstitutionsByReference(): void {
     /** @var \Drupal\views\ViewExecutable $view */
