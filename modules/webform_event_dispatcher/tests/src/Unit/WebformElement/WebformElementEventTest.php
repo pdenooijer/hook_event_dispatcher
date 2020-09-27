@@ -57,7 +57,7 @@ class WebformElementEventTest extends UnitTestCase {
 
     webform_event_dispatcher_webform_element_info_alter($definitions);
 
-    /* @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementInfoAlterEvent $event */
+    /** @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent('hook_event_dispatcher.webform.element.info.alter');
     self::assertInstanceOf(WebformElementInfoAlterEvent::class, $event);
     self::assertSame($expectedDefinitions, $event->getDefinitions());
@@ -83,7 +83,7 @@ class WebformElementEventTest extends UnitTestCase {
 
     webform_event_dispatcher_webform_element_alter($element, $formState, $context);
 
-    /* @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementAlterEvent $event */
+    /** @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementAlterEvent $event */
     $event = $this->manager->getRegisteredEvent('hook_event_dispatcher.webform.element.alter');
     self::assertInstanceOf(WebformElementAlterEvent::class, $event);
     self::assertSame($expectedElement, $event->getElement());
@@ -112,7 +112,7 @@ class WebformElementEventTest extends UnitTestCase {
 
     webform_event_dispatcher_webform_element_alter($element, $formState, $context);
 
-    /* @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementTypeAlterEvent $event */
+    /** @var \Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementTypeAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.webform.element_$elementType.alter");
     self::assertInstanceOf(WebformElementTypeAlterEvent::class, $event);
     self::assertSame($expectedElement, $event->getElement());

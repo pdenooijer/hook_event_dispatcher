@@ -46,13 +46,13 @@ class UserEventTest extends UnitTestCase {
    */
   public function testUserCancelEvent(): void {
     $edit = ['Test', 'array'];
-    /* @var \Drupal\Core\Session\AccountInterface $account */
+    /** @var \Drupal\Core\Session\AccountInterface $account */
     $account = $this->createMock(AccountInterface::class);
     $method = 'Test method';
 
     user_event_dispatcher_user_cancel($edit, $account, $method);
 
-    /* @var \Drupal\user_event_dispatcher\Event\User\UserCancelEvent $event */
+    /** @var \Drupal\user_event_dispatcher\Event\User\UserCancelEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL);
     self::assertSame($edit, $event->getEdit());
     self::assertSame($account, $event->getAccount());
@@ -61,6 +61,8 @@ class UserEventTest extends UnitTestCase {
 
   /**
    * User cancel methods alter event test.
+   *
+   * @SuppressWarnings(PHPMD.UnusedLocalVariable)
    */
   public function testUserCancelMethodsAlterEvent(): void {
     $this->manager->setEventCallbacks([
@@ -75,7 +77,7 @@ class UserEventTest extends UnitTestCase {
 
     user_event_dispatcher_user_cancel_methods_alter($methods);
 
-    /* @var \Drupal\user_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
+    /** @var \Drupal\user_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
     self::assertSame($expectedMethods, $methods);
     self::assertSame($expectedMethods, $event->getMethods());
@@ -90,7 +92,7 @@ class UserEventTest extends UnitTestCase {
 
     user_event_dispatcher_user_login($account);
 
-    /* @var \Drupal\user_event_dispatcher\Event\User\UserLoginEvent $event */
+    /** @var \Drupal\user_event_dispatcher\Event\User\UserLoginEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGIN);
     self::assertEquals($account, $event->getAccount());
   }
@@ -104,7 +106,7 @@ class UserEventTest extends UnitTestCase {
 
     user_event_dispatcher_user_logout($account);
 
-    /* @var \Drupal\user_event_dispatcher\Event\User\UserLogoutEvent $event */
+    /** @var \Drupal\user_event_dispatcher\Event\User\UserLogoutEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGOUT);
     self::assertEquals($account, $event->getAccount());
   }
@@ -126,7 +128,7 @@ class UserEventTest extends UnitTestCase {
 
     user_event_dispatcher_user_format_name_alter($name, $account);
 
-    /* @var \Drupal\user_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
+    /** @var \Drupal\user_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
     self::assertSame('Test name improved!', $event->getName());
     self::assertSame($account, $event->getAccount());

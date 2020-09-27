@@ -57,7 +57,7 @@ class FormEventTest extends UnitTestCase {
     $expectedForm['test2'] = 'test_altered';
     self::assertSame($expectedForm, $form);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Form\FormAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Form\FormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::FORM_ALTER);
     self::assertSame($form, $event->getForm());
     self::assertSame($formState, $event->getFormState());
@@ -80,7 +80,7 @@ class FormEventTest extends UnitTestCase {
 
     core_event_dispatcher_form_alter($form, $formState, $formId);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.form_base_$baseFormId.alter");
     self::assertEquals($form, $event->getForm());
     self::assertEquals($formState, $event->getFormState());
@@ -100,7 +100,7 @@ class FormEventTest extends UnitTestCase {
 
     core_event_dispatcher_form_alter($form, $formState, $formId);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Form\FormAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Form\FormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.form_$formId.alter");
     self::assertEquals($form, $event->getForm());
     self::assertEquals($formState, $event->getFormState());

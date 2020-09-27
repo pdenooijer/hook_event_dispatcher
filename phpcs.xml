@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="Drupal Coding Standards">
+    <description>Enforce Drupal coding standards with some exceptions</description>
+
+    <rule ref="vendor/drupal/coder/coder_sniffer/Drupal"/>
+    <rule ref="Drupal">
+        <exclude name="Drupal.Commenting.ClassComment.Short"/>
+        <exclude name="Drupal.Classes.UseGlobalClass.RedundantUseStatement"/>
+    </rule>
+
+    <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice"/>
+    <rule ref="DrupalPractice">
+        <exclude name="DrupalPractice.Commenting.CommentEmptyLine.SpacingAfter"/>
+    </rule>
+</ruleset>

@@ -50,7 +50,7 @@ class EntityAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = core_event_dispatcher_entity_access($entity, $operation, $account);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityAccessEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityAccessEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_ACCESS);
     self::assertSame($entity, $event->getEntity());
     self::assertSame($operation, $event->getOperation());

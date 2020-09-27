@@ -75,7 +75,7 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
 
     core_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
     self::assertSame($expectedLinks, $event->getLinks());
     self::assertSame($expectedLinks, $currentLinks);
@@ -116,7 +116,7 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
 
     core_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
     self::assertSame($expectedLinks, $currentLinks);
     self::assertSame($expectedLinks, $event->getLinks());

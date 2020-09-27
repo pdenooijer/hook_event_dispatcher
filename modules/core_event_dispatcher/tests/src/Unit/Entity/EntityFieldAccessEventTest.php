@@ -50,7 +50,7 @@ class EntityFieldAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = core_event_dispatcher_entity_field_access($operation, $fieldDefinition, $account, $items);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityFieldAccessEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityFieldAccessEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_FIELD_ACCESS);
     self::assertSame($operation, $event->getOperation());
     self::assertSame($fieldDefinition, $event->getFieldDefinition());
@@ -78,7 +78,7 @@ class EntityFieldAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = core_event_dispatcher_entity_field_access($operation, $fieldDefinition, $account, $items);
 
-    /* @var \Drupal\core_event_dispatcher\Event\Entity\EntityFieldAccessEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Entity\EntityFieldAccessEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_FIELD_ACCESS);
     self::assertSame($operation, $event->getOperation());
     self::assertSame($fieldDefinition, $event->getFieldDefinition());

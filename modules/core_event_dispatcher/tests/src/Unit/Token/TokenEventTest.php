@@ -109,7 +109,7 @@ class TokenEventTest extends UnitTestCase {
         ],
       ],
     ];
-    /* @var \Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Token\TokensInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_INFO);
     self::assertSame($expectedTypes, $result['types']);
     self::assertSame($expectedTokens, $result['tokens']);
@@ -151,7 +151,7 @@ class TokenEventTest extends UnitTestCase {
       '[test_type:token1]' => $replacement1,
       '[test_type:token2]' => $replacement2,
     ];
-    /* @var \Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent $event */
+    /** @var \Drupal\core_event_dispatcher\Event\Token\TokensReplacementEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_REPLACEMENT);
     self::assertSame($expectedResult, $result);
     self::assertSame($type, $event->getType());

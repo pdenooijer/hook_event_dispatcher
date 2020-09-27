@@ -128,7 +128,7 @@ final class EntityEventTest extends UnitTestCase {
    */
   private function createAndAssertEntityEvent(string $class, array $variables): void {
     $this->dispatcher->setExpectedEventCount(3);
-    /* @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEntityEvent $class */
+    /** @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEntityEvent $class */
     $this->service->createAndDispatchKnownEvents($class::getHook(), $variables);
     /** @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEntityEvent[] $events */
     $events = $this->dispatcher->getEvents();

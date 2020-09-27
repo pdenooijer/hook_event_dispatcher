@@ -139,7 +139,7 @@ final class OtherEventTest extends UnitTestCase {
    *   Event class name.
    */
   private function createAndAssertEvent(string $class): void {
-    /* @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent $class */
+    /** @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent $class */
     $this->service->createAndDispatchKnownEvents($class::getHook(), $this->variables);
     self::assertSame($class::name(), $this->dispatcher->getLastEventName());
     /** @var \Drupal\preprocess_event_dispatcher\Event\AbstractPreprocessEvent $event */
