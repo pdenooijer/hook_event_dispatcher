@@ -31,7 +31,7 @@ use Drupal\preprocess_event_dispatcher\Variables\ViewTableEventVariables;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
-use Drupal\views\Plugin\views\field\EntityField;
+use Drupal\views\Plugin\views\field\FieldHandlerInterface;
 use Drupal\views\Plugin\views\field\Markup;
 use Drupal\views\ResultRow;
 use Drupal\views\ViewExecutable;
@@ -191,7 +191,7 @@ final class OtherEventVariablesTest extends UnitTestCase {
    */
   public function testViewFieldEvent(): void {
     $variablesArray = $this->createVariablesArray();
-    $field = Mockery::mock(EntityField::class);
+    $field = Mockery::mock(FieldHandlerInterface::class);
     $variablesArray['field'] = $field;
     $output = Mockery::mock(Markup::class);
     $variablesArray['output'] = $output;
