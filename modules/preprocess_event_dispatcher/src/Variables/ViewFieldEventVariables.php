@@ -2,7 +2,7 @@
 
 namespace Drupal\preprocess_event_dispatcher\Variables;
 
-use Drupal\views\Plugin\views\field\EntityField;
+use Drupal\views\Plugin\views\field\FieldHandlerInterface;
 use Drupal\views\Plugin\views\field\Markup;
 use Drupal\views\ResultRow;
 use Drupal\views\ViewExecutable;
@@ -15,10 +15,10 @@ class ViewFieldEventVariables extends AbstractEventVariables {
   /**
    * Get the field.
    *
-   * @return \Drupal\views\Plugin\views\field\EntityField
+   * @return \Drupal\views\Plugin\views\field\FieldHandlerInterface
    *   Field.
    */
-  public function getField(): EntityField {
+  public function getField(): FieldHandlerInterface {
     return $this->variables['field'];
   }
 
