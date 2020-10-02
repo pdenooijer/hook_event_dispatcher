@@ -744,6 +744,18 @@ interface HookEventDispatcherInterface {
    *
    * @Event
    *
+   * @see toolbar_event_dispatcher_toolbar()
+   * @see hook_toolbar()
+   *
+   * @var string
+   */
+  public const TOOLBAR = self::PREFIX . 'toolbar';
+
+  /**
+   * Alter the toolbar menu after hook_toolbar() is invoked.
+   *
+   * @Event
+   *
    * @see toolbar_event_dispatcher_toolbar_alter()
    * @see hook_toolbar_alter()
    *
