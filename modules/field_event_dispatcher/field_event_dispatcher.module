@@ -15,13 +15,13 @@ use Drupal\field_event_dispatcher\Event\Field\FieldFormatterThirdPartySettingsFo
 use Drupal\field_event_dispatcher\Event\Field\FieldWidgetSettingsSummaryAlterEvent;
 use Drupal\field_event_dispatcher\Event\Field\FieldWidgetThirdPartySettingsFormEvent;
 use Drupal\field_event_dispatcher\Event\Field\WidgetFormAlterEvent;
+use Drupal\field_event_dispatcher\Event\Field\WidgetMultivalueFormAlterEvent;
 use Drupal\field_event_dispatcher\Event\Field\WidgetTypeFormAlterEvent;
 
 // @todo hook_field_info_alter()
 // @todo hook_field_ui_preconfigured_options_alter()
 // @todo hook_field_storage_config_update_forbid()
 // @todo hook_field_widget_info_alter()
-// @todo hook_field_widget_multivalue_form_alter()
 // @todo hook_field_info_max_weight()
 // @todo hook_field_purge_field_storage()
 // @todo hook_field_purge_field()
@@ -73,6 +73,17 @@ function field_event_dispatcher_field_widget_form_alter(array &$element, FormSta
   $manager = Drupal::service('hook_event_dispatcher.manager');
   $manager->register(new WidgetFormAlterEvent($element, $formState, $context));
   $manager->register(new WidgetTypeFormAlterEvent($element, $formState, $context));
+}
+
+/**
+ * Implements hook_field_widget_multivalue_form_alter().
+ *
+ * {@inheritdoc}
+ */
+function field_event_dispatcher_field_widget_multivalue_form_alter(array &$elements, FormStateInterface $formState, array $context) {
+  /** @var \Drupal\hook_event_dispatcher\Manager\HookEventDispatcherManagerInterface $manager */
+  $manager = Drupal::service('hook_event_dispatcher.manager');
+  $manager->register(new WidgetMultivalueFormAlterEvent($elements, $formState, $context));
 }
 
 /**
