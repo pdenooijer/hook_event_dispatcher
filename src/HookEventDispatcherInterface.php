@@ -183,6 +183,18 @@ interface HookEventDispatcherInterface {
   public const WIDGET_FORM_ALTER = self::PREFIX . 'widget_form.alter';
 
   /**
+   * Alter forms for multi-value field widgets provided by other modules.
+   *
+   * @Event
+   *
+   * @see field_event_dispatcher_field_widget_multivalue_form_alter()
+   * @see hook_field_widget_multivalue_form_alter()
+   *
+   * @var string
+   */
+  public const WIDGET_MULTIVALUE_FORM_ALTER = self::PREFIX . 'widget_multivalue_form.alter';
+
+  /**
    * Control access to fields.
    *
    * @Event
