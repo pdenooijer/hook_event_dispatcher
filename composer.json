@@ -16,6 +16,7 @@
     "squizlabs/php_codesniffer": "^3.4"
   },
   "minimum-stability": "alpha",
+  "prefer-stable": true,
   "scripts": {
     "test": [
       "@phpunit",
