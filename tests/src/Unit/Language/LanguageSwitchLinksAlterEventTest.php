@@ -76,12 +76,12 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
 
     hook_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
-    $this->assertSame($expectedLinks, $event->getLinks());
-    $this->assertSame($expectedLinks, $currentLinks);
-    $this->assertSame($currentType, $event->getType());
-    $this->assertSame($currentPath, $event->getPath());
+    self::assertSame($expectedLinks, $event->getLinks());
+    self::assertSame($expectedLinks, $currentLinks);
+    self::assertSame($currentType, $event->getType());
+    self::assertSame($currentPath, $event->getPath());
   }
 
   /**
@@ -121,9 +121,9 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
 
     hook_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
-    $this->assertSame($expectedLinks, $event->getLinks());
+    self::assertSame($expectedLinks, $event->getLinks());
   }
 
   /**
@@ -159,9 +159,9 @@ class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
 
     hook_event_dispatcher_language_switch_links_alter($currentLinks, $currentType, $currentPath);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LANGUAGE_SWITCH_LINKS_ALTER);
-    $this->assertSame($expectedLinks, $event->getLinks());
+    self::assertSame($expectedLinks, $event->getLinks());
   }
 
 }

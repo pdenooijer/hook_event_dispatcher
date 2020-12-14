@@ -60,8 +60,8 @@ final class JsAlterEventTest extends UnitTestCase {
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::JS_ALTER);
 
-    $this->assertSame($expectedJavascript, $event->getJavascript());
-    $this->assertSame($attachedAssets, $event->getAttachedAssets());
+    self::assertSame($expectedJavascript, $event->getJavascript());
+    self::assertSame($attachedAssets, $event->getAttachedAssets());
   }
 
   /**
@@ -92,8 +92,8 @@ final class JsAlterEventTest extends UnitTestCase {
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\JsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::JS_ALTER);
 
-    $this->assertSame($expectedJavascript, $event->getJavascript());
-    $this->assertSame($attachedAssets, $event->getAttachedAssets());
+    self::assertSame($expectedJavascript, $event->getJavascript());
+    self::assertSame($attachedAssets, $event->getAttachedAssets());
   }
 
 }

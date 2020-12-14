@@ -54,13 +54,13 @@ class LibraryInfoAlterEventTest extends UnitTestCase {
     hook_event_dispatcher_library_info_alter($libraries, $extension);
 
     $expectedLibraries['test_library'] = 'test_altered';
-    $this->assertSame($libraries, $expectedLibraries);
+    self::assertSame($libraries, $expectedLibraries);
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\LibraryInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::LIBRARY_INFO_ALTER);
 
-    $this->assertSame($libraries, $event->getLibraries());
-    $this->assertSame($extension, $event->getExtension());
+    self::assertSame($libraries, $event->getLibraries());
+    self::assertSame($extension, $event->getExtension());
   }
 
 }

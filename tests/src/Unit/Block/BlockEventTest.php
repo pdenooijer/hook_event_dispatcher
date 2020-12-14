@@ -44,14 +44,14 @@ class BlockEventTest extends UnitTestCase {
 
     hook_event_dispatcher_block_build_alter($build, $block);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Block\BlockBuildAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::BLOCK_BUILD_ALTER);
-    $this->assertEquals($build, $event->getBuild());
-    $this->assertEquals($block, $event->getBlock());
+    self::assertEquals($build, $event->getBuild());
+    self::assertEquals($block, $event->getBlock());
 
     $newBuild = ['newBuild'];
     $event->setBuild($newBuild);
-    $this->assertEquals($newBuild, $event->getBuild());
+    self::assertEquals($newBuild, $event->getBuild());
   }
 
 }

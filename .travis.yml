@@ -17,7 +17,7 @@ install:
 script:
 - vendor/bin/parallel-lint --exclude vendor/ -e php,module,inc,install,profile,theme .
 - vendor/bin/phpunit --configuration=phpunit.xml --coverage-text
-- vendor/bin/phpcs --ignore=vendor/ --standard=vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml --extensions=php,module,inc,install,profile,theme --report=full --warning-severity=0 .
+- vendor/bin/phpcs --ignore=vendor/ --standard=phpcs.xml --extensions=php,module,inc,install,profile,theme,css,info,txt,md,yml --report=full .
 - vendor/bin/phpmd --exclude vendor/ --suffixes php,module,inc,install,profile,theme . text phpmd.xml
 - composer validate
 

@@ -60,7 +60,7 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_pre_view($view, $displayId, $arguments);
 
-    $this->assertEquals('test2', $arguments[0]);
+    self::assertEquals('test2', $arguments[0]);
   }
 
   /**
@@ -72,9 +72,9 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_pre_build($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_BUILD);
-    $this->assertEquals($view, $event->getView());
+    self::assertEquals($view, $event->getView());
   }
 
   /**
@@ -86,9 +86,9 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_post_build($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_BUILD);
-    $this->assertEquals($view, $event->getView());
+    self::assertEquals($view, $event->getView());
   }
 
   /**
@@ -100,9 +100,9 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_pre_execute($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_EXECUTE);
-    $this->assertEquals($view, $event->getView());
+    self::assertEquals($view, $event->getView());
   }
 
   /**
@@ -114,9 +114,9 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_post_execute($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_POST_EXECUTE);
-    $this->assertEquals($view, $event->getView());
+    self::assertEquals($view, $event->getView());
   }
 
   /**
@@ -128,9 +128,9 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_pre_render($view);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Views\ViewsPreBuildEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_PRE_RENDER);
-    $this->assertEquals($view, $event->getView());
+    self::assertEquals($view, $event->getView());
   }
 
   /**
@@ -155,8 +155,8 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_post_render($view, $output, $cache);
 
-    $this->assertEquals("<h2>Test</h2>", $output);
-    $this->assertEquals(10, $cache->options['results_lifespan']);
+    self::assertEquals("<h2>Test</h2>", $output);
+    self::assertEquals(10, $cache->options['results_lifespan']);
   }
 
   /**
@@ -170,10 +170,10 @@ class ViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_views_query_alter($view, $query);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Views\ViewsQueryAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::VIEWS_QUERY_ALTER);
-    $this->assertSame($view, $event->getView());
-    $this->assertSame($query, $event->getQuery());
+    self::assertSame($view, $event->getView());
+    self::assertSame($query, $event->getQuery());
   }
 
   /**
@@ -191,7 +191,7 @@ class ViewEventTest extends UnitTestCase {
     ]);
 
     $result = hook_event_dispatcher_views_query_substitutions($view);
-    $this->assertSame($expected, $result);
+    self::assertSame($expected, $result);
   }
 
 }
