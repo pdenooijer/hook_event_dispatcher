@@ -39,6 +39,7 @@ class PageAttachmentsEventTest extends UnitTestCase {
    * Test the PageAttachmentsEvent by reference.
    */
   public function testPageAttachmentsByReference() {
+    $currentAttachments = $testAttachment = [];
     $currentAttachments['current']['#attached']['library'] = ['current/current'];
     $testAttachment['#attached']['library'] = ['test/test'];
 
@@ -54,16 +55,17 @@ class PageAttachmentsEventTest extends UnitTestCase {
 
     hook_event_dispatcher_page_attachments($currentAttachments);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_ATTACHMENTS);
-    $this->assertSame($expectedAttachments, $event->getAttachments());
-    $this->assertSame($expectedAttachments, $currentAttachments);
+    self::assertSame($expectedAttachments, $event->getAttachments());
+    self::assertSame($expectedAttachments, $currentAttachments);
   }
 
   /**
    * Test the PageAttachmentsEvent by set.
    */
   public function testPageAttachmentsBySet() {
+    $currentAttachments = $testAttachment = [];
     $currentAttachments['current']['#attached']['library'] = ['current/current'];
     $testAttachment['#attached']['library'] = ['test/test'];
 
@@ -80,10 +82,10 @@ class PageAttachmentsEventTest extends UnitTestCase {
 
     hook_event_dispatcher_page_attachments($currentAttachments);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Page\PageAttachmentsEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_ATTACHMENTS);
-    $this->assertSame($expectedAttachments, $event->getAttachments());
-    $this->assertSame($expectedAttachments, $currentAttachments);
+    self::assertSame($expectedAttachments, $event->getAttachments());
+    self::assertSame($expectedAttachments, $currentAttachments);
   }
 
 }

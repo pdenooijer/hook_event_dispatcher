@@ -43,7 +43,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     $suggestions = [
       'container_theme_function_1',
       'container_theme_function_2',
-      'container_theme_function_3'
+      'container_theme_function_3',
     ];
     $variables = ['content' => 'test'];
     $hook = 'container';
@@ -52,8 +52,8 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER);
-    $this->assertEquals($suggestions, $event->getSuggestions());
-    $this->assertEquals($variables, $event->getVariables());
+    self::assertEquals($suggestions, $event->getSuggestions());
+    self::assertEquals($variables, $event->getVariables());
   }
 
   /**
@@ -64,7 +64,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     $suggestions = [
       'container_theme_function_1',
       'container_theme_function_2',
-      'container_theme_function_3'
+      'container_theme_function_3',
     ];
     $variables = ['content' => 'test'];
     $hook = 'container';
@@ -84,8 +84,8 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEME_SUGGESTIONS_ALTER);
-    $this->assertEquals($newSuggestions, $event->getSuggestions());
-    $this->assertEquals($variables, $event->getVariables());
+    self::assertEquals($newSuggestions, $event->getSuggestions());
+    self::assertEquals($variables, $event->getVariables());
   }
 
   /**
@@ -96,7 +96,7 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
     $suggestions = [
       'container_theme_function_1',
       'container_theme_function_2',
-      'container_theme_function_3'
+      'container_theme_function_3',
     ];
     $variables = ['content' => 'test'];
     $hook = 'container';
@@ -105,8 +105,8 @@ class ThemeSuggestionsAlterEventTest extends UnitTestCase {
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemeSuggestionsAlterIdEvent $event */
     $event = $this->manager->getRegisteredEvent('hook_event_dispatcher.theme.suggestions_' . $hook . '_alter');
-    $this->assertEquals($suggestions, $event->getSuggestions());
-    $this->assertEquals($variables, $event->getVariables());
+    self::assertEquals($suggestions, $event->getSuggestions());
+    self::assertEquals($variables, $event->getVariables());
   }
 
 }

@@ -28,7 +28,7 @@ final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterfa
    *   Event.
    */
   public function preprocessPage(PagePreprocessEvent $event) {
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables $variables */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\PageEventVariables $variables */
     $variables = $event->getVariables();
     $node = $variables->getNode();
 
@@ -46,7 +46,7 @@ final class ExamplePreprocessorEventSubscriber implements EventSubscriberInterfa
    *   Event.
    */
   public function preprocessBlock(BlockPreprocessEvent $event) {
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables $variables */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\BlockEventVariables $variables */
     $variables = $event->getVariables();
 
     if ($variables->get('field_contact_form') === NULL) {

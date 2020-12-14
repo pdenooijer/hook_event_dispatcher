@@ -40,7 +40,7 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
    */
   public function testTemplatePreprocessDefaultVariablesAlterEvent() {
     $newVariable = [
-      'test_variable' => TRUE
+      'test_variable' => TRUE,
     ];
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER => function (TemplatePreprocessDefaultVariablesAlterEvent $event) use ($newVariable) {
@@ -66,7 +66,7 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
-    $this->assertSame($expectedVariables, $event->getVariables());
+    self::assertSame($expectedVariables, $event->getVariables());
   }
 
   /**
@@ -74,7 +74,7 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
    */
   public function testTemplatePreprocessDefaultVariablesAlterEventBySet() {
     $newVariable = [
-      'test_variable' => TRUE
+      'test_variable' => TRUE,
     ];
     $this->manager->setEventCallbacks([
       HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER => function (TemplatePreprocessDefaultVariablesAlterEvent $event) use ($newVariable) {
@@ -101,7 +101,7 @@ final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCas
 
     /** @var \Drupal\hook_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TEMPLATE_PREPROCESS_DEFAULT_VARIABLES_ALTER);
-    $this->assertSame($expectedVariables, $event->getVariables());
+    self::assertSame($expectedVariables, $event->getVariables());
   }
 
 }

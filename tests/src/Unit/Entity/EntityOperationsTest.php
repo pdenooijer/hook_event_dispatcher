@@ -62,10 +62,10 @@ class EntityOperationsTest extends UnitTestCase {
 
     $result = hook_event_dispatcher_entity_operation($entity);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityOperationEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Entity\EntityOperationEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_OPERATION);
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($expectedOperations, $result);
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($expectedOperations, $result);
   }
 
   /**
@@ -93,11 +93,11 @@ class EntityOperationsTest extends UnitTestCase {
 
     hook_event_dispatcher_entity_operation_alter($operations, $entity);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityOperationAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Entity\EntityOperationAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_OPERATION_ALTER);
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($expectedOperations, $event->getOperations());
-    $this->assertSame($expectedOperations, $operations);
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($expectedOperations, $event->getOperations());
+    self::assertSame($expectedOperations, $operations);
   }
 
 }

@@ -25,7 +25,7 @@ class HookEventDispatcherManagerTest extends UnitTestCase {
 
     $manager = new HookEventDispatcherManager($dispatcher);
     $returnedEvent = $manager->register($event);
-    $this->assertEquals($event, $returnedEvent);
+    self::assertEquals($event, $returnedEvent);
   }
 
 }
