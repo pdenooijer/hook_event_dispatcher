@@ -5,7 +5,7 @@ namespace Drupal\Tests\core_event_dispatcher\Unit\Theme;
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\core_event_dispatcher\Event\Theme\LibraryInfoAlterEvent;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use function core_event_dispatcher_library_info_alter;
@@ -15,7 +15,7 @@ use function core_event_dispatcher_library_info_alter;
  *
  * @group hook_event_dispatcher
  */
-class LibraryInfoAlterEventTest extends UnitTestCase {
+class LibraryInfoAlterEventTest extends TestCase {
 
   /**
    * The manager.

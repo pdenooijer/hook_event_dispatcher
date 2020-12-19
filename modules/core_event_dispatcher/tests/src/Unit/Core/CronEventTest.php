@@ -6,7 +6,7 @@ use Drupal;
 use Drupal\core_event_dispatcher\Event\Core\CronEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use function core_event_dispatcher_cron;
 
@@ -15,7 +15,7 @@ use function core_event_dispatcher_cron;
  *
  * @group hook_event_dispatcher
  */
-final class CronEventTest extends UnitTestCase {
+final class CronEventTest extends TestCase {
 
   /**
    * HookEventDispatcherManagerSpy.

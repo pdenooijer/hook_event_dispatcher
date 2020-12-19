@@ -7,14 +7,14 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\field_event_dispatcher\Event\Field\AbstractFieldSettingsSummaryFormEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class AbstractFieldSettingsSummaryAlterEventTestCase.
  *
  * @group field_event_dispatcher
  */
-abstract class AbstractFieldSettingsSummaryAlterEventTestCase extends UnitTestCase {
+abstract class AbstractFieldSettingsSummaryAlterEventTestCase extends TestCase {
 
   /**
    * The manager.

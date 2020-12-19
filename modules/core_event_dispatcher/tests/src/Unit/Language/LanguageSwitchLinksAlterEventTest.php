@@ -9,7 +9,7 @@ use Drupal\Core\Url;
 use Drupal\core_event_dispatcher\Event\Language\LanguageSwitchLinksAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_language_switch_links_alter;
 
 /**
@@ -17,7 +17,7 @@ use function core_event_dispatcher_language_switch_links_alter;
  *
  * @group hook_event_dispatcher
  */
-class LanguageSwitchLinksAlterEventTest extends UnitTestCase {
+class LanguageSwitchLinksAlterEventTest extends TestCase {
 
   /**
    * The manager.

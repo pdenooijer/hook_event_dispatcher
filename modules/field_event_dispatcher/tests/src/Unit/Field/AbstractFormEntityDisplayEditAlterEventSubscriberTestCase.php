@@ -9,14 +9,14 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\core_event_dispatcher\Event\Form\FormIdAlterEvent;
 use Drupal\field_event_dispatcher\EventSubscriber\Form\FormEntityDisplayEditAlterEventSubscriber;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase.
  *
  * @group field_event_dispatcher
  */
-abstract class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase extends UnitTestCase {
+abstract class AbstractFormEntityDisplayEditAlterEventSubscriberTestCase extends TestCase {
 
   /**
    * The manager.

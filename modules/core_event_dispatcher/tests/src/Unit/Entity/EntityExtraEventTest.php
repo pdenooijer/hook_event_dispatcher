@@ -8,7 +8,7 @@ use Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityExtraFieldInfoEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_entity_extra_field_info;
 use function core_event_dispatcher_entity_extra_field_info_alter;
 
@@ -17,7 +17,7 @@ use function core_event_dispatcher_entity_extra_field_info_alter;
  *
  * @group core_event_dispatcher
  */
-class EntityExtraEventTest extends UnitTestCase {
+class EntityExtraEventTest extends TestCase {
 
   /**
    * The manager.

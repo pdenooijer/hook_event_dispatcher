@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\core_event_dispatcher\Event\Entity\EntityBaseFieldInfoAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_entity_base_field_info_alter;
 
 /**
@@ -16,7 +16,7 @@ use function core_event_dispatcher_entity_base_field_info_alter;
  *
  * @group core_event_dispatcher
  */
-class EntityBaseFieldInfoAlterEventTest extends UnitTestCase {
+class EntityBaseFieldInfoAlterEventTest extends TestCase {
 
   /**
    * The manager.

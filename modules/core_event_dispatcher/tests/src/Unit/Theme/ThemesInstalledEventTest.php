@@ -6,7 +6,7 @@ use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_themes_installed;
 
 /**
@@ -14,7 +14,7 @@ use function core_event_dispatcher_themes_installed;
  *
  * @group hook_event_dispatcher
  */
-class ThemesInstalledEventTest extends UnitTestCase {
+class ThemesInstalledEventTest extends TestCase {
 
   /**
    * The manager.

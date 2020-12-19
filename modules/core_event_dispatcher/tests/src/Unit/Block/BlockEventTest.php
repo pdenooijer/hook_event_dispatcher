@@ -8,7 +8,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\core_event_dispatcher\Event\Block\BlockBuildAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_block_build_alter;
 
 /**
@@ -16,7 +16,7 @@ use function core_event_dispatcher_block_build_alter;
  *
  * @group hook_event_dispatcher
  */
-class BlockEventTest extends UnitTestCase {
+class BlockEventTest extends TestCase {
 
   /**
    * The manager.

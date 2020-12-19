@@ -4,7 +4,7 @@ namespace Drupal\Tests\preprocess_event_dispatcher\Unit;
 
 use Drupal\node\NodeInterface;
 use Drupal\preprocess_event_dispatcher\Variables\PageEventVariables;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery;
 use stdClass;
 
@@ -13,7 +13,7 @@ use stdClass;
  *
  * @group preprocess_event_dispatcher
  */
-final class PageTest extends UnitTestCase {
+final class PageTest extends TestCase {
 
   /**
    * Test the getter.

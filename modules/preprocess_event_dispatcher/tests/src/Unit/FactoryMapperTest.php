@@ -3,7 +3,7 @@
 namespace Drupal\Tests\preprocess_event_dispatcher\Unit;
 
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function array_filter;
 use function count;
 use function dirname;
@@ -16,7 +16,7 @@ use function substr;
  *
  * @group preprocess_event_dispatcher
  */
-final class FactoryMapperTest extends UnitTestCase {
+final class FactoryMapperTest extends TestCase {
 
   /**
    * Factory mapper.

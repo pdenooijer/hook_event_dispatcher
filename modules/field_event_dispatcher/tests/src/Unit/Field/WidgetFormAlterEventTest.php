@@ -11,7 +11,7 @@ use Drupal\field_event_dispatcher\Event\Field\WidgetFormAlterEvent;
 use Drupal\field_event_dispatcher\Event\Field\WidgetMultivalueFormAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function field_event_dispatcher_field_widget_form_alter;
 use function field_event_dispatcher_field_widget_multivalue_form_alter;
 
@@ -20,7 +20,7 @@ use function field_event_dispatcher_field_widget_multivalue_form_alter;
  *
  * @group field_event_dispatcher
  */
-final class WidgetFormAlterEventTest extends UnitTestCase {
+final class WidgetFormAlterEventTest extends TestCase {
 
   /**
    * The manager.

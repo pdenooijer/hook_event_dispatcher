@@ -11,7 +11,7 @@ use Drupal\core_event_dispatcher\Event\Entity\EntityViewAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityViewEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_entity_view;
 use function core_event_dispatcher_entity_view_alter;
 
@@ -20,7 +20,7 @@ use function core_event_dispatcher_entity_view_alter;
  *
  * @group core_event_dispatcher
  */
-final class EntityViewEventTest extends UnitTestCase {
+final class EntityViewEventTest extends TestCase {
 
   /**
    * The manager.

@@ -24,7 +24,7 @@ use Drupal\preprocess_event_dispatcher\Variables\TaxonomyTermEventVariables;
 use Drupal\taxonomy\TermInterface;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\EntityMockFactory;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery;
 
 /**
@@ -35,7 +35,7 @@ use Mockery;
  * Testing all variables gives expected PHPMD warnings.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class EntityEventVariablesTest extends UnitTestCase {
+final class EntityEventVariablesTest extends TestCase {
 
   /**
    * Factory mapper.

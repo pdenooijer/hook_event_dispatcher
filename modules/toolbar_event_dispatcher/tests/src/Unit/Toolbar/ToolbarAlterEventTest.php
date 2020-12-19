@@ -3,11 +3,11 @@
 namespace Drupal\Tests\toolbar_event_dispatcher\Unit\Toolbar;
 
 use Drupal;
-use Drupal\toolbar_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
+use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
-use Drupal\Core\DependencyInjection\ContainerBuilder;
+use Drupal\toolbar_event_dispatcher\Event\Toolbar\ToolbarAlterEvent;
+use PHPUnit\Framework\TestCase;
 use function toolbar_event_dispatcher_toolbar_alter;
 
 /**
@@ -15,7 +15,7 @@ use function toolbar_event_dispatcher_toolbar_alter;
  *
  * @group toolbar_event_dispatcher
  */
-class ToolbarAlterEventTest extends UnitTestCase {
+class ToolbarAlterEventTest extends TestCase {
 
   /**
    * The manager.

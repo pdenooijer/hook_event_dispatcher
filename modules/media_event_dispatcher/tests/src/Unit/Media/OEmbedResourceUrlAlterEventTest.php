@@ -8,7 +8,7 @@ use Drupal\media\OEmbed\Provider;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\media_event_dispatcher\Event\Media\OEmbedResourceUrlAlterEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function media_event_dispatcher_oembed_resource_url_alter;
 
 /**
@@ -16,7 +16,7 @@ use function media_event_dispatcher_oembed_resource_url_alter;
  *
  * @group media_event_dispatcher
  */
-class OEmbedResourceUrlAlterEventTest extends UnitTestCase {
+class OEmbedResourceUrlAlterEventTest extends TestCase {
 
   /**
    * The manager.
@@ -28,7 +28,7 @@ class OEmbedResourceUrlAlterEventTest extends UnitTestCase {
   /**
    * Sets up the test.
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);

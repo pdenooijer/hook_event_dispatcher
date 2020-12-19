@@ -29,7 +29,7 @@ use Drupal\preprocess_event_dispatcher\Variables\ViewEventVariables;
 use Drupal\preprocess_event_dispatcher\Variables\ViewFieldEventVariables;
 use Drupal\preprocess_event_dispatcher\Variables\ViewTableEventVariables;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use Drupal\user\UserInterface;
 use Drupal\views\Plugin\views\field\FieldHandlerInterface;
 use Drupal\views\Plugin\views\field\Markup;
@@ -46,7 +46,7 @@ use Mockery;
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-final class OtherEventVariablesTest extends UnitTestCase {
+final class OtherEventVariablesTest extends TestCase {
 
   /**
    * Factory mapper.

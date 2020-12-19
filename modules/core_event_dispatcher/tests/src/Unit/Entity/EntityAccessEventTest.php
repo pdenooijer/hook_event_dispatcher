@@ -12,7 +12,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\core_event_dispatcher\Event\Entity\EntityAccessEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_entity_access;
 
 /**
@@ -20,7 +20,7 @@ use function core_event_dispatcher_entity_access;
  *
  * @group core_event_dispatcher
  */
-class EntityAccessEventTest extends UnitTestCase {
+class EntityAccessEventTest extends TestCase {
 
   /**
    * The manager.

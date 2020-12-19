@@ -9,7 +9,7 @@ use Drupal\core_event_dispatcher\Event\Entity\EntityOperationAlterEvent;
 use Drupal\core_event_dispatcher\Event\Entity\EntityOperationEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_entity_operation;
 use function core_event_dispatcher_entity_operation_alter;
 
@@ -18,7 +18,7 @@ use function core_event_dispatcher_entity_operation_alter;
  *
  * @group core_event_dispatcher
  */
-class EntityOperationsTest extends UnitTestCase {
+class EntityOperationsTest extends TestCase {
 
   /**
    * The manager.

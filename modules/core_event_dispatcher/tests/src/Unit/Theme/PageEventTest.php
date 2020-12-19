@@ -9,7 +9,7 @@ use Drupal\core_event_dispatcher\Event\Theme\PageBottomEvent;
 use Drupal\core_event_dispatcher\Event\Theme\PageTopEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_page_attachments;
 use function core_event_dispatcher_page_bottom;
 use function core_event_dispatcher_page_top;
@@ -19,7 +19,7 @@ use function core_event_dispatcher_page_top;
  *
  * @group hook_event_dispatcher
  */
-class PageEventTest extends UnitTestCase {
+class PageEventTest extends TestCase {
 
   /**
    * The manager.
