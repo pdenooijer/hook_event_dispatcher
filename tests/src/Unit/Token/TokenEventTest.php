@@ -107,12 +107,12 @@ class TokenEventTest extends UnitTestCase {
         ],
       ],
     ];
-    /* @var \Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Token\TokensInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_INFO);
-    $this->assertEquals($expectedTypes, $result['types']);
-    $this->assertEquals($expectedTokens, $result['tokens']);
-    $this->assertEquals($expectedTypes, $event->getTokenTypes());
-    $this->assertEquals($expectedTokens, $event->getTokens());
+    self::assertEquals($expectedTypes, $result['types']);
+    self::assertEquals($expectedTokens, $result['tokens']);
+    self::assertEquals($expectedTypes, $event->getTokenTypes());
+    self::assertEquals($expectedTokens, $event->getTokens());
   }
 
   /**
@@ -149,18 +149,18 @@ class TokenEventTest extends UnitTestCase {
       '[test_type:token1]' => $replacement1,
       '[test_type:token2]' => $replacement2,
     ];
-    /* @var \Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Token\TokensReplacementEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::TOKEN_REPLACEMENT);
-    $this->assertEquals($expectedResult, $result);
-    $this->assertEquals($type, $event->getType());
-    $this->assertEquals($tokens, $event->getTokens());
-    $this->assertEquals($data, $event->getRawData());
-    $this->assertEquals($options, $event->getOptions());
-    $this->assertEquals($metaData, $event->getBubbleableMetadata());
-    $this->assertEquals('test!', $event->getData('test_data'));
-    $this->assertNull($event->getData('none_existing'));
-    $this->assertFalse($event->forToken('none_existing', 'token1'));
-    $this->assertFalse($event->forToken('test_type', 'none_existing'));
+    self::assertEquals($expectedResult, $result);
+    self::assertEquals($type, $event->getType());
+    self::assertEquals($tokens, $event->getTokens());
+    self::assertEquals($data, $event->getRawData());
+    self::assertEquals($options, $event->getOptions());
+    self::assertEquals($metaData, $event->getBubbleableMetadata());
+    self::assertEquals('test!', $event->getData('test_data'));
+    self::assertNull($event->getData('none_existing'));
+    self::assertFalse($event->forToken('none_existing', 'token1'));
+    self::assertFalse($event->forToken('test_type', 'none_existing'));
   }
 
   /**

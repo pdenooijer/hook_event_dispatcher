@@ -53,13 +53,13 @@ class PathEventTest extends UnitTestCase {
 
     hook_event_dispatcher_path_delete($path);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Path\PathDeleteEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_DELETE);
-    $this->assertEquals($source, $event->getSource());
-    $this->assertEquals($alias, $event->getAlias());
-    $this->assertEquals($langcode, $event->getLangcode());
-    $this->assertEquals($pid, $event->getPid());
-    $this->assertTrue($event->isRedirect());
+    self::assertEquals($source, $event->getSource());
+    self::assertEquals($alias, $event->getAlias());
+    self::assertEquals($langcode, $event->getLangcode());
+    self::assertEquals($pid, $event->getPid());
+    self::assertTrue($event->isRedirect());
   }
 
   /**
@@ -79,12 +79,12 @@ class PathEventTest extends UnitTestCase {
 
     hook_event_dispatcher_path_insert($path);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Path\PathInsertEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_INSERT);
-    $this->assertEquals($source, $event->getSource());
-    $this->assertEquals($alias, $event->getAlias());
-    $this->assertEquals($langcode, $event->getLangcode());
-    $this->assertEquals($pid, $event->getPid());
+    self::assertEquals($source, $event->getSource());
+    self::assertEquals($alias, $event->getAlias());
+    self::assertEquals($langcode, $event->getLangcode());
+    self::assertEquals($pid, $event->getPid());
   }
 
   /**
@@ -104,12 +104,12 @@ class PathEventTest extends UnitTestCase {
 
     hook_event_dispatcher_path_update($path);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Path\PathUpdateEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PATH_UPDATE);
-    $this->assertEquals($source, $event->getSource());
-    $this->assertEquals($alias, $event->getAlias());
-    $this->assertEquals($langcode, $event->getLangcode());
-    $this->assertEquals($pid, $event->getPid());
+    self::assertEquals($source, $event->getSource());
+    self::assertEquals($alias, $event->getAlias());
+    self::assertEquals($langcode, $event->getLangcode());
+    self::assertEquals($pid, $event->getPid());
   }
 
   /**
@@ -123,7 +123,7 @@ class PathEventTest extends UnitTestCase {
     hook_event_dispatcher_path_update([]);
 
     // Add this check so phpunit won't trigger incomplete test.
-    $this->assertTrue(TRUE);
+    self::assertTrue(TRUE);
   }
 
 }

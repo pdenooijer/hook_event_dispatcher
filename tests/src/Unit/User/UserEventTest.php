@@ -42,17 +42,17 @@ class UserEventTest extends UnitTestCase {
    */
   public function testUserCancelEvent() {
     $edit = ['Test', 'array'];
-    /* @var \Drupal\Core\Session\AccountInterface $account */
+    /** @var \Drupal\Core\Session\AccountInterface $account */
     $account = $this->createMock(AccountInterface::class);
     $method = 'Test method';
 
     hook_event_dispatcher_user_cancel($edit, $account, $method);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\User\UserCancelEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL);
-    $this->assertSame($edit, $event->getEdit());
-    $this->assertSame($account, $event->getAccount());
-    $this->assertSame($method, $event->getMethod());
+    self::assertSame($edit, $event->getEdit());
+    self::assertSame($account, $event->getAccount());
+    self::assertSame($method, $event->getMethod());
   }
 
   /**
@@ -70,9 +70,9 @@ class UserEventTest extends UnitTestCase {
 
     hook_event_dispatcher_user_cancel_methods_alter($methods);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
-    $this->assertSame(['Test method improved!'], $event->getMethods());
+    self::assertSame(['Test method improved!'], $event->getMethods());
   }
 
   /**
@@ -89,9 +89,9 @@ class UserEventTest extends UnitTestCase {
 
     hook_event_dispatcher_user_cancel_methods_alter($methods);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\User\UserCancelMethodsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_CANCEL_METHODS_ALTER);
-    $this->assertSame(['New method'], $event->getMethods());
+    self::assertSame(['New method'], $event->getMethods());
   }
 
   /**
@@ -103,9 +103,9 @@ class UserEventTest extends UnitTestCase {
 
     hook_event_dispatcher_user_login($account);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserLoginEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\User\UserLoginEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGIN);
-    $this->assertEquals($account, $event->getAccount());
+    self::assertEquals($account, $event->getAccount());
   }
 
   /**
@@ -117,9 +117,9 @@ class UserEventTest extends UnitTestCase {
 
     hook_event_dispatcher_user_logout($account);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserLogoutEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\User\UserLogoutEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_LOGOUT);
-    $this->assertEquals($account, $event->getAccount());
+    self::assertEquals($account, $event->getAccount());
   }
 
   /**
@@ -139,10 +139,10 @@ class UserEventTest extends UnitTestCase {
 
     hook_event_dispatcher_user_format_name_alter($name, $account);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
-    $this->assertSame('Test name improved!', $event->getName());
-    $this->assertSame($account, $event->getAccount());
+    self::assertSame('Test name improved!', $event->getName());
+    self::assertSame($account, $event->getAccount());
   }
 
   /**
@@ -161,10 +161,10 @@ class UserEventTest extends UnitTestCase {
 
     hook_event_dispatcher_user_format_name_alter($name, $account);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\User\UserFormatNameAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::USER_FORMAT_NAME_ALTER);
-    $this->assertSame('New name!', $event->getName());
-    $this->assertSame($account, $event->getAccount());
+    self::assertSame('New name!', $event->getName());
+    self::assertSame($account, $event->getAccount());
   }
 
 }

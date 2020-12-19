@@ -57,13 +57,13 @@ class EntityFieldAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = hook_event_dispatcher_entity_field_access($operation, $fieldDefinition, $account, $items);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\EntityField\EntityFieldAccessEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\EntityField\EntityFieldAccessEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_FIELD_ACCESS);
-    $this->assertEquals($operation, $event->getOperation());
-    $this->assertEquals($fieldDefinition, $event->getFieldDefinition());
-    $this->assertEquals($account, $event->getAccount());
-    $this->assertEquals($items, $event->getItems());
-    $this->assertEquals($accessResult, $hookAccessResult);
+    self::assertEquals($operation, $event->getOperation());
+    self::assertEquals($fieldDefinition, $event->getFieldDefinition());
+    self::assertEquals($account, $event->getAccount());
+    self::assertEquals($items, $event->getItems());
+    self::assertEquals($accessResult, $hookAccessResult);
   }
 
 }

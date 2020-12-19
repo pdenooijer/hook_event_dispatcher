@@ -34,14 +34,15 @@ final class PageTest extends UnitTestCase {
    * Test the getter.
    */
   public function testGet() {
+    $vars = [];
     $vars['page']['test'] = TRUE;
     $vars['page']['array'] = ['array key' => 1];
     $vars['page']['object'] = new stdClass();
     $page = new PageEventVariables($vars);
-    $this->assertTrue($page->get('test'));
-    $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf(stdClass::class, $page->get('object'));
-    $this->assertFalse($page->get('doesNotExists', FALSE));
+    self::assertTrue($page->get('test'));
+    self::assertArrayHasKey('array key', $page->get('array'));
+    self::assertInstanceOf(stdClass::class, $page->get('object'));
+    self::assertFalse($page->get('doesNotExists', FALSE));
   }
 
   /**
@@ -53,11 +54,11 @@ final class PageTest extends UnitTestCase {
     $page->set('test', TRUE);
     $page->set('array', ['array key' => 1]);
     $page->set('object', new stdClass());
-    $this->assertTrue($page->get('test'));
-    $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf(stdClass::class, $page->get('object'));
+    self::assertTrue($page->get('test'));
+    self::assertArrayHasKey('array key', $page->get('array'));
+    self::assertInstanceOf(stdClass::class, $page->get('object'));
     $page->set('null');
-    $this->assertNull($page->get('null'));
+    self::assertNull($page->get('null'));
   }
 
   /**
@@ -69,9 +70,9 @@ final class PageTest extends UnitTestCase {
     $vars['page']['test'] = TRUE;
     $vars['page']['array'] = ['array key' => 1];
     $vars['page']['object'] = new stdClass();
-    $this->assertTrue($page->get('test'));
-    $this->assertArrayHasKey('array key', $page->get('array'));
-    $this->assertInstanceOf(stdClass::class, $page->get('object'));
+    self::assertTrue($page->get('test'));
+    self::assertArrayHasKey('array key', $page->get('array'));
+    self::assertInstanceOf(stdClass::class, $page->get('object'));
   }
 
   /**
@@ -80,11 +81,11 @@ final class PageTest extends UnitTestCase {
   public function testIsNodePage() {
     $vars = [];
     $page = new PageEventVariables($vars);
-    $this->assertFalse($page->isNodePage());
+    self::assertFalse($page->isNodePage());
     $vars['node'] = new stdClass();
-    $this->assertFalse($page->isNodePage());
+    self::assertFalse($page->isNodePage());
     $vars['node'] = $this->node;
-    $this->assertTrue($page->isNodePage());
+    self::assertTrue($page->isNodePage());
   }
 
   /**
@@ -93,50 +94,52 @@ final class PageTest extends UnitTestCase {
   public function testGetNode() {
     $vars = [];
     $page = new PageEventVariables($vars);
-    $this->assertEquals(NULL, $page->getNode());
+    self::assertEquals(NULL, $page->getNode());
     $page->set('node', new stdClass());
-    $this->assertEquals(NULL, $page->getNode());
+    self::assertEquals(NULL, $page->getNode());
     $vars['node'] = $this->node;
-    $this->assertInstanceOf(NodeInterface::class, $page->getNode());
+    self::assertInstanceOf(NodeInterface::class, $page->getNode());
   }
 
   /**
    * Test getting a var by ref and changing it.
    */
   public function testGetVarByRef() {
+    $vars = [];
     $vars['page']['test'] = 'test';
     $page = new PageEventVariables($vars);
     $test = &$page->getByReference('test');
-    $this->assertEquals('test', $test);
+    self::assertEquals('test', $test);
     $test = 'OtherTest';
-    $this->assertEquals('OtherTest', $page->get('test'));
-    $this->assertEquals('OtherTest', $vars['page']['test']);
+    self::assertEquals('OtherTest', $page->get('test'));
+    self::assertEquals('OtherTest', $vars['page']['test']);
   }
 
   /**
    * Test getting root variables by reference.
    */
   public function testGetRootVariablesByReference() {
+    $vars = [];
     $vars['test'] = 'something';
     $page = new PageEventVariables($vars);
     $retrievedVars = &$page->getRootVariablesByReference();
-    $this->assertSame($vars, $retrievedVars);
+    self::assertSame($vars, $retrievedVars);
 
     $retrievedVars['test2'] = 'other';
-    $this->assertSame($vars, $retrievedVars);
-    $this->assertSame($vars, $page->getRootVariablesByReference());
+    self::assertSame($vars, $retrievedVars);
+    self::assertSame($vars, $page->getRootVariablesByReference());
   }
 
   /**
    * Test add cache context.
    */
   public function testAddCacheContext() {
-    $vars = [];
+    $vars = $expectedVars = [];
     $page = new PageEventVariables($vars);
     $page->addCacheContext('url.path');
 
     $expectedVars['#cache']['contexts'][] = 'url.path';
-    $this->assertSame($expectedVars, $vars);
+    self::assertSame($expectedVars, $vars);
   }
 
 }

@@ -57,7 +57,7 @@ class PreprocessEventPassTest extends UnitTestCase {
 
     $services = YamlDefinitionsLoader::getInstance()->getServices();
     foreach (array_keys($services) as $id) {
-      $this->assertTrue($this->builder->has($id));
+      self::assertTrue($this->builder->has($id));
     }
   }
 
@@ -78,19 +78,19 @@ class PreprocessEventPassTest extends UnitTestCase {
     $this->pass->process($this->builder);
     $this->builder->compile();
 
-    /* @var \Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper $mapper */
+    /** @var \Drupal\hook_event_dispatcher\Service\PreprocessEventFactoryMapper $mapper */
     $mapper = $this->builder->get('preprocess_event.factory_mapper');
     $variables = [];
 
     $eckMappedFactory = $mapper->getFactory(EckEntityPreprocessEvent::getHook());
-    $this->assertInstanceOf(FakePreprocessEventFactory::class, $eckMappedFactory);
-    $this->assertEquals(EckEntityPreprocessEvent::getHook(), $eckMappedFactory->getEventHook());
-    $this->assertInstanceOf(FakePreprocessEvent::class, $eckMappedFactory->createEvent($variables));
+    self::assertInstanceOf(FakePreprocessEventFactory::class, $eckMappedFactory);
+    self::assertEquals(EckEntityPreprocessEvent::getHook(), $eckMappedFactory->getEventHook());
+    self::assertInstanceOf(FakePreprocessEvent::class, $eckMappedFactory->createEvent($variables));
 
     $htmlMappedFactory = $mapper->getFactory(HtmlPreprocessEvent::getHook());
-    $this->assertInstanceOf(FakePreprocessEventFactory::class, $htmlMappedFactory);
-    $this->assertEquals(HtmlPreprocessEvent::getHook(), $htmlMappedFactory->getEventHook());
-    $this->assertInstanceOf(FakePreprocessEvent::class, $htmlMappedFactory->createEvent($variables));
+    self::assertInstanceOf(FakePreprocessEventFactory::class, $htmlMappedFactory);
+    self::assertEquals(HtmlPreprocessEvent::getHook(), $htmlMappedFactory->getEventHook());
+    self::assertInstanceOf(FakePreprocessEvent::class, $htmlMappedFactory->createEvent($variables));
   }
 
 }

@@ -57,7 +57,7 @@ class ToolbarAlterEventTest extends UnitTestCase {
 
     hook_event_dispatcher_toolbar_alter($items);
 
-    $this->assertSame($expectedItems, $items);
+    self::assertSame($expectedItems, $items);
   }
 
   /**
@@ -83,7 +83,7 @@ class ToolbarAlterEventTest extends UnitTestCase {
 
     hook_event_dispatcher_toolbar_alter($items);
 
-    $this->assertSame($expectedItems, $items);
+    self::assertSame($expectedItems, $items);
   }
 
 }

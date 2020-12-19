@@ -17,7 +17,7 @@ class WebformElementInfoAlterEvent extends Event implements EventInterface {
    * The webform element.
    *
    * @var array
-   *   The array of webform handlers, keyed on the machine-readable element name.
+   *   Array of webform handlers, keyed on the machine-readable element name.
    */
   private $definitions;
 
@@ -25,7 +25,7 @@ class WebformElementInfoAlterEvent extends Event implements EventInterface {
    * WidgetFormAlterEvent constructor.
    *
    * @param array $definitions
-   *   The array of webform handlers, keyed on the machine-readable element name.
+   *   Array of webform handlers, keyed on the machine-readable element name.
    */
   public function __construct(array &$definitions) {
     $this->definitions = &$definitions;
@@ -35,7 +35,7 @@ class WebformElementInfoAlterEvent extends Event implements EventInterface {
    * Get the definitions.
    *
    * @return array
-   *   The array of webform handlers, keyed on the machine-readable element name.
+   *   Array of webform handlers, keyed on the machine-readable element name.
    */
   public function &getDefinitions() {
     return $this->definitions;

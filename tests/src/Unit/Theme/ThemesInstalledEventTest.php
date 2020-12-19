@@ -4,7 +4,6 @@ namespace Drupal\Tests\hook_event_dispatcher\Unit\Theme;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\hook_event_dispatcher\Event\Theme\ThemeEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\UnitTestCase;
@@ -45,9 +44,9 @@ class ThemesInstalledEventTest extends UnitTestCase {
 
     hook_event_dispatcher_themes_installed($themes);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Theme\ThemesInstalledEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Theme\ThemesInstalledEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::THEMES_INSTALLED);
-    $this->assertSame($themes, $event->getThemeList());
+    self::assertSame($themes, $event->getThemeList());
   }
 
 }

@@ -54,7 +54,7 @@ class EntityAccessEventTest extends UnitTestCase {
     $otherEntity = $this->createMock(EntityInterface::class);
     $event->setEntity($otherEntity);
 
-    $this->assertEquals($otherEntity, $event->getEntity());
+    self::assertEquals($otherEntity, $event->getEntity());
   }
 
   /**
@@ -67,15 +67,15 @@ class EntityAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Entity\EntityAccessEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_ACCESS);
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($operation, $event->getOperation());
-    $this->assertSame($account, $event->getAccount());
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($operation, $event->getOperation());
+    self::assertSame($account, $event->getAccount());
 
-    $this->assertTrue($hookAccessResult->isNeutral());
-    $this->assertFalse($hookAccessResult->isAllowed());
-    $this->assertFalse($hookAccessResult->isForbidden());
+    self::assertTrue($hookAccessResult->isNeutral());
+    self::assertFalse($hookAccessResult->isAllowed());
+    self::assertFalse($hookAccessResult->isForbidden());
   }
 
   /**
@@ -97,9 +97,9 @@ class EntityAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
 
-    $this->assertFalse($hookAccessResult->isNeutral());
-    $this->assertFalse($hookAccessResult->isAllowed());
-    $this->assertTrue($hookAccessResult->isForbidden());
+    self::assertFalse($hookAccessResult->isNeutral());
+    self::assertFalse($hookAccessResult->isAllowed());
+    self::assertTrue($hookAccessResult->isForbidden());
   }
 
   /**
@@ -119,9 +119,9 @@ class EntityAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
 
-    $this->assertTrue($hookAccessResult->isNeutral());
-    $this->assertFalse($hookAccessResult->isAllowed());
-    $this->assertFalse($hookAccessResult->isForbidden());
+    self::assertTrue($hookAccessResult->isNeutral());
+    self::assertFalse($hookAccessResult->isAllowed());
+    self::assertFalse($hookAccessResult->isForbidden());
   }
 
   /**
@@ -141,9 +141,9 @@ class EntityAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
 
-    $this->assertFalse($hookAccessResult->isNeutral());
-    $this->assertTrue($hookAccessResult->isAllowed());
-    $this->assertFalse($hookAccessResult->isForbidden());
+    self::assertFalse($hookAccessResult->isNeutral());
+    self::assertTrue($hookAccessResult->isAllowed());
+    self::assertFalse($hookAccessResult->isForbidden());
   }
 
   /**
@@ -163,9 +163,9 @@ class EntityAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
 
-    $this->assertFalse($hookAccessResult->isNeutral());
-    $this->assertFalse($hookAccessResult->isAllowed());
-    $this->assertTrue($hookAccessResult->isForbidden());
+    self::assertFalse($hookAccessResult->isNeutral());
+    self::assertFalse($hookAccessResult->isAllowed());
+    self::assertTrue($hookAccessResult->isForbidden());
   }
 
   /**
@@ -194,9 +194,9 @@ class EntityAccessEventTest extends UnitTestCase {
 
     $hookAccessResult = hook_event_dispatcher_entity_access($entity, $operation, $account);
 
-    $this->assertFalse($hookAccessResult->isNeutral());
-    $this->assertFalse($hookAccessResult->isAllowed());
-    $this->assertTrue($hookAccessResult->isForbidden());
+    self::assertFalse($hookAccessResult->isNeutral());
+    self::assertFalse($hookAccessResult->isAllowed());
+    self::assertTrue($hookAccessResult->isForbidden());
   }
 
 }

@@ -125,7 +125,7 @@ final class EntityEventTest extends UnitTestCase {
    */
   private function createAndAssertEntityEvent($class) {
     $this->dispatcher->setExpectedEventCount(3);
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEntityEvent $class */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEntityEvent $class */
     $this->service->createAndDispatchKnownEvents($class::getHook(), $this->variables);
     /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\AbstractPreprocessEntityEvent[] $events */
     $events = $this->dispatcher->getEvents();
@@ -133,29 +133,29 @@ final class EntityEventTest extends UnitTestCase {
     $expectedName = $class::DISPATCH_NAME_PREFIX . $class::getHook();
     $firstEvent = \reset($events);
     $firstName = \key($events);
-    $this->assertSame($expectedName, $firstName);
-    $this->assertInstanceOf($class, $firstEvent);
-    $this->assertInstanceOf(AbstractEventVariables::class, $firstEvent->getVariables());
+    self::assertSame($expectedName, $firstName);
+    self::assertInstanceOf($class, $firstEvent);
+    self::assertInstanceOf(AbstractEventVariables::class, $firstEvent->getVariables());
 
     $secondEvent = \next($events);
     $secondName = \key($events);
     $bundle = $secondEvent->getVariables()->getEntityBundle();
-    $this->assertNotNull($bundle);
-    $this->assertInternalType('string', $bundle);
+    self::assertNotNull($bundle);
+    self::assertInternalType('string', $bundle);
     $expectedName .= '.' . $bundle;
-    $this->assertSame($expectedName, $secondName);
-    $this->assertInstanceOf($class, $secondEvent);
-    $this->assertInstanceOf(AbstractEventVariables::class, $secondEvent->getVariables());
+    self::assertSame($expectedName, $secondName);
+    self::assertInstanceOf($class, $secondEvent);
+    self::assertInstanceOf(AbstractEventVariables::class, $secondEvent->getVariables());
 
     $thirdEvent = \next($events);
     $thirdName = \key($events);
     $viewMode = $thirdEvent->getVariables()->getViewMode();
-    $this->assertNotNull($viewMode);
-    $this->assertInternalType('string', $viewMode);
+    self::assertNotNull($viewMode);
+    self::assertInternalType('string', $viewMode);
     $expectedName .= '.' . $viewMode;
-    $this->assertSame($expectedName, $thirdName);
-    $this->assertInstanceOf($class, $thirdEvent);
-    $this->assertInstanceOf(AbstractEventVariables::class, $thirdEvent->getVariables());
+    self::assertSame($expectedName, $thirdName);
+    self::assertInstanceOf($class, $thirdEvent);
+    self::assertInstanceOf(AbstractEventVariables::class, $thirdEvent->getVariables());
   }
 
 }

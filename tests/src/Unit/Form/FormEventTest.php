@@ -49,15 +49,15 @@ class FormEventTest extends UnitTestCase {
 
     hook_event_dispatcher_form_alter($form, $formState, $formId);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::FORM_ALTER);
-    $this->assertEquals($form, $event->getForm());
-    $this->assertEquals($formState, $event->getFormState());
-    $this->assertEquals($formId, $event->getFormId());
+    self::assertEquals($form, $event->getForm());
+    self::assertEquals($formState, $event->getFormState());
+    self::assertEquals($formId, $event->getFormId());
 
     $newForm = ['NewForm'];
     $event->setForm($newForm);
-    $this->assertEquals($newForm, $event->getForm());
+    self::assertEquals($newForm, $event->getForm());
   }
 
   /**
@@ -76,12 +76,12 @@ class FormEventTest extends UnitTestCase {
 
     hook_event_dispatcher_form_alter($form, $formState, $formId);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Form\FormBaseAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.form_base_$baseFormId.alter");
-    $this->assertEquals($form, $event->getForm());
-    $this->assertEquals($formState, $event->getFormState());
-    $this->assertEquals($formId, $event->getFormId());
-    $this->assertEquals($baseFormId, $event->getBaseFormId());
+    self::assertEquals($form, $event->getForm());
+    self::assertEquals($formState, $event->getFormState());
+    self::assertEquals($formId, $event->getFormId());
+    self::assertEquals($baseFormId, $event->getBaseFormId());
   }
 
   /**
@@ -96,11 +96,11 @@ class FormEventTest extends UnitTestCase {
 
     hook_event_dispatcher_form_alter($form, $formState, $formId);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Form\FormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.form_$formId.alter");
-    $this->assertEquals($form, $event->getForm());
-    $this->assertEquals($formState, $event->getFormState());
-    $this->assertEquals($formId, $event->getFormId());
+    self::assertEquals($form, $event->getForm());
+    self::assertEquals($formState, $event->getFormState());
+    self::assertEquals($formId, $event->getFormId());
   }
 
   /**
@@ -122,9 +122,9 @@ class FormEventTest extends UnitTestCase {
 
     hook_event_dispatcher_field_widget_form_alter($element, $formState, $context);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Form\WidgetFormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::WIDGET_FORM_ALTER);
-    $this->assertEquals($element, $event->getElement());
+    self::assertEquals($element, $event->getElement());
     $this->assertEquals($formState, $event->getFormState());
     $this->assertEquals($context, $event->getContext());
 
@@ -152,7 +152,7 @@ class FormEventTest extends UnitTestCase {
 
     hook_event_dispatcher_field_widget_form_alter($element, $formState, $context);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Form\WidgetTypeFormAlterEvent $event */
     $event = $this->manager->getRegisteredEvent("hook_event_dispatcher.widget_$widgetType.alter");
     $this->assertEquals($element, $event->getElement());
     $this->assertEquals($formState, $event->getFormState());

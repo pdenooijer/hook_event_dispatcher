@@ -53,9 +53,9 @@ final class EntityEventVariablesTest extends UnitTestCase {
     $variablesArray['commented_entity'] = 'node';
     $variablesArray['view_mode'] = $comment->getViewMode();
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables $variables */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\CommentEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(CommentPreprocessEvent::class, $variablesArray);
-    $this->assertInstanceOf(CommentEventVariables::class, $variables);
+    self::assertInstanceOf(CommentEventVariables::class, $variables);
     $this->assertAbstractEntityEventVariables($variables, $comment);
     $this->assertSame($comment, $variables->getComment());
     $this->assertSame('node', $variables->getCommentedEntity());
@@ -75,7 +75,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
     $variablesArray['theme_hook_original'] = $eckEntity->getEntityType();
     $variablesArray['bundle'] = $eckEntity->bundle();
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariables $variables */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\EckEntityEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(EckEntityPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(EckEntityEventVariables::class, $variables);
     $this->assertAbstractEntityEventVariables($variables, $eckEntity);
@@ -92,7 +92,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
     $variablesArray['theme_hook_original'] = $node->getEntityType();
     $variablesArray['view_mode'] = $node->getViewMode();
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables $variables */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\NodeEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(NodePreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(NodeEventVariables::class, $variables);
     $this->assertAbstractEntityEventVariables($variables, $node);
@@ -126,7 +126,7 @@ final class EntityEventVariablesTest extends UnitTestCase {
     $variablesArray['theme_hook_original'] = $term->getEntityType();
     $variablesArray['view_mode'] = $term->getViewMode();
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVariables $variables */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\Variables\TaxonomyTermEventVariables $variables */
     $variables = $this->getVariablesFromCreatedEvent(TaxonomyTermPreprocessEvent::class, $variablesArray);
     $this->assertInstanceOf(TaxonomyTermEventVariables::class, $variables);
     $this->assertAbstractEntityEventVariables($variables, $term);
@@ -184,14 +184,14 @@ final class EntityEventVariablesTest extends UnitTestCase {
    *   Variables object.
    */
   private function getVariablesFromCreatedEvent($class, array $variablesArray) {
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEventInterface $class */
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEventInterface $class */
     $hook = $class::getHook();
     $this->assertEquals(AbstractPreprocessEvent::DISPATCH_NAME_PREFIX . $hook, $class::name());
 
     $factory = $this->mapper->getFactory($hook);
     $this->assertEquals($hook, $factory->getEventHook());
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEntityEventInterface $event*/
+    /** @var \Drupal\hook_event_dispatcher\Event\Preprocess\PreprocessEntityEventInterface $event*/
     $event = $factory->createEvent($variablesArray);
     $this->assertInstanceOf(PreprocessEntityEventInterface::class, $event);
     $this->assertInstanceOf($class, $event);

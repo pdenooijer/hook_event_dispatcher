@@ -60,13 +60,13 @@ final class EntityViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_entity_view($build, $entity, $display, $viewMode);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_VIEW);
-    $this->assertSame($build, $event->getBuild());
-    $this->assertSame($expectedBuild, $event->getBuild());
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($display, $event->getDisplay());
-    $this->assertSame($viewMode, $event->getViewMode());
+    self::assertSame($build, $event->getBuild());
+    self::assertSame($expectedBuild, $event->getBuild());
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($display, $event->getDisplay());
+    self::assertSame($viewMode, $event->getViewMode());
   }
 
   /**
@@ -87,13 +87,13 @@ final class EntityViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_entity_view($build, $entity, $display, $viewMode);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Entity\EntityViewEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_VIEW);
-    $this->assertSame($build, $event->getBuild());
-    $this->assertSame($otherBuild, $event->getBuild());
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($display, $event->getDisplay());
-    $this->assertSame($viewMode, $event->getViewMode());
+    self::assertSame($build, $event->getBuild());
+    self::assertSame($otherBuild, $event->getBuild());
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($display, $event->getDisplay());
+    self::assertSame($viewMode, $event->getViewMode());
   }
 
   /**
@@ -113,12 +113,12 @@ final class EntityViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_entity_view_alter($build, $entity, $display);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityViewAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Entity\EntityViewAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_VIEW_ALTER);
-    $this->assertSame($build, $event->getBuild());
-    $this->assertSame($expectedBuild, $event->getBuild());
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($display, $event->getDisplay());
+    self::assertSame($build, $event->getBuild());
+    self::assertSame($expectedBuild, $event->getBuild());
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($display, $event->getDisplay());
   }
 
   /**
@@ -138,12 +138,12 @@ final class EntityViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_entity_build_defaults_alter($build, $entity, $viewMode);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_BUILD_DEFAULTS_ALTER);
-    $this->assertSame($build, $event->getBuild());
-    $this->assertSame($expectedBuild, $event->getBuild());
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame($viewMode, $event->getViewMode());
+    self::assertSame($build, $event->getBuild());
+    self::assertSame($expectedBuild, $event->getBuild());
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame($viewMode, $event->getViewMode());
   }
 
   /**
@@ -156,11 +156,11 @@ final class EntityViewEventTest extends UnitTestCase {
 
     hook_event_dispatcher_entity_build_defaults_alter($build, $entity, $viewMode);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Entity\EntityBuildDefaultsAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_BUILD_DEFAULTS_ALTER);
-    $this->assertSame($build, $event->getBuild());
-    $this->assertSame($entity, $event->getEntity());
-    $this->assertSame((string) $viewMode, $event->getViewMode());
+    self::assertSame($build, $event->getBuild());
+    self::assertSame($entity, $event->getEntity());
+    self::assertSame((string) $viewMode, $event->getViewMode());
   }
 
 }

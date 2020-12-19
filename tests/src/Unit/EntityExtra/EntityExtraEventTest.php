@@ -68,11 +68,11 @@ class EntityExtraEventTest extends UnitTestCase {
       ],
     ];
     $hookFieldInfoResult = hook_event_dispatcher_entity_extra_field_info();
-    $this->assertEquals($expectedFieldInfo, $hookFieldInfoResult);
+    self::assertEquals($expectedFieldInfo, $hookFieldInfoResult);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO);
-    $this->assertEquals($expectedFieldInfo, $event->getFieldInfo());
+    self::assertEquals($expectedFieldInfo, $event->getFieldInfo());
   }
 
   /**
@@ -107,11 +107,11 @@ class EntityExtraEventTest extends UnitTestCase {
     ]);
 
     $hookFieldInfoResult = hook_event_dispatcher_entity_extra_field_info();
-    $this->assertEquals($fieldInfo, $hookFieldInfoResult);
+    self::assertEquals($fieldInfo, $hookFieldInfoResult);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO);
-    $this->assertEquals($fieldInfo, $event->getFieldInfo());
+    self::assertEquals($fieldInfo, $event->getFieldInfo());
   }
 
   /**
@@ -149,10 +149,10 @@ class EntityExtraEventTest extends UnitTestCase {
 
     hook_event_dispatcher_entity_extra_field_info_alter($fieldInfo);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\EntityExtra\EntityExtraFieldInfoAlterEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::ENTITY_EXTRA_FIELD_INFO_ALTER);
-    $this->assertEquals($expectedFieldInfo, $event->getFieldInfo());
-    $this->assertEquals($expectedFieldInfo, $fieldInfo);
+    self::assertEquals($expectedFieldInfo, $event->getFieldInfo());
+    self::assertEquals($expectedFieldInfo, $fieldInfo);
   }
 
 }

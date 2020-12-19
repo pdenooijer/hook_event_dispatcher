@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\hook_event_dispatcher\Unit\Page;
 
+use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\Event\Page\PageTopEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
@@ -32,14 +33,14 @@ class PageTopEventTest extends UnitTestCase {
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);
     $builder->compile();
-    \Drupal::setContainer($builder);
+    Drupal::setContainer($builder);
   }
 
   /**
    * Test the PageTopEvent by reference.
    */
   public function testPageTopEventByReference() {
-    $pageTop = [];
+    $pageTop = $expectedBuild = [];
     $renderArray = [
       '#markup' => 'Top!',
     ];
@@ -54,16 +55,16 @@ class PageTopEventTest extends UnitTestCase {
 
     hook_event_dispatcher_page_top($pageTop);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageTopEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Page\PageTopEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_TOP);
-    $this->assertSame($expectedBuild, $event->getBuild());
+    self::assertSame($expectedBuild, $event->getBuild());
   }
 
   /**
    * Test the PageTopEvent by set.
    */
   public function testPageTopEventBySet() {
-    $pageTop = [];
+    $pageTop = $expectedBuild = [];
     $renderArray = [
       '#markup' => 'Top!',
     ];
@@ -79,9 +80,9 @@ class PageTopEventTest extends UnitTestCase {
 
     hook_event_dispatcher_page_top($pageTop);
 
-    /* @var \Drupal\hook_event_dispatcher\Event\Page\PageTopEvent $event */
+    /** @var \Drupal\hook_event_dispatcher\Event\Page\PageTopEvent $event */
     $event = $this->manager->getRegisteredEvent(HookEventDispatcherInterface::PAGE_TOP);
-    $this->assertSame($expectedBuild, $event->getBuild());
+    self::assertSame($expectedBuild, $event->getBuild());
   }
 
 }
