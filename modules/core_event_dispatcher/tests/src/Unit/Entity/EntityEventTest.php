@@ -7,7 +7,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_entity_create;
 use function core_event_dispatcher_entity_delete;
 use function core_event_dispatcher_entity_insert;
@@ -23,7 +23,7 @@ use function core_event_dispatcher_entity_update;
  *
  * @group core_event_dispatcher
  */
-class EntityEventTest extends UnitTestCase {
+class EntityEventTest extends TestCase {
 
   /**
    * The manager.

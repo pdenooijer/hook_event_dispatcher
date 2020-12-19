@@ -8,7 +8,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\core_event_dispatcher\Event\Theme\JsAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_js_alter;
 
 /**
@@ -16,7 +16,7 @@ use function core_event_dispatcher_js_alter;
  *
  * @group hook_event_dispatcher
  */
-final class JsAlterEventTest extends UnitTestCase {
+final class JsAlterEventTest extends TestCase {
 
   /**
    * The manager.

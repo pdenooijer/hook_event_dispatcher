@@ -4,15 +4,15 @@ namespace Drupal\Tests\views_event_dispatcher\Unit\Views;
 
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\views_event_dispatcher\Event\Views\ViewsPostRenderEvent;
-use Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent;
-use Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
 use Drupal\views\Plugin\views\cache\CachePluginBase;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPostRenderEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsPreViewEvent;
+use Drupal\views_event_dispatcher\Event\Views\ViewsQuerySubstitutionsEvent;
+use PHPUnit\Framework\TestCase;
 use function views_event_dispatcher_views_post_build;
 use function views_event_dispatcher_views_post_execute;
 use function views_event_dispatcher_views_post_render;
@@ -27,7 +27,7 @@ use function views_event_dispatcher_views_query_substitutions;
  *
  * @group views_event_dispatcher
  */
-class ViewEventTest extends UnitTestCase {
+class ViewEventTest extends TestCase {
 
   /**
    * The manager.

@@ -7,7 +7,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\core_event_dispatcher\Event\Theme\TemplatePreprocessDefaultVariablesAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_template_preprocess_default_variables_alter;
 
 /**
@@ -15,7 +15,7 @@ use function core_event_dispatcher_template_preprocess_default_variables_alter;
  *
  * @group hook_event_dispatcher
  */
-final class TemplatePreprocessDefaultVariablesAlterEventTest extends UnitTestCase {
+final class TemplatePreprocessDefaultVariablesAlterEventTest extends TestCase {
 
   /**
    * The manager.

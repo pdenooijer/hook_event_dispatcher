@@ -16,7 +16,7 @@ use Drupal\taxonomy\TermInterface;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\EntityMockFactory;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\SpyEventDispatcher;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function key;
 use function next;
 use function reset;
@@ -29,7 +29,7 @@ use function reset;
  * Testing all lots of classes gives expected coupling warnings.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class EntityEventTest extends UnitTestCase {
+final class EntityEventTest extends TestCase {
 
   /**
    * PreprocessEventService.

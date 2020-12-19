@@ -7,7 +7,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\field_event_dispatcher\Event\Field\FieldFormatterInfoAlterEvent;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function field_event_dispatcher_field_formatter_info_alter;
 
 /**
@@ -15,7 +15,7 @@ use function field_event_dispatcher_field_formatter_info_alter;
  *
  * @group field_event_dispatcher
  */
-class FieldFormatterInfoAlterEventTest extends UnitTestCase {
+class FieldFormatterInfoAlterEventTest extends TestCase {
 
   /**
    * The manager.
@@ -27,7 +27,7 @@ class FieldFormatterInfoAlterEventTest extends UnitTestCase {
   /**
    * Sets up the test.
    */
-  public function setUp() {
+  public function setUp(): void {
     $builder = new ContainerBuilder();
     $this->manager = new HookEventDispatcherManagerSpy();
     $builder->set('hook_event_dispatcher.manager', $this->manager);

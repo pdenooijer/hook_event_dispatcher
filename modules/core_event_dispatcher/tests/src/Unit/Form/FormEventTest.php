@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\core_event_dispatcher\Event\Form\FormAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_form_alter;
 
 /**
@@ -16,7 +16,7 @@ use function core_event_dispatcher_form_alter;
  *
  * @group core_event_dispatcher
  */
-class FormEventTest extends UnitTestCase {
+class FormEventTest extends TestCase {
 
   /**
    * The manager.

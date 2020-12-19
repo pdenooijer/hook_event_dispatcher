@@ -5,7 +5,7 @@ namespace Drupal\Tests\preprocess_event_dispatcher\Unit;
 use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\preprocess_event_dispatcher\Service\PreprocessEventServiceInterface;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery;
 
 /**
@@ -13,7 +13,7 @@ use Mockery;
  *
  * @group preprocess_event_dispatcher
  */
-final class PreprocessModuleTest extends UnitTestCase {
+final class PreprocessModuleTest extends TestCase {
 
   /**
    * PreprocessEventService.

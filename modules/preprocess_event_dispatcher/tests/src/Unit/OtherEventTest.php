@@ -14,7 +14,7 @@ use Drupal\preprocess_event_dispatcher\Event\ViewPreprocessEvent;
 use Drupal\preprocess_event_dispatcher\Service\PreprocessEventService;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\SpyEventDispatcher;
 use Drupal\Tests\preprocess_event_dispatcher\Unit\Helpers\YamlDefinitionsLoader;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function str_replace;
 
 /**
@@ -25,7 +25,7 @@ use function str_replace;
  * Testing all variables gives expected PHPMD warnings.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class OtherEventTest extends UnitTestCase {
+final class OtherEventTest extends TestCase {
 
   /**
    * PreprocessEventService.

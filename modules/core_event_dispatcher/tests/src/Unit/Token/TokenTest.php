@@ -3,7 +3,7 @@
 namespace Drupal\Tests\core_event_dispatcher\Unit\Token;
 
 use Drupal\core_event_dispatcher\ValueObject\Token;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
 
 /**
@@ -11,7 +11,7 @@ use UnexpectedValueException;
  *
  * @group hook_event_dispatcher
  */
-class TokenTest extends UnitTestCase {
+class TokenTest extends TestCase {
 
   /**
    * Test Token invalid token exception.

@@ -11,7 +11,7 @@ use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\core_event_dispatcher\ValueObject\Token;
 use Drupal\core_event_dispatcher\ValueObject\TokenType;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use UnexpectedValueException;
 use function core_event_dispatcher_token_info;
 use function core_event_dispatcher_tokens;
@@ -21,7 +21,7 @@ use function core_event_dispatcher_tokens;
  *
  * @group hook_event_dispatcher
  */
-class TokenEventTest extends UnitTestCase {
+class TokenEventTest extends TestCase {
 
   /**
    * The manager.

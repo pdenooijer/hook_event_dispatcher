@@ -6,10 +6,10 @@ use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
 use Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementAlterEvent;
 use Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementInfoAlterEvent;
 use Drupal\webform_event_dispatcher\Event\WebformElement\WebformElementTypeAlterEvent;
+use PHPUnit\Framework\TestCase;
 use function array_merge;
 use function array_merge_recursive;
 
@@ -18,7 +18,7 @@ use function array_merge_recursive;
  *
  * @group hook_event_dispatcher
  */
-class WebformElementEventTest extends UnitTestCase {
+class WebformElementEventTest extends TestCase {
 
   /**
    * The manager.

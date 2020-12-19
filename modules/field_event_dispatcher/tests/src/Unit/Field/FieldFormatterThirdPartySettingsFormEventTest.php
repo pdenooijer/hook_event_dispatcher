@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormState;
 use Drupal\field_event_dispatcher\Event\Field\FieldFormatterThirdPartySettingsFormEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function field_event_dispatcher_field_formatter_third_party_settings_form;
 
 /**
@@ -18,7 +18,7 @@ use function field_event_dispatcher_field_formatter_third_party_settings_form;
  *
  * @group field_event_dispatcher
  */
-class FieldFormatterThirdPartySettingsFormEventTest extends UnitTestCase {
+class FieldFormatterThirdPartySettingsFormEventTest extends TestCase {
 
   /**
    * The manager.

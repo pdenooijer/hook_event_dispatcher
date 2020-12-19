@@ -8,7 +8,7 @@ use Drupal\views_event_dispatcher\Event\Views\ViewsDataAlterEvent;
 use Drupal\views_event_dispatcher\Event\Views\ViewsDataEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function views_event_dispatcher_views_data;
 use function views_event_dispatcher_views_data_alter;
 
@@ -17,7 +17,7 @@ use function views_event_dispatcher_views_data_alter;
  *
  * @group views_event_dispatcher
  */
-class ViewDataEventTest extends UnitTestCase {
+class ViewDataEventTest extends TestCase {
 
   /**
    * The manager.

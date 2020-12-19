@@ -7,7 +7,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\core_event_dispatcher\Event\Theme\ThemeRegistryAlterEvent;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function core_event_dispatcher_theme_registry_alter;
 
 /**
@@ -15,7 +15,7 @@ use function core_event_dispatcher_theme_registry_alter;
  *
  * @group hook_event_dispatcher
  */
-class ThemeRegistryAlterEventTest extends UnitTestCase {
+class ThemeRegistryAlterEventTest extends TestCase {
 
   /**
    * The manager.

@@ -6,7 +6,7 @@ use Drupal;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
 use Drupal\Tests\hook_event_dispatcher\Unit\HookEventDispatcherManagerSpy;
-use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\TestCase;
 use function path_event_dispatcher_path_delete;
 use function path_event_dispatcher_path_insert;
 use function path_event_dispatcher_path_update;
@@ -16,7 +16,7 @@ use function path_event_dispatcher_path_update;
  *
  * @group path_event_dispatcher
  */
-class PathEventTest extends UnitTestCase {
+class PathEventTest extends TestCase {
 
   /**
    * The manager.
