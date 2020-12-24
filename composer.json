@@ -20,6 +20,7 @@
     "test": [
       "@phpunit",
       "@phpcbf",
+      "@phpcs",
       "@phpmd"
     ],
     "ci": [
