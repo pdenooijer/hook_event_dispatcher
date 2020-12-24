@@ -52,6 +52,20 @@ abstract class AbstractFieldThirdPartySettingsFormEvent extends Event implements
   }
 
   /**
+   * Get the field definition.
+   *
+   * @deprecated in hook_event_dispatcher:2.6.0 and is removed from hook_event_dispatcher:3.0.0. Use
+   *   getFieldDefinition() instead.
+   * @see https://www.drupal.org/project/hook_event_dispatcher/issues/3189252
+   *
+   * @return \Drupal\Core\Field\FieldDefinitionInterface
+   *   The field definition.
+   */
+  public function getFieldDefinition(): FieldDefinitionInterface {
+    return $this->fieldDefinition;
+  }
+
+  /**
    * Get the (entire) configuration form array.
    *
    * @return array
