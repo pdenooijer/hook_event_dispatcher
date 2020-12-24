@@ -52,7 +52,7 @@ class FieldFormatterThirdPartySettingsFormEventTest extends TestCase {
         FieldFormatterThirdPartySettingsFormEvent $event
       ) {
         $event->getPlugin();
-        $event->getFieldDefintion();
+        $event->getFieldDefinition();
         $event->getViewMode();
         $event->getForm();
         $event->getFormState();

@@ -52,7 +52,7 @@ class FieldWidgetThirdPartySettingsFormEventTest extends TestCase {
         FieldWidgetThirdPartySettingsFormEvent $event
       ) {
         $event->getPlugin();
-        $event->getFieldDefintion();
+        $event->getFieldDefinition();
         $event->getFormMode();
         $event->getForm();
         $event->getFormState();
