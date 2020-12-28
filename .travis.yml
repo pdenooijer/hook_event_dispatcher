@@ -11,8 +11,10 @@ cache:
   directories:
   - ~/.composer
 
+env:
+- XDEBUG_MODE=coverage
+
 install:
-- if php -v | grep 'Xdebug v3.0.0'; then phpenv config-rm xdebug.ini; fi
 - COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-dist
 
 script:
