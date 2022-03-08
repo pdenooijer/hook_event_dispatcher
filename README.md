@@ -1,3 +1,7 @@
+Moved
+-----
+This project has moved to the [Drupal code repository](https://git.drupalcode.org/project/hook_event_dispatcher).
+
 Description
 -----------
 This module dispatches events for several drupal core hooks. This allows you to
